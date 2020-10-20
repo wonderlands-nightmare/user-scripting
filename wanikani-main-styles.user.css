@@ -9,11 +9,11 @@
     --grey:                #f4f4f4;
 }
 
-.lessons-and-reviews .lessons-and-reviews__reviews-button .has-reviews { 
+.lessons-and-reviews .lessons-and-reviews__reviews-button.has-reviews { 
     animation: reviewPulse 2s infinite; 
 } 
 
-.lessons-and-reviews .lessons-and-reviews__lessons-button .has-lessons { 
+.lessons-and-reviews .lessons-and-reviews__lessons-button.has-lessons { 
     animation: lessonPulse 2s infinite; 
 } 
 
