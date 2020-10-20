@@ -14,8 +14,6 @@ let reviewButton = '.lessons-and-reviews .lessons-and-reviews__reviews-button';
 let lessonButton = '.lessons-and-reviews .lessons-and-reviews__lessons-button';
 
 var style = document.createElement('style');
-
-style.innerHTML = wanikaniStyles;
 style.type = 'text/css';
 style.rel = 'stylesheet';
 style.href = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wanikani-main.user.css';
