@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         Testing
-// @namespace    http://tampermonkey.net/
+// @name         WaniKani Dashboard
+// @namespace    https://dev.azure.com/aktonkin
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       Wonderlands-Nightmares
 // @match        https://www.wanikani.com/dashboard
 // @grant        none
 // ==/UserScript==
