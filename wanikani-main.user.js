@@ -4,10 +4,8 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       Wonderlands-Nightmares
-// @homepage     https://dev.azure.com/aktonkin/_git/Custom%20Scripting
-// @homepageURL  https://dev.azure.com/aktonkin/_git/Custom%20Scripting
-// @updateURL    https://dev.azure.com/aktonkin/_git/Custom%20Scripting?path=%2Fwanikani-main.js
 // @match        https://www.wanikani.com/dashboard
+// @updateURL    https://dev.azure.com/aktonkin/_git/Custom%20Scripting?path=%2Fwanikani-main.js
 // @grant        none
 // ==/UserScript==
 
