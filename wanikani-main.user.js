@@ -5,7 +5,7 @@
 // @description  try to take over the world!
 // @author       Wonderlands-Nightmares
 // @match        https://www.wanikani.com/dashboard
-// @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/raw/master/wanikani-main.user.js
+// @updateURL    https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wanikani-main.user.js
 // @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wanikani-main.user.css
 // @grant        none
 // ==/UserScript==
