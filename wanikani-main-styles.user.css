@@ -48,24 +48,24 @@
 
 @keyframes reviewPulse { 
     0% { 
-        box-shadow: 0 0 0 0  --reviewColourDarker ; 
+        box-shadow: 0 0 0 0 --reviewColourDarker; 
     } 
     70% { 
-        box-shadow: 0 0 0 7px --white ; 
+        box-shadow: 0 0 0 7px --white; 
     } 
     100% { 
-        box-shadow: 0 0 0 0  --reviewColourLighter ; 
+        box-shadow: 0 0 0 0 --reviewColourLighter; 
     } 
 } 
 
 @keyframes lessonPulse { 
     0% { 
-        box-shadow: 0 0 0 0  --lessonColourDarker ; 
+        box-shadow: 0 0 0 0 --lessonColourDarker; 
     } 
     70% { 
-        box-shadow: 0 0 0 7px  --white ; 
+        box-shadow: 0 0 0 7px --white; 
     } 
     100% { 
-        box-shadow: 0 0 0 0  --lessonColourLighter ; 
+        box-shadow: 0 0 0 0 --lessonColourLighter; 
     } 
 }
