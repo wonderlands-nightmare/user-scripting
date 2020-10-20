@@ -1,13 +1,3 @@
-// ==UserScript==
-// @name         WaniKani Dashboard
-// @namespace    https://github.com/wonderlands-nightmare
-// @version      0.2
-// @description  try to take over the world!
-// @author       Wonderlands-Nightmares
-// @match        https://www.wanikani.com/dashboard
-// @grant        none
-// ==/UserScript==
-
 (function() {
     let counter = 0
 
