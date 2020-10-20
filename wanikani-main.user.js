@@ -10,7 +10,7 @@
 // @grant        none
 // ==/UserScript==
 
-//import wanikaniStyles from './wanikani-main-user.css';
+import wanikaniStyles from 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wanikani-main.user.css';
 
 let reviewButton = '.lessons-and-reviews .lessons-and-reviews__reviews-button';
 let lessonButton = '.lessons-and-reviews .lessons-and-reviews__lessons-button';
