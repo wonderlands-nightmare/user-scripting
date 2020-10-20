@@ -13,7 +13,7 @@
     /*************************************************
      *  Add styling to page.
      *************************************************/
-    var cssFile = "https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wanikani-main-styles.user.css";
+    var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wanikani-main-styles.user.css';
 
     $.get(cssFile, function(content) {
         $('head').append('<style id="burnReviewStyles"></style>');
