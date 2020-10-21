@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Dashboard Critical Items
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      0.2
+// @version      0.1
 // @description  try to take over the world!
 // @author       Wonderlands-Nightmares
 // @match        https://www.wanikani.com/dashboard
