@@ -9,15 +9,23 @@
     --grey:                #f4f4f4;
 }
 
-.lessons-and-reviews .lessons-and-reviews__reviews-button.has-reviews { 
-    /* animation: reviewPulse 2s infinite;  */
+.navigation-shortcuts .navigation-shortcut--reviews > a > span {
+    background: var(--reviewColour);
+}
+
+.navigation-shortcuts .navigation-shortcut--lessons > a > span {
+    background: var(--lessonColour);
+}
+
+.lessons-and-reviews .lessons-and-reviews__reviews-button.has-reviews, 
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
     --start-pulse: var(--reviewColourDarker);
     --end-pulse: var(--reviewColourLighter);
     animation: buttonPulse 2s infinite; 
 } 
 
-.lessons-and-reviews .lessons-and-reviews__lessons-button.has-lessons { 
-    /* animation: lessonPulse 2s infinite;  */
+.lessons-and-reviews .lessons-and-reviews__lessons-button.has-lessons, 
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
     --start-pulse: var(--lessonColourDarker);
     --end-pulse: var(--lessonColourLighter);
     animation: buttonPulse 2s infinite; 
@@ -35,28 +43,3 @@
         box-shadow: 0 0 0 0 var(--end-pulse); 
     } 
 } 
-
-
-@keyframes reviewPulse { 
-    0% { 
-        box-shadow: 0 0 0 0 var(--reviewColourDarker); 
-    } 
-    70% { 
-        box-shadow: 0 0 0 7px var(--white); 
-    } 
-    100% { 
-        box-shadow: 0 0 0 0 var(--reviewColourLighter); 
-    } 
-} 
-
-@keyframes lessonPulse { 
-    0% { 
-        box-shadow: 0 0 0 0 var(--lessonColourDarker); 
-    } 
-    70% { 
-        box-shadow: 0 0 0 7px var(--white); 
-    } 
-    100% { 
-        box-shadow: 0 0 0 0 var(--lessonColourLighter); 
-    } 
-}

@@ -9,7 +9,7 @@
 // @grant        none
 // ==/UserScript==
 
-$(function () {
+(function () {
     /*************************************************
      *  Variable initialisation.
      *************************************************/
@@ -19,11 +19,11 @@ $(function () {
     /*************************************************
      *  Execute script.
      *************************************************/
-    console.log('Running wl-wanikani-helpers functions.')
-        .then(addStyles)
-        .then(reviewAndLessonButtonPulseEffect)
-        .then(autoRefreshOnNextReviewHour)
-        .then(function(){ console.log('All wl-wanikani-helpers functions have loaded.'); });
+    console.log('Running wl-wanikani-helpers functions.');
+    addStyles();
+    reviewAndLessonButtonPulseEffect();
+    autoRefreshOnNextReviewHour();
+    console.log('All wl-wanikani-helpers functions have loaded.');
 
 
     /*************************************************
@@ -95,9 +95,9 @@ $(function () {
             location.reload();
         }
         else {
-            setTimeout(refreshPromise, 600000);
+            setTimeout(autoRefreshOnNextReviewHour, 600000);
             console.log('Reset timeout: ' + refreshCounter);
-            refreshCounter = refreshCounter + 1
+            refreshCounter = refreshCounter + 1;
         }
     };
 })();
