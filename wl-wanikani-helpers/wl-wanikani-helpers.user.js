@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  Some smaller dashboard helper functions.
 // @author       Wonderlands-Nightmares
-// @match        https://www.wanikani.com/dashboard
+// @match        https://www.wanikani.com/*
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wl-wanikani-helpers/wl-wanikani-helpers.user.js
 // @grant        none
 // ==/UserScript==

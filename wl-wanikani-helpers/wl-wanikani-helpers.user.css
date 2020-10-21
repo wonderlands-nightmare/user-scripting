@@ -11,10 +11,12 @@
 
 .navigation-shortcuts .navigation-shortcut--reviews > a > span {
     background: var(--reviewColour);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .navigation-shortcuts .navigation-shortcut--lessons > a > span {
     background: var(--lessonColour);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .lessons-and-reviews .lessons-and-reviews__reviews-button.has-reviews, 

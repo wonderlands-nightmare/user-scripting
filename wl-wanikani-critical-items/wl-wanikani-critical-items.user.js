@@ -22,7 +22,8 @@
     const config = {
 		wk_items: {
 			options: {
-				review_statistics: true
+                review_statistics: true,
+                asignments: true
 			},
             filters: {
                 level: '1..+0', //only retrieve items from lv 1 up to and including current level
