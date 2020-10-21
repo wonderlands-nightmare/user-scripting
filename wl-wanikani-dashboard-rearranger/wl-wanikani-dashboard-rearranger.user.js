@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WaniKani Dashboard Helpers
+// @name         WaniKani Dashboard Rearranger
 // @namespace    https://github.com/wonderlands-nightmare
 // @version      0.1
 // @description  Some smaller dashboard helper functions.
