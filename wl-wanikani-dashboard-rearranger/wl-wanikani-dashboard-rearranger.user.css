@@ -1,0 +1,31 @@
+:root {
+    --white:      #ffffff;
+    --black:      #000000;
+    --grey:       #f4f4f4;
+    --pink:       #dd0093;
+    --purple:     #882d9e;
+    --dark-blue:  #294ddb;
+    --light-blue: #0093dd;
+    --maroon:     #800000;
+    --gold:       #ffd700;
+}
+
+.srs-progress #apprentice {
+    background: linear-gradient(to right, var(--pink), var(--purple));
+}
+
+.srs-progress #guru {
+    background: linear-gradient(to right, var(--purple), var(--dark-blue));
+}
+
+.srs-progress #master {
+    background: linear-gradient(to right, var(--dark-blue), var(--light-blue));
+}
+
+.srs-progress #enlightened {
+    background: linear-gradient(to right, var(--light-blue), var(--gold));
+}
+
+.srs-progress #burned {
+    background: linear-gradient(to right, var(--gold), var(--maroon));
+}

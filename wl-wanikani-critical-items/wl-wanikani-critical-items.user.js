@@ -9,10 +9,12 @@
 // @grant        none
 // ==/UserScript==
 
-$(function () {
+(function () {
     /*************************************************
      *  Variable initialisation.
      *************************************************/
+    const scriptNameSpace = 'wl-wanikani-critical-items';
+    
     // criticalItemsDebug
     let debugMode = false;
 
@@ -44,7 +46,7 @@ $(function () {
     /*************************************************
      *  Execute script.
      *************************************************/
-    console.log('Running wl-wanikani-critical-items functions.')
+    console.log('Running ' + scriptNameSpace + ' functions.')
     wkof.include('ItemData, Menu, Settings');
     wkof.ready('ItemData, Menu, Settings')
         .then(addStyles)
@@ -53,7 +55,7 @@ $(function () {
         .then(getItems)
         .then(getCriticalItems)
         .then(updatePage)
-        .then(function() { console.log('All wl-wanikani-critical-items functions have loaded.'); });
+        .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
     
 
     /*************************************************
@@ -61,7 +63,7 @@ $(function () {
      *************************************************/
     function criticalItemsDebug(debugMessage) {
         debugMode ? console.log(debugMessage) : '';
-    }
+    };
 
 
     /*************************************************
@@ -69,16 +71,16 @@ $(function () {
      *************************************************/
     function addStyles() {
         var style = document.createElement('style');
-        var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.css';
+        var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/' + scriptNameSpace + '/' + scriptNameSpace + '.user.css';
 
         $.get(cssFile, function(content) {
             style.innerHTML = content;
         });
 
-        style.className = 'wl-wanikani-critical-items-custom-styles';
+        style.className = '' + scriptNameSpace + '-custom-styles';
 
         document.head.appendChild(style);
-    }
+    };
 
 
     /*************************************************
@@ -95,11 +97,11 @@ $(function () {
             title:     'Critical Tables',
             on_click:  openSettings
         });
-    }
+    };
 
     function openSettings() {
         settingsDialog.open();
-    }
+    };
 
     function installSettings() {
         settingsDialog = new wkof.Settings({
@@ -125,7 +127,7 @@ $(function () {
             wkof.settings.Critical_Tables = $.extend(true, {}, defaults,wkof.settings.Critical_Tables);
             settingsDialog.save();
         });
-    }
+    };
 
     function processSettings(){
         settingsDialog.save();
@@ -135,7 +137,7 @@ $(function () {
         getItems()
             .then(getCriticalItems)
             .then(updatePage);
-    }
+    };
     
     // =================
     // Critical items list
@@ -144,23 +146,25 @@ $(function () {
         criticalItemsDebug('Getting items.');
 
         return wkof.ItemData.get_items(config);
-    }
+    };
 
 
     function getCriticalItems(items) {
         criticalItemsDebug('Getting critical items.');
 
         let returnItems = items.filter(isCritical);
+
         criticalItemsDebug(returnItems);
+        
         return returnItems;
-    }
+    };
 
     function isCritical(item) {
         criticalItemsDebug('Check if critical.');
 
         item.critical_score = item.review_statistics.percentage_correct;
-        return item.critical_score <= 90;
-    }
+        return item.critical_score <= 65;
+    };
 
     function updatePage(items) {
         criticalItemsDebug('Updating page.');
@@ -172,7 +176,7 @@ $(function () {
                 : b.critical_score - a.critical_score});
 
         createTables(items);
-	}
+	};
 
     function itemsCharacterCallback (itemsData){
         criticalItemsDebug('Character callback.');
@@ -186,7 +190,7 @@ $(function () {
             //if both characters and character_images are somehow absent try using slug instead
             return itemsData.slug;
         }
-    }
+    };
 
     function createTables(items) {
         criticalItemsDebug('Create Tables.');
@@ -230,8 +234,8 @@ $(function () {
             </div>
         `;
 
-        $(criticalTableHTML).insertBefore('section.srs-progress');
+        $(criticalTableHTML).insertAfter('section.srs-progress');
 
         criticalItemsDebug('Created?');
-    }
+    };
 })();

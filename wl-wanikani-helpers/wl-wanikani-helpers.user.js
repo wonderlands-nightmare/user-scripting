@@ -13,17 +13,20 @@
     /*************************************************
      *  Variable initialisation.
      *************************************************/
+    const scriptNameSpace = 'wl-wanikani-helpers';
+    
+    // autoRefreshOnNextReviewHour
     let refreshCounter = 0
 
 
     /*************************************************
      *  Execute script.
      *************************************************/
-    console.log('Running wl-wanikani-helpers functions.');
+    console.log('Running ' + scriptNameSpace + ' functions.');
     addStyles();
     reviewAndLessonButtonPulseEffect();
     autoRefreshOnNextReviewHour();
-    console.log('All wl-wanikani-helpers functions have loaded.');
+    console.log('All ' + scriptNameSpace + ' functions have loaded.');
 
 
     /*************************************************
@@ -37,16 +40,16 @@
      *************************************************/
     function addStyles() {
         var style = document.createElement('style');
-        var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-helpers/wl-wanikani-helpers.user.css';
+        var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/' + scriptNameSpace + '/' + scriptNameSpace + '.user.css';
 
         $.get(cssFile, function(content) {
             style.innerHTML = content;
         });
 
-        style.className = 'wl-wanikani-helpers-custom-styles';
+        style.className = scriptNameSpace + '-custom-styles';
 
         document.head.appendChild(style);
-    }
+    };
 
 
     /*************************************************
@@ -81,17 +84,19 @@
             $(lessonButton).removeClass('has-lessons');
             $(lessonShortcutButton).addClass('has-lessons');
         }
-    }
+    };
 
 
     /*************************************************
      *  Add reload timer for auto-refresh on next review time.
      *************************************************/
     function autoRefreshOnNextReviewHour() {
-        let currentHour = new Date().getHours() % 12 || 12;
+        let todayForecastsCount = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour time').length;
+        let current24Hour = new Date().getHours();
+        let current12Hour = current24Hour % 12 || 12;
         let nextReviewHour = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text().replace(/ am| pm/gi, '');
 
-        if (currentHour == nextReviewHour) {
+        if (current12Hour == nextReviewHour || (todayForecastsCount == 0 && current24Hour == 0)) {
             location.reload();
         }
         else {
