@@ -1,0 +1,32 @@
+:root {
+    --grey: #f4f4f4;
+}
+
+.custom-critical-items { 
+    padding: 12px 24px; 
+    margin-bottom: 30px; 
+    background: var(--grey); 
+} 
+
+.custom-critical-items section { 
+    margin-bottom: 0; 
+} 
+
+.custom-critical-items section .progress-entries { 
+    grid-template-columns: none; 
+    display: flex; 
+} 
+
+.custom-critical-items section .progress-entry { 
+    height: 40px; 
+} 
+
+.custom-critical-items section .progress-entry.radical, 
+.custom-critical-items section .progress-entry.kanji { 
+    width: 40px; 
+} 
+
+.custom-critical-items .vocabulary-icon { 
+    font-size: 21px; 
+    height: 40px; 
+} 
