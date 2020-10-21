@@ -75,11 +75,11 @@
 
         if (lessonCount > 0) {
             $(lessonButton).addClass('has-lessons');
-            $(lessonShortcutButton).addClass('has-reviews');
+            $(lessonShortcutButton).addClass('has-lessons');
         }
         else {
             $(lessonButton).removeClass('has-lessons');
-            $(lessonShortcutButton).addClass('has-reviews');
+            $(lessonShortcutButton).addClass('has-lessons');
         }
     }
 
