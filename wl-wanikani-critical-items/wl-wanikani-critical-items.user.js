@@ -46,7 +46,7 @@
     /*************************************************
      *  Execute script.
      *************************************************/
-    console.log('Running ' + scriptNameSpace + ' functions.')
+    console.log('Running ' + scriptNameSpace + ' functions.');
     wkof.include('ItemData, Menu, Settings');
     wkof.ready('ItemData, Menu, Settings')
         .then(addStyles)
