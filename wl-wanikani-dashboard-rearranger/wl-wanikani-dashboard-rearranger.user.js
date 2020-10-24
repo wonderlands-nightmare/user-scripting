@@ -56,7 +56,7 @@
 
         progressEntries.each(function() {
             let parentClasses = '';
-            parentClasses += $(this).siblings('h2').text();
+            parentClasses += $(this).siblings('h2').text().toLowerCase();
             
             let progressEntry = progressEntries.find('.progress-entry');
 
