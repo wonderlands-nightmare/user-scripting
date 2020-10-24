@@ -18,6 +18,19 @@
     // autoRefreshOnNextReviewHour
     let refreshCounter = 0
 
+    let progressitems = $('.progress-and-forecast .dashboard-progress .progress-entries .progress-entry__pips');
+    
+    $.each(progressitems, function(index, progressItem){
+        //let progressitem = progressItem.children;
+        
+        //let hasClass = progressitem.hasClass('.bg-grey-300');
+        //console.log(hasClass);
+        //console.log(progressitem);
+        // if (progressitem.hasClass()) {
+        //     console.log(progressitem);
+        // }
+    });
+
 
     /*************************************************
      *  Execute script.
@@ -73,7 +86,7 @@
         }
         else {
             $(reviewButton).removeClass('has-lessons');
-            $(reviewShortcutButton).addClass('has-reviews');
+            $(reviewShortcutButton).removeClass('has-reviews');
         }
 
         if (lessonCount > 0) {
@@ -82,7 +95,7 @@
         }
         else {
             $(lessonButton).removeClass('has-lessons');
-            $(lessonShortcutButton).addClass('has-lessons');
+            $(lessonShortcutButton).removeClass('has-lessons');
         }
     };
 
