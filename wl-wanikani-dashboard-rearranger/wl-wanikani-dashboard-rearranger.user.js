@@ -52,12 +52,23 @@
      *  Hides the completed progress items.
      *************************************************/
     function hideCompleteProgressItems() {
-        let progressEntry = $('.progress-and-forecast .dashboard-progress .progress-entries .progress-entry');
-    
-        $(progressEntry).each(function() {
-            if ($(this).find('.progress-entry__pips .bg-gray-300').length = 0) {
-                $(this).addClass('hidden');
-            }
+        let progressEntries = $('.progress-and-forecast .dashboard-progress .progress-entries');
+
+        progressEntries.each(function() {
+            let parentClasses = '';
+            parentClasses += $(this).siblings('h2').text();
+            
+            let progressEntry = progressEntries.find('.progress-entry');
+
+            parentClasses += (progressEntry.length == 0) ? ' all-done' : '';
+
+            $(this).parent('.rounded').addClass(parentClasses);
+
+            $(progressEntry).each(function() {
+                if ($(this).find('.progress-entry__pips .bg-gray-300').length = 0) {
+                    $(this).addClass('hidden');
+                }
+            });
         });
     }
 })();
