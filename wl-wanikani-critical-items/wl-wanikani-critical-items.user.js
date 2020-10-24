@@ -14,16 +14,23 @@
      *  Variable initialisation.
      *************************************************/
     const scriptNameSpace = 'wl-wanikani-critical-items';
-    
+
+    // openSettings, installSettings, processSettings
+    let settingsDialog;
+
+    // installSettings
+    let defaults = {
+        debugMode: false,
+    };
+
     // criticalItemsDebug
     let debugMode = false;
 
     // getItems
-    const config = {
+    const itemDataConfig = {
 		wk_items: {
 			options: {
-                review_statistics: true,
-                asignments: true
+                review_statistics: true
 			},
             filters: {
                 level: '1..+0', //only retrieve items from lv 1 up to and including current level
@@ -35,21 +42,18 @@
 		}
     };
 
-    // openSettings, installSettings, processSettings
-    let settingsDialog;
-    
-    // installSettings
-    let defaults = {
-        debugMode: false,
-    };
-    
+    let wkofItems = {};
+    let wkofItemsData = {};
+
+    // isCritical
+    const apprenticeIds = [1, 2, 3, 4]
 
     /*************************************************
      *  Execute script.
      *************************************************/
     console.log('Running ' + scriptNameSpace + ' functions.');
     wkof.include('ItemData, Menu, Settings');
-    wkof.ready('ItemData, Menu, Settings')
+    wkof.ready('Apiv2, ItemData, Menu, Settings')
         .then(addStyles)
         .then(installMenu)
         .then(installSettings)
@@ -57,13 +61,27 @@
         .then(getCriticalItems)
         .then(updatePage)
         .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
-    
+
 
     /*************************************************
      *  Helper functions.
      *************************************************/
     function criticalItemsDebug(debugMessage) {
         debugMode ? console.log(debugMessage) : '';
+    };
+
+    function itemsCharacterCallback (itemsData){
+        criticalItemsDebug('Character callback.');
+
+        //check if an item has characters. Kanji and vocabulary will always have these but wk-specific radicals (e.g. gun, leaf, stick) use images instead
+        if(itemsData.characters!= null) {
+            return itemsData.characters;
+        } else if (itemsData.character_images != null){
+            return '<i class="radical-'+itemsData.slug+' radicalCharacterImgSize"></i>';
+        } else {
+            //if both characters and character_images are somehow absent try using slug instead
+            return itemsData.slug;
+        }
     };
 
 
@@ -139,59 +157,59 @@
             .then(getCriticalItems)
             .then(updatePage);
     };
-    
+
     // =================
     // Critical items list
     // =================
     function getItems() {
         criticalItemsDebug('Getting items.');
 
-        return wkof.ItemData.get_items(config);
+        return Promise.all([wkof.ItemData.get_items(itemDataConfig), wkof.Apiv2.fetch_endpoint('user')])
+            .then(function([itemsData, userData]) {
+                wkofItems.ItemsData = itemsData;
+                wkofItems.UsersData = userData;
+                return wkofItems;
+            });
     };
-
 
     function getCriticalItems(items) {
         criticalItemsDebug('Getting critical items.');
 
-        let returnItems = items.filter(isCritical);
+        wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
+        wkofItemsData.CriticalItems = items.ItemsData.filter(isCritical);
 
-        criticalItemsDebug(returnItems);
-        
-        return returnItems;
+        criticalItemsDebug(wkofItemsData);
+
+        return wkofItemsData;
     };
 
     function isCritical(item) {
         criticalItemsDebug('Check if critical.');
+        // 1 - appr1, 2 - appr2, 3 - appr3, 4 - appr4, 5 - guru1, 6 - guru2, 7 - mast, 8 - enli
 
-        item.critical_score = item.review_statistics.percentage_correct;
-        return item.critical_score <= 65;
+        const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
+        const isApprentice = apprenticeIds.includes(item.assignments.srs_stage);
+        const itemCritical = isLowerLevel && isApprentice;
+
+        if (itemCritical) {
+            console.log(item.data.level);
+            item.critical_level = (wkofItemsData.SafeLevel - item.data.level)/item.assignments.srs_stage;
+
+            return item;
+        };
     };
 
     function updatePage(items) {
         criticalItemsDebug('Updating page.');
 
-        //sort by percentage, if score equal sort by level ascending
-        items = items.sort(function(a, b){
-            return (a.critical_score == b.critical_score)
-                ? a.data.level - b.data.level
-                : b.critical_score - a.critical_score});
+        items = items.CriticalItems.sort(function(a, b) {
+            return (a.critical_level == b.critical_level)
+                ? b.assignments.srs_stage - a.assignments.srs_stage
+                : b.critical_level - a.critical_level;
+        });
 
         createTables(items);
 	};
-
-    function itemsCharacterCallback (itemsData){
-        criticalItemsDebug('Character callback.');
-
-        //check if an item has characters. Kanji and vocabulary will always have these but wk-specific radicals (e.g. gun, leaf, stick) use images instead
-        if(itemsData.characters!= null) {
-            return itemsData.characters;
-        } else if (itemsData.character_images != null){
-            return '<i class="radical-'+itemsData.slug+' radicalCharacterImgSize"></i>';
-        } else {
-            //if both characters and character_images are somehow absent try using slug instead
-            return itemsData.slug;
-        }
-    };
 
     function createTables(items) {
         criticalItemsDebug('Create Tables.');
@@ -216,14 +234,23 @@
         `;
 
         criticalItemsDebug('Create Tables after html1.');
+        console.log(items);
 
         $.each(items, function(index, item) {
             criticalItemsDebug('Is item index: '+index);
+
+            let itemAddedStyle = '';
+
+            if (item.critical_level > 0) {
+                itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
+            }
+
             let itemType = item.object;
             criticalTableHTML += `
                         <div class="progress-entry relative rounded-tr rounded-tl ${itemType}">
-                            <a href="${item.data.document_url}" class="${itemType}-icon" lang="ja">
+                            <a href="${item.data.document_url}" class="${itemType}-icon" lang="ja" ${itemAddedStyle}>
                                 <div>${itemsCharacterCallback(item.data)}</div>
+                                <span class="progress-item-level">${item.data.level}</span>
                             </a>
                         </div>
             `;
@@ -235,6 +262,9 @@
             </div>
         `;
 
+        if ($('.custom-critical-items').length > 0) {
+            $('.custom-critical-items').remove();
+        }
         $(criticalTableHTML).insertAfter('section.srs-progress');
 
         criticalItemsDebug('Created?');

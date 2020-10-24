@@ -1,5 +1,7 @@
 :root {
-    --grey: #f4f4f4;
+    --grey:       #f4f4f4;
+    --white:      #ffffff;
+    --dark-green: #006400;
 }
 
 .custom-critical-items { 
@@ -17,16 +19,29 @@
     display: flex; 
 } 
 
-.custom-critical-items section .progress-entry { 
+.custom-critical-items section .progress-entries .progress-entry { 
     height: 40px; 
 } 
 
-.custom-critical-items section .progress-entry.radical, 
-.custom-critical-items section .progress-entry.kanji { 
+.custom-critical-items section .progress-entries .progress-entry.radical, 
+.custom-critical-items section .progress-entries .progress-entry.kanji { 
     width: 40px; 
 } 
 
-.custom-critical-items section .progress-entry .vocabulary-icon { 
+.custom-critical-items section .progress-entries .progress-entry .vocabulary-icon { 
+    height: 40px;
     font-size: 21px; 
-    height: 40px; 
-} 
+}
+
+.custom-critical-items section .progress-entries .progress-entry a .progress-item-level { 
+    position: absolute;
+    padding: 0px 4px;
+    background: var(--dark-green);
+    border: 0.5px solid var(--white);
+    border-radius: 50%;
+    bottom: -5px;
+    right: -5px;
+    font-size: 8px;
+    font-weight: bold;
+    line-height: 15px;
+}
