@@ -15,14 +15,6 @@
      *************************************************/
     const scriptNameSpace = 'wl-wanikani-critical-items';
 
-    // openSettings, installSettings, processSettings
-    let settingsDialog;
-
-    // installSettings
-    let defaults = {
-        debugMode: false,
-    };
-
     // criticalItemsDebug
     let debugMode = false;
 
@@ -48,26 +40,31 @@
     // isCritical
     const apprenticeIds = [1, 2, 3, 4]
 
+
     /*************************************************
      *  Execute script.
      *************************************************/
     console.log('Running ' + scriptNameSpace + ' functions.');
     wkof.include('ItemData, Menu, Settings');
     wkof.ready('Apiv2, ItemData, Menu, Settings')
-        .then(addStyles)
-        .then(installMenu)
-        .then(installSettings)
-        .then(getItems)
+        .then(addCriticalItemsStyles)
         .then(getCriticalItems)
-        .then(updatePage)
+        .then(getCriticalItemsData)
+        .then(updatePageForCriticalItems)
         .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
 
 
     /*************************************************
      *  Helper functions.
      *************************************************/
-    function criticalItemsDebug(debugMessage) {
-        debugMode ? console.log(debugMessage) : '';
+    function criticalItemsDebug(debugMessage, debugItem = 'empty') {
+        if (debugMode) {
+            console.log(scriptNameSpace + ': ' + debugMessage);
+            
+            if (debugItem != 'empty') {
+                console.log(debugItem);
+            }
+        }
     };
 
     function itemsCharacterCallback (itemsData){
@@ -88,7 +85,7 @@
     /*************************************************
      *  Adds styling to page.
      *************************************************/
-    function addStyles() {
+    function addCriticalItemsStyles() {
         var style = document.createElement('style');
         var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/' + scriptNameSpace + '/' + scriptNameSpace + '.user.css';
 
@@ -106,62 +103,9 @@
      *  Add Critical Items component to dashboard.
      *************************************************/
     // =================
-    // Critical items menu/settings
-    // =================
-    function installMenu() {
-        wkof.Menu.insert_script_link({
-            script_id: 'Critical_Tables',
-            name: 'Critical_Tables',
-            submenu:   'Settings',
-            title:     'Critical Tables',
-            on_click:  openSettings
-        });
-    };
-
-    function openSettings() {
-        settingsDialog.open();
-    };
-
-    function installSettings() {
-        settingsDialog = new wkof.Settings({
-            script_id: 'Critical_Tables',
-            name: 'Critical_Tables',
-            title: 'Critical Tables',
-            on_save: processSettings,
-            settings: {
-                'debugMode': {
-                    type:'dropdown',
-                    label:'Total number of leeches',
-                    hover_tip: 'The amount of leeches you want to display',
-                    default: defaults.debugMode,
-                    content:{
-                        true:'Enable',
-                        false:'Disable'
-                    }
-                }
-            }
-        });
-
-        settingsDialog.load().then(function(){
-            wkof.settings.Critical_Tables = $.extend(true, {}, defaults,wkof.settings.Critical_Tables);
-            settingsDialog.save();
-        });
-    };
-
-    function processSettings(){
-        settingsDialog.save();
-        console.log(wkof.settings.Critical_Tables.debugMode);
-        debugMode = wkof.settings.Critical_Tables.debugMode;
-        //refresh critical items table
-        getItems()
-            .then(getCriticalItems)
-            .then(updatePage);
-    };
-
-    // =================
     // Critical items list
     // =================
-    function getItems() {
+    function getCriticalItems() {
         criticalItemsDebug('Getting items.');
 
         return Promise.all([wkof.ItemData.get_items(itemDataConfig), wkof.Apiv2.fetch_endpoint('user')])
@@ -172,13 +116,13 @@
             });
     };
 
-    function getCriticalItems(items) {
+    function getCriticalItemsData(items) {
         criticalItemsDebug('Getting critical items.');
 
         wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
         wkofItemsData.CriticalItems = items.ItemsData.filter(isCritical);
 
-        criticalItemsDebug(wkofItemsData);
+        criticalItemsDebug('Got critical items, show data.', wkofItemsData);
 
         return wkofItemsData;
     };
@@ -192,14 +136,13 @@
         const itemCritical = isLowerLevel && isApprentice;
 
         if (itemCritical) {
-            console.log(item.data.level);
             item.critical_level = (wkofItemsData.SafeLevel - item.data.level)/item.assignments.srs_stage;
 
             return item;
         };
     };
 
-    function updatePage(items) {
+    function updatePageForCriticalItems(items) {
         criticalItemsDebug('Updating page.');
 
         items = items.CriticalItems.sort(function(a, b) {
@@ -234,10 +177,9 @@
         `;
 
         criticalItemsDebug('Create Tables after html1.');
-        console.log(items);
 
         $.each(items, function(index, item) {
-            criticalItemsDebug('Is item index: '+index);
+            criticalItemsDebug('Is item index: '+ index);
 
             let itemAddedStyle = '';
 

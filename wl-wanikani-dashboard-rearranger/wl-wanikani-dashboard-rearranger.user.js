@@ -20,7 +20,7 @@
      *  Execute script.
      *************************************************/
     console.log('Running ' + scriptNameSpace + ' functions.');
-    addStyles();
+    addRearrangerStyles();
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
 
 
@@ -33,7 +33,7 @@
     /*************************************************
      *  Adds styling to page.
      *************************************************/
-    function addStyles() {
+    function addRearrangerStyles() {
         var style = document.createElement('style');
         var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/' + scriptNameSpace + '/' + scriptNameSpace + '.user.css';
 
@@ -44,5 +44,5 @@
         style.className = scriptNameSpace + '-custom-styles';
 
         document.head.appendChild(style);
-    }; 
+    };
 })();
