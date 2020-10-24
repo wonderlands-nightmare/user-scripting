@@ -16,20 +16,7 @@
     const scriptNameSpace = 'wl-wanikani-helpers';
     
     // autoRefreshOnNextReviewHour
-    let refreshCounter = 0
-
-    let progressitems = $('.progress-and-forecast .dashboard-progress .progress-entries .progress-entry__pips');
-    
-    $.each(progressitems, function(index, progressItem){
-        //let progressitem = progressItem.children;
-        
-        //let hasClass = progressitem.hasClass('.bg-grey-300');
-        //console.log(hasClass);
-        //console.log(progressitem);
-        // if (progressitem.hasClass()) {
-        //     console.log(progressitem);
-        // }
-    });
+    let refreshCounter = 0;
 
 
     /*************************************************

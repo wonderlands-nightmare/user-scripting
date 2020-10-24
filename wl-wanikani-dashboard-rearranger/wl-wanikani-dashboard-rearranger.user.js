@@ -45,4 +45,23 @@
 
         document.head.appendChild(style);
     };
+
+
+    /*************************************************
+     *  Hides the completed progress items.
+     *************************************************/
+    function hideCompleteProgressItems() {
+        let progressitems = $('.progress-and-forecast .dashboard-progress .progress-entries .progress-entry__pips');
+    
+        $.each(progressitems, function(index, progressItem){
+            //let progressitem = progressItem.children;
+            
+            //let hasClass = progressitem.hasClass('.bg-grey-300');
+            //console.log(hasClass);
+            //console.log(progressitem);
+            // if (progressitem.hasClass()) {
+            //     console.log(progressitem);
+            // }
+        });
+    }
 })();
