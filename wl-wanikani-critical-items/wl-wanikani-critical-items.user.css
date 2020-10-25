@@ -49,17 +49,19 @@
 
 .critical-item-tooltip .critical-item-tooltip-text {
     visibility: hidden;
-    position: absolute;
     width: max-content;
-    padding: 10px;
     background-color: var(--black);
-    border-radius: 6px;
-    bottom: 125%;
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 0.3s;
     color: var(--white);
     text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
   
 .critical-item-tooltip .critical-item-tooltip-text::after {
