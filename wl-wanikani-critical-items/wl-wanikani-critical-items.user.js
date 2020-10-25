@@ -60,7 +60,7 @@
     function criticalItemsDebug(debugMessage, debugItem = 'empty') {
         if (debugMode) {
             console.log(scriptNameSpace + ': ' + debugMessage);
-            
+
             if (debugItem != 'empty') {
                 console.log(debugItem);
             }
@@ -154,6 +154,12 @@
         createTables(items);
 	};
 
+    function isAccepted(item) {
+        criticalItemsDebug('Check if accepted.');
+
+        return item.accepted_answer == true;
+    };
+
     function createTables(items) {
         criticalItemsDebug('Create Tables.');
 
@@ -179,17 +185,70 @@
         criticalItemsDebug('Create Tables after html1.');
 
         $.each(items, function(index, item) {
+            let itemReadings = item.data.readings.filter(isAccepted);
+            let itemMeanings = item.data.meanings.filter(isAccepted);
+            console.log('item is');
+            console.log(item);
+            console.log('item readings');
+            console.log(itemReadings);
+            console.log('item meanings');
+            console.log(itemMeanings);
+
             criticalItemsDebug('Is item index: '+ index);
 
             let itemAddedStyle = '';
+            let tooltipTextHTML = '';
+            let itemReadingTooltipItems = '';
+            let itemMeaningTooltipItems = '';
 
             if (item.critical_level > 0) {
                 itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
             }
 
+            if (itemReadings.length > 0 || itemMeanings.length > 0) {
+                tooltipTextHTML += `
+                    <span class="critical-item-tooltip-text">
+                `;
+
+                if (itemReadings.length > 0) {
+                    $.each(itemReadings, function(index, reading) {
+                        if (index == 0){
+                            itemReadingTooltipItems += reading.reading;
+                        }
+                        else {
+                            itemReadingTooltipItems += ', ' + reading.reading;
+                        }
+                    });
+
+                    tooltipTextHTML += `
+                        <div class="critical-item-tooltip-text-entries item-readings">${ itemReadingTooltipItems }</div>
+                    `;
+                }
+
+                if (itemMeanings.length > 0) {
+                    $.each(itemMeanings, function(index, meaning) {
+                        if (index == 0){
+                            itemMeaningTooltipItems += meaning.meaning;
+                        }
+                        else {
+                            itemMeaningTooltipItems += ', ' + meaning.meaning;
+                        }
+                    });
+
+                    tooltipTextHTML += `
+                        <div class="critical-item-tooltip-text-entries item-meanings">${ itemMeaningTooltipItems }</div>
+                    `;
+                }
+
+                tooltipTextHTML += `
+                    </span>
+                `;
+            }
+
             let itemType = item.object;
             criticalTableHTML += `
-                        <div class="progress-entry relative rounded-tr rounded-tl ${ itemType }">
+                        <div class="critical-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
+                            ${ tooltipTextHTML }
                             <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
                                 <div>${ itemsCharacterCallback(item.data) }</div>
                                 <span class="progress-item-level">${ item.data.level }</span>
