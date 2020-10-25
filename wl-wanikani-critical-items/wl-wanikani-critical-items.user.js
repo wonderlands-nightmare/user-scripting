@@ -189,10 +189,10 @@
 
             let itemType = item.object;
             criticalTableHTML += `
-                        <div class="progress-entry relative rounded-tr rounded-tl ${itemType}">
-                            <a href="${item.data.document_url}" class="${itemType}-icon" lang="ja" ${itemAddedStyle}>
-                                <div>${itemsCharacterCallback(item.data)}</div>
-                                <span class="progress-item-level">${item.data.level}</span>
+                        <div class="progress-entry relative rounded-tr rounded-tl ${ itemType }">
+                            <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
+                                <div>${ itemsCharacterCallback(item.data) }</div>
+                                <span class="progress-item-level">${ item.data.level }</span>
                             </a>
                         </div>
             `;

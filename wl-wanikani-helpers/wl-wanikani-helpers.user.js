@@ -107,8 +107,9 @@
 
             let nextRefreshText = nextReviewText.replace(' ', ':' + new Date().getMinutes() + ' ');
             let autoRefreshHTML = `
-                <span class="auto-refresh-indicator">Next refresh at ${nextRefreshText}</span>
+                <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
             `;
+            console.log(nextRefreshText);
 
             $(autoRefreshHTML).insertAfter('.forecast > h1');
         }
