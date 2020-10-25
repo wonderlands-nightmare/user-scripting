@@ -103,9 +103,9 @@
         let nextRefreshText = '';
 
         if (nextReviewText == '') {
-            let nextRefreshMinutes = addLeadingZero(currentMinutes + 10);
+            let nextRefreshMinutes = currentMinutes + 10;
             let refreshTextHours = addLeadingZero((nextRefreshMinutes >= 50) ? ((current24Hour + 1) % 24) : current24Hour);
-            let refreshTextMinutes = nextRefreshMinutes % 60;
+            let refreshTextMinutes = addLeadingZero(nextRefreshMinutes % 60);
             nextRefreshText = refreshTextHours + ':' + refreshTextMinutes;
         }
         else {
