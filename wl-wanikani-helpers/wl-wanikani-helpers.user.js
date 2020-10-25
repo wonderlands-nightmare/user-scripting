@@ -92,8 +92,9 @@
      *************************************************/
     function autoRefreshOnNextReviewHour() {
         let todayForecastsCount = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour time').length;
-        let currentMinutes = new Date().getMinutes();
-        let current24Hour = new Date().getHours();
+        let currentDate = new Date();
+        let currentMinutes = (currentDate.getMinutes() > 10) ? '0' + currentDate.getMinutes() : currentDate.getMinutes();
+        let current24Hour = currentDate.getHours();
         let current12Hour = current24Hour % 12 || 12;
         let nextReviewText = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text();
         let nextReviewHour = nextReviewText.replace(/ am| pm/gi, '');
