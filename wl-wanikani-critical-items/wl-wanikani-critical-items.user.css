@@ -1,7 +1,8 @@
 :root {
+    --black:      #000000;
+    --dark-green: #006400;
     --grey:       #f4f4f4;
     --white:      #ffffff;
-    --dark-green: #006400;
 }
 
 .custom-critical-items { 
@@ -44,4 +45,37 @@
     font-size: 8px;
     font-weight: bold;
     line-height: 15px;
+}
+
+.critical-item-tooltip .critical-item-tooltip-text {
+    visibility: hidden;
+    width: 120px;
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.critical-item-tooltip .critical-item-tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--black) transparent transparent transparent;
+}
+  
+.critical-item-tooltip:hover .critical-item-tooltip-text {
+    visibility: visible;
+    opacity: 1;
 }
