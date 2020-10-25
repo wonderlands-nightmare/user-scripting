@@ -1,8 +1,10 @@
 :root {
-    --black:      #000000;
-    --dark-green: #006400;
-    --grey:       #f4f4f4;
-    --white:      #ffffff;
+    --black:             #000000;
+    --dark-green:        #006400;
+    --dark-grey:         #6b6b6b;
+    --grey:              #f4f4f4;
+    --transparent-black: rgba(0, 0, 0, 0.75);
+    --white:             #ffffff;
 }
 
 .custom-critical-items { 
@@ -49,19 +51,33 @@
 
 .critical-item-tooltip .critical-item-tooltip-text {
     visibility: hidden;
-    width: max-content;
-    background-color: var(--black);
+    width: 120px;
+    background-color: var(--transparent-black);
     color: var(--white);
     text-align: center;
-    border-radius: 6px;
+    border-radius: 5px;
     padding: 10px;
     position: absolute;
     z-index: 1;
     bottom: 125%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -70px;
     opacity: 0;
     transition: opacity 0.3s;
+}
+
+.critical-item-tooltip .critical-item-tooltip-text .critical-item-tooltip-text-entries {
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.critical-item-tooltip .critical-item-tooltip-text .critical-item-tooltip-text-entries.item-readings {
+    background: var(--dark-green);
+}
+
+.critical-item-tooltip .critical-item-tooltip-text .critical-item-tooltip-text-entries.item-meanings {
+    background: var(--dark-grey);
 }
   
 .critical-item-tooltip .critical-item-tooltip-text::after {
