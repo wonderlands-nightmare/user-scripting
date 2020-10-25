@@ -185,21 +185,13 @@
         criticalItemsDebug('Create Tables after html1.');
 
         $.each(items, function(index, item) {
-            let itemReadings = item.data.readings.filter(isAccepted);
-            let itemMeanings = item.data.meanings.filter(isAccepted);
-            console.log('item is');
-            console.log(item);
-            console.log('item readings');
-            console.log(itemReadings);
-            console.log('item meanings');
-            console.log(itemMeanings);
-
-            criticalItemsDebug('Is item index: '+ index);
-
             let itemAddedStyle = '';
             let tooltipTextHTML = '';
             let itemReadingTooltipItems = '';
             let itemMeaningTooltipItems = '';
+
+            let itemReadings = item.data.readings.filter(isAccepted);
+            let itemMeanings = item.data.meanings.filter(isAccepted);
 
             if (item.critical_level > 0) {
                 itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
