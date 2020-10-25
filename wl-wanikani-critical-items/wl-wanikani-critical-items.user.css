@@ -31,9 +31,13 @@
     width: 40px; 
 } 
 
-.custom-critical-items section .progress-entries .progress-entry .vocabulary-icon { 
+.custom-critical-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
     height: 40px;
-    font-size: 21px; 
+    font-size: 21px;
+}
+
+.custom-critical-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
+    text-decoration: none;
 }
 
 .custom-critical-items section .progress-entries .progress-entry a .progress-item-level { 
