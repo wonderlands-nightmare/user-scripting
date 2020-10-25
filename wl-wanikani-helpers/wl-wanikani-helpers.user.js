@@ -116,7 +116,7 @@
             <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
         `;
 
-        if ($('.auto-refresh-indicators').length > 0) {
+        if ($('.auto-refresh-indicator').length > 0) {
             $('.auto-refresh-indicator').remove();
         }
         $(autoRefreshHTML).insertAfter('.forecast > h1');
