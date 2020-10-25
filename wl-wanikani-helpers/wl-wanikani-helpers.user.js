@@ -94,15 +94,23 @@
         let todayForecastsCount = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour time').length;
         let current24Hour = new Date().getHours();
         let current12Hour = current24Hour % 12 || 12;
-        let nextReviewHour = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text().replace(/ am| pm/gi, '');
+        let nextReviewText = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text();
+        let nextReviewHour = nextReviewText.replace(/ am| pm/gi, '');
 
         if (current12Hour == nextReviewHour || (todayForecastsCount == 0 && current24Hour == 0)) {
             location.reload();
         }
         else {
             setTimeout(autoRefreshOnNextReviewHour, 600000);
-            console.log('Reset timeout: ' + refreshCounter);
+            console.log('Auto refresh counter: ' + refreshCounter);
             refreshCounter = refreshCounter + 1;
+
+            let nextRefreshText = nextReviewText.replace(' ', ':' + new Date().getMinutes() + ' ');
+            let autoRefreshHTML = `
+                <span class="auto-refresh-indicator">Next refresh at ${nextRefreshText}</span>
+            `;
+
+            $(autoRefreshHTML).insertAfter('.forecast > h1');
         }
     };
 })();

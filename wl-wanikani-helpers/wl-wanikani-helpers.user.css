@@ -9,12 +9,12 @@
     --grey:                #f4f4f4;
 }
 
-.navigation-shortcuts .navigation-shortcut--reviews > a > span {
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
     background: var(--reviewColour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.navigation-shortcuts .navigation-shortcut--lessons > a > span {
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
     background: var(--lessonColour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
@@ -31,7 +31,16 @@
     --start-pulse: var(--lessonColourDarker);
     --end-pulse: var(--lessonColourLighter);
     animation: buttonPulse 2s infinite; 
-} 
+}
+
+.progress-and-forecast .forecast > h1 {
+    margin-bottom: 5px;
+}
+
+.progress-and-forecast .forecast .auto-refresh-indicator {
+    margin-bottom: 12px;
+    font-weight: bold;
+}
 
 
 @keyframes buttonPulse { 
