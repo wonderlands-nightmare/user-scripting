@@ -32,7 +32,9 @@
     /*************************************************
      *  Helper functions.
      *************************************************/
-    // Code goes here...
+    function addLeadingZero(valueToAddTo) {
+        return valueToAddTo < 10 ? '0' + valueToAddTo : valueToAddTo;
+    }
 
 
     /*************************************************
@@ -93,7 +95,7 @@
     function autoRefreshOnNextReviewHour() {
         let todayForecastsCount = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour time').length;
         let currentDate = new Date();
-        let currentMinutes = (currentDate.getMinutes() > 10) ? '0' + currentDate.getMinutes() : currentDate.getMinutes();
+        let currentMinutes = currentDate.getMinutes();
         let current24Hour = currentDate.getHours();
         let current12Hour = current24Hour % 12 || 12;
         let nextReviewText = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text();
@@ -101,13 +103,13 @@
         let nextRefreshText = '';
 
         if (nextReviewText == '') {
-            let nextRefreshMinutes = currentMinutes + 10;
-            let refreshTextHours = (nextRefreshMinutes >= 50) ? ((current24Hour + 1) % 24) : current24Hour;
+            let nextRefreshMinutes = addLeadingZero(currentMinutes + 10);
+            let refreshTextHours = addLeadingZero((nextRefreshMinutes >= 50) ? ((current24Hour + 1) % 24) : current24Hour);
             let refreshTextMinutes = nextRefreshMinutes % 60;
             nextRefreshText = refreshTextHours + ':' + refreshTextMinutes;
         }
         else {
-            nextRefreshText = nextReviewText.replace(' ', ':' + currentMinutes + ' ');
+            nextRefreshText = nextReviewText.replace(' ', ':' + addLeadingZero(currentMinutes) + ' ');
         }
 
         let autoRefreshHTML = `
