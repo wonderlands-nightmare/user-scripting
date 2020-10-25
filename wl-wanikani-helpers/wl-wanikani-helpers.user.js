@@ -92,10 +92,31 @@
      *************************************************/
     function autoRefreshOnNextReviewHour() {
         let todayForecastsCount = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour time').length;
+        let currentMinutes = new Date().getMinutes();
         let current24Hour = new Date().getHours();
         let current12Hour = current24Hour % 12 || 12;
         let nextReviewText = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text();
         let nextReviewHour = nextReviewText.replace(/ am| pm/gi, '');
+        let nextRefreshText = '';
+
+        if (nextReviewText == '') {
+            let nextRefreshMinutes = currentMinutes + 10;
+            let refreshTextHours = (nextRefreshMinutes >= 50) ? ((current24Hour + 1) % 24) : current24Hour;
+            let refreshTextMinutes = nextRefreshMinutes % 60;
+            nextRefreshText = refreshTextHours + ':' + refreshTextMinutes;
+        }
+        else {
+            nextRefreshText = nextReviewText.replace(' ', ':' + currentMinutes + ' ');
+        }
+
+        let autoRefreshHTML = `
+            <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
+        `;
+
+        if ($('.auto-refresh-indicators').length > 0) {
+            $('.auto-refresh-indicator').remove();
+        }
+        $(autoRefreshHTML).insertAfter('.forecast > h1');
 
         if (current12Hour == nextReviewHour || (todayForecastsCount == 0 && current24Hour == 0)) {
             location.reload();
@@ -104,14 +125,6 @@
             setTimeout(autoRefreshOnNextReviewHour, 600000);
             console.log('Auto refresh counter: ' + refreshCounter);
             refreshCounter = refreshCounter + 1;
-
-            let nextRefreshText = nextReviewText.replace(' ', ':' + new Date().getMinutes() + ' ');
-            let autoRefreshHTML = `
-                <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
-            `;
-            console.log(nextRefreshText);
-
-            $(autoRefreshHTML).insertAfter('.forecast > h1');
         }
     };
 })();
