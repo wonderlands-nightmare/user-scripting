@@ -68,22 +68,34 @@
 
         let reviewCount = $(reviewButton + ' > span').text();
         let lessonCount = $(lessonButton + ' > span').text();
+        let reviewShortcutCount = $(reviewShortcutButton + ' > span').text();
+        let lessonShortcutCount = $(lessonShortcutButton + ' > span').text();
 
         if (reviewCount > 0) {
             $(reviewButton).addClass('has-reviews');
-            $(reviewShortcutButton).addClass('has-reviews');
         }
         else {
             $(reviewButton).removeClass('has-lessons');
-            $(reviewShortcutButton).removeClass('has-reviews');
         }
 
         if (lessonCount > 0) {
             $(lessonButton).addClass('has-lessons');
-            $(lessonShortcutButton).addClass('has-lessons');
         }
         else {
             $(lessonButton).removeClass('has-lessons');
+        }
+
+        if (reviewShortcutCount > 0) {
+            $(reviewShortcutButton).addClass('has-reviews');
+        }
+        else {
+            $(reviewShortcutButton).removeClass('has-reviews');
+        }
+
+        if (lessonShortcutCount > 0) {
+            $(lessonShortcutButton).addClass('has-lessons');
+        }
+        else {
             $(lessonShortcutButton).removeClass('has-lessons');
         }
     };
