@@ -65,8 +65,8 @@
 
         $(reviewButton).attr('href', '/review/start');
         $(reviewShortcutButton).attr('href', '/review/start');
-        $(lessonButton).attr('href', '/lesson/start');
-        $(lessonShortcutButton).attr('href', '/lesson/start');
+        $(lessonButton).attr('href', '/lesson/session');
+        $(lessonShortcutButton).attr('href', '/lesson/session');
 
         let reviewCount = $(reviewButton + ' > span').text();
         let lessonCount = $(lessonButton + ' > span').text();
