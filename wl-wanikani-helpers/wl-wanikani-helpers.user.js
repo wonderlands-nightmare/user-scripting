@@ -32,8 +32,12 @@
     /*************************************************
      *  Helper functions.
      *************************************************/
-    function addLeadingZero(valueToAddTo) {
-        return valueToAddTo < 10 ? '0' + valueToAddTo : valueToAddTo;
+    function addLeadingZero(valueToAddTo, isString = false) {
+        return isString 
+            ? '0' + valueToAddTo 
+            : valueToAddTo < 10 
+                ? '0' + valueToAddTo 
+                : valueToAddTo;       
     }
 
 
@@ -123,7 +127,7 @@
             nextRefreshText = refreshTextHours + ':' + refreshTextMinutes;
         }
         else {
-            nextRefreshText = nextReviewText.replace(' ', ':' + addLeadingZero(currentMinutes) + ' ');
+            nextRefreshText = nextReviewText.replace(' ', ':' + addLeadingZero(currentMinutes.toString().slice(1), true) + ' ');
         }
 
         let autoRefreshHTML = `
