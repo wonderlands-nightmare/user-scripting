@@ -48,9 +48,9 @@
     border-radius: 50%;
     bottom: -5px;
     right: -5px;
-    font-size: 8px;
+    font-size: 9px;
     font-weight: bold;
-    line-height: 15px;
+    line-height: 14px;
 }
 
 .critical-item-tooltip .critical-item-tooltip-text {
