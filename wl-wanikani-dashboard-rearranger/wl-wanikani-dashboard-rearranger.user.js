@@ -56,19 +56,18 @@
 
         progressEntries.each(function() {
             let parentClasses = '';
-            parentClasses += $(this).siblings('h2').text().toLowerCase();
-            
             let progressEntry = progressEntries.find('.progress-entry');
 
+            parentClasses += $(this).siblings('h2').text().toLowerCase();
             parentClasses += (progressEntry.length == 0) ? ' all-done' : '';
 
-            $(this).parent('.rounded').addClass(parentClasses);
-
             $(progressEntry).each(function() {
-                if ($(this).find('.progress-entry__pips .bg-gray-300').length = 0) {
+                if ($(this).find('.progress-entry__pips .bg-gray-300').length == 0) {
                     $(this).addClass('hidden');
                 }
             });
+
+            $(this).parent('.rounded').addClass(parentClasses);
         });
     }
 })();
