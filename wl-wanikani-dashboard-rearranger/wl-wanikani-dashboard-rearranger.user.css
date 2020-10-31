@@ -40,7 +40,6 @@
 .progress-component .rounded.kanji.all-done .progress-entries::after {
     content: '✔';
     position: relative;
-    left: 20vw;
     width: 20px; 
     height: 20px;
     text-align: center;
