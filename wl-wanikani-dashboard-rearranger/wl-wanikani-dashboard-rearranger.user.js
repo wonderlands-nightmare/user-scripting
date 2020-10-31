@@ -68,11 +68,6 @@
             parentClasses += ($(this).find('.progress-entry.hidden').length == $(this).find('.progress-entry').length) ? ' all-done' : '';
 
             $(this).parent('.rounded').addClass(parentClasses);
-
-            if ($(this).parent('.rounded').hasClass('all-done')) {
-                let tickOffset = $(this).width() / 2;
-                $(this).get(0).style.setProperty('--tick-offset', tickOffset);
-            }
         });
     }
 })();
