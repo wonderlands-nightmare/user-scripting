@@ -71,7 +71,7 @@
 
             if ($(this).parent('.rounded').hasClass('all-done')) {
                 let tickOffset = $(this).width() / 2;
-                $(this).css('--tick-offset', tickOffset);
+                $(this).css({ '--tick-offset': tickOffset });
             }
         });
     }
