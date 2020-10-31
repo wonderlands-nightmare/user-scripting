@@ -69,9 +69,9 @@
 
             $(this).parent('.rounded').addClass(parentClasses);
 
-            if ($(this).hasClass('all-done')) {
+            if ($(this).parent('.rounded').hasClass('all-done')) {
                 let tickOffset = $(this).width() / 2;
-                $(this + '::after').css({ left: tickOffset });
+                $(this).css({ '--tick-offset': tickOffset });
             }
         });
     }
