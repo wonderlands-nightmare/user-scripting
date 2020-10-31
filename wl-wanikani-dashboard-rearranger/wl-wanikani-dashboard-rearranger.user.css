@@ -38,6 +38,11 @@
 
 .progress-component .rounded.radicals.all-done .progress-entries::after,
 .progress-component .rounded.kanji.all-done .progress-entries::after {
+    --tick-offset: 0;
+}
+
+.progress-component .rounded.radicals.all-done .progress-entries::after,
+.progress-component .rounded.kanji.all-done .progress-entries::after {
     content: '✔';
     position: relative;
     left: var(--tick-offset);
