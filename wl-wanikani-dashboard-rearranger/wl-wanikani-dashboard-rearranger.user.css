@@ -36,13 +36,11 @@
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.progress-component .rounded.radicals.all-done .progress-entries::after,
-.progress-component .rounded.kanji.all-done .progress-entries::after {
+.progress-component .rounded.all-done .progress-entries{
     --tick-offset: 0;
 }
 
-.progress-component .rounded.radicals.all-done .progress-entries::after,
-.progress-component .rounded.kanji.all-done .progress-entries::after {
+.progress-component .rounded.all-done .progress-entries::after {
     content: '✔';
     position: relative;
     left: var(--tick-offset);
