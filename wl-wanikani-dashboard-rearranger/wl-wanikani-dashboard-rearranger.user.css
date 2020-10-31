@@ -37,14 +37,11 @@
 }
 
 .progress-component .rounded.all-done .progress-entries {
-    content: '✔';
+    content: '';
     position: relative;
     left: 50%;
     width: 20px; 
     height: 20px;
-    text-align: center;
-    color: var(--green);
     border: 1px solid var(--green);
-    background: var(--white);
     border-radius: 50%;
 }
