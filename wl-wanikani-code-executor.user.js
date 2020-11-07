@@ -14,6 +14,7 @@
 // @resource     REARRANGER_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.js
 // @resource     CRITICAL_ITEMS_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.js
 // @grant        GM_getResourceText
+// @grant        GM_getResourceURL
 // @grant        GM_addStyle
 // ==/UserScript==
 
