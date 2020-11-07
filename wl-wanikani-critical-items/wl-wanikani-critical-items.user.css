@@ -47,7 +47,6 @@
 .custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level { 
     position: absolute;
     padding: 0px 4px;
-    background: var(--dark-grey);
     border: 0.5px solid var(--white);
     border-radius: 50%;
     top: -5px;
