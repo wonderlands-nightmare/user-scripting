@@ -1,12 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Dashboard Critical Items
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      0.1
-// @description  try to take over the world!
 // @author       Wonderlands-Nightmares
-// @match        https://www.wanikani.com/dashboard
-// @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.js
-// @grant        none
 // ==/UserScript==
 
 (function () {
@@ -44,14 +39,14 @@
     /*************************************************
      *  Execute script.
      *************************************************/
-    console.log('Running ' + scriptNameSpace + ' functions.');
-    wkof.include('ItemData, Menu, Settings');
-    wkof.ready('Apiv2, ItemData, Menu, Settings')
-        //.then(addCriticalItemsStyles)
-        .then(getCriticalItems)
-        .then(getCriticalItemsData)
-        .then(updatePageForCriticalItems)
-        .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
+    // console.log('Running ' + scriptNameSpace + ' functions.');
+    // wkof.include('ItemData, Menu, Settings');
+    // wkof.ready('Apiv2, ItemData, Menu, Settings')
+    //     //.then(addCriticalItemsStyles)
+    //     .then(getCriticalItems)
+    //     .then(getCriticalItemsData)
+    //     .then(updatePageForCriticalItems)
+    //     .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
 
 
     /*************************************************

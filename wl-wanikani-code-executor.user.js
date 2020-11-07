@@ -2,10 +2,9 @@
 // @name         WaniKani Dashboard
 // @namespace    https://github.com/wonderlands-nightmare
 // @version      0.1
-// @description  When a door closes, kick it down.
+// @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
-// @match        https://www.wanikani.com/dashboard
-// @match        https://www.wanikani.com
+// @match        https://www.wanikani.com/*
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wl-wanikani-code-executor.user.js
 // @resource     COMMON_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-common-styles.user.css
 // @resource     HELPERS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-helpers/wl-wanikani-helpers.user.css
@@ -40,6 +39,14 @@
     addFunctions("CRITICAL_ITEMS_JS");
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
 
+    console.log('Running ' + scriptNameSpace + ' functions2.');
+    wkof.include('ItemData, Menu, Settings');
+    wkof.ready('Apiv2, ItemData, Menu, Settings')
+        //.then(addCriticalItemsStyles)
+        .then(getCriticalItems)
+        .then(getCriticalItemsData)
+        .then(updatePageForCriticalItems)
+        .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded2.'); });
 
     /*************************************************
      *  Helper functions.
