@@ -35,9 +35,9 @@
     addStyles("REARRANGER_CSS");
     addStyles("CRITICAL_ITEMS_CSS");
     // Add functions
-    addFunctions("HELPERS_CSS");
-    addFunctions("REARRANGER_CSS");
-    addFunctions("CRITICAL_ITEMS_CSS");
+    addFunctions("HELPERS_JS");
+    addFunctions("REARRANGER_JS");
+    addFunctions("CRITICAL_ITEMS_JS");
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
 
 
@@ -58,12 +58,13 @@
     function addFunctions(jsFileName) {
         const functionJs = GM_getResourceText(jsFileName);
 
-        let style = document.createElement('style');
+        let script = document.createElement('script');
         
-        style.innerHTML = functionJs;
+        script.innerHTML = functionJs;
 
-        style.type = 'text/javascript';
+        script.type = 'text/javascript';
+        script.className = 'custom-js';
 
-        document.head.appendChild(style);
+        document.head.appendChild(script);
     };
 })();
