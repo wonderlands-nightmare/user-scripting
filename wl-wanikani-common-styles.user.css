@@ -1,0 +1,28 @@
+:root {
+    /* WaniKani colours */
+    --lessonColour:        #ff00aa;
+    --lessonColourDarker:  #bd007e;
+    --lessonColourLighter: #fa7acf;
+    --reviewColour:        #00aaff;
+    --reviewColourDarker:  #0279b5;
+    --reviewColourLighter: #80d4ff;
+
+    /* Common colours */
+    --dark-blue:           #294ddb;
+    --dark-green:          #006400;
+    --gold:                #ffd700;
+    --green:               #218139;
+    --light-blue:          #0093dd;
+    --maroon:              #800000;
+    --pink:                #dd0093;
+    --purple:              #882d9e;
+
+    /* Shades */
+    --black:               #000000;
+    --dark-grey:           #6b6b6b;
+    --grey:                #f4f4f4;
+    --white:               #ffffff;
+
+    /* Odd colours */
+    --transparent-black:   rgba(0, 0, 0, 0.75);
+}

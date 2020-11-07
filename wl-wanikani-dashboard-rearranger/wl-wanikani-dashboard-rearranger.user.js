@@ -20,7 +20,7 @@
      *  Execute script.
      *************************************************/
     console.log('Running ' + scriptNameSpace + ' functions.');
-    addRearrangerStyles();
+    //addRearrangerStyles();
     hideCompleteProgressItems();
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
 

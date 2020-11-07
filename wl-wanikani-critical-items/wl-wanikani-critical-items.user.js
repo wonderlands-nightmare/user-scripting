@@ -47,7 +47,7 @@
     console.log('Running ' + scriptNameSpace + ' functions.');
     wkof.include('ItemData, Menu, Settings');
     wkof.ready('Apiv2, ItemData, Menu, Settings')
-        .then(addCriticalItemsStyles)
+        //.then(addCriticalItemsStyles)
         .then(getCriticalItems)
         .then(getCriticalItemsData)
         .then(updatePageForCriticalItems)
@@ -234,7 +234,7 @@
                             <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
                                 <div>${ itemsCharacterCallback(item.data) }</div>
                                 <span class="progress-item-level">${ item.data.level }</span>
-                                <span class="progress-item-srs-level">${ item.assignments.srs_stage }</span>
+                                <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }">${ item.assignments.srs_stage }</span>
                             </a>
                         </div>
             `;

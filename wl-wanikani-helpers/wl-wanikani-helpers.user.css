@@ -1,14 +1,3 @@
-:root {
-    --reviewColour:        #00aaff;
-    --lessonColour:        #ff00aa;
-    --reviewColourDarker:  #0279b5;
-    --lessonColourDarker:  #bd007e;
-    --reviewColourLighter: #80d4ff;
-    --lessonColourLighter: #fa7acf;
-    --white:               #ffffff;
-    --grey:                #f4f4f4;
-}
-
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
     background: var(--reviewColour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;

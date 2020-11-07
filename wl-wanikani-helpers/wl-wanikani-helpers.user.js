@@ -23,7 +23,7 @@
      *  Execute script.
      *************************************************/
     console.log('Running ' + scriptNameSpace + ' functions.');
-    addHelperStyles();
+    //addHelperStyles();
     reviewAndLessonButtonPulseEffect();
     autoRefreshOnNextReviewHour();
     console.log('All ' + scriptNameSpace + ' functions have loaded.');

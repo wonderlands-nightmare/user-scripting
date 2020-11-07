@@ -1,16 +1,3 @@
-:root {
-    --white:      #ffffff;
-    --black:      #000000;
-    --grey:       #f4f4f4;
-    --pink:       #dd0093;
-    --purple:     #882d9e;
-    --dark-blue:  #294ddb;
-    --light-blue: #0093dd;
-    --maroon:     #800000;
-    --gold:       #ffd700;
-    --green:      #218139;
-}
-
 .srs-progress #apprentice {
     background: linear-gradient(to right, var(--pink), var(--purple));
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
