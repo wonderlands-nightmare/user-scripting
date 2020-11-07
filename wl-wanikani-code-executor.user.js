@@ -14,7 +14,6 @@
 // @resource     REARRANGER_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.js
 // @resource     CRITICAL_ITEMS_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.js
 // @grant        GM_getResourceText
-// @grant        GM_getResourceURL
 // @grant        GM_addStyle
 // ==/UserScript==
 
@@ -40,14 +39,6 @@
     addFunctions("CRITICAL_ITEMS_JS");
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
 
-    console.log('Running ' + scriptNameSpace + ' functions2.');
-    wkof.include('ItemData, Menu, Settings');
-    wkof.ready('Apiv2, ItemData, Menu, Settings')
-        //.then(addCriticalItemsStyles)
-        .then(getCriticalItems)
-        .then(getCriticalItemsData)
-        .then(updatePageForCriticalItems)
-        .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded2.'); });
 
     /*************************************************
      *  Helper functions.
@@ -64,11 +55,11 @@
     };
 
     function addFunctions(jsFileName) {
-        const functionJs = GM_getResourceURL(jsFileName);
+        const functionJs = GM_getResourceText(jsFileName);
 
         let script = document.createElement('script');
         
-        script.src = functionJs;
+        script.innerHTML = functionJs;
 
         script.type = 'text/javascript';
         script.className = 'custom-js';

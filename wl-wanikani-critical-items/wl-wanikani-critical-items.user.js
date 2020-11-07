@@ -39,14 +39,14 @@
     /*************************************************
      *  Execute script.
      *************************************************/
-    // console.log('Running ' + scriptNameSpace + ' functions.');
-    // wkof.include('ItemData, Menu, Settings');
-    // wkof.ready('Apiv2, ItemData, Menu, Settings')
-    //     //.then(addCriticalItemsStyles)
-    //     .then(getCriticalItems)
-    //     .then(getCriticalItemsData)
-    //     .then(updatePageForCriticalItems)
-    //     .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
+    console.log('Running ' + scriptNameSpace + ' functions.');
+    wkof.include('ItemData, Menu, Settings');
+    wkof.ready('Apiv2, ItemData, Menu, Settings')
+        //.then(addCriticalItemsStyles)
+        .then(getCriticalItems)
+        .then(getCriticalItemsData)
+        .then(updatePageForCriticalItems)
+        .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
 
 
     /*************************************************

@@ -1,12 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Dashboard Rearranger
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      0.1
-// @description  Some smaller dashboard helper functions.
 // @author       Wonderlands-Nightmares
-// @match        https://www.wanikani.com/dashboard
-// @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.js
-// @grant        none
 // ==/UserScript==
 
 (function () {
