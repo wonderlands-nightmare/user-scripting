@@ -63,11 +63,11 @@
     };
 
     function addFunctions(jsFileName) {
-        const functionJs = GM_getResourceText(jsFileName);
+        const functionJs = GM_getResourceURL(jsFileName);
 
         let script = document.createElement('script');
         
-        script.innerHTML = functionJs;
+        script.src = functionJs;
 
         script.type = 'text/javascript';
         script.className = 'custom-js';
