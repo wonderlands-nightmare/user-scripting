@@ -57,6 +57,26 @@
     line-height: 14px;
 }
 
+.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
+    background: var(--black);
+}
+
+.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
+    background: var(--maroon);
+}
+
+.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
+    background: var(--lessonColourDarker);
+}
+
+.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
+    background: var(--reviewColourDarker);
+}
+
+.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 { 
+    background: var(--dark-blue);
+}
+
 .critical-item-tooltip .critical-item-tooltip-text {
     visibility: hidden;
     width: 120px;
@@ -96,7 +116,7 @@
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: var(--black) transparent transparent transparent;
+    border-color: var(--transparent-black) transparent transparent transparent;
 }
   
 .critical-item-tooltip:hover .critical-item-tooltip-text {
