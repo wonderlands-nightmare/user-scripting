@@ -73,6 +73,6 @@
         script.type = 'text/javascript';
         script.className = 'custom-js';
 
-        document.head.appendChild(script);
+        document.body.appendChild(script);
     };
 })();
