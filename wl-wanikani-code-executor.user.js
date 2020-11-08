@@ -35,9 +35,9 @@
     addStyles("REARRANGER_CSS");
     addStyles("CRITICAL_ITEMS_CSS");
     // Add functions
-    addFunctions("HELPERS_JS");
-    addFunctions("REARRANGER_JS");
-    addFunctions("CRITICAL_ITEMS_JS");
+    await addFunctions("HELPERS_JS");
+    await addFunctions("REARRANGER_JS");
+    await addFunctions("CRITICAL_ITEMS_JS");
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
 
     console.log('Running ' + scriptNameSpace + ' functions2.');
