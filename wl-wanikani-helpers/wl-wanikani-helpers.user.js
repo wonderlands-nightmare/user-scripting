@@ -4,125 +4,113 @@
 // @author       Wonderlands-Nightmares
 // ==/UserScript==
 
-(function () {
-    /*************************************************
-     *  Variable initialisation.
-     *************************************************/
-    const scriptNameSpace = 'wl-wanikani-helpers';
-    
-    // autoRefreshOnNextReviewHour
-    let refreshCounter = 0;
+
+/*************************************************
+ *  Variable initialisation.
+ *************************************************/
+// autoRefreshOnNextReviewHour
+let refreshCounter = 0;
 
 
-    /*************************************************
-     *  Execute script.
-     *************************************************/
-    console.log('Running ' + scriptNameSpace + ' functions.');
-    reviewAndLessonButtonPulseEffect();
-    autoRefreshOnNextReviewHour();
-    console.log('All ' + scriptNameSpace + ' functions have loaded.');
-
-
-    /*************************************************
-     *  Helper functions.
-     *************************************************/
-    function addLeadingZero(valueToAddTo, isString = false) {
-        return isString 
+/*************************************************
+ *  Helper functions.
+ *************************************************/
+function addLeadingZero(valueToAddTo, isString = false) {
+    return isString 
+        ? '0' + valueToAddTo 
+        : (valueToAddTo < 10) 
             ? '0' + valueToAddTo 
-            : (valueToAddTo < 10) 
-                ? '0' + valueToAddTo 
-                : valueToAddTo;       
+            : valueToAddTo;       
+}
+
+
+/*************************************************
+ *  Update review button href's and add class for pulse effect.
+ *************************************************/
+function reviewAndLessonButtonPulseEffect() {
+    let reviewButton = '.lessons-and-reviews .lessons-and-reviews__reviews-button';
+    let lessonButton = '.lessons-and-reviews .lessons-and-reviews__lessons-button';
+    let reviewShortcutButton = '.navigation-shortcuts .navigation-shortcut--reviews > a';
+    let lessonShortcutButton = '.navigation-shortcuts .navigation-shortcut--lessons > a';
+
+    $(reviewButton).attr('href', '/review/start');
+    $(reviewShortcutButton).attr('href', '/review/start');
+    $(lessonButton).attr('href', '/lesson/session');
+    $(lessonShortcutButton).attr('href', '/lesson/session');
+
+    let reviewCount = $(reviewButton + ' > span').text();
+    let lessonCount = $(lessonButton + ' > span').text();
+    let reviewShortcutCount = $(reviewShortcutButton + ' > span').text();
+    let lessonShortcutCount = $(lessonShortcutButton + ' > span').text();
+
+    if (reviewCount > 0) {
+        $(reviewButton).addClass('has-reviews');
+    }
+    else {
+        $(reviewButton).removeClass('has-lessons');
     }
 
+    if (lessonCount > 0) {
+        $(lessonButton).addClass('has-lessons');
+    }
+    else {
+        $(lessonButton).removeClass('has-lessons');
+    }
 
-    /*************************************************
-     *  Update review button href's and add class for pulse effect.
-     *************************************************/
-    function reviewAndLessonButtonPulseEffect() {
-        let reviewButton = '.lessons-and-reviews .lessons-and-reviews__reviews-button';
-        let lessonButton = '.lessons-and-reviews .lessons-and-reviews__lessons-button';
-        let reviewShortcutButton = '.navigation-shortcuts .navigation-shortcut--reviews > a';
-        let lessonShortcutButton = '.navigation-shortcuts .navigation-shortcut--lessons > a';
+    if (reviewShortcutCount > 0) {
+        $(reviewShortcutButton).addClass('has-reviews');
+    }
+    else {
+        $(reviewShortcutButton).removeClass('has-reviews');
+    }
 
-        $(reviewButton).attr('href', '/review/start');
-        $(reviewShortcutButton).attr('href', '/review/start');
-        $(lessonButton).attr('href', '/lesson/session');
-        $(lessonShortcutButton).attr('href', '/lesson/session');
-
-        let reviewCount = $(reviewButton + ' > span').text();
-        let lessonCount = $(lessonButton + ' > span').text();
-        let reviewShortcutCount = $(reviewShortcutButton + ' > span').text();
-        let lessonShortcutCount = $(lessonShortcutButton + ' > span').text();
-
-        if (reviewCount > 0) {
-            $(reviewButton).addClass('has-reviews');
-        }
-        else {
-            $(reviewButton).removeClass('has-lessons');
-        }
-
-        if (lessonCount > 0) {
-            $(lessonButton).addClass('has-lessons');
-        }
-        else {
-            $(lessonButton).removeClass('has-lessons');
-        }
-
-        if (reviewShortcutCount > 0) {
-            $(reviewShortcutButton).addClass('has-reviews');
-        }
-        else {
-            $(reviewShortcutButton).removeClass('has-reviews');
-        }
-
-        if (lessonShortcutCount > 0) {
-            $(lessonShortcutButton).addClass('has-lessons');
-        }
-        else {
-            $(lessonShortcutButton).removeClass('has-lessons');
-        }
-    };
+    if (lessonShortcutCount > 0) {
+        $(lessonShortcutButton).addClass('has-lessons');
+    }
+    else {
+        $(lessonShortcutButton).removeClass('has-lessons');
+    }
+};
 
 
-    /*************************************************
-     *  Add reload timer for auto-refresh on next review time.
-     *************************************************/
-    function autoRefreshOnNextReviewHour() {
-        let todayForecastsCount = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour time').length;
-        let currentDate = new Date();
-        let currentMinutes = currentDate.getMinutes();
-        let current24Hour = currentDate.getHours();
-        let current12Hour = current24Hour % 12 || 12;
-        let nextReviewText = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text();
-        let nextReviewHour = nextReviewText.replace(/ am| pm/gi, '');
-        let nextRefreshText = '';
+/*************************************************
+ *  Add reload timer for auto-refresh on next review time.
+ *************************************************/
+function autoRefreshOnNextReviewHour() {
+    let todayForecastsCount = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour time').length;
+    let currentDate = new Date();
+    let currentMinutes = currentDate.getMinutes();
+    let current24Hour = currentDate.getHours();
+    let current12Hour = current24Hour % 12 || 12;
+    let nextReviewText = $('.forecast table.w-full > tbody:first-child > tr.review-forecast__hour:nth-child(2) time').text();
+    let nextReviewHour = nextReviewText.replace(/ am| pm/gi, '');
+    let nextRefreshText = '';
 
-        if (nextReviewText == '') {
-            let nextRefreshMinutes = currentMinutes + 10;
-            let refreshTextHours = addLeadingZero((nextRefreshMinutes >= 50) ? ((current24Hour + 1) % 24) : current24Hour);
-            let refreshTextMinutes = addLeadingZero(nextRefreshMinutes % 60);
-            nextRefreshText = refreshTextHours + ':' + refreshTextMinutes;
-        }
-        else {
-            nextRefreshText = nextReviewText.replace(' ', ':' + addLeadingZero(currentMinutes.toString().slice(1), true) + ' ');
-        }
+    if (nextReviewText == '') {
+        let nextRefreshMinutes = currentMinutes + 10;
+        let refreshTextHours = addLeadingZero((nextRefreshMinutes >= 50) ? ((current24Hour + 1) % 24) : current24Hour);
+        let refreshTextMinutes = addLeadingZero(nextRefreshMinutes % 60);
+        nextRefreshText = refreshTextHours + ':' + refreshTextMinutes;
+    }
+    else {
+        nextRefreshText = nextReviewText.replace(' ', ':' + addLeadingZero(currentMinutes.toString().slice(1), true) + ' ');
+    }
 
-        let autoRefreshHTML = `
-            <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
-        `;
+    let autoRefreshHTML = `
+        <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
+    `;
 
-        if ($('.auto-refresh-indicator').length > 0) {
-            $('.auto-refresh-indicator').remove();
-        }
-        $(autoRefreshHTML).insertAfter('.forecast > h1');
+    if ($('.auto-refresh-indicator').length > 0) {
+        $('.auto-refresh-indicator').remove();
+    }
+    $(autoRefreshHTML).insertAfter('.forecast > h1');
 
-        if (current12Hour == nextReviewHour || (todayForecastsCount == 0 && current24Hour == 0)) {
-            location.reload();
-        }
-        else {
-            setTimeout(autoRefreshOnNextReviewHour, 600000);
-            console.log('Auto refresh counter: ' + refreshCounter);
-            refreshCounter = refreshCounter + 1;
-        }
-    };
-})();
+    if (current12Hour == nextReviewHour || (todayForecastsCount == 0 && current24Hour == 0)) {
+        location.reload();
+    }
+    else {
+        setTimeout(autoRefreshOnNextReviewHour, 600000);
+        console.log('Auto refresh counter: ' + refreshCounter);
+        refreshCounter = refreshCounter + 1;
+    }
+};

@@ -28,6 +28,9 @@
      *  Execute script.
      *************************************************/
     await addStylesAndFunctions();
+    await executeHelpersCode();
+    await executeRearrangerCode();
+
     // Initialise WKOF
     wkof.include('Apiv2, ItemData');
     await executeCriticalItemsCode();
@@ -75,14 +78,15 @@
 
     function executeHelpersCode() {
         console.log('Running Helpers functions.');
-    
+        reviewAndLessonButtonPulseEffect();
+        autoRefreshOnNextReviewHour();
         console.log('All Helpers functions have loaded.');
     };
 
 
     function executeRearrangerCode() {
         console.log('Running Rearranger functions.');
-    
+        hideCompleteProgressItems();
         console.log('All Rearranger functions have loaded.');
     };
 
