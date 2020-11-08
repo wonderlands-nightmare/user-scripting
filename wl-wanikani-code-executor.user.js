@@ -18,7 +18,7 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-(function () {
+(async function () {
     /*************************************************
      *  Variable initialisation.
      *************************************************/
@@ -69,7 +69,6 @@
         let script = document.createElement('script');
         
         script.src = functionJs;
-
         script.type = 'text/javascript';
         script.className = 'custom-js';
 
