@@ -42,7 +42,6 @@
     console.log('Running ' + scriptNameSpace + ' functions.');
     wkof.include('ItemData, Menu, Settings');
     wkof.ready('Apiv2, ItemData, Menu, Settings')
-        //.then(addCriticalItemsStyles)
         .then(getCriticalItems)
         .then(getCriticalItemsData)
         .then(updatePageForCriticalItems)
@@ -74,23 +73,6 @@
             //if both characters and character_images are somehow absent try using slug instead
             return itemsData.slug;
         }
-    };
-
-
-    /*************************************************
-     *  Adds styling to page.
-     *************************************************/
-    function addCriticalItemsStyles() {
-        var style = document.createElement('style');
-        var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/' + scriptNameSpace + '/' + scriptNameSpace + '.user.css';
-
-        $.get(cssFile, function(content) {
-            style.innerHTML = content;
-        });
-
-        style.className = '' + scriptNameSpace + '-custom-styles';
-
-        document.head.appendChild(style);
     };
 
 
@@ -142,7 +124,7 @@
 
         items = items.CriticalItems.sort(function(a, b) {
             return (a.critical_level == b.critical_level)
-                ? b.assignments.srs_stage - a.assignments.srs_stage
+                ? a.assignments.srs_stage - b.assignments.srs_stage
                 : b.critical_level - a.critical_level;
         });
 
@@ -158,19 +140,13 @@
     function createTables(items) {
         criticalItemsDebug('Create Tables.');
 
-        let criticalTableHTML = '';
-        let headerMessage = '';
-
-        if (items.length == 0){ //if no items
-            headerMessage = 'Sorry no items are critical right now.';
-        }
-        else {
-            headerMessage = 'You have critical items you suck at!'
-        }
+        let headerMessage = (items.length == 0) 
+                            ? 'Sorry no items are critical right now.'
+                            : 'You have critical items you suck at!';
 
         criticalItemsDebug('Create Tables after if.');
 
-        criticalTableHTML += `
+        let criticalTableHTML = `
             <div class="rounded custom-critical-items">
                 <section class="rounded bg-white p-3 -mx-3">
                     <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-black text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${headerMessage}</h2>

@@ -18,7 +18,6 @@
      *  Execute script.
      *************************************************/
     console.log('Running ' + scriptNameSpace + ' functions.');
-    //addHelperStyles();
     reviewAndLessonButtonPulseEffect();
     autoRefreshOnNextReviewHour();
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
@@ -30,27 +29,10 @@
     function addLeadingZero(valueToAddTo, isString = false) {
         return isString 
             ? '0' + valueToAddTo 
-            : valueToAddTo < 10 
+            : (valueToAddTo < 10) 
                 ? '0' + valueToAddTo 
                 : valueToAddTo;       
     }
-
-
-    /*************************************************
-     *  Adds styling to page.
-     *************************************************/
-    function addHelperStyles() {
-        var style = document.createElement('style');
-        var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/' + scriptNameSpace + '/' + scriptNameSpace + '.user.css';
-
-        $.get(cssFile, function(content) {
-            style.innerHTML = content;
-        });
-
-        style.className = scriptNameSpace + '-custom-styles';
-
-        document.head.appendChild(style);
-    };
 
 
     /*************************************************

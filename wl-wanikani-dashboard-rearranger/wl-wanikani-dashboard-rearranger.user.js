@@ -15,7 +15,6 @@
      *  Execute script.
      *************************************************/
     console.log('Running ' + scriptNameSpace + ' functions.');
-    //addRearrangerStyles();
     hideCompleteProgressItems();
     console.log('All ' + scriptNameSpace + ' functions have loaded.');
 
@@ -24,23 +23,6 @@
      *  Helper functions.
      *************************************************/
     // Code goes here...
-
-
-    /*************************************************
-     *  Adds styling to page.
-     *************************************************/
-    function addRearrangerStyles() {
-        var style = document.createElement('style');
-        var cssFile = 'https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/' + scriptNameSpace + '/' + scriptNameSpace + '.user.css';
-
-        $.get(cssFile, function(content) {
-            style.innerHTML = content;
-        });
-
-        style.className = scriptNameSpace + '-custom-styles';
-
-        document.head.appendChild(style);
-    };
 
 
     /*************************************************
