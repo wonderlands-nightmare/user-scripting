@@ -4,7 +4,7 @@
 // @author       Wonderlands-Nightmares
 // ==/UserScript==
 
-(function () {
+// (function () {
     /*************************************************
      *  Variable initialisation.
      *************************************************/
@@ -224,4 +224,4 @@
 
         criticalItemsDebug('Created?');
     };
-})();
+// })();
