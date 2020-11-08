@@ -72,10 +72,6 @@
     background: var(--reviewColourDarker);
 }
 
-.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 { 
-    background: var(--dark-blue);
-}
-
 .critical-item-tooltip .critical-item-tooltip-text {
     visibility: hidden;
     width: 120px;
