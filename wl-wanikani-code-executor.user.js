@@ -14,7 +14,6 @@
 // @resource     REARRANGER_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.js
 // @resource     CRITICAL_ITEMS_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.js
 // @grant        GM_getResourceText
-// @grant        GM_getResourceURL
 // @grant        GM_addStyle
 // ==/UserScript==
 
@@ -28,35 +27,14 @@
     /*************************************************
      *  Execute script.
      *************************************************/
-    console.log('Running ' + scriptNameSpace + ' functions.');
-    // Add styles
-    addStyles("COMMON_CSS");
-    addStyles("HELPERS_CSS");
-    addStyles("REARRANGER_CSS");
-    addStyles("CRITICAL_ITEMS_CSS");
-    // Add functions
-    await addFunctions("HELPERS_JS");
-    await addFunctions("REARRANGER_JS");
-    await addFunctions("CRITICAL_ITEMS_JS");
-    console.log('All ' + scriptNameSpace + ' functions have loaded.');
-
-    console.log('Running ' + scriptNameSpace + ' functions2.');
-    wkof.include('ItemData, Menu, Settings');
-    wkof.ready('Apiv2, ItemData, Menu, Settings')
-        .then(getCriticalItems)
-        .then(getCriticalItemsData)
-        .then(updatePageForCriticalItems)
-        .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded2.'); });
+    await addStylesAndFunctions();
+    // Initialise WKOF
+    wkof.include('Apiv2, ItemData');
+    await executeCriticalItemsCode();
 
 
     /*************************************************
      *  Helper functions.
-     *************************************************/
-    // Code goes here...
-
-
-    /*************************************************
-     *  Adds styling to page.
      *************************************************/
     function addStyles(cssFileName) {
         const styleCss = GM_getResourceText(cssFileName);
@@ -64,14 +42,57 @@
     };
 
     function addFunctions(jsFileName) {
-        const functionJs = GM_getResourceURL(jsFileName);
+        const functionJs = GM_getResourceText(jsFileName);
 
         let script = document.createElement('script');
         
-        script.src = functionJs;
+        script.innerHTML = functionJs;
         script.type = 'text/javascript';
         script.className = 'custom-js';
 
         document.body.appendChild(script);
+    };
+
+
+    /*************************************************
+     *  Functions for executing plugins.
+     *************************************************/
+    function addStylesAndFunctions() {
+        console.log('Running Add CSS and JS functions.');
+        // Add styles
+        addStyles("COMMON_CSS");
+        addStyles("HELPERS_CSS");
+        addStyles("REARRANGER_CSS");
+        addStyles("CRITICAL_ITEMS_CSS");
+
+        // Add functions
+        addFunctions("HELPERS_JS");
+        addFunctions("REARRANGER_JS");
+        addFunctions("CRITICAL_ITEMS_JS");
+        console.log('All Add CSS and JS functions have loaded.');
+    };
+
+
+    function executeHelpersCode() {
+        console.log('Running Helpers functions.');
+    
+        console.log('All Helpers functions have loaded.');
+    };
+
+
+    function executeRearrangerCode() {
+        console.log('Running Rearranger functions.');
+    
+        console.log('All Rearranger functions have loaded.');
+    };
+
+
+    function executeCriticalItemsCode() {
+        console.log('Running Critical Items functions.');
+        wkof.ready('Apiv2, ItemData')
+        .then(getCriticalItems)
+        .then(getCriticalItemsData)
+        .then(updatePageForCriticalItems)
+        .then(function() { console.log('All Critical Items functions have loaded.'); });
     };
 })();

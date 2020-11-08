@@ -4,12 +4,10 @@
 // @author       Wonderlands-Nightmares
 // ==/UserScript==
 
-// (function () {
+(function () {
     /*************************************************
      *  Variable initialisation.
      *************************************************/
-    const scriptNameSpace = 'wl-wanikani-critical-items';
-
     // criticalItemsDebug
     let debugMode = false;
 
@@ -34,18 +32,6 @@
 
     // isCritical
     const apprenticeIds = [1, 2, 3, 4]
-
-
-    /*************************************************
-     *  Execute script.
-     *************************************************/
-    // console.log('Running ' + scriptNameSpace + ' functions.');
-    // wkof.include('ItemData, Menu, Settings');
-    // wkof.ready('Apiv2, ItemData, Menu, Settings')
-    //     .then(getCriticalItems)
-    //     .then(getCriticalItemsData)
-    //     .then(updatePageForCriticalItems)
-    //     .then(function() { console.log('All ' + scriptNameSpace + ' functions have loaded.'); });
 
 
     /*************************************************
@@ -224,4 +210,4 @@
 
         criticalItemsDebug('Created?');
     };
-// })();
+})();
