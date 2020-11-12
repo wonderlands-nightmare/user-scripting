@@ -23,9 +23,6 @@
      *************************************************/
     const wkofModules = 'Apiv2, ItemData';
 
-    // wl-wanikani-critical-items - criticalItemsDebug
-    let debugMode = false;
-
 
     /*************************************************
      *  Execute script.
@@ -97,6 +94,7 @@
     function executeCriticalItemsCode() {
         console.log('Running Critical Items functions.');
         wkof.ready(wkofModules)
+        .then(setCriticalItemsDebugMode(false))
         .then(getCriticalItems)
         .then(getCriticalItemsData)
         .then(updatePageForCriticalItems)

@@ -7,6 +7,9 @@
 /*************************************************
  *  Variable initialisation.
  *************************************************/
+// criticalItemsDebug
+let debugMode = false;
+
 // getItems
 const itemDataConfig = {
     wk_items: {
@@ -33,6 +36,10 @@ const apprenticeIds = [1, 2, 3, 4]
 /*************************************************
  *  Helper functions.
  *************************************************/
+function setCriticalItemsDebugMode(debugModeBoolean = false) {
+    let debugMode = debugModeBoolean;
+}
+
 function criticalItemsDebug(debugMessage, debugItem = 'empty') {
     if (debugMode) {
         console.log(scriptNameSpace + ': ' + debugMessage);
