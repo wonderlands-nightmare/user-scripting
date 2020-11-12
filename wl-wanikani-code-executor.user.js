@@ -21,7 +21,10 @@
     /*************************************************
      *  Variable initialisation.
      *************************************************/
-    const scriptNameSpace = 'wl-wanikani-dashboard';
+    const wkofModules = 'Apiv2, ItemData';
+
+    // wl-wanikani-critical-items - criticalItemsDebug
+    let debugMode = false;
 
 
     /*************************************************
@@ -32,7 +35,7 @@
     await executeRearrangerCode();
 
     // Initialise WKOF
-    wkof.include('Apiv2, ItemData');
+    wkof.include(wkofModules);
     await executeCriticalItemsCode();
 
 
@@ -93,7 +96,7 @@
 
     function executeCriticalItemsCode() {
         console.log('Running Critical Items functions.');
-        wkof.ready('Apiv2, ItemData')
+        wkof.ready(wkofModules)
         .then(getCriticalItems)
         .then(getCriticalItemsData)
         .then(updatePageForCriticalItems)

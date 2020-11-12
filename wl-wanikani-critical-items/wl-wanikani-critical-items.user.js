@@ -7,9 +7,6 @@
 /*************************************************
  *  Variable initialisation.
  *************************************************/
-// criticalItemsDebug
-let debugMode = false;
-
 // getItems
 const itemDataConfig = {
     wk_items: {
