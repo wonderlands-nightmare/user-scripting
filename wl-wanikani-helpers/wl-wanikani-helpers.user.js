@@ -21,55 +21,38 @@ function addLeadingZero(valueToAddTo, isString = false) {
         : (valueToAddTo < 10) 
             ? '0' + valueToAddTo 
             : valueToAddTo;       
-}
+};
+
+
+function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonHref, buttonClass) {
+    let buttonCount = $(buttonSelector + ' > span').text();
+
+    $(buttonSelector).attr(buttonHref);
+    
+    if (buttonCount > 0) {
+        $(buttonSelector).addClass(buttonClass);
+    }
+    else {
+        $(buttonSelector).removeClass(buttonClass);
+    }
+};
 
 
 /*************************************************
  *  Update review button href's and add class for pulse effect.
  *************************************************/
 function reviewAndLessonButtonPulseEffect() {
-    let reviewButton = '.lessons-and-reviews .lessons-and-reviews__reviews-button';
-    let lessonButton = '.lessons-and-reviews .lessons-and-reviews__lessons-button';
-    let reviewShortcutButton = '.navigation-shortcuts .navigation-shortcut--reviews > a';
-    let lessonShortcutButton = '.navigation-shortcuts .navigation-shortcut--lessons > a';
+    // Review dashboard button
+    addReviewAndLessonButtonPulseEffect('.lessons-and-reviews .lessons-and-reviews__reviews-button', '/review/start', 'has-reviews');
 
-    $(reviewButton).attr('href', '/review/start');
-    $(reviewShortcutButton).attr('href', '/review/start');
-    $(lessonButton).attr('href', '/lesson/session');
-    $(lessonShortcutButton).attr('href', '/lesson/session');
+    // Review shortcut button
+    addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--reviews > a', '/review/start', 'has-reviews');
 
-    let reviewCount = $(reviewButton + ' > span').text();
-    let lessonCount = $(lessonButton + ' > span').text();
-    let reviewShortcutCount = $(reviewShortcutButton + ' > span').text();
-    let lessonShortcutCount = $(lessonShortcutButton + ' > span').text();
+    // Lesson dashboard button
+    addReviewAndLessonButtonPulseEffect('.lessons-and-reviews .lessons-and-reviews__lessons-button', '/lesson/session', 'has-lessons');
 
-    if (reviewCount > 0) {
-        $(reviewButton).addClass('has-reviews');
-    }
-    else {
-        $(reviewButton).removeClass('has-lessons');
-    }
-
-    if (lessonCount > 0) {
-        $(lessonButton).addClass('has-lessons');
-    }
-    else {
-        $(lessonButton).removeClass('has-lessons');
-    }
-
-    if (reviewShortcutCount > 0) {
-        $(reviewShortcutButton).addClass('has-reviews');
-    }
-    else {
-        $(reviewShortcutButton).removeClass('has-reviews');
-    }
-
-    if (lessonShortcutCount > 0) {
-        $(lessonShortcutButton).addClass('has-lessons');
-    }
-    else {
-        $(lessonShortcutButton).removeClass('has-lessons');
-    }
+    // Lesson shortcut button
+    addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--lessons > a', '/lesson/session', 'has-lessons');
 };
 
 

@@ -30,7 +30,7 @@ let wkofItems = {};
 let wkofItemsData = {};
 
 // isCritical
-const apprenticeIds = [1, 2, 3, 4]
+const apprenticeIds = [1, 2, 3, 4];
 
 
 /*************************************************
