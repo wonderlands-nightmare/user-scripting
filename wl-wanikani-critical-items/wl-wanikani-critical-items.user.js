@@ -150,8 +150,10 @@ function createTables(items) {
         let itemReadingTooltipItems = '';
         let itemMeaningTooltipItems = '';
 
+        let itemType = item.object;
+
         let itemReadings = item.data.readings.filter(isAccepted);
-        let itemMeanings = item.data.meanings.filter(isAccepted);
+        let itemMeanings = itemType != 'radical' ? item.data.meanings.filter(isAccepted) : {};
 
         if (item.critical_level > 0) {
             itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
@@ -187,7 +189,6 @@ function createTables(items) {
             `;
         }
 
-        let itemType = item.object;
         criticalTableHTML += `
                     <div class="critical-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ tooltipTextHTML }
