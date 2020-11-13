@@ -144,52 +144,53 @@ function createTables(items) {
 
     criticalItemsDebug('Create Tables after html1.');
 
-    $.each(items, function(index, item) {
-        let itemAddedStyle = '';
-        let tooltipTextHTML = '';
-        let itemReadingTooltipItems = '';
-        let itemMeaningTooltipItems = '';
+    if (items.length > 0) {
+        $.each(items, function(index, item) {
+            let itemAddedStyle = '';
+            let tooltipTextHTML = '';
+            let itemReadingTooltipItems = '';
+            let itemMeaningTooltipItems = '';
 
-        let itemType = item.object;
+            let itemType = item.object;
 
-        let itemReadings = itemType != 'radical' ? item.data.readings.filter(isAccepted) : {};
-        let itemMeanings = item.data.meanings.filter(isAccepted);
+            let itemReadings = itemType != 'radical' ? item.data.readings.filter(isAccepted) : {};
+            let itemMeanings = item.data.meanings.filter(isAccepted);
 
-        if (item.critical_level > 0) {
-            itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
-        }
+            if (item.critical_level > 0) {
+                itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
+            }
 
-        if (itemReadings.length > 0 || itemMeanings.length > 0) {
-            tooltipTextHTML += `
+            if (itemReadings.length > 0 || itemMeanings.length > 0) {
+                tooltipTextHTML += `
                     <span class="critical-item-tooltip-text">
-            `;
+                `;
 
-            if (itemReadings.length > 0) {
-                $.each(itemReadings, function(index, reading) {
-                    itemReadingTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
-                });
+                if (itemReadings.length > 0) {
+                    $.each(itemReadings, function(index, reading) {
+                        itemReadingTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+                    });
 
-                tooltipTextHTML += `
+                    tooltipTextHTML += `
                         <div class="critical-item-tooltip-text-entries item-readings">${ itemReadingTooltipItems }</div>
-                `;
-            }
+                    `;
+                }
 
-            if (itemMeanings.length > 0) {
-                $.each(itemMeanings, function(index, meaning) {
-                    itemMeaningTooltipItems += (index == 0 ? '' : ', ') + meaning.meaning;
-                });
+                if (itemMeanings.length > 0) {
+                    $.each(itemMeanings, function(index, meaning) {
+                        itemMeaningTooltipItems += (index == 0 ? '' : ', ') + meaning.meaning;
+                    });
+
+                    tooltipTextHTML += `
+                        <div class="critical-item-tooltip-text-entries item-meanings">${ itemMeaningTooltipItems }</div>
+                    `;
+                }
 
                 tooltipTextHTML += `
-                        <div class="critical-item-tooltip-text-entries item-meanings">${ itemMeaningTooltipItems }</div>
+                    </span>
                 `;
             }
 
-            tooltipTextHTML += `
-                    </span>
-            `;
-        }
-
-        criticalTableHTML += `
+            criticalTableHTML += `
                     <div class="critical-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ tooltipTextHTML }
                         <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
@@ -198,8 +199,9 @@ function createTables(items) {
                             <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }">${ item.assignments.srs_stage }</span>
                         </a>
                     </div>
-        `;
-    });
+            `;
+        });
+    }
 
     criticalTableHTML += `
                 </div>
