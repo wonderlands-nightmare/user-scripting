@@ -36,7 +36,7 @@ const apprenticeIds = [1, 2, 3, 4]
 /*************************************************
  *  Helper functions.
  *************************************************/
-function setCriticalItemsDebugMode(debugModeBoolean = false) {
+function setCriticalItemsDebugMode(debugModeBoolean) {
     debugMode = debugModeBoolean;
 }
 
