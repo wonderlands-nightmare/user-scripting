@@ -38,7 +38,7 @@ const apprenticeIds = [1, 2, 3, 4]
  *************************************************/
 function setCriticalItemsDebugMode(debugModeBoolean) {
     debugMode = debugModeBoolean;
-}
+};
 
 function criticalItemsDebug(debugMessage, debugItem = 'empty') {
     if (debugMode) {
