@@ -42,7 +42,7 @@ function setCriticalItemsDebugMode(debugModeBoolean) {
 
 function criticalItemsDebug(debugMessage, debugItem = 'empty') {
     if (debugMode) {
-        console.log(scriptNameSpace + ': ' + debugMessage);
+        console.log('Critical Items log: ' + debugMessage);
 
         if (debugItem != 'empty') {
             console.log(debugItem);
