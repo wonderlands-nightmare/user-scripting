@@ -27,7 +27,7 @@ function addLeadingZero(valueToAddTo, isString = false) {
 function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonHref, buttonClass) {
     let buttonCount = $(buttonSelector + ' > span').text();
 
-    $(buttonSelector).attr(buttonHref);
+    $(buttonSelector).attr('href', buttonHref);
     
     if (buttonCount > 0) {
         $(buttonSelector).addClass(buttonClass);
