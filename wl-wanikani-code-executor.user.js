@@ -8,10 +8,10 @@
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wl-wanikani-code-executor.user.js
 // @resource     COMMON_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-common-styles.user.css
 // @resource     HELPERS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-helpers/wl-wanikani-helpers.user.css
-// @resource     REARRANGER_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.css
-// @resource     CRITICAL_ITEMS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.css
 // @resource     HELPERS_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-helpers/wl-wanikani-helpers.user.js
+// @resource     REARRANGER_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.css
 // @resource     REARRANGER_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.js
+// @resource     CRITICAL_ITEMS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.css
 // @resource     CRITICAL_ITEMS_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-critical-items/wl-wanikani-critical-items.user.js
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
@@ -23,17 +23,27 @@
      *************************************************/
     const wkofModules = 'Apiv2, ItemData';
 
+    const urlToExecuteOn = {
+        dashboard: {
+            one: 'https://www.wanikani.com',
+            two: 'https://www.wanikani.com/dashboard'
+        }
+    };
+
 
     /*************************************************
      *  Execute script.
      *************************************************/
     await addStylesAndFunctions();
     await executeHelpersCode();
-    await executeRearrangerCode();
 
     // Initialise WKOF
     wkof.include(wkofModules);
-    await executeCriticalItemsCode();
+
+    if (Object.value(urlToExecuteOn.dashboard).includes(window.location.href)) {
+        await executeRearrangerCode();
+        await executeCriticalItemsCode();
+    }
 
 
     /*************************************************
