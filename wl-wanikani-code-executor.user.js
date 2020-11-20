@@ -179,8 +179,7 @@
     async function executeCriticalItemsCode(wkofData) {
         console.log('Running Critical Items functions.');
         await setCriticalItemsDebugMode(false);
-        let getCritItems = await getCriticalItems(wkofData);
-        let getCritItemsData = await getCriticalItemsData(getCritItems);
+        let getCritItemsData = await getCriticalItemsData(wkofData);
         await updatePageForCriticalItems(getCritItemsData);
         console.log('All Critical Items functions have loaded.');
     };

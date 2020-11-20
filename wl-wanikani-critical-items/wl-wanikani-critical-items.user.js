@@ -70,17 +70,6 @@ function itemsCharacterCallback (itemsData){
 // =================
 // Critical items list
 // =================
-function getCriticalItems() {
-    criticalItemsDebug('Getting items.');
-
-    return Promise.all([wkof.ItemData.get_items(itemDataConfig), wkof.Apiv2.fetch_endpoint('user')])
-        .then(function([itemsData, userData]) {
-            wkofItems.CritItemsData = itemsData;
-            wkofItems.UsersData = userData;
-            return wkofItems;
-        });
-};
-
 function getCriticalItemsData(items) {
     criticalItemsDebug('Getting critical items.');
 
