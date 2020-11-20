@@ -116,6 +116,10 @@
         document.body.appendChild(script);
     };
 
+
+    /*************************************************
+     *  Get functions.
+     *************************************************/
     async function getWkofDataObject() {
         wkofItems.UsersData = await wkof.Apiv2.fetch_endpoint('user');
         wkofItems.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
