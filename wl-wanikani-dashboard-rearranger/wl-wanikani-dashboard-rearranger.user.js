@@ -39,3 +39,29 @@ function hideCompleteProgressItems() {
         $(this).parent('.rounded').addClass(parentClasses);
     });
 };
+
+
+/*************************************************
+ *  Add reload timer for auto-refresh on next review time.
+ *************************************************/
+function autoRefreshOnNextReviewHour(nextRefresh) {
+    let nextRefreshText = new Date(nextRefresh).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
+    let timeoutValue = new Date(nextRefresh) - new Date();
+
+    let autoRefreshHTML = `
+        <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
+    `;
+
+    if ($('.auto-refresh-indicator').length > 0) {
+        $('.auto-refresh-indicator').remove();
+    }
+    $(autoRefreshHTML).insertAfter('.forecast > h1');
+
+    if (timeoutValue <= 0) {
+        location.reload();
+    }
+    else {
+        setTimeout(autoRefreshOnNextReviewHour, timeoutValue);
+        console.log('Auto refresh set for ' + nextRefreshText);
+    }
+};

@@ -76,7 +76,7 @@ function getCriticalItems() {
 
     return Promise.all([wkof.ItemData.get_items(itemDataConfig), wkof.Apiv2.fetch_endpoint('user')])
         .then(function([itemsData, userData]) {
-            wkofItems.ItemsData = itemsData;
+            wkofItems.CritItemsData = itemsData;
             wkofItems.UsersData = userData;
             return wkofItems;
         });
@@ -86,7 +86,7 @@ function getCriticalItemsData(items) {
     criticalItemsDebug('Getting critical items.');
 
     wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
-    wkofItemsData.CriticalItems = items.ItemsData.filter(isCritical);
+    wkofItemsData.CriticalItems = items.CritItemsData.filter(isCritical);
 
     criticalItemsDebug('Got critical items, show data.', wkofItemsData);
 

@@ -30,6 +30,54 @@
         }
     };
 
+    const critItemDataConfig = {
+        wk_items: {
+            options: {
+                assignments: true,
+                review_statistics: true
+            },
+            filters: {
+                level: '1..+0', //only retrieve items from lv 1 up to and including current level
+                srs: {
+                    value: 'lock, init, burn',
+                    invert: true
+                } //exlude locked, initial and burned items
+            }
+        }
+    };
+
+    const lockItemDataConfig = {
+        wk_items: {
+            options: {
+                review_statistics: true
+            },
+            filters: {
+                level: '+0', //only retrieve items from lv 1 up to and including current level
+                item_type: 'kan, rad',
+                srs: {
+                    value: 'lock'
+                    //invert: true
+                } //exlude locked, initial and burned items
+            }
+        }
+    };
+
+    const initItemDataConfig = {
+        wk_items: {
+            options: {
+                assignments: true,
+                review_statistics: true
+            },
+            filters: {
+                level: '+0', //only retrieve items from lv 1 up to and including current level
+                srs: {
+                    value: 'lock, init, burn',
+                    invert: true
+                } //exlude locked, initial and burned items
+            }
+        }
+    };
+
 
     /*************************************************
      *  Execute script.
@@ -37,12 +85,10 @@
     await addStylesAndFunctions();
     await executeHelpersCode();
 
-    // Initialise WKOF
-    wkof.include(wkofModules);
-
     if (Object.value(urlToExecuteOn.dashboard).includes(window.location.href)) {
-        await executeRearrangerCode();
-        await executeCriticalItemsCode();
+        let initWkofData = await intialiseWkofData();
+        await executeRearrangerCode(initWkofData);
+        await executeCriticalItemsCode(initWkofData);
     }
 
 
@@ -89,25 +135,42 @@
     function executeHelpersCode() {
         console.log('Running Helpers functions.');
         reviewAndLessonButtonPulseEffect();
-        autoRefreshOnNextReviewHour();
         console.log('All Helpers functions have loaded.');
     };
 
 
-    function executeRearrangerCode() {
+    function intialiseWkofData() {
+        console.log('Running WKOF initialisation.');
+        wkof.include(wkofModules);
+
+        wkof.ready(wkofModules)
+            .then(function() {
+                wkofItems.UsersData = await wkof.Apiv2.fetch_endpoint('user');
+                wkofItems.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
+                wkofItems.CritItemsData = await wkof.ItemData.get_items(critItemDataConfig);
+                wkofItems.LockItemsData = await wkof.ItemData.get_items(lockItemDataConfig);
+                wkofItems.InitItemsData = await wkof.ItemData.get_items(initItemDataConfig);
+                return wkofItems;
+            });
+        console.log('WKOF initialisation complete.');
+    };
+
+
+    function executeRearrangerCode(wkofData) {
         console.log('Running Rearranger functions.');
+        // TODO: Replace with new rearranger features, passing data given to new functions
         hideCompleteProgressItems();
+        autoRefreshOnNextReviewHour(wkofData.SummaryData.data.next_reviews_at);
         console.log('All Rearranger functions have loaded.');
     };
 
 
-    function executeCriticalItemsCode() {
+    async function executeCriticalItemsCode(wkofData) {
         console.log('Running Critical Items functions.');
-        wkof.ready(wkofModules)
-        .then(setCriticalItemsDebugMode(false))
-        .then(getCriticalItems)
-        .then(getCriticalItemsData)
-        .then(updatePageForCriticalItems)
-        .then(function() { console.log('All Critical Items functions have loaded.'); });
+        await setCriticalItemsDebugMode(false);
+        let getCritItems = await getCriticalItems(wkofData);
+        let getCritItemsData = await getCriticalItemsData(getCritItems);
+        await updatePageForCriticalItems(getCritItemsData);
+        console.log('All Critical Items functions have loaded.');
     };
 })();
