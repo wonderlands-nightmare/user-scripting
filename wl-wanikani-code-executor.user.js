@@ -139,7 +139,7 @@
     };
 
 
-    function intialiseWkofData() {
+    async function intialiseWkofData() {
         console.log('Running WKOF initialisation.');
         wkof.include(wkofModules);
 
