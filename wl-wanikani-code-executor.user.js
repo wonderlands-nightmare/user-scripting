@@ -86,7 +86,7 @@
     await addStylesAndFunctions();
     await executeHelpersCode();
 
-    if (Object.value(urlToExecuteOn.dashboard).includes(window.location.href)) {
+    if (Object.values(urlToExecuteOn.dashboard).includes(window.location.href)) {
         await intialiseWkofData();
     }
 
@@ -103,7 +103,7 @@
             .then(executeWkofDependentFunctions);
         console.log('WKOF initialisation complete.');
     };
-    
+
     function executeWkofDependentFunctions(wkofData) {
         executeRearrangerCode(wkofData);
         executeCriticalItemsCode(wkofData);
