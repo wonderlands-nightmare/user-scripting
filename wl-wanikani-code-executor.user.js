@@ -94,6 +94,16 @@
     /*************************************************
      *  Helper functions.
      *************************************************/
+    function intialiseWkofData() {
+        console.log('Running WKOF initialisation.');
+        wkof.include(wkofModules);
+
+        wkof.ready(wkofModules)
+            .then(getWkofDataObject)
+            .then(executeWkofDependentFunctions);
+        console.log('WKOF initialisation complete.');
+    };
+    
     function executeWkofDependentFunctions(wkofData) {
         executeRearrangerCode(wkofData);
         executeCriticalItemsCode(wkofData);
@@ -154,17 +164,6 @@
         console.log('Running Helpers functions.');
         reviewAndLessonButtonPulseEffect();
         console.log('All Helpers functions have loaded.');
-    };
-
-
-    function intialiseWkofData() {
-        console.log('Running WKOF initialisation.');
-        wkof.include(wkofModules);
-
-        wkof.ready(wkofModules)
-            .then(getWkofDataObject)
-            .then(executeWkofDependentFunctions);
-        console.log('WKOF initialisation complete.');
     };
 
 
