@@ -139,12 +139,12 @@
     };
 
 
-    async function intialiseWkofData() {
+    function intialiseWkofData() {
         console.log('Running WKOF initialisation.');
         wkof.include(wkofModules);
 
         wkof.ready(wkofModules)
-            .then(function() {
+            .then(async function() {
                 wkofItems.UsersData = await wkof.Apiv2.fetch_endpoint('user');
                 wkofItems.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
                 wkofItems.CritItemsData = await wkof.ItemData.get_items(critItemDataConfig);
