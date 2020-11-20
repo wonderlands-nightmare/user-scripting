@@ -26,7 +26,6 @@ const itemDataConfig = {
     }
 };
 
-let wkofItems = {};
 let wkofItemsData = {};
 
 // isCritical

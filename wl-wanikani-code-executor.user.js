@@ -21,6 +21,7 @@
     /*************************************************
      *  Variable initialisation.
      *************************************************/
+    let wkofItems = {};
     const wkofModules = 'Apiv2, ItemData';
 
     const urlToExecuteOn = {
