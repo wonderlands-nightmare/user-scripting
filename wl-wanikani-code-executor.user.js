@@ -87,15 +87,18 @@
     await executeHelpersCode();
 
     if (Object.value(urlToExecuteOn.dashboard).includes(window.location.href)) {
-        let initWkofData = await intialiseWkofData();
-        await executeRearrangerCode(initWkofData);
-        await executeCriticalItemsCode(initWkofData);
+        await intialiseWkofData();
     }
 
 
     /*************************************************
      *  Helper functions.
      *************************************************/
+    function executeWkofDependentFunctions(wkofData) {
+        executeRearrangerCode(wkofData);
+        executeCriticalItemsCode(wkofData);
+    }
+    
     function addStyles(cssFileName) {
         const styleCss = GM_getResourceText(cssFileName);
         GM_addStyle(styleCss);
@@ -112,6 +115,16 @@
 
         document.body.appendChild(script);
     };
+
+    async function getWkofDataObject() {
+        wkofItems.UsersData = await wkof.Apiv2.fetch_endpoint('user');
+        wkofItems.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
+        wkofItems.CritItemsData = await wkof.ItemData.get_items(critItemDataConfig);
+        wkofItems.LockItemsData = await wkof.ItemData.get_items(lockItemDataConfig);
+        wkofItems.InitItemsData = await wkof.ItemData.get_items(initItemDataConfig);
+        return wkofItems;
+    };
+    
 
 
     /*************************************************
@@ -145,14 +158,8 @@
         wkof.include(wkofModules);
 
         wkof.ready(wkofModules)
-            .then(async function() {
-                wkofItems.UsersData = await wkof.Apiv2.fetch_endpoint('user');
-                wkofItems.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
-                wkofItems.CritItemsData = await wkof.ItemData.get_items(critItemDataConfig);
-                wkofItems.LockItemsData = await wkof.ItemData.get_items(lockItemDataConfig);
-                wkofItems.InitItemsData = await wkof.ItemData.get_items(initItemDataConfig);
-                return wkofItems;
-            });
+            .then(getWkofDataObject)
+            .then(executeWkofDependentFunctions);
         console.log('WKOF initialisation complete.');
     };
 
