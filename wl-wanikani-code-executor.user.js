@@ -72,7 +72,7 @@
             filters: {
                 level: '+0', //only retrieve items from lv 1 up to and including current level
                 srs: {
-                    value: 'lock, init, burn',
+                    value: 'burn',
                     invert: true
                 } //exlude locked, initial and burned items
             }
