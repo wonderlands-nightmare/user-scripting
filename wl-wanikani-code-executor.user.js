@@ -180,7 +180,7 @@
         console.log('Running Critical Items functions.');
         await setCriticalItemsDebugMode(false);
         let getCritItemsData = await getCriticalItemsData(wkofData);
-        await updatePageForCriticalItems(getCritItemsData);
+        await generateCriticalItemsTableHTML(getCritItemsData);
         console.log('All Critical Items functions have loaded.');
     };
 })();
