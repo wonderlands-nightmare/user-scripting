@@ -113,7 +113,7 @@ function getCriticalItemsData(items) {
 
 function generateCriticalItemsTableHTML(criticalItemsData) {
     let getCriticalItemsHTML = generateCriticalItemsHTML(criticalItemsData);
-    let headerMessage = (items.length == 0) 
+    let headerMessage = (criticalItemsData.length == 0) 
                         ? 'Sorry no items are critical right now.'
                         : 'You have critical items you suck at!';
 
