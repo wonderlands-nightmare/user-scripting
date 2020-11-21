@@ -23,7 +23,7 @@
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.progress-component .rounded.all-done .progress-entries {
+.rounded.all-done .progress-entries {
     content: '';
     position: relative;
     left: 50%;

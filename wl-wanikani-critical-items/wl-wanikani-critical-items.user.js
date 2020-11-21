@@ -112,6 +112,7 @@ function getCriticalItemsData(items) {
 };
 
 function generateCriticalItemsTableHTML(criticalItemsData) {
+    criticalItemsDebug('Generating critical items table HTML with the following data.', criticalItemsData);
     let getCriticalItemsHTML = generateCriticalItemsHTML(criticalItemsData);
     let headerMessage = (criticalItemsData.length == 0) 
                         ? 'Sorry no items are critical right now.'
@@ -132,10 +133,11 @@ function generateCriticalItemsTableHTML(criticalItemsData) {
         $('.custom-critical-items').remove();
     }
     $(criticalTableHTML).insertAfter('section.srs-progress');
+    criticalItemsDebug('Finished adding critical items table.');
 };
 
 function generateCriticalItemsHTML(items) {
-    criticalItemsDebug('Create Tables.');
+    criticalItemsDebug('Generating critical items HTML.');
     let criticalItemsHTML = '';
 
     if (items.length > 0) {
@@ -161,7 +163,7 @@ function generateCriticalItemsHTML(items) {
         });
     }
 
-    criticalItemsDebug('Created?');
+    criticalItemsDebug('Generated the following critical items HTML.', criticalItemsHTML);
     return criticalItemsHTML;
 };
 
