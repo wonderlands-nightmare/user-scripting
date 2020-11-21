@@ -65,22 +65,8 @@ function itemsCharacterCallback (itemsData){
 
 
 /*************************************************
- *  Add Critical Items component to dashboard.
+ *  Filter functions.
  *************************************************/
-// =================
-// Critical items list
-// =================
-function getCriticalItemsData(items) {
-    criticalItemsDebug('Getting critical items.');
-
-    wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
-    wkofItemsData.CriticalItems = items.CritItemsData.filter(isCritical);
-
-    criticalItemsDebug('Got critical items, show data.', wkofItemsData);
-
-    return wkofItemsData;
-};
-
 function isCritical(item) {
     criticalItemsDebug('Check if critical.');
     // 1 - appr1, 2 - appr2, 3 - appr3, 4 - appr4, 5 - guru1, 6 - guru2, 7 - mast, 8 - enli
@@ -96,91 +82,100 @@ function isCritical(item) {
     };
 };
 
-function updatePageForCriticalItems(items) {
-    criticalItemsDebug('Updating page.');
-
-    items = items.CriticalItems.sort(function(a, b) {
-        return (a.critical_level == b.critical_level)
-            ? a.assignments.srs_stage - b.assignments.srs_stage
-            : b.critical_level - a.critical_level;
-    });
-
-    createTables(items);
-};
-
 function isAccepted(item) {
     criticalItemsDebug('Check if accepted.');
 
     return item.accepted_answer == true;
 };
 
-function createTables(items) {
+
+/*************************************************
+ *  Add Critical Items component to dashboard.
+ *************************************************/
+// =================
+// Critical items list
+// =================
+function getCriticalItemsData(items) {
+    criticalItemsDebug('Getting critical items.');
+
+    wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
+    wkofItemsData.CriticalItems = items.CritItemsData.filter(isCritical);
+    wkofItemsData.CriticalItems = wkofItemsData.CriticalItems.sort(function(a, b) {
+        return (a.critical_level == b.critical_level)
+            ? a.assignments.srs_stage - b.assignments.srs_stage
+            : b.critical_level - a.critical_level;
+    });
+
+    criticalItemsDebug('Got critical items, show data.', wkofItemsData);
+
+    return wkofItemsData;
+};
+
+function updatePageForCriticalItems(items) {
+    criticalItemsDebug('Updating page.');
+
+    
+
+    createTables(items);
+};
+
+function generateItemTooltipHTML(item) {
+    let tooltipTextHTML = '';
+    let itemReadingTooltipItems = '';
+    let itemMeaningTooltipItems = '';
+    let itemReadings = item.object != 'radical' ? item.data.readings.filter(isAccepted) : {};
+    let itemMeanings = item.data.meanings.filter(isAccepted);
+
+    if (itemReadings.length > 0 || itemMeanings.length > 0) {
+        tooltipTextHTML += `
+            <span class="critical-item-tooltip-text">
+        `;
+
+        if (itemReadings.length > 0) {
+            $.each(itemReadings, function(index, reading) {
+                itemReadingTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+            });
+
+            tooltipTextHTML += `
+                <div class="critical-item-tooltip-text-entries item-readings">${ itemReadingTooltipItems }</div>
+            `;
+        }
+
+        if (itemMeanings.length > 0) {
+            $.each(itemMeanings, function(index, meaning) {
+                itemMeaningTooltipItems += (index == 0 ? '' : ', ') + meaning.meaning;
+            });
+
+            tooltipTextHTML += `
+                <div class="critical-item-tooltip-text-entries item-meanings">${ itemMeaningTooltipItems }</div>
+            `;
+        }
+
+        tooltipTextHTML += `
+            </span>
+        `;
+    }
+
+    return tooltipTextHTML;
+}
+
+function generateCriticalItemsHTML(items) {
     criticalItemsDebug('Create Tables.');
-
-    let headerMessage = (items.length == 0) 
-                        ? 'Sorry no items are critical right now.'
-                        : 'You have critical items you suck at!';
-
-    criticalItemsDebug('Create Tables after if.');
-
-    let criticalTableHTML = `
-        <div class="rounded custom-critical-items">
-            <section class="rounded bg-white p-3 -mx-3">
-                <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-black text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${headerMessage}</h2>
-                <div class="progress-entries">
-    `;
-
-    criticalItemsDebug('Create Tables after html1.');
+    let criticalItemsHTML = '';
 
     if (items.length > 0) {
         $.each(items, function(index, item) {
             let itemAddedStyle = '';
-            let tooltipTextHTML = '';
-            let itemReadingTooltipItems = '';
-            let itemMeaningTooltipItems = '';
-
             let itemType = item.object;
-
-            let itemReadings = itemType != 'radical' ? item.data.readings.filter(isAccepted) : {};
-            let itemMeanings = item.data.meanings.filter(isAccepted);
+            let criticalItemTooltipHTML = generateItemTooltipHTML(item);
 
             if (item.critical_level > 0) {
                 itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
             }
 
-            if (itemReadings.length > 0 || itemMeanings.length > 0) {
-                tooltipTextHTML += `
-                    <span class="critical-item-tooltip-text">
-                `;
-
-                if (itemReadings.length > 0) {
-                    $.each(itemReadings, function(index, reading) {
-                        itemReadingTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
-                    });
-
-                    tooltipTextHTML += `
-                        <div class="critical-item-tooltip-text-entries item-readings">${ itemReadingTooltipItems }</div>
-                    `;
-                }
-
-                if (itemMeanings.length > 0) {
-                    $.each(itemMeanings, function(index, meaning) {
-                        itemMeaningTooltipItems += (index == 0 ? '' : ', ') + meaning.meaning;
-                    });
-
-                    tooltipTextHTML += `
-                        <div class="critical-item-tooltip-text-entries item-meanings">${ itemMeaningTooltipItems }</div>
-                    `;
-                }
-
-                tooltipTextHTML += `
-                    </span>
-                `;
-            }
-
-            criticalTableHTML += `
+            criticalItemsHTML += `
                     <div class="critical-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
-                        ${ tooltipTextHTML }
+                        ${ criticalItemTooltipHTML }
                         <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
                             <div>${ itemsCharacterCallback(item.data) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
@@ -189,9 +184,26 @@ function createTables(items) {
                     </div>
             `;
         });
-    }
+    }    
 
-    criticalTableHTML += `
+    criticalItemsHTML = criticalItemsHTML
+
+    criticalItemsDebug('Created?');
+    return criticalItemsHTML;
+};
+
+function generateCriticalItemsTableHTML() {
+    let getCriticalItemsHTML = generateCriticalItemsHTML();
+    let headerMessage = (items.length == 0) 
+                        ? 'Sorry no items are critical right now.'
+                        : 'You have critical items you suck at!';
+
+    let criticalTableHTML = `
+        <div class="rounded custom-critical-items ${ getCriticalItemsHTML == '' ? 'all-done' : 'got-some' }">
+            <section class="rounded bg-white p-3 -mx-3">
+                <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-black text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${ headerMessage }</h2>
+                <div class="progress-entries">
+                    ${ getCriticalItemsHTML }
                 </div>
             </section>
         </div>
@@ -201,6 +213,4 @@ function createTables(items) {
         $('.custom-critical-items').remove();
     }
     $(criticalTableHTML).insertAfter('section.srs-progress');
-
-    criticalItemsDebug('Created?');
-};
+}

@@ -44,10 +44,23 @@ function hideCompleteProgressItems() {
 /*************************************************
  *  Add reload timer for auto-refresh on next review time.
  *************************************************/
-function autoRefreshOnNextReviewHour(nextRefresh) {
-    let nextRefreshText = new Date(nextRefresh).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
-    let timeoutValue = new Date(nextRefresh) - new Date();
+function autoRefreshOnNextReviewHour(summaryData) {
+    let nextRefreshValue = '';
+    let objHasReviewsIterator = 1;
+    let objHasReviews = false;
 
+    while (!objHasReviews) {
+        if (summaryData.data.reviews[objHasReviewsIterator].subject_ids.length > 0) {
+            nextRefreshValue = summaryData.data.reviews[objHasReviewsIterator].available_at;
+            objHasReviews = true;
+        }
+        else {
+            objHasReviewsIterator++;
+        }
+    }; 
+    
+    let nextRefreshText = new Date(nextRefreshValue).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
+    let timeoutValue = new Date(nextRefreshValue) - new Date();
     let autoRefreshHTML = `
         <span class="auto-refresh-indicator">Next refresh at ${ nextRefreshText }</span>
     `;
@@ -55,13 +68,14 @@ function autoRefreshOnNextReviewHour(nextRefresh) {
     if ($('.auto-refresh-indicator').length > 0) {
         $('.auto-refresh-indicator').remove();
     }
+
     $(autoRefreshHTML).insertAfter('.forecast > h1');
 
     if (timeoutValue <= 0) {
         location.reload();
     }
     else {
-        setTimeout(autoRefreshOnNextReviewHour, timeoutValue);
+        setTimeout(autoRefreshOnNextReviewHour, timeoutValue, summaryData);
         console.log('Auto refresh set for ' + nextRefreshText);
     }
 };

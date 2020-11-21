@@ -171,7 +171,7 @@
         console.log('Running Rearranger functions.');
         // TODO: Replace with new rearranger features, passing data given to new functions
         hideCompleteProgressItems();
-        autoRefreshOnNextReviewHour(wkofData.SummaryData.data.next_reviews_at);
+        autoRefreshOnNextReviewHour(wkofData.SummaryData);
         console.log('All Rearranger functions have loaded.');
     };
 
