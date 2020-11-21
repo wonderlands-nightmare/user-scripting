@@ -159,9 +159,7 @@ function generateCriticalItemsHTML(items) {
                     </div>
             `;
         });
-    }    
-
-    criticalItemsHTML = criticalItemsHTML
+    }
 
     criticalItemsDebug('Created?');
     return criticalItemsHTML;
