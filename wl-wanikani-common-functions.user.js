@@ -48,7 +48,7 @@ function itemsCharacterCallback (itemsData){
  *************************************************/
 function generateCustomItemsTableHTML(criticalItemsData) {
     wlWanikaniDebug('Generating critical items table HTML with the following data.', criticalItemsData);
-    let getCustomItemsHTML = generateCustomItemsHTML(criticalItemsData.ItemsData);
+    let getCustomItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems);
     let headerMessage = (criticalItemsData.length == 0) 
                         ? 'Sorry no items are critical right now.'
                         : 'You have critical items you suck at!';
