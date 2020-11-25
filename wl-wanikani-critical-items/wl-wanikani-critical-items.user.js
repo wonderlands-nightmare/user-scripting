@@ -56,8 +56,8 @@ function getCriticalItemsData(items) {
     wlWanikaniDebug('Getting critical items.');
 
     wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
-    wkofItemsData.CriticalItems = items.ItemsData.filter(isCritical);
-    wkofItemsData.CriticalItems = wkofItemsData.CriticalItems.sort(function(a, b) {
+    wkofItemsData.CustomItems = items.ItemsData.filter(isCritical);
+    wkofItemsData.CustomItems = wkofItemsData.CustomItems.sort(function(a, b) {
         return (a.critical_level == b.critical_level)
             ? a.assignments.srs_stage - b.assignments.srs_stage
             : b.critical_level - a.critical_level;
