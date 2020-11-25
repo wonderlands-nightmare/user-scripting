@@ -23,7 +23,7 @@ const apprenticeIds = [1, 2, 3, 4];
  *  Filter functions.
  *************************************************/
 function isCritical(item) {
-    wlWaniKaniDebug('Check if critical.');
+    wlWanikaniDebug('Check if critical.');
     // 1 - appr1, 2 - appr2, 3 - appr3, 4 - appr4, 5 - guru1, 6 - guru2, 7 - mast, 8 - enli
 
     const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
@@ -38,7 +38,7 @@ function isCritical(item) {
 };
 
 function isAccepted(item) {
-    wlWaniKaniDebug('Check if accepted.');
+    wlWanikaniDebug('Check if accepted.');
 
     return item.accepted_answer == true;
 };
@@ -51,7 +51,7 @@ function isAccepted(item) {
 // Critical items list
 // =================
 function getCriticalItemsData(items) {
-    wlWaniKaniDebug('Getting critical items.');
+    wlWanikaniDebug('Getting critical items.');
 
     wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
     wkofItemsData.CriticalItems = items.ItemsData.filter(isCritical);
@@ -61,7 +61,7 @@ function getCriticalItemsData(items) {
             : b.critical_level - a.critical_level;
     });
 
-    wlWaniKaniDebug('Got critical items, show data.', wkofItemsData);
+    wlWanikaniDebug('Got critical items, show data.', wkofItemsData);
 
     return wkofItemsData;
 };

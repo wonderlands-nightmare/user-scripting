@@ -146,7 +146,7 @@
 
     function executeCriticalItemsCode(wkofData) {
         console.log('Running Critical Items functions.');
-        setWlWaniKaniDebugMode(false);
+        setWlWanikaniDebugMode(false);
         let getCritItemsData = getCriticalItemsData(wkofData);
         generateCustomItemsTableHTML(getCritItemsData);
         console.log('All Critical Items functions have loaded.');

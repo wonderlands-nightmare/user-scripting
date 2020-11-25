@@ -7,7 +7,7 @@
 /*************************************************
  *  Variable initialisation.
  *************************************************/
-// wlWaniKaniDebug
+// wlWanikaniDebug
 let debugMode = false;
 
 
@@ -18,7 +18,7 @@ function setWlWanikaniDebugMode(debugModeBoolean) {
     debugMode = debugModeBoolean;
 };
 
-function wlWaniKaniDebug(debugMessage, debugItem = 'empty') {
+function wlWanikaniDebug(debugMessage, debugItem = 'empty') {
     if (debugMode) {
         console.log('Critical Items log: ' + debugMessage);
 
@@ -29,7 +29,7 @@ function wlWaniKaniDebug(debugMessage, debugItem = 'empty') {
 };
 
 function itemsCharacterCallback (itemsData){
-    wlWaniKaniDebug('Character callback.');
+    wlWanikaniDebug('Character callback.');
 
     //check if an item has characters. Kanji and vocabulary will always have these but wk-specific radicals (e.g. gun, leaf, stick) use images instead
     if(itemsData.characters!= null) {
@@ -47,7 +47,7 @@ function itemsCharacterCallback (itemsData){
  *  Common HTML generator functions.
  *************************************************/
 function generateCustomItemsTableHTML(criticalItemsData) {
-    wlWaniKaniDebug('Generating critical items table HTML with the following data.', criticalItemsData);
+    wlWanikaniDebug('Generating critical items table HTML with the following data.', criticalItemsData);
     let getCriticalItemsHTML = generateCriticalItemsHTML(criticalItemsData.CriticalItems);
     let headerMessage = (criticalItemsData.length == 0) 
                         ? 'Sorry no items are critical right now.'
@@ -68,11 +68,11 @@ function generateCustomItemsTableHTML(criticalItemsData) {
         $('.custom-critical-items').remove();
     }
     $(criticalTableHTML).insertAfter('section.srs-progress');
-    wlWaniKaniDebug('Finished adding critical items table.');
+    wlWanikaniDebug('Finished adding critical items table.');
 };
 
 function generateCustomItemsHTML(items) {
-    wlWaniKaniDebug('Generating critical items HTML.');
+    wlWanikaniDebug('Generating critical items HTML.');
     let criticalItemsHTML = '';
 
     if (items.length > 0) {
@@ -98,7 +98,7 @@ function generateCustomItemsHTML(items) {
         });
     }
 
-    wlWaniKaniDebug('Generated the following critical items HTML.', criticalItemsHTML);
+    wlWanikaniDebug('Generated the following critical items HTML.', criticalItemsHTML);
     return criticalItemsHTML;
 };
 
