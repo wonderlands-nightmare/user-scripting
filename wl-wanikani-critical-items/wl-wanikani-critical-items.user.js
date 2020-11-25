@@ -26,15 +26,17 @@ function isCritical(item) {
     wlWanikaniDebug('Check if critical.');
     // 1 - appr1, 2 - appr2, 3 - appr3, 4 - appr4, 5 - guru1, 6 - guru2, 7 - mast, 8 - enli
 
-    const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
-    const isApprentice = apprenticeIds.includes(item.assignments.srs_stage);
-    const itemCritical = isLowerLevel && isApprentice;
+    if ("ItemsData" in wkofItemsData) {
+        const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
+        const isApprentice = apprenticeIds.includes(item.assignments.srs_stage);
+        const itemCritical = isLowerLevel && isApprentice;
 
-    if (itemCritical) {
-        item.critical_level = (wkofItemsData.SafeLevel - item.data.level)/item.assignments.srs_stage;
+        if (itemCritical) {
+            item.critical_level = (wkofItemsData.SafeLevel - item.data.level)/item.assignments.srs_stage;
 
-        return item;
-    };
+            return item;
+        }
+    }
 };
 
 function isAccepted(item) {
