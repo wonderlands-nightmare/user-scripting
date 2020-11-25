@@ -7,6 +7,7 @@
 // @match        https://www.wanikani.com/*
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wl-wanikani-code-executor.user.js
 // @resource     COMMON_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-common-styles.user.css
+// @resource     COMMON_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-common-functions.user.js
 // @resource     HELPERS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-helpers/wl-wanikani-helpers.user.css
 // @resource     HELPERS_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-helpers/wl-wanikani-helpers.user.js
 // @resource     REARRANGER_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/wl-wanikani-dashboard-rearranger/wl-wanikani-dashboard-rearranger.user.css
@@ -31,50 +32,18 @@
         }
     };
 
-    const critItemDataConfig = {
+    const itemDataConfig = {
         wk_items: {
             options: {
                 assignments: true,
                 review_statistics: true
             },
             filters: {
-                level: '1..+0', //only retrieve items from lv 1 up to and including current level
-                srs: {
-                    value: 'lock, init, burn',
-                    invert: true
-                } //exlude locked, initial and burned items
-            }
-        }
-    };
-
-    const lockItemDataConfig = {
-        wk_items: {
-            options: {
-                review_statistics: true
-            },
-            filters: {
-                level: '+0', //only retrieve items from lv 1 up to and including current level
-                item_type: 'kan, rad',
-                srs: {
-                    value: 'lock'
-                    //invert: true
-                } //exlude locked, initial and burned items
-            }
-        }
-    };
-
-    const initItemDataConfig = {
-        wk_items: {
-            options: {
-                assignments: true,
-                review_statistics: true
-            },
-            filters: {
-                level: '+0', //only retrieve items from lv 1 up to and including current level
+                level: '1..+0',
                 srs: {
                     value: 'burn',
                     invert: true
-                } //exlude locked, initial and burned items
+                }
             }
         }
     };
@@ -84,7 +53,7 @@
      *  Execute script.
      *************************************************/
     await addStylesAndFunctions();
-    await executeHelpersCode();
+    executeHelpersCode();
 
     if (Object.values(urlToExecuteOn.dashboard).includes(window.location.href)) {
         await intialiseWkofData();
@@ -133,9 +102,7 @@
     async function getWkofDataObject() {
         wkofItems.UsersData = await wkof.Apiv2.fetch_endpoint('user');
         wkofItems.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
-        wkofItems.CritItemsData = await wkof.ItemData.get_items(critItemDataConfig);
-        wkofItems.LockItemsData = await wkof.ItemData.get_items(lockItemDataConfig);
-        wkofItems.InitItemsData = await wkof.ItemData.get_items(initItemDataConfig);
+        wkofItems.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
         return wkofItems;
     };
     
@@ -153,6 +120,7 @@
         addStyles("CRITICAL_ITEMS_CSS");
 
         // Add functions
+        addFunctions("COMMON_JS");
         addFunctions("HELPERS_JS");
         addFunctions("REARRANGER_JS");
         addFunctions("CRITICAL_ITEMS_JS");
@@ -178,9 +146,9 @@
 
     async function executeCriticalItemsCode(wkofData) {
         console.log('Running Critical Items functions.');
-        await setCriticalItemsDebugMode(false);
-        let getCritItemsData = await getCriticalItemsData(wkofData);
-        await generateCriticalItemsTableHTML(getCritItemsData);
+        setWlWaniKaniDebugMode(false);
+        let getCritItemsData = getCriticalItemsData(wkofData);
+        generateCustomItemsTableHTML(getCritItemsData);
         console.log('All Critical Items functions have loaded.');
     };
 })();

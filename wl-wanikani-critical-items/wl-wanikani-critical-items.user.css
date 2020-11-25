@@ -1,37 +1,37 @@
-.custom-critical-items { 
+.custom-items { 
     padding: 12px 24px; 
     margin-bottom: 30px; 
     background: var(--grey); 
 } 
 
-.custom-critical-items section { 
+.custom-items section { 
     margin-bottom: 0; 
 } 
 
-.custom-critical-items section .progress-entries { 
+.custom-items section .progress-entries { 
     grid-template-columns: none; 
     display: flex; 
 } 
 
-.custom-critical-items section .progress-entries .progress-entry { 
+.custom-items section .progress-entries .progress-entry { 
     height: 40px; 
 } 
 
-.custom-critical-items section .progress-entries .progress-entry.radical, 
-.custom-critical-items section .progress-entries .progress-entry.kanji { 
+.custom-items section .progress-entries .progress-entry.radical, 
+.custom-items section .progress-entries .progress-entry.kanji { 
     width: 40px; 
 } 
 
-.custom-critical-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
     height: 40px;
     font-size: 21px;
 }
 
-.custom-critical-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
     text-decoration: none;
 }
 
-.custom-critical-items section .progress-entries .progress-entry a .progress-item-level { 
+.custom-items section .progress-entries .progress-entry a .progress-item-level { 
     position: absolute;
     padding: 0px 4px;
     background: var(--dark-green);
@@ -44,7 +44,7 @@
     line-height: 14px;
 }
 
-.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
     position: absolute;
     padding: 0px 4px;
     border: 0.5px solid var(--white);
@@ -56,23 +56,23 @@
     line-height: 14px;
 }
 
-.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
     background: var(--black);
 }
 
-.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
     background: var(--maroon);
 }
 
-.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
     background: var(--lessonColourDarker);
 }
 
-.custom-critical-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
     background: var(--reviewColourDarker);
 }
 
-.critical-item-tooltip .critical-item-tooltip-text {
+.custom-item-tooltip .custom-item-tooltip-text {
     visibility: hidden;
     width: 120px;
     background-color: var(--transparent-black);
@@ -89,21 +89,21 @@
     transition: opacity 0.3s;
 }
 
-.critical-item-tooltip .critical-item-tooltip-text .critical-item-tooltip-text-entries {
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries {
     border-radius: 5px;
     padding: 5px 10px;
     margin-bottom: 10px;
 }
 
-.critical-item-tooltip .critical-item-tooltip-text .critical-item-tooltip-text-entries.item-readings {
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries.item-readings {
     background: var(--dark-green);
 }
 
-.critical-item-tooltip .critical-item-tooltip-text .critical-item-tooltip-text-entries.item-meanings {
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries.item-meanings {
     background: var(--dark-grey);
 }
   
-.critical-item-tooltip .critical-item-tooltip-text::after {
+.custom-item-tooltip .custom-item-tooltip-text::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -114,7 +114,7 @@
     border-color: var(--transparent-black) transparent transparent transparent;
 }
   
-.critical-item-tooltip:hover .critical-item-tooltip-text {
+.custom-item-tooltip:hover .custom-item-tooltip-text {
     visibility: visible;
     opacity: 1;
 }
