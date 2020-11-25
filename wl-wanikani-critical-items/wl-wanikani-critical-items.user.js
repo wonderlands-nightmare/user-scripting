@@ -53,7 +53,7 @@ function isAccepted(item) {
 // Critical items list
 // =================
 function getCriticalItemsData(items) {
-    wlWanikaniDebug('Getting critical items.');
+    wlWanikaniDebug('Getting critical items.', items);
 
     wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
     wkofItemsData.CustomItems = items.ItemsData.filter(isCritical);
