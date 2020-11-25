@@ -7,25 +7,6 @@
 /*************************************************
  *  Variable initialisation.
  *************************************************/
-// wlWaniKaniDebug
-let debugMode = false;
-
-// getItems
-const itemDataConfig = {
-    wk_items: {
-        options: {
-            review_statistics: true
-        },
-        filters: {
-            level: '1..+0', //only retrieve items from lv 1 up to and including current level
-            srs: {
-                value: 'lock, init, burn',
-                invert: true
-            } //exlude locked, initial and burned items
-        }
-    }
-};
-
 let wkofItemsData = {};
 
 // isCritical

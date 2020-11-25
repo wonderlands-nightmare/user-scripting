@@ -144,7 +144,7 @@
     };
 
 
-    async function executeCriticalItemsCode(wkofData) {
+    function executeCriticalItemsCode(wkofData) {
         console.log('Running Critical Items functions.');
         setWlWaniKaniDebugMode(false);
         let getCritItemsData = getCriticalItemsData(wkofData);
