@@ -46,7 +46,7 @@ function itemsCharacterCallback (itemsData){
 /*************************************************
  *  Common HTML generator functions.
  *************************************************/
-function generateCustomItemsTableHTML(criticalItemsData) {
+function generateCustomItemsTableHTML(criticalItemsData, customClass) {
     wlWanikaniDebug('Generating critical items table HTML with the following data.', criticalItemsData);
     let getCustomItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems);
     let headerMessage = (criticalItemsData.length == 0) 
@@ -54,7 +54,7 @@ function generateCustomItemsTableHTML(criticalItemsData) {
                         : 'You have critical items you suck at!';
 
     let customTableHTML = `
-        <div class="rounded custom-critical-items custom-items ${ getCustomItemsHTML == '' ? 'all-done' : '' }">
+        <div class="rounded ${ customClass } custom-items ${ getCustomItemsHTML == '' ? 'all-done' : '' }">
             <section class="rounded bg-white p-3 -mx-3">
                 <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-black text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${ headerMessage }</h2>
                 <div class="progress-entries">
