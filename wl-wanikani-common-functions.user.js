@@ -53,7 +53,7 @@ function generateCustomItemsTableHTML(criticalItemsData) {
                         ? 'Sorry no items are critical right now.'
                         : 'You have critical items you suck at!';
 
-    let criticalTableHTML = `
+    let customTableHTML = `
         <div class="rounded custom-critical-items custom-items ${ getCustomItemsHTML == '' ? 'all-done' : '' }">
             <section class="rounded bg-white p-3 -mx-3">
                 <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-black text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${ headerMessage }</h2>
@@ -64,11 +64,8 @@ function generateCustomItemsTableHTML(criticalItemsData) {
         </div>
     `;
 
-    if ($('.custom-critical-items').length > 0) {
-        $('.custom-critical-items').remove();
-    }
-    $(criticalTableHTML).insertAfter('section.srs-progress');
-    wlWanikaniDebug('Finished adding critical items table.');
+    wlWanikaniDebug('Finished generating critical items table.');
+    return customTableHTML;
 };
 
 function generateCustomItemsHTML(items) {
