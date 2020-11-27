@@ -39,12 +39,6 @@ function isCritical(item) {
     }
 };
 
-function isAccepted(item) {
-    wlWanikaniDebug('Check if accepted.');
-
-    return item.accepted_answer == true;
-};
-
 
 /*************************************************
  *  Add Critical Items component to dashboard.

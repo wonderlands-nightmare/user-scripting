@@ -44,6 +44,16 @@ function itemsCharacterCallback (itemsData){
 
 
 /*************************************************
+ *  Filter functions.
+ *************************************************/
+function isAccepted(item) {
+    wlWanikaniDebug('Check if accepted.');
+
+    return item.accepted_answer == true;
+};
+
+
+/*************************************************
  *  Common HTML generator functions.
  *************************************************/
 function generateCustomItemsTableHTML(criticalItemsData, customClass) {
