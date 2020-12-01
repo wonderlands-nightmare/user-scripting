@@ -17,7 +17,7 @@ async function generateDashboardHTML(data) {
     wlWanikaniDebug('Generating custom dashboard HTML with the following data.', data);
 
     let criticalItemsData = await getCriticalItemsData(data);
-    let genTableHTML = await generateCustomItemsTableHTML(criticalItemsData, 'custom-dashboard-critical-items');
+    let criticalItemsTableHTML = await generateCustomItemsTableHTML(criticalItemsData, 'custom-dashboard-critical-items');
 
     let nextReviewData = getNextReviewTime(data);
     
@@ -49,7 +49,7 @@ async function generateDashboardHTML(data) {
                             ${ generateSummaryHTML(enlightenedSummaryData, 'custom-dashboard-progress-summary enlightened-summary', '悟りを開いた（' + enlightenedSummaryData.totalCount + '）') }
                             ${ generateSummaryHTML(burnedSummaryData, 'custom-dashboard-progress-summary burned-summary', '焼け（' + burnedSummaryData.totalCount + '）') }
                         </section>
-                        ${ genTableHTML }
+                        ${ criticalItemsTableHTML }
                     </div>
                 </div>
             </div>
