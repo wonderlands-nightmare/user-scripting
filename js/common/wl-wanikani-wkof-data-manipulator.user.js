@@ -43,7 +43,7 @@ function isCritical(item) {
 
     if ("assignments" in item) {
         const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
-        const isApprentice = apprenticeIds.includes(item.assignments.srs_stage);
+        const isApprentice = Object.values(wanikaniSrsStages.apprentice).includes(item.assignments.srs_stage);
         const itemCritical = isLowerLevel && isApprentice;
 
         if (itemCritical) {
