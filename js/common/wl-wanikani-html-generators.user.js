@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WaniKani Dashboard Common Functions
+// @name         WaniKani Custom Dashboard HTML Generators
 // @namespace    https://github.com/wonderlands-nightmare
 // @author       Wonderlands-Nightmares
 // ==/UserScript==
@@ -7,30 +7,13 @@
 /*************************************************
  *  Variable initialisation.
  *************************************************/
-// wlWanikaniDebug
-let debugMode = false;
+// Add code
 
 
 /*************************************************
  *  Helper functions.
  *************************************************/
-function setWlWanikaniDebugMode(debugModeBoolean) {
-    debugMode = debugModeBoolean;
-};
-
-function wlWanikaniDebug(debugMessage, debugItem = 'empty') {
-    if (debugMode) {
-        console.log('Custom Items log: ' + debugMessage);
-
-        if (debugItem != 'empty') {
-            console.log(debugItem);
-        }
-    }
-};
-
 function itemsCharacterCallback (itemsData){
-    wlWanikaniDebug('Character callback.');
-
     //check if an item has characters. Kanji and vocabulary will always have these but wk-specific radicals (e.g. gun, leaf, stick) use images instead
     if(itemsData.characters!= null) {
         return itemsData.characters;
@@ -47,8 +30,6 @@ function itemsCharacterCallback (itemsData){
  *  Filter functions.
  *************************************************/
 function isAccepted(item) {
-    wlWanikaniDebug('Check if accepted.');
-
     return item.accepted_answer == true;
 };
 
@@ -56,10 +37,11 @@ function isAccepted(item) {
 /*************************************************
  *  Common HTML generator functions.
  *************************************************/
-function generateCustomItemsTableHTML(criticalItemsData, customClass) {
-    wlWanikaniDebug('Generating critical items table HTML with the following data.', criticalItemsData);
-    let getCustomItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems);
-    let headerMessage = (criticalItemsData.length == 0) 
+function generateCustomItemsTableHTML(customItemsData, customClass) {
+    wlWanikaniDebug('Generating critical items table HTML with the following data.', customItemsData);
+
+    let getCustomItemsHTML = generateCustomItemsHTML(customItemsData.CustomItems);
+    let headerMessage = (customItemsData.length == 0) 
                         ? 'Sorry no items are critical right now.'
                         : 'You have critical items you suck at!';
 
@@ -74,13 +56,14 @@ function generateCustomItemsTableHTML(criticalItemsData, customClass) {
         </div>
     `;
 
-    wlWanikaniDebug('Finished generating critical items table.');
+    wlWanikaniDebug('Finished generating custom items table.');
     return customTableHTML;
 };
 
 function generateCustomItemsHTML(items) {
-    wlWanikaniDebug('Generating critical items HTML.');
-    let criticalItemsHTML = '';
+    wlWanikaniDebug('Generating custom items HTML.');
+
+    let customItemsHTML = '';
 
     if (items.length > 0) {
         $.each(items, function(index, item) {
@@ -92,7 +75,7 @@ function generateCustomItemsHTML(items) {
                 itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
             }
 
-            criticalItemsHTML += `
+            customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ criticalItemTooltipHTML }
                         <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
@@ -105,8 +88,8 @@ function generateCustomItemsHTML(items) {
         });
     }
 
-    wlWanikaniDebug('Generated the following critical items HTML.', criticalItemsHTML);
-    return criticalItemsHTML;
+    wlWanikaniDebug('Generated the following custom items HTML.', customItemsHTML);
+    return customItemsHTML;
 };
 
 function generateItemTooltipHTML(item) {
@@ -147,4 +130,29 @@ function generateItemTooltipHTML(item) {
     }
 
     return tooltipTextHTML;
+};
+
+function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton = false, buttonClasses = '', buttonText = '') {
+    wlWanikaniDebug('Generating summary HTML.');
+
+    let buttonHTML = hasButton
+    ? `
+            <a class="custom-button ${ buttonClasses }">
+                <span>${ buttonText }</span>
+            </a>
+    `
+    : '';
+    
+    let summaryHTML = `
+        <div class="custom-summary ${ htmlClasses }">
+            <h2>${ divHeaderText }</h2>
+            <span class="custom-summary-kanji">漢字（${ summaryData.kanji.length }）</span>
+            <span class="custom-summary-radical">部首（${ summaryData.radical.length }）</span>
+            <span class="custom-summary-vocabulary">単語（${ summaryData.vocabulary.length }）</span>
+            ${ buttonHTML }
+        </div>
+    `;
+
+    wlWanikaniDebug('Generated the following summary HTML.', summaryHTML);
+    return summaryHTML;
 };
