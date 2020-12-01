@@ -7,6 +7,8 @@
 /*************************************************
  *  Variable initialisation.
  *************************************************/
+let wkofItemsData = {};
+
 const wanikaniSrsStages = {
     'locked': {'locked': -1 },
     'initiate': { 'initiate': 0 },
@@ -58,7 +60,7 @@ function isCritical(item) {
  *************************************************/
 function getCriticalItemsData(items) {
     wlWanikaniDebug('Getting critical items.', items);
-    let wkofItemsData = {};
+    
     wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
     wkofItemsData.CustomItems = items.ItemsData.filter(isCritical);
     wkofItemsData.CustomItems = wkofItemsData.CustomItems.sort(function(a, b) {

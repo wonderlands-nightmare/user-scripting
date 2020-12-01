@@ -17,12 +17,10 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-(async function () {
+(function () {
     /*************************************************
      *  Variable initialisation.
      *************************************************/
-    let wkofData = {};
-
     const isDebug = false;
 
     const wkofModules = 'Apiv2, ItemData';
@@ -50,15 +48,21 @@
     /*************************************************
      *  Execute script.
      *************************************************/
-    await addStylesAndFunctions();
+    addStylesAndFunctions();
     // remove original dashboard and add loading display
 
     
     if (Object.values(urlToExecuteOn.dashboard).includes(window.location.href)) {
-        await getWkofDataObject();
-        setWlWanikaniDebugMode(isDebug);
-        generateDashboardHTML(wkofData);
-        autoRefreshOnNextReviewHour(wkofData.SummaryData);
+        wkof.include(wkofModules);
+
+        wkof.ready(wkofModules)
+            .then(getWkofDataObject)
+            .then(function(data) {
+                console.log(data);
+                setWlWanikaniDebugMode(isDebug);
+                generateDashboardHTML(data);
+                autoRefreshOnNextReviewHour(data.SummaryData);
+            });
     }
 
     reviewAndLessonButtonPulseEffect();
@@ -90,15 +94,12 @@
      *************************************************/
     async function getWkofDataObject() {
         console.log('Running WKOF data retrieval.');
-        wkof.include(wkofModules);
-
-        wkof.ready(wkofModules)
-            .then(async function() {
-                wkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
-                wkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
-                wkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
-            });
+        let getWkofData = {};
+        getWkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
+        getWkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
+        getWkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
         console.log('WKOF data retrieval complete.');
+        return getWkofData;
     };
 
 
