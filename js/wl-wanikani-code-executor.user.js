@@ -93,7 +93,7 @@
         wkof.include(wkofModules);
 
         wkof.ready(wkofModules)
-            .then(function() {
+            .then(async function() {
                 wkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
                 wkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
                 wkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
