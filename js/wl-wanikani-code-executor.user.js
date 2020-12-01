@@ -118,7 +118,7 @@
         addFunctions("COMMON_JS");
         addFunctions("WKOF_DATA_JS");
         addFunctions("HTML_GEN_JS");
-        addFunctions("DASHBOARD_CSS");
+        addFunctions("DASHBOARD_JS");
         console.log('All Add CSS and JS functions have loaded.');
     };
 

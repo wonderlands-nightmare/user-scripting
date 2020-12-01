@@ -7,10 +7,10 @@
 /*************************************************
  *  Common debugger function.
  *************************************************/
-let debugMode = false;
+//let debugMode = false;
 
 function setWlWanikaniDebugMode(debugModeBoolean) {
-    debugMode = debugModeBoolean;
+    let debugMode = debugModeBoolean;
 };
 
 function wlWanikaniDebug(debugMessage, debugItem = '') {
