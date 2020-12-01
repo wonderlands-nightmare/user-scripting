@@ -10,7 +10,7 @@
 let debugMode = false;
 
 function setWlWanikaniDebugMode(debugModeBoolean) {
-    let debugMode = debugModeBoolean;
+    debugMode = debugModeBoolean;
 };
 
 function wlWanikaniDebug(debugMessage, debugItem = '') {

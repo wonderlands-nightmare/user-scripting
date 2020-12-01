@@ -94,9 +94,9 @@
 
         wkof.ready(wkofModules)
             .then(function() {
-                wkofData.UsersData = wkof.Apiv2.fetch_endpoint('user');
-                wkofData.SummaryData = wkof.Apiv2.fetch_endpoint('summary');
-                wkofData.ItemsData = wkof.ItemData.get_items(itemDataConfig);
+                wkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
+                wkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
+                wkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
             });
         console.log('WKOF data retrieval complete.');
     };
