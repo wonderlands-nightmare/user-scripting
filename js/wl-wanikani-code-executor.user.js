@@ -125,7 +125,7 @@
 
     function reviewAndLessonButtonPulseEffect() {
         // Shortcut buttons
-        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--lessons > a', '.navigation-shortcuts .navigation-shortcut--lessons > a > span').text(), '/lesson/session', 'has-lessons');
-        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--reviews > a', '.navigation-shortcuts .navigation-shortcut--reviews > a > span').text(), '/review/start', 'has-reviews');
+        addReviewAndLessonButtonPulseEffect($('.navigation-shortcuts .navigation-shortcut--lessons > a', '.navigation-shortcuts .navigation-shortcut--lessons > a > span').text(), '/lesson/session', 'has-lessons');
+        addReviewAndLessonButtonPulseEffect($('.navigation-shortcuts .navigation-shortcut--reviews > a', '.navigation-shortcuts .navigation-shortcut--reviews > a > span').text(), '/review/start', 'has-reviews');
     };
 })();
