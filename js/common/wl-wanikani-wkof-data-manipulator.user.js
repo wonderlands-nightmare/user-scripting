@@ -172,10 +172,10 @@ function getLevelProgress(data) {
             else if (item.object == 'radical') {
                 if ("assignments" in item) {
                     if (item.assignments.passed_at == null && item.assignments.unlocked_at != null) {
-                        progressData.Kanji.InProgress.push(item);
+                        progressData.Radicals.InProgress.push(item);
                     }
                     else if (item.assignments.passed_at != null) {
-                        progressData.Kanji.Passed.push(item);
+                        progressData.Radicals.Passed.push(item);
                     }
                 }
             }

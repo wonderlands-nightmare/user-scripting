@@ -6,8 +6,8 @@
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }*/
 
-.all-done .progress-entries,
-.all-done.custom-div {
+.all-done .progress-entries:after,
+.all-done.custom-div:after {
     content: '';
     position: relative;
     left: 50%;
