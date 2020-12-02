@@ -13,12 +13,13 @@
 /*************************************************
  *  Helper functions.
  *************************************************/
-function itemsCharacterCallback (itemsData){
+function itemsCharacterCallback (item){
+    let itemsData = item.data;
     //check if an item has characters. Kanji and vocabulary will always have these but wk-specific radicals (e.g. gun, leaf, stick) use images instead
     if (itemsData.characters != null) {
         return itemsData.characters;
     } else if (itemsData.character_images != null){
-        return '<img class="radical-image" alt="' + itemsData.slug + '" src="https://cdn.wanikani.com/subjects/images/' + itemsData.id + '-' + itemsData.slug + '-original.png"/>';
+        return '<img class="radical-image" alt="' + itemsData.slug + '" src="https://cdn.wanikani.com/subjects/images/' + item.id + '-' + itemsData.slug + '-original.png"/>';
     } else {
         //if both characters and character_images are somehow absent try using slug instead
         return itemsData.slug;
@@ -85,7 +86,7 @@ function generateCustomItemsHTML(items, type = '') {
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ customItemTooltipHTML }
                         <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
-                            <div>${ itemsCharacterCallback(item.data) }</div>
+                            <div>${ itemsCharacterCallback(item) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
                             ${ itemSrsLevel }
                         </a>
