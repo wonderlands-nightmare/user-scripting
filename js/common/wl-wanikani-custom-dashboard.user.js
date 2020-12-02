@@ -23,25 +23,25 @@ function generateDashboardHTML(data) {
     let levelProgressData = getLevelProgress(data);
     let levelProgressCircleHTML = generateLevelProgressCircleHTML(levelProgressData, 60, 6);
     let levelProgressKanjiInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
-    let levelProgressRadicalsInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
+    let levelProgressRadicalsInProgressHTML = generateCustomItemsHTML(levelProgressData.Radicals.InProgress);
     let levelProgressKanjiPassedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Passed);
-    let levelProgressRadicalsPassedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Passed);
+    let levelProgressRadicalsPassedHTML = generateCustomItemsHTML(levelProgressData.Radicals.Passed);
     let levelProgressKanjiLockedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Locked);
     let levelProgressItemsHTML = `
         ${ levelProgressCircleHTML }
-        <div class="custom-div border-bottom ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
             ${ levelProgressKanjiInProgressHTML }
         </div>
-        <div class="custom-div border-bottom ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
             ${ levelProgressRadicalsInProgressHTML }
         </div>
-        <div class="custom-div border-bottom ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
             ${ levelProgressKanjiPassedHTML }
         </div>
-        <div class="custom-div border-bottom ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
             ${ levelProgressRadicalsPassedHTML }
         </div>
-        <div class="custom-div ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
             ${ levelProgressKanjiLockedHTML }
         </div>
     `;
