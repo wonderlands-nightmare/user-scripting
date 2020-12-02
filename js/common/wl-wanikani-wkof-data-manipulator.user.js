@@ -111,7 +111,7 @@ function getSubjectData(data, type, subjectIds = []) {
 
     returnData.totalCount = counter;
     
-    wlWanikaniDebug('Retrieved ' + type + 'subject data.', returnData);
+    wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
     return returnData;
 }
 

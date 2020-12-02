@@ -71,7 +71,7 @@ function autoRefreshOnNextReviewHour(summaryData) {
 
 
 function setLevelProgressCircle(percent) {
-    let circle = $('.level-progress-indicator .progress-ring .progress-ring-circle');
+    let circle = $('.level-progress-indicator .progress-ring circle');
     let radius = circle.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
 

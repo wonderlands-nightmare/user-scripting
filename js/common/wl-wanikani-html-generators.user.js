@@ -82,7 +82,7 @@ function generateCustomItemsHTML(items, type = '') {
                         <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
                             <div>${ itemsCharacterCallback(item.data) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
-                            ${ 'assignments' in item ? `<span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }">${ item.assignments.srs_stage }</span>` : '' }
+                            ${ 'assignments' in item ? '<span class="progress-item-srs-level srs-level-' + item.assignments.srs_stage + '">' + item.assignments.srs_stage + '</span>' : '' }
                             }}
                         </a>
                     </div>
