@@ -26,9 +26,7 @@ function wlWanikaniDebug(debugMessage, debugItem = '') {
 /*************************************************
  *  Add pulse effect for lesson and review buttons.
  *************************************************/
-function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonHref, buttonClass) {
-    let buttonCount = $(buttonSelector + ' > span').text();
-
+function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, buttonHref, buttonClass) {
     $(buttonSelector).attr('href', buttonHref);
     
     if (buttonCount > 0) {

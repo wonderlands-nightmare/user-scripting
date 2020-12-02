@@ -29,19 +29,19 @@ function generateDashboardHTML(data) {
     let levelProgressKanjiLockedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Locked);
     let levelProgressItemsHTML = `
         ${ levelProgressCircleHTML }
-        <div class="progress-entries custom-div border-bottom ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom kanji-in-progress ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
             ${ levelProgressKanjiInProgressHTML }
         </div>
-        <div class="progress-entries custom-div border-bottom ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom radicals-in-progress ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
             ${ levelProgressRadicalsInProgressHTML }
         </div>
-        <div class="progress-entries custom-div border-bottom ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom kanji-passed ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
             ${ levelProgressKanjiPassedHTML }
         </div>
-        <div class="progress-entries custom-div border-bottom ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div border-bottom radicals-passed ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
             ${ levelProgressRadicalsPassedHTML }
         </div>
-        <div class="progress-entries custom-div ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
+        <div class="progress-entries custom-div kanji-locked ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
             ${ levelProgressKanjiLockedHTML }
         </div>
     `;
@@ -91,6 +91,8 @@ function generateDashboardHTML(data) {
     $(dashboardHTML).insertAfter('.footer-adjustment #search');
 
     setLevelProgressCircle(levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass);
+    addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
+    addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
     
     wlWanikaniDebug('Generated the following custom dashboard HTML.', dashboardHTML);
 };

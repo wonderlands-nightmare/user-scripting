@@ -56,6 +56,10 @@
 .custom-summary > .custom-button:hover {
     color: white;
     text-decoration: none;
+}
+
+.custom-lessons-and-reviews-button.reviews-button.has-reviews,
+.custom-lessons-and-reviews-button.lessons-button.has-lessons {
     transform: scale(1.05);
 }
 
@@ -66,7 +70,19 @@
     background: var(--lessonColour);
 }
 
-.progress-ring .progress-ring-circle {
+.level-progress-indicator {
+    position: absolute;
+    padding-top: 10px;
+}
+
+.level-progress-indicator > span {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 15px;
+    font-size: 10px;
+}
+
+.level-progress-indicator .progress-ring .progress-ring-circle {
     transition: 0.35s stroke-dashoffset;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
@@ -79,4 +95,8 @@
 }
 .custom-div.border-bottom {
     border-bottom: var(--dark-grey) 1px solid;
+}
+
+.custom-div.kanji-in-progress:first-child {
+    margin-left: 65px;
 }
