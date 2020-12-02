@@ -73,6 +73,10 @@
     stroke: var(--lessonColour);
 }
 
+.custom-div.progress-entries {
+    width: 100%;
+    padding: 20px 10px;
+}
 .custom-div.border-bottom {
     border-bottom: var(--dark-grey) 1px solid;
 }

@@ -81,4 +81,5 @@ function setLevelProgressCircle(percent) {
 
     const offset = circumference - percent / 100 * circumference;
     circleObj.style.strokeDashoffset = offset;
+    wlWanikaniDebug('Circle object.', circleObj);
 }
