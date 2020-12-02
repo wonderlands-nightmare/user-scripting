@@ -97,6 +97,6 @@
     border-bottom: var(--dark-grey) 1px solid;
 }
 
-.custom-div.kanji-in-progress:first-child {
+.custom-div.kanji-in-progress .progress-entry:first-child {
     margin-left: 65px;
 }

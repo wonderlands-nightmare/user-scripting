@@ -90,7 +90,7 @@ function generateDashboardHTML(data) {
 
     $(dashboardHTML).insertAfter('.footer-adjustment #search');
 
-    setLevelProgressCircle(levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass);
+    setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
     

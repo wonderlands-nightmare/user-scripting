@@ -59,6 +59,10 @@
     line-height: 14px;
 }
 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+    background: var(--dark-grey);
+}
+
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
     background: var(--black);
 }
