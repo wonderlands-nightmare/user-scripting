@@ -88,7 +88,6 @@ function generateCustomItemsHTML(items, type = '') {
                             <div>${ itemsCharacterCallback(item.data) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
                             ${ itemSrsLevel }
-                            }}
                         </a>
                     </div>
             `;
