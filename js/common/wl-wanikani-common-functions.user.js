@@ -72,12 +72,13 @@ function autoRefreshOnNextReviewHour(summaryData) {
 
 function setLevelProgressCircle(percent) {
     let circle = $('.level-progress-indicator .progress-ring circle');
-    let radius = circle[0].r.baseVal.value;
+    let circleObj = circle[0];
+    let radius = circleObj.r.baseVal.value;
     let circumference = radius * 2 * Math.PI;
 
-    circle.style.strokeDasharray = `${circumference} ${circumference}`;
-    circle.style.strokeDashoffset = `${circumference}`;
+    circleObj.style.strokeDasharray = `${circumference} ${circumference}`;
+    circleObj.style.strokeDashoffset = `${circumference}`;
 
     const offset = circumference - percent / 100 * circumference;
-    circle.style.strokeDashoffset = offset;
+    circleObj.style.strokeDashoffset = offset;
 }
