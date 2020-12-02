@@ -4,9 +4,10 @@
 /*.srs-progress #burned {
     background: linear-gradient(to right, var(--gold), var(--maroon));
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
+}*/
 
-.rounded.all-done .progress-entries {
+.all-done .progress-entries,
+.all-done.custom-div {
     content: '';
     position: relative;
     left: 50%;
@@ -14,7 +15,7 @@
     height: 20px;
     border: 1px solid var(--green);
     border-radius: 50%;
-}*/
+}
 
 .custom-section {
     display: flex;
@@ -70,4 +71,8 @@
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
     stroke: var(--lessonColour);
+}
+
+.custom-div.border-bottom {
+    border-bottom: var(--dark-grey) 1px solid;
 }

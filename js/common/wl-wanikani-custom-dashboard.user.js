@@ -22,12 +22,30 @@ function generateDashboardHTML(data) {
 
     let levelProgressData = getLevelProgress(data);
     let levelProgressItemsHTML = '';
-    levelProgressItemsHTML += generateLevelProgressCircleHTML(levelProgressData, 60, 6);
-    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
-    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Radicals.InProgress);
-    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Kanji.Passed);
-    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Radicals.Passed);
-    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Kanji.Locked);
+    let levelProgressCircleHTML = generateLevelProgressCircleHTML(levelProgressData, 60, 6);
+    let levelProgressKanjiInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
+    let levelProgressRadicalsInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
+    let levelProgressKanjiPassedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Passed);
+    let levelProgressRadicalsPassedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Passed);
+    let levelProgressKanjiLockedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Locked);
+    let levelProgressItemsHTML = `
+        ${ levelProgressCircleHTML }
+        <div class="custom-div border-bottom ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
+            ${ levelProgressKanjiInProgressHTML }
+        </div>
+        <div class="custom-div border-bottom ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
+            ${ levelProgressRadicalsInProgressHTML }
+        </div>
+        <div class="custom-div border-bottom ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
+            ${ levelProgressKanjiPassedHTML }
+        </div>
+        <div class="custom-div border-bottom ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
+            ${ levelProgressRadicalsPassedHTML }
+        </div>
+        <div class="custom-div ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
+            ${ levelProgressKanjiLockedHTML }
+        </div>
+    `;
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'level progress', levelProgressItemsHTML);
 
     let nextReviewData = getNextReviewTime(data);
