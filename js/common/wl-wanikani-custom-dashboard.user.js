@@ -21,7 +21,6 @@ function generateDashboardHTML(data) {
     let criticalItemsTableHTML = generateCustomItemsTableHTML(criticalItemsData, 'custom-dashboard-critical-items', 'critical', criticalItemsHTML);
 
     let levelProgressData = getLevelProgress(data);
-    let levelProgressItemsHTML = '';
     let levelProgressCircleHTML = generateLevelProgressCircleHTML(levelProgressData, 60, 6);
     let levelProgressKanjiInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
     let levelProgressRadicalsInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
