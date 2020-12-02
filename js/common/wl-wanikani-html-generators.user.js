@@ -15,10 +15,10 @@
  *************************************************/
 function itemsCharacterCallback (itemsData){
     //check if an item has characters. Kanji and vocabulary will always have these but wk-specific radicals (e.g. gun, leaf, stick) use images instead
-    if(itemsData.characters!= null) {
+    if (itemsData.characters != null) {
         return itemsData.characters;
     } else if (itemsData.character_images != null){
-        return '<i class="radical-'+itemsData.slug+' radicalCharacterImgSize"></i>';
+        return '<img class="radical-image" alt="' + itemsData.slug + '" src="https://cdn.wanikani.com/subjects/images/' + itemsData.id + '-' + itemsData.slug + '-original.png"/>';
     } else {
         //if both characters and character_images are somehow absent try using slug instead
         return itemsData.slug;
