@@ -67,3 +67,17 @@ function autoRefreshOnNextReviewHour(summaryData) {
         console.log('Auto refresh set for ' + new Date(nextRefreshValue).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' }));
     }
 };
+
+
+
+function setLevelProgressCircle(percent) {
+    let circle = $('.level-progress-indicator .progress-ring .progress-ring-circle');
+    let radius = circle.r.baseVal.value;
+    let circumference = radius * 2 * Math.PI;
+
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = `${circumference}`;
+
+    const offset = circumference - percent / 100 * circumference;
+    circle.style.strokeDashoffset = offset;
+}

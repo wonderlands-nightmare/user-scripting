@@ -74,6 +74,8 @@ function getCriticalItemsData(items) {
 }; 
 
 function getSubjectData(data, type, subjectIds = []) {
+    wlWanikaniDebug('Retrieving ' + type + ' subject data.');
+
     let returnData = {kanji: new Array(), radical: new Array(), vocabulary: new Array()};
     let isLessonOrReview = false;
     let counter = 0;
@@ -108,23 +110,24 @@ function getSubjectData(data, type, subjectIds = []) {
     })
 
     returnData.totalCount = counter;
-    console.log('returning data of '+type);
-    console.log(returnData);
-
+    
+    wlWanikaniDebug('Retrieved ' + type + 'subject data.', returnData);
     return returnData;
 }
 
 function getNextReviewTime(data) {
-    let nextRefreshData = [];
+    wlWanikaniDebug('Getting next review data.');
+
+    let nextReviewData = [];
     let objHasReviewsIterator = 1;
     let objHasReviews = false;
 
     while (!objHasReviews) {
         if (data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length > 0) {
             let refreshValue = new Date(data.SummaryData.data.reviews[objHasReviewsIterator].available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
-            nextRefreshData.text = refreshValue.includes('am') ? '午前'+refreshValue.replace(' am', '時') : '午後'+refreshValue.replace(' pm', '時');
-            nextRefreshData.count = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length;
-            nextRefreshData.subjectIds = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids;
+            nextReviewData.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
+            nextReviewData.count = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length;
+            nextReviewData.subjectIds = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids;
             objHasReviews = true;
         }
         else {
@@ -132,38 +135,57 @@ function getNextReviewTime(data) {
         }
     };
     
-    console.log('next refresh data');
-    console.log(nextRefreshData);
-
-    return nextRefreshData;
+    wlWanikaniDebug('Next review data.', nextReviewData);
+    return nextReviewData;
 };
 
-function progresschecker(data) {
-    console.log(data);
-    //===
-    let progressData = [];
-    let arr = {};
-    let newindex = 0;
+function getLevelProgress(data) {
+    wlWanikaniDebug('Getting level progress data.');
+    
+    let progressData = {
+        Kanji: {
+            InProgress: new Array(),
+            Passed: new Array(),
+            Locked: new Array()
+        },
+        Radicals: {
+            InProgress: new Array(),
+            Passed: new Array()
+        }
+    };
+
     $.each(data.ItemsData, function(index, item) {
-        if (item.object == 'kanji' && item.data.level == data.UsersData.data.level) {
-            arr[newindex] = item;
-            newindex++;
+        if (item.data.level == data.UsersData.data.level) {
+            if (item.object == 'kanji') {
+                if ("assignments" in item) {
+                    if (item.assignments.passed_at == null && item.assignments.unlocked_at != null) {
+                        progressData.Kanji.InProgress.push(item);
+                    }
+                    else if (item.assignments.passed_at != null) {
+                        progressData.Kanji.Passed.push(item);
+                    }
+                    else if (item.assignments.unlocked_at == null) {
+                        progressData.Kanji.Locked.push(item);
+                    }
+                }
+            }
+            else if (item.object == 'radical') {
+                if ("assignments" in item) {
+                    if (item.assignments.passed_at == null && item.assignments.unlocked_at != null) {
+                        progressData.Kanji.InProgress.push(item);
+                    }
+                    else if (item.assignments.passed_at != null) {
+                        progressData.Kanji.Passed.push(item);
+                    }
+                }
+            }
         }
     });
-    console.log(arr);
-    //===
-    progressData.lessnum = data.SummaryData.data.lessons[0].subject_ids.length;
-    progressData.revnum = data.SummaryData.data.reviews[0].subject_ids.length;
-    progressData.passat = Math.ceil(Object.keys(arr).length * 0.9);
-    //$.each(data.SummaryData.data.reviews, function(index, item) {
-    //    if (item.available_at == data.SummaryData.data.next_reviews_at) {
-    //        revnum = item.subject_ids.length;
-
-    //    }
-    //});
-    //===
-    console.log('=== Pass at ' + progressData.passat);
-    console.log('=== Lessons ' + progressData.lessnum);
-    console.log('=== Reviews ' + progressData.revnum);
+    
+    progressData.KanjiToPass = Math.ceil(
+        (progressData.Kanji.InProgress.length + progressData.Kanji.Passed.length + progressData.Kanji.Locked.length)
+        * 0.9);
+    
+    wlWanikaniDebug('Level progress data.', progressData);
     return progressData;
 };

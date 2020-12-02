@@ -129,7 +129,7 @@
         addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--reviews > a', '/review/start', 'has-reviews');
         
         // Custom dashboard
-        addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews .lessons-button', '/lesson/session', 'has-lessons');
-        addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews .reviews-button', '/review/start', 'has-reviews');
+        addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', '/lesson/session', 'has-lessons');
+        addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', '/review/start', 'has-reviews');
     };
 })();

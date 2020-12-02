@@ -13,15 +13,25 @@
 /*************************************************
  *  Add Custom Dashboard.
  *************************************************/
-async function generateDashboardHTML(data) {
+function generateDashboardHTML(data) {
     wlWanikaniDebug('Generating custom dashboard HTML with the following data.', data);
 
-    let criticalItemsData = await getCriticalItemsData(data);
-    let criticalItemsTableHTML = await generateCustomItemsTableHTML(criticalItemsData, 'custom-dashboard-critical-items');
+    let criticalItemsData = getCriticalItemsData(data);
+    let criticalItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems, 'critical');
+    let criticalItemsTableHTML = generateCustomItemsTableHTML(criticalItemsData, 'custom-dashboard-critical-items', 'critical', criticalItemsHTML);
+
+    let levelProgressData = getLevelProgress(data);
+    let levelProgressItemsHTML = '';
+    levelProgressItemsHTML += generateLevelProgressCircleHTML(levelProgressData, 60, 6);
+    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
+    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Radicals.InProgress);
+    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Kanji.Passed);
+    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Radicals.Passed);
+    levelProgressItemsHTML += generateCustomItemsHTML(levelProgressData.Kanji.Locked);
+    let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'level progress', levelProgressItemsHTML);
 
     let nextReviewData = getNextReviewTime(data);
     
-    let progressCheckerData = progresschecker(data);
     let lessonSummaryData = getSubjectData(data, 'lesson');
     let reviewSummaryData = getSubjectData(data, 'review');
     let nextReviewSummaryData = getSubjectData(data, 'next-review', nextReviewData.subjectIds);
@@ -42,6 +52,7 @@ async function generateDashboardHTML(data) {
                             ${ generateSummaryHTML(reviewSummaryData, 'custom-lessons-and-reviews-summary reviews-summary', '復習（' + reviewSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button reviews-button', '復習を開始') }
                             ${ generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary next-review-summary', nextReviewData.text +'の次の復習（' + nextReviewSummaryData.totalCount + '）') }
                         </section>
+                        ${ levelProgressItemsTableHTML }
                         <section class="custom-section custom-dashboard-progress">
                             ${ generateSummaryHTML(apprenticeSummaryData, 'custom-dashboard-progress-summary apprentice-summary', '見習（' + apprenticeSummaryData.totalCount + '）') }
                             ${ generateSummaryHTML(guruSummaryData, 'custom-dashboard-progress-summary guru-summary', '達人（' + guruSummaryData.totalCount + '）') }
@@ -61,6 +72,8 @@ async function generateDashboardHTML(data) {
     }
 
     $(dashboardHTML).insertAfter('.footer-adjustment #search');
+
+    setLevelProgressCircle(levelProgressData.Kanji.Passed / levelProgressData.KanjiToPass);
     
     wlWanikaniDebug('Generated the following custom dashboard HTML.', dashboardHTML);
 };

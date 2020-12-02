@@ -37,20 +37,19 @@ function isAccepted(item) {
 /*************************************************
  *  Common HTML generator functions.
  *************************************************/
-function generateCustomItemsTableHTML(customItemsData, customClass) {
-    wlWanikaniDebug('Generating critical items table HTML with the following data.', customItemsData);
+function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML) {
+    wlWanikaniDebug('Generating custom items table HTML with the following data.', customItemsData);
 
-    let getCustomItemsHTML = generateCustomItemsHTML(customItemsData.CustomItems);
     let headerMessage = (customItemsData.length == 0) 
-                        ? 'Sorry no items are critical right now.'
-                        : 'You have critical items you suck at!';
+                        ? 'Sorry, there are no ' + headerMessageType + ' items right now.'
+                        : 'You have ' + headerMessageType + ' items to look at!';
 
     let customTableHTML = `
-        <div class="rounded ${ customClass } custom-items ${ getCustomItemsHTML == '' ? 'all-done' : '' }">
+        <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">
             <section class="rounded bg-white p-3 -mx-3">
                 <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-black text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${ headerMessage }</h2>
                 <div class="progress-entries">
-                    ${ getCustomItemsHTML }
+                    ${ customItemsHTML }
                 </div>
             </section>
         </div>
@@ -60,7 +59,7 @@ function generateCustomItemsTableHTML(customItemsData, customClass) {
     return customTableHTML;
 };
 
-function generateCustomItemsHTML(items) {
+function generateCustomItemsHTML(items, type = '') {
     wlWanikaniDebug('Generating custom items HTML.');
 
     let customItemsHTML = '';
@@ -69,19 +68,22 @@ function generateCustomItemsHTML(items) {
         $.each(items, function(index, item) {
             let itemAddedStyle = '';
             let itemType = item.object;
-            let criticalItemTooltipHTML = generateItemTooltipHTML(item);
+            let customItemTooltipHTML = generateItemTooltipHTML(item);
 
-            if (item.critical_level > 0) {
-                itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
+            if (type = 'critical') {
+                if (item.critical_level > 0) {
+                    itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
+                }
             }
 
             customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
-                        ${ criticalItemTooltipHTML }
+                        ${ customItemTooltipHTML }
                         <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
                             <div>${ itemsCharacterCallback(item.data) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
-                            <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }">${ item.assignments.srs_stage }</span>
+                            ${ 'assignments' in item ? `<span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }">${ item.assignments.srs_stage }</span>` : '' }
+                            }}
                         </a>
                     </div>
             `;
@@ -156,3 +158,25 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
     wlWanikaniDebug('Generated the following summary HTML.', summaryHTML);
     return summaryHTML;
 };
+
+function generateLevelProgressCircleHTML(data, size, thickness) {
+    let levelProgressCircleHTML = `
+        <div class="level-progress-indicator">
+            <span>${ data.Kanji.Passed } / ${ data.KanjiToPass }</span>
+            <svg
+            class="progress-ring"
+            width="${ size }"
+            height="${ size }">
+                <circle
+                    class="progress-ring-circle"
+                    stroke-width="${ thickness }"
+                    fill="transparent"
+                    r="${ (size / 2) - thickness }"
+                    cx="${ size / 2 }"
+                    cy="${ size / 2 }"/>
+            </svg>
+        </div>
+    `;
+
+    return levelProgressCircleHTML;
+}
