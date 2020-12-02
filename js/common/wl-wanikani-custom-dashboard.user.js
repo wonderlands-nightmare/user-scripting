@@ -90,7 +90,7 @@ function generateDashboardHTML(data) {
 
     $(dashboardHTML).insertAfter('.footer-adjustment #search');
 
-    setLevelProgressCircle(levelProgressData.Kanji.Passed / levelProgressData.KanjiToPass);
+    setLevelProgressCircle(levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass);
     
     wlWanikaniDebug('Generated the following custom dashboard HTML.', dashboardHTML);
 };
