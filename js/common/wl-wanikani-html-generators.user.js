@@ -67,6 +67,7 @@ function generateCustomItemsHTML(items, type = '') {
     if (items.length > 0) {
         $.each(items, function(index, item) {
             let itemAddedStyle = '';
+            let itemSrsLevel = '';
             let itemType = item.object;
             let customItemTooltipHTML = generateItemTooltipHTML(item);
 
@@ -76,13 +77,17 @@ function generateCustomItemsHTML(items, type = '') {
                 }
             }
 
+            if ('assignments' in item) {
+                itemSrsLevel = '<span class="progress-item-srs-level srs-level-' + item.assignments.srs_stage + '">' + item.assignments.srs_stage + '</span>';
+            }
+
             customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ customItemTooltipHTML }
                         <a href="${ item.data.document_url }" class="${ itemType }-icon" lang="ja" ${ itemAddedStyle }>
                             <div>${ itemsCharacterCallback(item.data) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
-                            ${ 'assignments' in item ? '<span class="progress-item-srs-level srs-level-' + item.assignments.srs_stage + '">' + item.assignments.srs_stage + '</span>' : '' }
+                            ${ itemSrsLevel }
                             }}
                         </a>
                     </div>
@@ -162,7 +167,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
 function generateLevelProgressCircleHTML(data, size, thickness) {
     let levelProgressCircleHTML = `
         <div class="level-progress-indicator">
-            <span>${ data.Kanji.Passed } / ${ data.KanjiToPass }</span>
+            <span>${ data.Kanji.Passed.length } / ${ data.KanjiToPass }</span>
             <svg
             class="progress-ring"
             width="${ size }"
