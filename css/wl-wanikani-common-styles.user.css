@@ -3,31 +3,41 @@
  ********************************/
 :root {
     /* WaniKani colours */
-    --lessonColour:        #ff00aa;
-    --lessonColourDarker:  #bd007e;
-    --lessonColourLighter: #fa7acf;
-    --reviewColour:        #00aaff;
-    --reviewColourDarker:  #0279b5;
-    --reviewColourLighter: #80d4ff;
+    --lesson-colour:             #ff00aa;
+    --lesson-colour-darker:      #bd007e;
+    --lesson-colour-lighter:     #fa7acf;
+    --review-colour:             #00aaff;
+    --review-colour-darker:      #0279b5;
+    --review-colour-lighter:     #80d4ff;
+    --transparent-lesson-colour: rgb(255, 0, 170, 0.2);
+    --transparent-review-colour: rgb(0, 170, 255, 0.2);
 
     /* Common colours */
-    --dark-blue:           #294ddb;
-    --dark-green:          #006400;
-    --gold:                #ffd700;
-    --green:               #218139;
-    --light-blue:          #0093dd;
-    --maroon:              #800000;
-    --pink:                #dd0093;
-    --purple:              #882d9e;
+    --dark-blue:                 #294ddb;
+    --dark-green:                #006400;
+    --gold:                      #ffd700;
+    --green:                     #218139;
+    --light-blue:                #0093dd;
+    --maroon:                    #800000;
+    --pink:                      #dd0093;
+    --purple:                    #882d9e;
 
     /* Shades */
-    --black:               #000000;
-    --dark-grey:           #6b6b6b;
-    --grey:                #f4f4f4;
-    --white:               #ffffff;
+    --black:                     #000000;
+    --dark-grey:                 #6b6b6b;
+    --grey:                      #d5d5d5;
+    --light-grey:                #f4f4f4;
+    --white:                     #ffffff;
 
     /* Odd colours */
-    --transparent-black:   rgba(0, 0, 0, 0.75);
+    --transparent-black:         rgba(0, 0, 0, 0.75);
+    --transparent-dark-blue:     rgb(41, 77, 219, 0.2);
+    --transparent-dark-green:    rgb(0, 100, 0, 0.2);
+    --transparent-gold:          rgb(255, 215, 0, 0.2);
+    --transparent-light-blue:    rgb(0, 147, 221, 0.2);
+    --transparent-maroon:        rgb(128, 0, 0, 0.2);
+    --transparent-pink:          rgb(221, 0, 147, 0.2);
+    --transparent-purple:        rgb(136, 45, 158, 0.2);
 }
 
 
@@ -36,26 +46,26 @@
  ********************************/
 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
-    background: var(--reviewColour);
+    background: var(--review-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
-    background: var(--lessonColour);
+    background: var(--lesson-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.lessons-and-reviews .lessons-and-reviews__reviews-button.has-reviews, 
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
-    --start-pulse: var(--reviewColourDarker);
-    --end-pulse: var(--reviewColourLighter);
+    --start-pulse: var(--review-colour-darker);
+    --end-pulse: var(--review-colour-lighter);
     animation: buttonPulse 2s infinite; 
 } 
 
-.lessons-and-reviews .lessons-and-reviews__lessons-button.has-lessons, 
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
-    --start-pulse: var(--lessonColourDarker);
-    --end-pulse: var(--lessonColourLighter);
+    --start-pulse: var(--lesson-colour-darker);
+    --end-pulse: var(--lesson-colour-lighter);
     animation: buttonPulse 2s infinite; 
 }
 

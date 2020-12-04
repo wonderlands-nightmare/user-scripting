@@ -4,7 +4,7 @@
 .custom-items { 
     padding: 12px 24px; 
     margin-bottom: 30px; 
-    background: var(--grey); 
+    background: var(--light-grey); 
 } 
 
 .custom-items section { 
@@ -72,11 +72,11 @@
 }
 
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
-    background: var(--lessonColourDarker);
+    background: var(--lesson-colour-darker);
 }
 
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
-    background: var(--reviewColourDarker);
+    background: var(--review-colour-darker);
 }
 
 .custom-item-tooltip .custom-item-tooltip-text {
