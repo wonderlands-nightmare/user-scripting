@@ -103,14 +103,14 @@ function dashboardLoader(loaded = false) {
         if ($('.' + loaderClass).length > 0) {
             $('.' + loaderClass).remove();
         }
-
-        if ($('.dashboard').length > 0) {
-            $('.dashboard').remove();
-        }
     }
     else {
         if ($('.' + loaderClass).length > 0) {
             $('.' + loaderClass).remove();
+        }
+
+        if ($('.dashboard').length > 0) {
+            $('.dashboard').remove();
         }
 
         $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
