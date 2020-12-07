@@ -108,13 +108,14 @@ function updateShortcutNavigation(item) {
     let navItemCount = $(navItem).find('span').text();
     let newItemText = item == 'lesson' ? '授業' : '復習';
     navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
+    $('.navigation-shortcuts').addClass('hidden');
 
-    window.onscroll = function() {
-        if (window.pageYOffset >= 150) {
+    $(window).scroll(function() {
+        if ($(window).scrollTop() >= 150) {
             $('.navigation-shortcuts').removeClass('hidden');
         }
         else {
             $('.navigation-shortcuts').addClass('hidden');
         }
-    }
-}
+    });
+};
