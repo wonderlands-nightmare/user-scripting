@@ -98,16 +98,21 @@ function generateDashboardHTML(data) {
 };
 
 function dashboardLoader(loaded = false) {
+    const loaderClass = 'custom-dashboard-loader'
     if (loaded) {
-        if ($('.custom-dashboard').length > 0) {
-            $('.custom-dashboard').remove();
+        if ($('.' + loaderClass).length > 0) {
+            $('.' + loaderClass).remove();
+        }
+
+        if ($('.dashboard').length > 0) {
+            $('.dashboard').remove();
         }
     }
     else {
-        if ($('.custom-dashboard').length > 0) {
-            $('.custom-dashboard').remove();
+        if ($('.' + loaderClass).length > 0) {
+            $('.' + loaderClass).remove();
         }
-        
-        $('<div class="custom-dashboard-loader"></div>').insertAfter('.footer-adjustment #search');
+
+        $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
     }
 }
