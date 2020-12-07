@@ -111,10 +111,10 @@ function updateShortcutNavigation(item) {
 
     window.onscroll = function() {
         if (window.pageYOffset >= 150) {
-            navItem.removeClass('.hidden');
+            $('.navigation-shortcuts').removeClass('hidden');
         }
         else {
-            navItem.addClass('.hidden');
+            $('.navigation-shortcuts').addClass('hidden');
         }
     }
 }
