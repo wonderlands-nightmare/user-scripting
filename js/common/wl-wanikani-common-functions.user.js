@@ -81,3 +81,40 @@ function setLevelProgressCircle(percent) {
     circleObj.style.strokeDashoffset = offset;
     wlWanikaniDebug('Circle object.', circleObj);
 }
+
+function dashboardLoader(loaded = false) {
+    const loaderClass = 'custom-dashboard-loader'
+
+    if (loaded) {
+        if ($('.' + loaderClass).length > 0) {
+            $('.' + loaderClass).remove();
+        }
+    }
+    else {
+        if ($('.' + loaderClass).length > 0) {
+            $('.' + loaderClass).remove();
+        }
+
+        if ($('.dashboard').length > 0) {
+            $('.dashboard').remove();
+        }
+
+        $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
+    }
+}
+
+function updateShortcutNavigation(item) {
+    let navItem = $('.navigation-shortcut.navigation-shortcut--' + item + ' a');
+    let navItemCount = $(navItem).find('span').text();
+    let newItemText = item == 'lesson' ? '授業' : '復習';
+    navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
+
+    window.onscroll = function() {
+        if (window.pageYOffset >= 150) {
+            navItem.removeClass('.hidden');
+        }
+        else {
+            navItem.addClass('.hidden');
+        }
+    }
+}

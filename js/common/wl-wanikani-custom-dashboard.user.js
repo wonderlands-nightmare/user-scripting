@@ -96,23 +96,3 @@ function generateDashboardHTML(data) {
     
     wlWanikaniDebug('Generated the following custom dashboard HTML.', dashboardHTML);
 };
-
-function dashboardLoader(loaded = false) {
-    const loaderClass = 'custom-dashboard-loader'
-    if (loaded) {
-        if ($('.' + loaderClass).length > 0) {
-            $('.' + loaderClass).remove();
-        }
-    }
-    else {
-        if ($('.' + loaderClass).length > 0) {
-            $('.' + loaderClass).remove();
-        }
-
-        if ($('.dashboard').length > 0) {
-            $('.dashboard').remove();
-        }
-
-        $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
-    }
-}

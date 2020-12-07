@@ -62,6 +62,8 @@
                 setWlWanikaniDebugMode(isDebug);
                 generateDashboardHTML(data);
                 autoRefreshOnNextReviewHour(data.SummaryData);
+                updateShortcutNavigation('lessons');
+                updateShortcutNavigation('reviews');
                 dashboardLoader(true);
             });
     }
