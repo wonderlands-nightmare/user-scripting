@@ -53,15 +53,16 @@
 
     
     if (Object.values(urlToExecuteOn.dashboard).includes(window.location.href)) {
+        dashboardLoader();
         wkof.include(wkofModules);
 
         wkof.ready(wkofModules)
             .then(getWkofDataObject)
             .then(function(data) {
-                console.log(data);
                 setWlWanikaniDebugMode(isDebug);
                 generateDashboardHTML(data);
                 autoRefreshOnNextReviewHour(data.SummaryData);
+                dashboardLoader(true);
             });
     }
 

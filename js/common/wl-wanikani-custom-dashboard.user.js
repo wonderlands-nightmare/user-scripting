@@ -88,7 +88,7 @@ function generateDashboardHTML(data) {
         $('.custom-dashboard').remove();
     }
 
-    $(dashboardHTML).insertAfter('.footer-adjustment #search');
+    $(dashboardHTML).insertAfter('.footer-adjustment .custom-dashboard-loader');
 
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
@@ -96,3 +96,18 @@ function generateDashboardHTML(data) {
     
     wlWanikaniDebug('Generated the following custom dashboard HTML.', dashboardHTML);
 };
+
+function dashboardLoader(loaded = false) {
+    if (loaded) {
+        if ($('.custom-dashboard').length > 0) {
+            $('.custom-dashboard').remove();
+        }
+    }
+    else {
+        if ($('.custom-dashboard').length > 0) {
+            $('.custom-dashboard').remove();
+        }
+        
+        $('<div class="custom-dashboard-loader"></div>').insertAfter('.footer-adjustment #search');
+    }
+}

@@ -20,3 +20,20 @@ function hideCompleteProgressItems() {
         $(this).parent('.rounded').addClass(parentClasses);
     });
 };
+
+
+function getreviewdata(data) {
+    let nextReviewData = [];
+    $.each(data.SummaryData.data.reviews, function(index, item) {
+        if (item.subject_ids.length > 0) {
+            let itemData = [];
+            let refreshValue = new Date(item.available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
+            itemData.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
+            itemData.count = item.subject_ids.length;
+            itemData.subjectIds = item.subject_ids;
+            nextReviewData.push(itemData);
+        }
+    });
+    console.log('review-data');
+    console.log(nextReviewData);
+}

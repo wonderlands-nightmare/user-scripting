@@ -113,7 +113,7 @@ function getSubjectData(data, type, subjectIds = []) {
     
     wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
     return returnData;
-}
+};
 
 function getNextReviewTime(data) {
     wlWanikaniDebug('Getting next review data.');
