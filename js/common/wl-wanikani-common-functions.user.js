@@ -15,11 +15,7 @@ function setWlWanikaniDebugMode(debugModeBoolean) {
 
 function wlWanikaniDebug(debugMessage, debugItem = '') {
     if (debugMode) {
-        console.log(debugMessage);
-
-        if (debugItem != '') {
-            console.log(debugItem);
-        }
+        console.log(debugMessage, debugItem);
     }
 };
 
@@ -47,13 +43,20 @@ function autoRefreshOnNextReviewHour(summaryData) {
     let timeoutValue = 6000;
 
     while (!objHasReviews) {
-        if (summaryData.data.reviews[objHasReviewsIterator].subject_ids.length > 0) {
-            nextRefreshValue = summaryData.data.reviews[objHasReviewsIterator].available_at;
-            timeoutValue = new Date(nextRefreshValue) - new Date();
-            objHasReviews = true;
+        if (objHasReviewsIterator < summaryData.data.reviews.length) {
+            if (summaryData.data.reviews[objHasReviewsIterator].subject_ids.length > 0) {
+                nextRefreshValue = summaryData.data.reviews[objHasReviewsIterator].available_at;
+                timeoutValue = new Date(nextRefreshValue) - new Date();
+                objHasReviews = true;
+            }
+            else {
+                objHasReviewsIterator++;
+            }
         }
         else {
-            objHasReviewsIterator++;
+            nextRefreshValue = new Date().setHours(new Date().getHours() + 6);
+            timeoutValue = nextRefreshValue - new Date();
+            objHasReviews = true;
         }
     };
     

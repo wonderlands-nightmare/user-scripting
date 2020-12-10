@@ -116,22 +116,30 @@ function getSubjectData(data, type, subjectIds = []) {
 };
 
 function getNextReviewTime(data) {
-    wlWanikaniDebug('Getting next review data.');
+    wlWanikaniDebug('Getting next review data.', data);
 
     let nextReviewData = [];
     let objHasReviewsIterator = 1;
     let objHasReviews = false;
 
     while (!objHasReviews) {
-        if (data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length > 0) {
-            let refreshValue = new Date(data.SummaryData.data.reviews[objHasReviewsIterator].available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
-            nextReviewData.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
-            nextReviewData.count = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length;
-            nextReviewData.subjectIds = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids;
-            objHasReviews = true;
+        if (objHasReviewsIterator < data.SummaryData.data.reviews.length) {
+            if (data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length > 0) {
+                let refreshValue = new Date(data.SummaryData.data.reviews[objHasReviewsIterator].available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
+                nextReviewData.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
+                nextReviewData.count = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length;
+                nextReviewData.subjectIds = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids;
+                objHasReviews = true;
+            }
+            else {
+                objHasReviewsIterator++;
+            }
         }
         else {
-            objHasReviewsIterator++;
+            nextReviewData.text = '';
+            nextReviewData.count = 0;
+            nextReviewData.subjectIds = [];
+            objHasReviews = true;
         }
     };
     
