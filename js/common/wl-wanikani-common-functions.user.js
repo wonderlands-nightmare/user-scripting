@@ -109,7 +109,7 @@ function dashboardLoader(loaded = false) {
 function updateShortcutNavigation(item) {
     let navItem = $('.navigation-shortcut.navigation-shortcut--' + item + ' a');
     let navItemCount = $(navItem).find('span').text();
-    let newItemText = item == 'lesson' ? '授業' : '復習';
+    let newItemText = item == 'lessons' ? '授業' : '復習';
     navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
     $('.navigation-shortcuts').addClass('hidden');
 
