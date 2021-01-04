@@ -67,11 +67,11 @@ function generateDashboardHTML(data) {
     let enlightenedSummaryItemsHTML = `${ generateCustomItemsHTML(enlightenedSummaryData.kanji) } ${ generateCustomItemsHTML(enlightenedSummaryData.radical) } ${ generateCustomItemsHTML(enlightenedSummaryData.vocabulary) }`;
     let burnedSummaryItemsHTML = `${ generateCustomItemsHTML(burnedSummaryData.kanji) } ${ generateCustomItemsHTML(burnedSummaryData.radical) } ${ generateCustomItemsHTML(burnedSummaryData.vocabulary) }`;
 
-    let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice hidden', 'apprentice', apprenticeSummaryItemsHTML);
-    let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData, 'custom-dashboard-summary-items guru hidden', 'guru', guruSummaryItemsHTML);
-    let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master hidden', 'master', masterSummaryItemsHTML);
-    let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened hidden', 'enlightened', enlightenedSummaryItemsHTML);
-    let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned hidden', 'burned', burnedSummaryItemsHTML);
+    let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice', 'apprentice', apprenticeSummaryItemsHTML);
+    let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData, 'custom-dashboard-summary-items guru', 'guru', guruSummaryItemsHTML);
+    let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master', 'master', masterSummaryItemsHTML);
+    let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened', 'enlightened', enlightenedSummaryItemsHTML);
+    let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned', 'burned', burnedSummaryItemsHTML);
     
 
     let dashboardHTML = `
