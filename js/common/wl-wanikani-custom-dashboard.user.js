@@ -61,11 +61,11 @@ function generateDashboardHTML(data) {
     let enlightenedSummaryData = getSubjectData(data, 'enlightened');
     let burnedSummaryData = getSubjectData(data, 'burned');
 
-    let apprenticeSummaryItemsHTML = generateCustomItemsHTML(apprenticeSummaryData);
-    let guruSummaryItemsHTML = generateCustomItemsHTML(guruSummaryData);
-    let masterSummaryItemsHTML = generateCustomItemsHTML(masterSummaryData);
-    let enlightenedSummaryItemsHTML = generateCustomItemsHTML(enlightenedSummaryData);
-    let burnedSummaryItemsHTML = generateCustomItemsHTML(burnedSummaryData);
+    let apprenticeSummaryItemsHTML = `${ generateCustomItemsHTML(apprenticeSummaryData.kanji) } ${ generateCustomItemsHTML(apprenticeSummaryData.radical) } ${ generateCustomItemsHTML(apprenticeSummaryData.vocabulary) }`;
+    let guruSummaryItemsHTML = `${ generateCustomItemsHTML(guruSummaryData.kanji) } ${ generateCustomItemsHTML(guruSummaryData.radical) } ${ generateCustomItemsHTML(guruSummaryData.vocabulary) }`;
+    let masterSummaryItemsHTML = `${ generateCustomItemsHTML(masterSummaryData.kanji) } ${ generateCustomItemsHTML(masterSummaryData.radical) } ${ generateCustomItemsHTML(masterSummaryData.vocabulary) }`;
+    let enlightenedSummaryItemsHTML = `${ generateCustomItemsHTML(enlightenedSummaryData.kanji) } ${ generateCustomItemsHTML(enlightenedSummaryData.radical) } ${ generateCustomItemsHTML(enlightenedSummaryData.vocabulary) }`;
+    let burnedSummaryItemsHTML = `${ generateCustomItemsHTML(burnedSummaryData.kanji) } ${ generateCustomItemsHTML(burnedSummaryData.radical) } ${ generateCustomItemsHTML(burnedSummaryData.vocabulary) }`;
 
     let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice hidden', 'apprentice', apprenticeSummaryItemsHTML);
     let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData, 'custom-dashboard-summary-items guru hidden', 'guru', guruSummaryItemsHTML);

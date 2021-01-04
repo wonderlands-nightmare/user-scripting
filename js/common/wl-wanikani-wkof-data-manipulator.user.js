@@ -114,7 +114,7 @@ function getSubjectData(data, type, subjectIds = []) {
     })
 
     returnData.totalCount = counter;
-
+    returnData.length = returnData.kanji.length + returnData.radical.length + returnData.vocabulary.length;
     returnData.kanji = (returnData.kanji.length > 0) ? criticalSort(returnData.kanji) : [];
     returnData.radical = (returnData.radical.length > 0) ? criticalSort(returnData.radical) : [];
     returnData.vocabulary = (returnData.vocabulary.length > 0) ? criticalSort(returnData.vocabulary) : [];

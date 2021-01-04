@@ -87,6 +87,30 @@
     text-decoration: none;
 }
 
+.custom-summary > .custom-button.custom-progress-summary-button {
+    float: right;
+    background: var(--dark-grey);
+    border: 1px solid var(--dark-grey);
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button.selected {
+    background: var(--green);
+    border: 1px solid var(--black);
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button:hover,
+.custom-summary > .custom-button.custom-progress-summary-button.selected:hover {
+    background: var(--dark-green);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button {
+    float: right;
+    background: var(--dark-grey);
+    border: 1px solid var(--dark-grey)
+}
+
 .custom-lessons-and-reviews-button.reviews-button {
     background: var(--review-colour);
 }

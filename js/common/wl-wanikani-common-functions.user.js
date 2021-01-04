@@ -124,5 +124,15 @@ function updateShortcutNavigation(item) {
 };
 
 function setProgressSummaryButtonEffects() {
-    //
+    $('.custom-dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each(function (index, item) {
+        let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');    
+        let progressSummarySection = $('.custom-dashboard .custom-dashboard-summary-items.' + currentProgressType);
+        progressSummarySection.slideToggle();
+        $(this).on('click', function() {
+            wlWanikaniDebug('Clicked class type: ', currentProgressType);
+            
+            $(this).toggleClass('selected');
+            progressSummarySection.slideToggle();
+        });
+    });
 }
