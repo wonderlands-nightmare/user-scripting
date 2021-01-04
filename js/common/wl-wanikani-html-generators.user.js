@@ -114,11 +114,11 @@ function generateItemTooltipHTML(item) {
 
         if (itemReadings.length > 0) {
             $.each(itemReadings, function(index, reading) {
-                if (itemReadings.type == 'onyomi') {
+                if (reading.type == 'onyomi') {
                     itemReadingOnyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
                 }
                 
-                if (itemReadings.type == 'kunyomi') {
+                if (reading.type == 'kunyomi') {
                     itemReadingKunyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
                 }
             });
