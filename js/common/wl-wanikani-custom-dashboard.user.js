@@ -67,11 +67,11 @@ function generateDashboardHTML(data) {
     let enlightenedSummaryItemsHTML = generateCustomItemsHTML(enlightenedSummaryData);
     let burnedSummaryItemsHTML = generateCustomItemsHTML(burnedSummaryData);
 
-    let apprenticeSummaryItemsTableHTML = generateCustomItemsTable(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice hidden', 'apprentice', apprenticeSummaryItemsHTML)    
-    let guruSummaryItemsTableHTML = generateCustomItemsTable(guruSummaryData, 'custom-dashboard-summary-items guru hidden', 'guru', guruSummaryItemsHTML)
-    let masterSummaryItemsTableHTML = generateCustomItemsTable(masterSummaryData, 'custom-dashboard-summary-items master hidden', 'master', masterSummaryItemsHTML)
-    let enlightenedSummaryItemsTableHTML = generateCustomItemsTable(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened hidden', 'enlightened', enlightenedSummaryItemsHTML)
-    let burnedSummaryItemsTableHTML = generateCustomItemsTable(burnedSummaryData, 'custom-dashboard-summary-items burned hidden', 'burned', burnedSummaryItemsHTML)
+    let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice hidden', 'apprentice', apprenticeSummaryItemsHTML)    
+    let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData, 'custom-dashboard-summary-items guru hidden', 'guru', guruSummaryItemsHTML)
+    let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master hidden', 'master', masterSummaryItemsHTML)
+    let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened hidden', 'enlightened', enlightenedSummaryItemsHTML)
+    let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned hidden', 'burned', burnedSummaryItemsHTML)
     
 
     let dashboardHTML = `
