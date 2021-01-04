@@ -54,6 +54,14 @@ function isCritical(item) {
     }
 };
 
+function criticalSort(itemsToSort) {
+    return itemsToSort.sort(function(a, b) {
+               return (a.critical_level == b.critical_level)
+                   ? a.assignments.srs_stage - b.assignments.srs_stage
+                   : b.critical_level - a.critical_level;
+           });
+}
+
 
 /*************************************************
  *  Add Critical Items component to dashboard.
@@ -63,11 +71,7 @@ function getCriticalItemsData(items) {
     
     wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
     wkofItemsData.CustomItems = items.ItemsData.filter(isCritical);
-    wkofItemsData.CustomItems = wkofItemsData.CustomItems.sort(function(a, b) {
-        return (a.critical_level == b.critical_level)
-            ? a.assignments.srs_stage - b.assignments.srs_stage
-            : b.critical_level - a.critical_level;
-    });
+    wkofItemsData.CustomItems = criticalSort(wkofItemsData.CustomItems);
 
     wlWanikaniDebug('Got critical items, show data.', wkofItemsData);
     return wkofItemsData;
@@ -110,6 +114,10 @@ function getSubjectData(data, type, subjectIds = []) {
     })
 
     returnData.totalCount = counter;
+
+    returnData.kanji = (returnData.kanji.length > 0) ? criticalSort(returnData.kanji) : [];
+    returnData.radical = (returnData.radical.length > 0) ? criticalSort(returnData.radical) : [];
+    returnData.vocabulary = (returnData.vocabulary.length > 0) ? criticalSort(returnData.vocabulary) : [];
     
     wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
     return returnData;

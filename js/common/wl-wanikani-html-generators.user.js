@@ -101,7 +101,8 @@ function generateCustomItemsHTML(items, type = '') {
 
 function generateItemTooltipHTML(item) {
     let tooltipTextHTML = '';
-    let itemReadingTooltipItems = '';
+    let itemReadingOnyomiTooltipItems = '';
+    let itemReadingKunyomiTooltipItems = '';
     let itemMeaningTooltipItems = '';
     let itemReadings = item.object != 'radical' ? item.data.readings.filter(isAccepted) : {};
     let itemMeanings = item.data.meanings.filter(isAccepted);
@@ -113,12 +114,26 @@ function generateItemTooltipHTML(item) {
 
         if (itemReadings.length > 0) {
             $.each(itemReadings, function(index, reading) {
-                itemReadingTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+                if (itemReadings.type == 'onyomi') {
+                    itemReadingOnyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+                }
+                
+                if (itemReadings.type == 'kunyomi') {
+                    itemReadingKunyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+                }
             });
 
-            tooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings">${ itemReadingTooltipItems }</div>
-            `;
+            if (itemReadingOnyomiTooltipItems != '') {
+                tooltipTextHTML += `
+                <div class="custom-item-tooltip-text-entries item-readings onyomi">音読み：${ itemReadingOnyomiTooltipItems }</div>
+                `;
+            }
+            
+            if (itemReadingKunyomiTooltipItems != '') {
+                tooltipTextHTML += `
+                <div class="custom-item-tooltip-text-entries item-readings kunyomi">訓読み：${ itemReadingKunyomiTooltipItems }</div>
+                `;
+            }
         }
 
         if (itemMeanings.length > 0) {

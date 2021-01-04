@@ -50,7 +50,7 @@ function generateDashboardHTML(data) {
     let nextReviewData = getNextReviewTime(data);
     let nextReviewSummaryData = getSubjectData(data, 'next-review', nextReviewData.subjectIds);
     let nextReviewDataTitle = nextReviewData.text == ''
-                            ? '次の復習なんでもない'
+                            ? '次の復習をなんでもない'
                             : nextReviewData.text +'の次の復習（' + nextReviewSummaryData.totalCount + '）';
 
     let lessonSummaryData = getSubjectData(data, 'lesson');
@@ -60,6 +60,18 @@ function generateDashboardHTML(data) {
     let masterSummaryData = getSubjectData(data, 'master');
     let enlightenedSummaryData = getSubjectData(data, 'enlightened');
     let burnedSummaryData = getSubjectData(data, 'burned');
+
+    let apprenticeSummaryItemsHTML = generateCustomItemsHTML(apprenticeSummaryData);
+    let guruSummaryItemsHTML = generateCustomItemsHTML(guruSummaryData);
+    let masterSummaryItemsHTML = generateCustomItemsHTML(masterSummaryData);
+    let enlightenedSummaryItemsHTML = generateCustomItemsHTML(enlightenedSummaryData);
+    let burnedSummaryItemsHTML = generateCustomItemsHTML(burnedSummaryData);
+
+    let apprenticeSummaryItemsTableHTML = generateCustomItemsTable(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice hidden', 'apprentice', apprenticeSummaryItemsHTML)    
+    let guruSummaryItemsTableHTML = generateCustomItemsTable(guruSummaryData, 'custom-dashboard-summary-items guru hidden', 'guru', guruSummaryItemsHTML)
+    let masterSummaryItemsTableHTML = generateCustomItemsTable(masterSummaryData, 'custom-dashboard-summary-items master hidden', 'master', masterSummaryItemsHTML)
+    let enlightenedSummaryItemsTableHTML = generateCustomItemsTable(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened hidden', 'enlightened', enlightenedSummaryItemsHTML)
+    let burnedSummaryItemsTableHTML = generateCustomItemsTable(burnedSummaryData, 'custom-dashboard-summary-items burned hidden', 'burned', burnedSummaryItemsHTML)
     
 
     let dashboardHTML = `
@@ -74,12 +86,17 @@ function generateDashboardHTML(data) {
                         </section>
                         ${ levelProgressItemsTableHTML }
                         <section class="custom-section custom-dashboard-progress">
-                            ${ generateSummaryHTML(apprenticeSummaryData, 'custom-dashboard-progress-summary apprentice-summary', '見習（' + apprenticeSummaryData.totalCount + '）') }
-                            ${ generateSummaryHTML(guruSummaryData, 'custom-dashboard-progress-summary guru-summary', '達人（' + guruSummaryData.totalCount + '）') }
-                            ${ generateSummaryHTML(masterSummaryData, 'custom-dashboard-progress-summary master-summary', '主人（' + masterSummaryData.totalCount + '）') }
-                            ${ generateSummaryHTML(enlightenedSummaryData, 'custom-dashboard-progress-summary enlightened-summary', '悟りを開いた（' + enlightenedSummaryData.totalCount + '）') }
-                            ${ generateSummaryHTML(burnedSummaryData, 'custom-dashboard-progress-summary burned-summary', '焼け（' + burnedSummaryData.totalCount + '）') }
+                            ${ generateSummaryHTML(apprenticeSummaryData, 'custom-dashboard-progress-summary apprentice-summary', '見習（' + apprenticeSummaryData.totalCount + '）', true, 'custom-progress-summary-button apprentice', '見せて') }
+                            ${ generateSummaryHTML(guruSummaryData, 'custom-dashboard-progress-summary guru-summary', '達人（' + guruSummaryData.totalCount + '）', true, 'custom-progress-summary-button guru', '見せて') }
+                            ${ generateSummaryHTML(masterSummaryData, 'custom-dashboard-progress-summary master-summary', '主人（' + masterSummaryData.totalCount + '）', true, 'custom-progress-summary-button master', '見せて') }
+                            ${ generateSummaryHTML(enlightenedSummaryData, 'custom-dashboard-progress-summary enlightened-summary', '悟りを開いた（' + enlightenedSummaryData.totalCount + '）', true, 'custom-progress-summary-button enlightened', '見せて') }
+                            ${ generateSummaryHTML(burnedSummaryData, 'custom-dashboard-progress-summary burned-summary', '焼け（' + burnedSummaryData.totalCount + '）', true, 'custom-progress-summary-button burned', '見せて') }
                         </section>
+                        ${ apprenticeSummaryItemsTableHTML }
+                        ${ guruSummaryItemsTableHTML }
+                        ${ masterSummaryItemsTableHTML }
+                        ${ enlightenedSummaryItemsTableHTML }
+                        ${ burnedSummaryItemsTableHTML }
                         ${ criticalItemsTableHTML }
                     </div>
                 </div>
@@ -96,6 +113,7 @@ function generateDashboardHTML(data) {
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
+    setProgressSummaryButtonEffects();
     
     wlWanikaniDebug('Generated the following custom dashboard HTML.', dashboardHTML);
 };

@@ -122,3 +122,7 @@ function updateShortcutNavigation(item) {
         }
     });
 };
+
+function setProgressSummaryButtonEffects() {
+    //
+}
