@@ -81,7 +81,7 @@
 
 .custom-item-tooltip .custom-item-tooltip-text {
     visibility: hidden;
-    width: 120px;
+    width: 200px;
     background-color: var(--transparent-black);
     color: var(--white);
     text-align: center;
@@ -91,7 +91,7 @@
     z-index: 1;
     bottom: 125%;
     left: 50%;
-    margin-left: -70px;
+    margin-left: -110px;
     opacity: 0;
     transition: opacity 0.3s;
 }
