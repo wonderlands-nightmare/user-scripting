@@ -62,6 +62,14 @@ function criticalSort(itemsToSort) {
            });
 }
 
+function levelSort(itemsToSort) {
+    return itemsToSort.sort(function(a, b) {
+               return (a.data.level == b.data.level)
+                   ? a.assignments.srs_stage - b.assignments.srs_stage
+                   : a.data.level - b.data.level;
+           });
+}
+
 
 /*************************************************
  *  Add Critical Items component to dashboard.
@@ -115,9 +123,9 @@ function getSubjectData(data, type, subjectIds = []) {
 
     returnData.totalCount = counter;
     returnData.length = returnData.kanji.length + returnData.radical.length + returnData.vocabulary.length;
-    returnData.kanji = (returnData.kanji.length > 0) ? criticalSort(returnData.kanji) : [];
-    returnData.radical = (returnData.radical.length > 0) ? criticalSort(returnData.radical) : [];
-    returnData.vocabulary = (returnData.vocabulary.length > 0) ? criticalSort(returnData.vocabulary) : [];
+    returnData.kanji = (returnData.kanji.length > 0) ? levelSort(returnData.kanji) : [];
+    returnData.radical = (returnData.radical.length > 0) ? levelSort(returnData.radical) : [];
+    returnData.vocabulary = (returnData.vocabulary.length > 0) ? levelSort(returnData.vocabulary) : [];
     
     wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
     return returnData;
