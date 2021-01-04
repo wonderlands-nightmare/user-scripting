@@ -42,8 +42,8 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
     wlWanikaniDebug('Generating custom items table HTML with the following data.', customItemsData);
 
     let headerMessage = (customItemsData.length == 0) 
-                        ? 'Sorry, there are no ' + headerMessageType + ' items right now.'
-                        : 'You have ' + headerMessageType + ' items to look at!';
+                        ? 'ごめんなさい, 君は' + headerMessageType + 'ありません.'
+                        : '君は' + headerMessageType + '項目あります!';
 
     let customTableHTML = `
         <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">

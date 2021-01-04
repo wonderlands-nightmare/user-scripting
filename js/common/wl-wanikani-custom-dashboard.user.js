@@ -18,7 +18,7 @@ function generateDashboardHTML(data) {
 
     let criticalItemsData = getCriticalItemsData(data);
     let criticalItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems, 'critical');
-    let criticalItemsTableHTML = generateCustomItemsTableHTML(criticalItemsData, 'custom-dashboard-critical-items', 'critical', criticalItemsHTML);
+    let criticalItemsTableHTML = generateCustomItemsTableHTML(criticalItemsData, 'custom-dashboard-critical-items', 'クリティカル', criticalItemsHTML);
 
     let levelProgressData = getLevelProgress(data);
     let levelProgressCircleHTML = generateLevelProgressCircleHTML(levelProgressData, 60, 6);
@@ -45,7 +45,7 @@ function generateDashboardHTML(data) {
             ${ levelProgressKanjiLockedHTML }
         </div>
     `;
-    let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'level progress', levelProgressItemsHTML);
+    let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
 
     let nextReviewData = getNextReviewTime(data);
     let nextReviewSummaryData = getSubjectData(data, 'next-review', nextReviewData.subjectIds);
@@ -67,11 +67,11 @@ function generateDashboardHTML(data) {
     let enlightenedSummaryItemsHTML = `${ generateCustomItemsHTML(enlightenedSummaryData.kanji) }${ generateCustomItemsHTML(enlightenedSummaryData.radical) }${ generateCustomItemsHTML(enlightenedSummaryData.vocabulary) }`;
     let burnedSummaryItemsHTML = `${ generateCustomItemsHTML(burnedSummaryData.kanji) }${ generateCustomItemsHTML(burnedSummaryData.radical) }${ generateCustomItemsHTML(burnedSummaryData.vocabulary) }`;
 
-    let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice', 'apprentice', apprenticeSummaryItemsHTML);
-    let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData, 'custom-dashboard-summary-items guru', 'guru', guruSummaryItemsHTML);
-    let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master', 'master', masterSummaryItemsHTML);
-    let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened', 'enlightened', enlightenedSummaryItemsHTML);
-    let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned', 'burned', burnedSummaryItemsHTML);
+    let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice', '見習', apprenticeSummaryItemsHTML);
+    let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData, 'custom-dashboard-summary-items guru', '達人', guruSummaryItemsHTML);
+    let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master', '主人', masterSummaryItemsHTML);
+    let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened', '悟りを開いた', enlightenedSummaryItemsHTML);
+    let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned', '焼け', burnedSummaryItemsHTML);
     
 
     let dashboardHTML = `
