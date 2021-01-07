@@ -141,19 +141,25 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
         `;
 
         if (itemReadings.length > 0) {
-            $.each(itemReadings, function(index, reading) {
-                if (reading.type == 'onyomi') {
-                    itemReadingOnyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
-                }
-                else if (reading.type == 'kunyomi') {
-                    itemReadingKunyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
-                }
-                else if (reading.type == 'nanori') {
-                    itemReadingNanoriTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
-                }
-                else {
-                    itemReadingOtherTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
-                }
+            let onyomiReadings = itemReadings.filter(function (item) { return item.type == 'onyomi'; });
+            let kunyomiReadings = itemReadings.filter(function (item) { return item.type == 'kunyomi'; });
+            let nanoriReadings = itemReadings.filter(function (item) { return item.type == 'nanori'; });
+            let otherReadings = itemReadings.filter(function (item) { return !('type' in item); });
+
+            $.each(onyomiReadings, function(index, reading) {
+                itemReadingOnyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+            });
+
+            $.each(kunyomiReadings, function(index, reading) {
+                itemReadingKunyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+            });
+
+            $.each(nanoriReadings, function(index, reading) {
+                itemReadingNanoriTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+            });
+
+            $.each(otherReadings, function(index, reading) {
+                itemReadingOtherTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
             });
 
             if (itemReadingOnyomiTooltipItems != '') {
