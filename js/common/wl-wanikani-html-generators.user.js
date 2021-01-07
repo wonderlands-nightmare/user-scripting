@@ -34,6 +34,10 @@ function isAccepted(item) {
     return item.accepted_answer == true;
 };
 
+function isNotAccepted(item) {
+    return item.accepted_answer == false;
+};
+
 
 /*************************************************
  *  Common HTML generator functions.
@@ -101,16 +105,38 @@ function generateCustomItemsHTML(items, type = '') {
 
 function generateItemTooltipHTML(item) {
     let tooltipTextHTML = '';
+    let acceptedItemReadings = item.object != 'radical' ? item.data.readings.filter(isAccepted) : {};
+    let acceptedItemMeanings = item.data.meanings.filter(isAccepted);
+    let notAcceptedItemReadings = item.object != 'radical' ? item.data.readings.filter(isNotAccepted) : {};
+    let notAcceptedItemMeanings = item.data.meanings.filter(isNotAccepted);
+
+    if (acceptedItemReadings.length > 0 || acceptedItemMeanings.length > 0 || notAcceptedItemReadings.length > 0 || notAcceptedItemMeanings.length > 0) {
+        tooltipTextHTML += `
+            <span class="custom-item-tooltip-text">
+        `;
+
+        tooltipTextHTML += generateTooltipMeaningReadingHTML(acceptedItemReadings, acceptedItemMeanings, 'accepted');
+        tooltipTextHTML += generateTooltipMeaningReadingHTML(notAcceptedItemReadings, notAcceptedItemMeanings, 'not-accepted');
+
+        tooltipTextHTML += `
+            </span>
+        `;
+    }
+
+    return tooltipTextHTML;
+};
+
+
+function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customClass) {
+    let returnTooltipTextHTML = '';
     let itemReadingOnyomiTooltipItems = '';
     let itemReadingKunyomiTooltipItems = '';
     let itemReadingOtherTooltipItems = '';
     let itemMeaningTooltipItems = '';
-    let itemReadings = item.object != 'radical' ? item.data.readings.filter(isAccepted) : {};
-    let itemMeanings = item.data.meanings.filter(isAccepted);
 
     if (itemReadings.length > 0 || itemMeanings.length > 0) {
-        tooltipTextHTML += `
-            <span class="custom-item-tooltip-text">
+        returnTooltipTextHTML += `
+            <div class="custom-item-tooltip-text-${ customClass }-entries">
         `;
 
         if (itemReadings.length > 0) {
@@ -127,18 +153,18 @@ function generateItemTooltipHTML(item) {
             });
 
             if (itemReadingOnyomiTooltipItems != '') {
-                tooltipTextHTML += `
+                returnTooltipTextHTML += `
                 <div class="custom-item-tooltip-text-entries item-readings onyomi">音読み：${ itemReadingOnyomiTooltipItems }</div>
                 `;
             }
             
             if (itemReadingKunyomiTooltipItems != '') {
-                tooltipTextHTML += `
+                returnTooltipTextHTML += `
                 <div class="custom-item-tooltip-text-entries item-readings kunyomi">訓読み：${ itemReadingKunyomiTooltipItems }</div>
                 `;
             }
             if (itemReadingOtherTooltipItems != '') {
-                tooltipTextHTML += `
+                returnTooltipTextHTML += `
                 <div class="custom-item-tooltip-text-entries item-readings vocabulary">単語：${ itemReadingOtherTooltipItems }</div>
                 `;
             }
@@ -149,18 +175,19 @@ function generateItemTooltipHTML(item) {
                 itemMeaningTooltipItems += (index == 0 ? '' : ', ') + meaning.meaning;
             });
 
-            tooltipTextHTML += `
+            returnTooltipTextHTML += `
                 <div class="custom-item-tooltip-text-entries item-meanings">${ itemMeaningTooltipItems }</div>
             `;
         }
 
-        tooltipTextHTML += `
-            </span>
+        returnTooltipTextHTML += `
+            </div>
         `;
     }
 
-    return tooltipTextHTML;
-};
+    return returnTooltipTextHTML;
+}
+
 
 function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton = false, buttonClasses = '', buttonText = '') {
     wlWanikaniDebug('Generating summary HTML.');

@@ -102,12 +102,20 @@
     margin-bottom: 10px;
 }
 
-.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries.item-readings {
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-readings {
     background: var(--dark-green);
 }
 
-.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries.item-meanings {
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
     background: var(--dark-grey);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-readings {
+    background: var(--maroon);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
+    background: var(--black);
 }
   
 .custom-item-tooltip .custom-item-tooltip-text::after {
