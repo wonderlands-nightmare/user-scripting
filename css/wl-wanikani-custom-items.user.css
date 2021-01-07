@@ -143,6 +143,7 @@
     position: absolute;
     z-index: 1;
     right: 5%;
+    top: 15%;
 }
 
 .custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
@@ -156,7 +157,7 @@
     border-color: transparent var(--transparent-black) transparent transparent;
 }
 
-.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-dashboard-progress-summary.future-review-summary {
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
     width: auto;
     background: var(--purple);
     border-radius: 5px;
