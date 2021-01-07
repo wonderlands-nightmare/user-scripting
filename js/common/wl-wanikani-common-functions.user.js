@@ -140,10 +140,10 @@ function setProgressSummaryButtonEffects() {
 function setFutureReviewsTooltip() {
     $('.custom-dashboard .custom-lessons-and-reviews .custom-summary.custom-lessons-and-reviews-summary.next-review-summary').hover(
         function(){
-            $('.newbie').show();
+            $('.custom-dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').show();
         },
         function(){
-            $('.newbie').hide();
+            $('.custom-dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').hide();
         }
     );
 }
