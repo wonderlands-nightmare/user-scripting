@@ -255,6 +255,8 @@ function generateLevelProgressCircleHTML(data, size, thickness) {
 
 
 function generateFutureReviewsHTML(nextReviewData) {
+    wlWanikaniDebug('Generating future reviews HTML with the following data.', nextReviewData);
+
     let nextReviewHTMLData = [];
     let futureReviewsHTML = '';
     let returnHTML = [];
@@ -282,6 +284,8 @@ function generateFutureReviewsHTML(nextReviewData) {
         returnHTML.nextReviewHTML = nextReviewHTMLData[0];
         returnHTML.futureReviewsHTML = futureReviewsHTML;
     }
+
+    wlWanikaniDebug('Generated the following future reviews HTML.', returnHTML);
 
     return returnHTML;
 }
