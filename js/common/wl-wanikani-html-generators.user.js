@@ -131,6 +131,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
     let returnTooltipTextHTML = '';
     let itemReadingOnyomiTooltipItems = '';
     let itemReadingKunyomiTooltipItems = '';
+    let itemReadingNanoriTooltipItems = '';
     let itemReadingOtherTooltipItems = '';
     let itemMeaningTooltipItems = '';
 
@@ -146,6 +147,9 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
                 }
                 else if (reading.type == 'kunyomi') {
                     itemReadingKunyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
+                }
+                else if (reading.type == 'nanori') {
+                    itemReadingNanoriTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
                 }
                 else {
                     itemReadingOtherTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
@@ -163,6 +167,13 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
                 <div class="custom-item-tooltip-text-entries item-readings kunyomi">訓読み：${ itemReadingKunyomiTooltipItems }</div>
                 `;
             }
+
+            if (itemReadingNanoriTooltipItems != '') {
+                returnTooltipTextHTML += `
+                <div class="custom-item-tooltip-text-entries item-readings nanori">名乗り：${ itemReadingNanoriTooltipItems }</div>
+                `;
+            }
+
             if (itemReadingOtherTooltipItems != '') {
                 returnTooltipTextHTML += `
                 <div class="custom-item-tooltip-text-entries item-readings vocabulary">単語：${ itemReadingOtherTooltipItems }</div>
