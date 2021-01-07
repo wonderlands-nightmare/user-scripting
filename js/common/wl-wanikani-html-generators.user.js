@@ -268,7 +268,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
             let nextReviewDataTitle = dataItem.text == ''
                                     ? '次の復習をなんでもない'
                                     : dataItem.text +'の次の復習（' + nextReviewSummaryData.totalCount + '）';
-            nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-dashboard-progress-summary ' + nextReviewCustomClass, nextReviewDataTitle));
+            nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass, nextReviewDataTitle));
         });
     
         if (nextReviewData.length > 1) {
