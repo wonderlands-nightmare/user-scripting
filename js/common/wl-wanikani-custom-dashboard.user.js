@@ -48,7 +48,7 @@ function generateDashboardHTML(data) {
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
 
     let nextReviewData = getNextReviewTime(data);
-    let nextReviewsHTML = generateFutureReviewsHTML(nextReviewData);
+    let nextReviewsHTML = generateFutureReviewsHTML(data, nextReviewData);
 
     let lessonSummaryData = getSubjectData(data, 'lesson');
     let reviewSummaryData = getSubjectData(data, 'review');
