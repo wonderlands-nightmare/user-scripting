@@ -252,3 +252,36 @@ function generateLevelProgressCircleHTML(data, size, thickness) {
 
     return levelProgressCircleHTML;
 }
+
+
+function generateFutureReviewsHTML(nextReviewData) {
+    let nextReviewHTMLData = [];
+    let futureReviewsHTML = '';
+    let returnHTML = [];
+
+    if (nextReviewData.length > 0) {
+        $.each(nextReviewData, function(index, dataItem) {
+            let nextReviewSummaryData = getSubjectData(data, 'next-review', dataItem.subjectIds);
+            let nextReviewCustomClass = index == 0 ? 'next-review-summary' : 'future-review-summary';
+            let nextReviewDataTitle = dataItem.text == ''
+                                    ? '次の復習をなんでもない'
+                                    : dataItem.text +'の次の復習（' + nextReviewSummaryData.totalCount + '）';
+            nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-dashboard-progress-summary' + nextReviewCustomClass, nextReviewDataTitle));
+        });
+    
+        if (nextReviewData.length > 1) {
+            futureReviewsHTML += `<span class="custom-lessons-and-reviews-summary-tooltip future-reviews">`;
+
+            $.each(nextReviewHTMLData, function(index, htmlItem) {
+                futureReviewsHTML += index > 0 ? htmlItem : '';
+            });
+
+            futureReviewsHTML += `</span>`;
+        }
+
+        returnHTML.nextReviewHTML = nextReviewHTMLData[0];
+        returnHTML.futureReviewsHTML = futureReviewsHTML;
+    }
+
+    return returnHTML;
+}

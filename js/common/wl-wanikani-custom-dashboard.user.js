@@ -48,10 +48,7 @@ function generateDashboardHTML(data) {
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
 
     let nextReviewData = getNextReviewTime(data);
-    let nextReviewSummaryData = getSubjectData(data, 'next-review', nextReviewData.subjectIds);
-    let nextReviewDataTitle = nextReviewData.text == ''
-                            ? '次の復習をなんでもない'
-                            : nextReviewData.text +'の次の復習（' + nextReviewSummaryData.totalCount + '）';
+    let nextReviewsHTML = generateFutureReviewsHTML(nextReviewData);
 
     let lessonSummaryData = getSubjectData(data, 'lesson');
     let reviewSummaryData = getSubjectData(data, 'review');
@@ -82,8 +79,9 @@ function generateDashboardHTML(data) {
                         <section class="custom-section custom-lessons-and-reviews">
                             ${ generateSummaryHTML(lessonSummaryData, 'custom-lessons-and-reviews-summary lessons-summary', '授業（' + lessonSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button lessons-button', '授業を開始') }
                             ${ generateSummaryHTML(reviewSummaryData, 'custom-lessons-and-reviews-summary reviews-summary', '復習（' + reviewSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button reviews-button', '復習を開始') }
-                            ${ generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary next-review-summary', nextReviewDataTitle) }
+                            ${ nextReviewsHTML.nextReviewHTML }
                         </section>
+                        ${ nextReviewsHTML.futureReviewsHTML }
                         ${ levelProgressItemsTableHTML }
                         <section class="custom-section custom-dashboard-progress">
                             ${ generateSummaryHTML(apprenticeSummaryData, 'custom-dashboard-progress-summary apprentice-summary', '見習（' + apprenticeSummaryData.totalCount + '）', true, 'custom-progress-summary-button apprentice', '見せて') }
@@ -114,6 +112,7 @@ function generateDashboardHTML(data) {
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
     setProgressSummaryButtonEffects();
+    setFutureReviewsTooltip();
     
     wlWanikaniDebug('Generated the following custom dashboard HTML.', dashboardHTML);
 };

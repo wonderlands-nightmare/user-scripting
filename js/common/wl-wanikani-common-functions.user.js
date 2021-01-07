@@ -136,3 +136,14 @@ function setProgressSummaryButtonEffects() {
         });
     });
 }
+
+function setFutureReviewsTooltip() {
+    $('.custom-dashboard .custom-lessons-and-reviews .custom-summary.custom-lessons-and-reviews-summary.next-review-summary').hover(
+        function(){
+            $('.newbie').show();
+        },
+        function(){
+            $('.newbie').hide();
+        }
+    );
+}

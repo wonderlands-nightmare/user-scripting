@@ -88,7 +88,7 @@ function getCriticalItemsData(items) {
 function getSubjectData(data, type, subjectIds = []) {
     wlWanikaniDebug('Retrieving ' + type + ' subject data.');
 
-    let returnData = {kanji: new Array(), radical: new Array(), vocabulary: new Array()};
+    let returnData = { kanji: new Array(), radical: new Array(), vocabulary: new Array() };
     let isLessonOrReview = false;
     let counter = 0;
 
@@ -135,29 +135,20 @@ function getNextReviewTime(data) {
     wlWanikaniDebug('Getting next review data.', data);
 
     let nextReviewData = [];
-    let objHasReviewsIterator = 1;
-    let objHasReviews = false;
+    let summaryReviewsData = data.SummaryData.data.reviews;
 
-    while (!objHasReviews) {
-        if (objHasReviewsIterator < data.SummaryData.data.reviews.length) {
-            if (data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length > 0) {
-                let refreshValue = new Date(data.SummaryData.data.reviews[objHasReviewsIterator].available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
-                nextReviewData.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
-                nextReviewData.count = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids.length;
-                nextReviewData.subjectIds = data.SummaryData.data.reviews[objHasReviewsIterator].subject_ids;
-                objHasReviews = true;
-            }
-            else {
-                objHasReviewsIterator++;
+    $.each(summaryReviewsData, function(index, nextReviewItem) {
+        if (index != 0) {
+            if (nextReviewItem.subject_ids.length > 0) {
+                let nextReviewDataItem = {};
+                let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
+                nextReviewDataItem.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
+                nextReviewDataItem.count = nextReviewItem.subject_ids.length;
+                nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
+                nextReviewData.push(nextReviewDataItem);
             }
         }
-        else {
-            nextReviewData.text = '';
-            nextReviewData.count = 0;
-            nextReviewData.subjectIds = [];
-            objHasReviews = true;
-        }
-    };
+    });
     
     wlWanikaniDebug('Next review data.', nextReviewData);
     return nextReviewData;

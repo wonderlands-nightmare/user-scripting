@@ -133,3 +133,33 @@
     visibility: visible;
     opacity: 1;
 }
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews {
+    display: none;
+    background-color: var(--transparent-black);
+    color: var(--white);
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    right: 5%;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    left: 0;
+    margin-left: -20px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent var(--transparent-black) transparent transparent;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-dashboard-progress-summary.future-review-summary {
+    width: auto;
+    background: var(--purple);
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+}
