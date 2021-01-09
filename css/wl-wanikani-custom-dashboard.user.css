@@ -29,8 +29,12 @@
     background: linear-gradient(to right, var(--transparent-review-colour), var(--transparent-dark-green));
 }
 
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.totals-summary {
+    background: linear-gradient(to right, var(--transparent-dark-green), var(--transparent-purple));
+}
+
 .custom-lessons-and-reviews .custom-lessons-and-reviews-summary.next-review-summary {
-    background: linear-gradient(to right, var(--transparent-dark-green), var(--transparent-maroon));
+    background: linear-gradient(to right, var(--transparent-purple), var(--transparent-maroon));
 }
 
 .all-done .progress-entries:after,
@@ -74,6 +78,7 @@
 }
 
 .custom-summary > .custom-button {
+    display: block;
     margin-top: 10px;
     text-align: center;
     font-size: 15px;
@@ -88,7 +93,6 @@
 }
 
 .custom-summary > .custom-button.custom-progress-summary-button {
-    float: right;
     background: var(--dark-grey);
     border: 1px solid var(--dark-grey);
 }
@@ -103,12 +107,6 @@
     background: var(--dark-green);
     transition: 0.5s;
     cursor: pointer;
-}
-
-.custom-summary > .custom-button.custom-progress-summary-button {
-    float: right;
-    background: var(--dark-grey);
-    border: 1px solid var(--dark-grey)
 }
 
 .custom-lessons-and-reviews-button.reviews-button {

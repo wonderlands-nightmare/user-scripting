@@ -113,9 +113,15 @@ function getSubjectData(data, type, subjectIds = []) {
         }
         else {
             if ("assignments" in dataItem) {
-                if (Object.values(wanikaniSrsStages[type]).includes(dataItem.assignments.srs_stage)) {
+                if (type == 'total') {
                     returnData[dataItem.object].push(dataItem);
                     counter++;
+                }
+                else {
+                    if (Object.values(wanikaniSrsStages[type]).includes(dataItem.assignments.srs_stage)) {
+                        returnData[dataItem.object].push(dataItem);
+                        counter++;
+                    }
                 }
             }
         }
