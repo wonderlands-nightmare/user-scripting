@@ -43,7 +43,7 @@ function isNotAccepted(item) {
  *  Common HTML generator functions.
  *************************************************/
 function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML, headerCount = false) {
-    wlWanikaniDebug('Generating custom items table HTML with the following data.', customItemsData);
+    wlWanikaniDebug('Generating custom items table (' + customClass + ') HTML with the following data.', customItemsData);
 
     let headerMessageCount = headerCount ? '（' + customItemsData.length + '）' : '';
     let headerMessage = (customItemsData.length == 0) 
@@ -61,7 +61,7 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
         </div>
     `;
 
-    wlWanikaniDebug('Finished generating custom items table.');
+    wlWanikaniDebug('Finished generating custom items (' + customClass + ') table.');
     return customTableHTML;
 };
 
