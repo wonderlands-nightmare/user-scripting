@@ -42,12 +42,13 @@ function isNotAccepted(item) {
 /*************************************************
  *  Common HTML generator functions.
  *************************************************/
-function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML) {
+function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML, headerCount = false) {
     wlWanikaniDebug('Generating custom items table HTML with the following data.', customItemsData);
 
+    let headerMessageCount = headerCount ? '（' + customItemsData.length + '）' : '';
     let headerMessage = (customItemsData.length == 0) 
                         ? 'ごめんなさい, 君は' + headerMessageType + 'ありません.'
-                        : '君は' + headerMessageType + '項目あります!';
+                        : '君は' + headerMessageType + '項目あります!' + headerMessageCount;
 
     let customTableHTML = `
         <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">
