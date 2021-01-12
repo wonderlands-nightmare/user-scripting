@@ -142,14 +142,14 @@
     border-radius: 5px;
     position: absolute;
     z-index: 1;
-    right: 5%;
-    top: 15%;
+    right: 110px;
+    top: 83px;
 }
 
 .custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
     content: "";
     position: absolute;
-    top: 10%;
+    top: 60px;
     left: 0;
     margin-left: -20px;
     border-width: 10px;
@@ -163,4 +163,17 @@
     border-radius: 5px;
     border: none;
     margin: 10px;
+    padding: 10px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > h2 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > span {
+    margin: 0;
+    font-size: 12px;
+    line-height: 10px;
 }
