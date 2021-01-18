@@ -59,24 +59,40 @@
     line-height: 14px;
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
-    background: var(--dark-grey);
-}
-
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
     background: var(--black);
 }
 
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
-    background: var(--maroon);
+    background: var(--dark-grey);
 }
 
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
-    background: var(--lesson-colour-darker);
+    background: var(--lesson-colour-lighter);
 }
 
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
+    background: var(--lesson-colour-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 { 
+    background: var(--purple);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-6 { 
+    background: var(--dark-blue);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-7 { 
     background: var(--review-colour-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-8 { 
+    background: var(--gold-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-9 { 
+    background: var(--maroon);
 }
 
 .custom-item-tooltip .custom-item-tooltip-text {
