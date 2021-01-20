@@ -185,9 +185,9 @@ function getLevelProgress(data) {
                     else if (item.assignments.passed_at != null) {
                         progressData.Kanji.Passed.push(item);
                     }
-                    else if (item.assignments.unlocked_at == null) {
-                        progressData.Kanji.Locked.push(item);
-                    }
+                }
+                else {
+                    progressData.Kanji.Locked.push(item);
                 }
             }
             else if (item.object == 'radical') {

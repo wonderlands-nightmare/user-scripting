@@ -25,6 +25,10 @@
     width: 40px; 
 } 
 
+.custom-items section .progress-entries .progress-entry.kanji a.kanji-icon {
+    background: var(--dark-grey);
+}
+
 .custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
     height: 40px;
     font-size: 21px;
@@ -34,29 +38,30 @@
     text-decoration: none;
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-level { 
+.custom-items section .progress-entries .progress-entry a .progress-item-level,
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
     position: absolute;
-    padding: 0px 4px;
-    background: var(--dark-green);
+    width: 15px;
     border: 0.5px solid var(--white);
     border-radius: 50%;
-    bottom: -5px;
-    right: -5px;
     font-size: 9px;
     font-weight: bold;
     line-height: 14px;
 }
 
+.custom-items section .progress-entries .progress-entry a .progress-item-level { 
+    background: var(--dark-green);
+    bottom: -5px;
+    right: -5px;
+}
+
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
-    position: absolute;
-    padding: 0px 4px;
-    border: 0.5px solid var(--white);
-    border-radius: 50%;
     top: -5px;
     right: -5px;
-    font-size: 9px;
-    font-weight: bold;
-    line-height: 14px;
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-0 { 
+    background: var(--dark-green);
 }
 
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
