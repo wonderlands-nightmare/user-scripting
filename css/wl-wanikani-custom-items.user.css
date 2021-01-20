@@ -25,7 +25,7 @@
     width: 40px; 
 } 
 
-.custom-items section .progress-entries .progress-entry.kanji a.kanji-icon {
+.custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
     background: var(--dark-grey);
 }
 

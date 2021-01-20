@@ -77,7 +77,7 @@ function generateCustomItemsHTML(items, type = '') {
             let itemType = item.object;
             let customItemTooltipHTML = generateItemTooltipHTML(item);
 
-            if (type = 'critical') {
+            if (type == 'critical') {
                 if (item.critical_level > 0) {
                     itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
                 }
