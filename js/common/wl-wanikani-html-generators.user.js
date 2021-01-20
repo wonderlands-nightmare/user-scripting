@@ -241,6 +241,13 @@ function generateLevelProgressCircleHTML(data, size, thickness) {
             width="${ size }"
             height="${ size }">
                 <circle
+                    class="progress-ring-circle-track"
+                    stroke-width="${ thickness }"
+                    fill="transparent"
+                    r="${ (size / 2) - thickness }"
+                    cx="${ size / 2 }"
+                    cy="${ size / 2 }"/>
+                <circle
                     class="progress-ring-circle"
                     stroke-width="${ thickness }"
                     fill="transparent"

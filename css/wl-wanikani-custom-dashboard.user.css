@@ -124,7 +124,7 @@
 .level-progress-indicator > span {
     position: absolute;
     margin-top: 20px;
-    margin-left: 15px;
+    margin-left: 19px;
     font-size: 10px;
 }
 
@@ -133,6 +133,10 @@
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
     stroke: var(--lesson-colour);
+}
+
+.level-progress-indicator .progress-ring .progress-ring-circle-track {
+    stroke: var(--grey);
 }
 
 .custom-div.progress-entries {
