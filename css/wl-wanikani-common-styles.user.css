@@ -46,7 +46,7 @@
  *  Lesson/Review navigation styles
  ********************************/
 /* Initialise navigation styles */
-.custom-lessons-and-reviews-button,
+.custom-lessons-and-reviews-button:not(.has-reviews):not(.has-lessons),
 .navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
 .navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-lessons) > span {
     background: var(--dark-grey);
