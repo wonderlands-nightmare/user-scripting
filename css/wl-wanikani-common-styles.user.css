@@ -53,11 +53,13 @@
 }
 
 /* Add animations and styles to main and shortcut buttons */
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
     background: var(--review-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
     background: var(--lesson-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -65,7 +67,6 @@
 
 .custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
-    background: var(--review-colour);
     --start-pulse: var(--review-colour-darker);
     --end-pulse: var(--review-colour-lighter);
     animation: buttonPulse 2s infinite; 
@@ -73,7 +74,6 @@
 
 .custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
-    background: var(--lesson-colour);
     --start-pulse: var(--lesson-colour-darker);
     --end-pulse: var(--lesson-colour-lighter);
     animation: buttonPulse 2s infinite; 
