@@ -16,10 +16,12 @@
 function generateDashboardHTML(data) {
     wlWanikaniDebug('Generating custom dashboard HTML with the following data.', data);
 
+    // Get critical items data and generate HTML for section
     let criticalItemsData = getCriticalItemsData(data);
     let criticalItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems, 'critical');
     let criticalItemsTableHTML = generateCustomItemsTableHTML(criticalItemsData.CustomItems, 'custom-dashboard-critical-items', 'クリティカル', criticalItemsHTML, true);
 
+    // Get level progress data and generate HTML for section
     let levelProgressData = getLevelProgress(data);
     let levelProgressCircleHTML = generateLevelProgressCircleHTML(levelProgressData, 60, 6);
     let levelProgressKanjiInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
@@ -47,9 +49,11 @@ function generateDashboardHTML(data) {
     `;
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
 
+    // Get next review data and generate HTML for summary
     let nextReviewData = getNextReviewTime(data);
     let nextReviewsHTML = generateFutureReviewsHTML(data, nextReviewData);
 
+    // Get lesson, review, and srs level data
     let lessonSummaryData = getSubjectData(data, 'lesson');
     let reviewSummaryData = getSubjectData(data, 'review');
     let apprenticeSummaryData = getSubjectData(data, 'apprentice');
@@ -58,21 +62,24 @@ function generateDashboardHTML(data) {
     let enlightenedSummaryData = getSubjectData(data, 'enlightened');
     let burnedSummaryData = getSubjectData(data, 'burned');
 
+    // Get total kanji/radical/vocabulary data
     let totalSummaryData = getSubjectData(data, 'total');
 
+    // Generate the custom items HTML for srs level summary and section
     let apprenticeSummaryItemsHTML = `${ generateCustomItemsHTML(apprenticeSummaryData.kanji) }${ generateCustomItemsHTML(apprenticeSummaryData.radical) }${ generateCustomItemsHTML(apprenticeSummaryData.vocabulary) }`;
     let guruSummaryItemsHTML = `${ generateCustomItemsHTML(guruSummaryData.kanji) }${ generateCustomItemsHTML(guruSummaryData.radical) }${ generateCustomItemsHTML(guruSummaryData.vocabulary) }`;
     let masterSummaryItemsHTML = `${ generateCustomItemsHTML(masterSummaryData.kanji) }${ generateCustomItemsHTML(masterSummaryData.radical) }${ generateCustomItemsHTML(masterSummaryData.vocabulary) }`;
     let enlightenedSummaryItemsHTML = `${ generateCustomItemsHTML(enlightenedSummaryData.kanji) }${ generateCustomItemsHTML(enlightenedSummaryData.radical) }${ generateCustomItemsHTML(enlightenedSummaryData.vocabulary) }`;
     let burnedSummaryItemsHTML = `${ generateCustomItemsHTML(burnedSummaryData.kanji) }${ generateCustomItemsHTML(burnedSummaryData.radical) }${ generateCustomItemsHTML(burnedSummaryData.vocabulary) }`;
 
+    // Generate HTML for srs level section
     let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice', '見習', apprenticeSummaryItemsHTML);
     let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData, 'custom-dashboard-summary-items guru', '達人', guruSummaryItemsHTML);
     let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master', '主人', masterSummaryItemsHTML);
     let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened', '悟りを開いた', enlightenedSummaryItemsHTML);
     let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned', '焼け', burnedSummaryItemsHTML);
     
-
+    // Generate entire dashboard HTML
     let dashboardHTML = `
         <div class="custom-dashboard">
             <div class="container">
@@ -105,12 +112,15 @@ function generateDashboardHTML(data) {
         </div>
     `;
 
+    // Remove any existing custom dashboard just in case
     if ($('.custom-dashboard').length > 0) {
         $('.custom-dashboard').remove();
     }
 
+    // Add dashboard to page
     $(dashboardHTML).insertAfter('.footer-adjustment .custom-dashboard-loader');
 
+    // Apply level progress circle, lesson/review and srs progress summary button effects, and next review tooltip hover
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');

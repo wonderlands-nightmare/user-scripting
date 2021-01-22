@@ -11,24 +11,26 @@
 
 
 /*************************************************
- *  Helper functions.
+ *  Get appropriate image or slug for a kanji/radical/vocabulary
+ *  item provided
  *************************************************/
 function itemsCharacterCallback (item){
     let itemsData = item.data;
-    //check if an item has characters. Kanji and vocabulary will always have these but wk-specific radicals (e.g. gun, leaf, stick) use images instead
+    
     if (itemsData.characters != null) {
         return itemsData.characters;
-    } else if (itemsData.character_images != null){
+    }
+    else if (itemsData.character_images != null){
         return '<img class="radical-image" alt="' + itemsData.slug + '" src="https://cdn.wanikani.com/subjects/images/' + item.id + '-' + itemsData.slug + '-original.png"/>';
-    } else {
-        //if both characters and character_images are somehow absent try using slug instead
+    }
+    else {
         return itemsData.slug;
     }
 };
 
 
 /*************************************************
- *  Filter functions.
+ *  Kanji/radical/vocabulary item meaning or reading filters
  *************************************************/
 function isAccepted(item) {
     return item.accepted_answer == true;
@@ -40,7 +42,7 @@ function isNotAccepted(item) {
 
 
 /*************************************************
- *  Common HTML generator functions.
+ *  Custom item table HTML generator
  *************************************************/
 function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML, headerCount = false) {
     wlWanikaniDebug('Generating custom items table (' + customClass + ') HTML with the following data.', customItemsData);
@@ -65,6 +67,10 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
     return customTableHTML;
 };
 
+
+/*************************************************
+ *  Custom items HTML generator
+ *************************************************/
 function generateCustomItemsHTML(items, type = '') {
     wlWanikaniDebug('Generating custom items HTML.');
 
@@ -104,6 +110,10 @@ function generateCustomItemsHTML(items, type = '') {
     return customItemsHTML;
 };
 
+
+/*************************************************
+ *  Custom item tooltip wrapper HTML generator
+ *************************************************/
 function generateItemTooltipHTML(item) {
     let tooltipTextHTML = '';
     let acceptedItemReadings = item.object != 'radical' ? item.data.readings.filter(isAccepted) : {};
@@ -128,6 +138,9 @@ function generateItemTooltipHTML(item) {
 };
 
 
+/*************************************************
+ *  Custom item tooltip content HTML generator
+ *************************************************/
 function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customClass) {
     let returnTooltipTextHTML = '';
     let itemReadingOnyomiTooltipItems = '';
@@ -207,6 +220,9 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 }
 
 
+/*************************************************
+ *  Custom summary HTML generator
+ *************************************************/
 function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton = false, buttonClasses = '', buttonText = '') {
     wlWanikaniDebug('Generating summary HTML.');
 
@@ -232,6 +248,10 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
     return summaryHTML;
 };
 
+
+/*************************************************
+ *  Level progress circle HTML generator
+ *************************************************/
 function generateLevelProgressCircleHTML(data, size, thickness) {
     let levelProgressCircleHTML = `
         <div class="level-progress-indicator">
@@ -262,6 +282,9 @@ function generateLevelProgressCircleHTML(data, size, thickness) {
 }
 
 
+/*************************************************
+ *  Next reviews summary HTML generator
+ *************************************************/
 function generateFutureReviewsHTML(data, nextReviewData) {
     wlWanikaniDebug('Generating future reviews HTML with the following data.', nextReviewData);
 
@@ -294,6 +317,5 @@ function generateFutureReviewsHTML(data, nextReviewData) {
     }
 
     wlWanikaniDebug('Generated the following future reviews HTML.', returnHTML);
-
     return returnHTML;
 }

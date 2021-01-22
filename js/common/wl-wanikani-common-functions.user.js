@@ -5,14 +5,17 @@
 // ==/UserScript==
 
 /*************************************************
- *  Common debugger function.
+ *  Common debugger function
  *************************************************/
+// Only used to initialise variable for code in this file
 let debugMode = false;
 
+// Called from main userscript to set debug mode
 function setWlWanikaniDebugMode(debugModeBoolean) {
     debugMode = debugModeBoolean;
 };
 
+// Actual debug function
 function wlWanikaniDebug(debugMessage, debugItem = '') {
     if (debugMode) {
         console.log(debugMessage, debugItem);
@@ -20,13 +23,11 @@ function wlWanikaniDebug(debugMessage, debugItem = '') {
 };
 
 /*************************************************
- *  Add pulse effect for lesson and review buttons.
+ *  Add pulse effect for lesson and review buttons
  *************************************************/
 function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, buttonHref, buttonClass) {
-    $(buttonSelector).attr('href', buttonHref);
-    
     if (buttonCount > 0) {
-        $(buttonSelector).addClass(buttonClass);
+        $(buttonSelector).addClass(buttonClass).attr('href', buttonHref);
     }
     else {
         $(buttonSelector).removeClass(buttonClass);
@@ -34,7 +35,7 @@ function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, button
 };
 
 /*************************************************
- *  Add reload timer for auto-refresh on next review time.
+ *  Add reload timer for auto-refresh on next review time
  *************************************************/
 function autoRefreshOnNextReviewHour(summaryData) {
     let nextRefreshValue = '';
@@ -70,7 +71,9 @@ function autoRefreshOnNextReviewHour(summaryData) {
 };
 
 
-
+/*************************************************
+ *  Set level progress indicator fill
+ *************************************************/
 function setLevelProgressCircle(percent) {
     let circle = $('.level-progress-indicator .progress-ring circle.progress-ring-circle');
     let circleObj = circle[0];
@@ -85,8 +88,13 @@ function setLevelProgressCircle(percent) {
     wlWanikaniDebug('Circle object.', circleObj);
 }
 
+
+/*************************************************
+ *  Add a loading animation to the page while the dashboard HTML
+ *  is generated
+ *************************************************/
 function dashboardLoader(loaded = false) {
-    const loaderClass = 'custom-dashboard-loader'
+    const loaderClass = 'custom-dashboard-loader';
 
     if (loaded) {
         if ($('.' + loaderClass).length > 0) {
@@ -94,6 +102,7 @@ function dashboardLoader(loaded = false) {
         }
     }
     else {
+        // Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
         if ($('.' + loaderClass).length > 0) {
             $('.' + loaderClass).remove();
         }
@@ -106,10 +115,16 @@ function dashboardLoader(loaded = false) {
     }
 }
 
+
+/*************************************************
+ *  Alter the Lesson and Review shortcut navigations to be in 
+ *  Japanese
+ *************************************************/
 function updateShortcutNavigation(item) {
     let navItem = $('.navigation-shortcut.navigation-shortcut--' + item + ' a');
     let navItemCount = $(navItem).find('span').text();
     let newItemText = item == 'lessons' ? '授業' : '復習';
+
     navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
     $('.navigation-shortcuts').addClass('hidden');
 
@@ -123,11 +138,18 @@ function updateShortcutNavigation(item) {
     });
 };
 
+
+/*************************************************
+ *  Add slide toggle effects to the SRS Progress Summary 'show' 
+ *  buttons to show SRS Progress Summary information
+ *************************************************/
 function setProgressSummaryButtonEffects() {
     $('.custom-dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each(function (index, item) {
         let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');    
         let progressSummarySection = $('.custom-dashboard .custom-dashboard-summary-items.' + currentProgressType);
+
         progressSummarySection.slideToggle();
+        
         $(this).on('click', function() {
             wlWanikaniDebug('Clicked class type: ', currentProgressType);
             
@@ -137,6 +159,11 @@ function setProgressSummaryButtonEffects() {
     });
 }
 
+
+/*************************************************
+ *  Add hover effect for Next Review summary to show reviews
+ *  over the next 24hrs
+ *************************************************/
 function setFutureReviewsTooltip() {
     $('.custom-dashboard .custom-lessons-and-reviews .custom-summary.custom-lessons-and-reviews-summary.next-review-summary').hover(
         function(){

@@ -1,7 +1,8 @@
 /********************************
- *  Custom items section, item and tooltip styles.
+ *  Items section and progress entry styles
  ********************************/
-.custom-items { 
+/* Main wrapper styles */
+ .custom-items { 
     padding: 12px 24px; 
     margin-bottom: 30px; 
     background: var(--light-grey); 
@@ -11,6 +12,7 @@
     margin-bottom: 0; 
 } 
 
+/* Progress entry styles */
 .custom-items section .progress-entries { 
     grid-template-columns: none; 
     display: flex; 
@@ -38,6 +40,10 @@
     text-decoration: none;
 }
 
+/********************************
+ *  Item level and SRS level indicator styles
+ ********************************/  
+/* Level and SRS level indicator wrapper styles */
 .custom-items section .progress-entries .progress-entry a .progress-item-level,
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
     position: absolute;
@@ -49,12 +55,14 @@
     line-height: 14px;
 }
 
+/* Item level styles */
 .custom-items section .progress-entries .progress-entry a .progress-item-level { 
     background: var(--dark-green);
     bottom: -5px;
     right: -5px;
 }
 
+/* Item SRS level styles */
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
     top: -5px;
     right: -5px;
@@ -100,6 +108,10 @@
     background: var(--maroon);
 }
 
+/********************************
+ *  Tooltip styles
+ ********************************/  
+/* Item tooltip wrapper styles */
 .custom-item-tooltip .custom-item-tooltip-text {
     visibility: hidden;
     width: 200px;
@@ -117,6 +129,7 @@
     transition: opacity 0.3s;
 }
 
+/* Item tooltip content styles */
 .custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries {
     border-radius: 5px;
     padding: 5px 10px;
@@ -155,6 +168,7 @@
     opacity: 1;
 }
 
+/* Next review tooltip wrapper styles */
 .custom-lessons-and-reviews-summary-tooltip.future-reviews {
     display: none;
     background-color: var(--transparent-black);
@@ -178,6 +192,7 @@
     border-color: transparent var(--transparent-black) transparent transparent;
 }
 
+/* Next review tooltip content styles */
 .custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
     width: auto;
     background: var(--purple);

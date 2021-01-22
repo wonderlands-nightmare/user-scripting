@@ -7,8 +7,10 @@
 /*************************************************
  *  Variable initialisation.
  *************************************************/
+// Global data variable
 let wkofItemsData = {};
 
+// Used for specific filtering configurations
 const wanikaniSrsStages = {
     'locked': {'locked': -1 },
     'initiate': { 'initiate': 0 },
@@ -29,13 +31,7 @@ const wanikaniSrsStages = {
 
 
 /*************************************************
- *  Helper functions.
- *************************************************/
-// Add code
-
-
-/*************************************************
- *  Filter functions.
+ *  Critical item filter
  *************************************************/
 function isCritical(item) {
     wlWanikaniDebug('Check if critical.');
@@ -54,6 +50,11 @@ function isCritical(item) {
     }
 };
 
+
+/*************************************************
+ *  Sorting functions
+ *************************************************/
+// Sorts items based on critical level
 function criticalSort(itemsToSort) {
     return itemsToSort.sort(function(a, b) {
                return (a.critical_level == b.critical_level)
@@ -62,6 +63,7 @@ function criticalSort(itemsToSort) {
            });
 }
 
+// Sorts items based on level
 function levelSort(itemsToSort) {
     return itemsToSort.sort(function(a, b) {
                return (a.data.level == b.data.level)
@@ -72,7 +74,7 @@ function levelSort(itemsToSort) {
 
 
 /*************************************************
- *  Add Critical Items component to dashboard.
+ *  Generate critical items data object
  *************************************************/
 function getCriticalItemsData(items) {
     wlWanikaniDebug('Getting critical items.', items);
@@ -85,6 +87,10 @@ function getCriticalItemsData(items) {
     return wkofItemsData;
 }; 
 
+
+/*************************************************
+ *  Generate kanji/radical/vocabulary subject data object
+ *************************************************/
 function getSubjectData(data, type, subjectIds = []) {
     wlWanikaniDebug('Retrieving ' + type + ' subject data.');
 
@@ -137,6 +143,10 @@ function getSubjectData(data, type, subjectIds = []) {
     return returnData;
 };
 
+
+/*************************************************
+ *  Generate next review data object
+ *************************************************/
 function getNextReviewTime(data) {
     wlWanikaniDebug('Getting next review data.', data);
 
@@ -148,9 +158,11 @@ function getNextReviewTime(data) {
             if (nextReviewItem.subject_ids.length > 0) {
                 let nextReviewDataItem = {};
                 let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
+
                 nextReviewDataItem.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
                 nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
+
                 nextReviewData.push(nextReviewDataItem);
             }
         }
@@ -160,6 +172,10 @@ function getNextReviewTime(data) {
     return nextReviewData;
 };
 
+
+/*************************************************
+ *  Generate level progress data object
+ *************************************************/
 function getLevelProgress(data) {
     wlWanikaniDebug('Getting level progress data.');
     
@@ -203,6 +219,7 @@ function getLevelProgress(data) {
         }
     });
     
+    // Calculation for how many kanji are needed to pass the level 
     progressData.KanjiToPass = Math.ceil(
         (progressData.Kanji.InProgress.length + progressData.Kanji.Passed.length + progressData.Kanji.Locked.length)
         * 0.9);

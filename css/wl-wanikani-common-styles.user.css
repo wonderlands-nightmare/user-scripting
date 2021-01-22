@@ -1,5 +1,5 @@
 /********************************
- *  Common colours
+ *  Global colours
  ********************************/
 :root {
     /* WaniKani colours */
@@ -43,9 +43,16 @@
 
 
 /********************************
- *  Lesson/Review navigation effects
+ *  Lesson/Review navigation styles
  ********************************/
+/* Initialise navigation styles */
+.custom-lessons-and-reviews-button,
+.navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
+.navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-reviews) > span {
+    background: var(--dark-grey);
+}
 
+/* Add animations and styles to main and shortcut buttons */
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
     background: var(--review-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
@@ -70,7 +77,9 @@
     animation: buttonPulse 2s infinite; 
 }
 
-
+/********************************
+ *  Animations
+ ********************************/
 @keyframes buttonPulse { 
     0% { 
         box-shadow: 0 0 0 0 var(--start-pulse); 

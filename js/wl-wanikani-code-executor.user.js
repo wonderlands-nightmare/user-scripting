@@ -21,10 +21,13 @@
     /*************************************************
      *  Variable initialisation.
      *************************************************/
+    // Change this to turn debugging on
     const isDebug = false;
 
+    // WKOF modules required
     const wkofModules = 'Apiv2, ItemData';
 
+    // URLs to restrict certain code to
     const urlToExecuteOn = {
         dashboard: {
             one: 'https://www.wanikani.com/',
@@ -32,6 +35,7 @@
         }
     };
 
+    // General WKOF item data config
     const itemDataConfig = {
         wk_items: {
             options: {
@@ -46,14 +50,13 @@
 
 
     /*************************************************
-     *  Execute script.
+     *  Actual script execution code
      *************************************************/
-    addStylesAndFunctions();
-    // remove original dashboard and add loading display
-
-    
+    // Run code if page URL is one of the whitelisted URLs
     if (Object.values(urlToExecuteOn.dashboard).includes(window.location.href)) {
+        addStylesAndFunctions();
         dashboardLoader();
+
         wkof.include(wkofModules);
 
         wkof.ready(wkofModules)
@@ -64,15 +67,14 @@
                 autoRefreshOnNextReviewHour(data.SummaryData);
                 updateShortcutNavigation('lessons');
                 updateShortcutNavigation('reviews');
+                navShortcutReviewAndLessonButtonPulseEffect();
                 dashboardLoader(true);
             });
     }
 
-    reviewAndLessonButtonPulseEffect();
-
 
     /*************************************************
-     *  Helper functions.
+     *  Retrieves CSS and JS code through GM and adds to page
      *************************************************/
     function addStyles(cssFileName) {
         const styleCss = GM_getResourceText(cssFileName);
@@ -93,14 +95,16 @@
 
 
     /*************************************************
-     *  Get functions.
+     *  Get the primary WKOF data for all other functions
      *************************************************/
     async function getWkofDataObject() {
         console.log('Running WKOF data retrieval.');
         let getWkofData = {};
+
         getWkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
         getWkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
         getWkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
+        
         console.log('WKOF data retrieval complete.');
         return getWkofData;
     };
@@ -108,7 +112,8 @@
 
 
     /*************************************************
-     *  Functions for executing plugins.
+     *  Execution function for addinc CSS and JS code to page,
+     *  done for simplicity since it's a simple function call
      *************************************************/
     function addStylesAndFunctions() {
         console.log('Running Add CSS and JS functions.');
@@ -126,8 +131,10 @@
     };
 
 
-    function reviewAndLessonButtonPulseEffect() {
-        // Shortcut buttons
+    /*************************************************
+     *  Add pulse effect to the lesson/review navigation shortcuts
+     *************************************************/
+    function navShortcutReviewAndLessonButtonPulseEffect() {
         addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--lessons > a', $('.navigation-shortcuts .navigation-shortcut--lessons > a > span').text(), '/lesson/session', 'has-lessons');
         addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--reviews > a', $('.navigation-shortcuts .navigation-shortcut--reviews > a > span').text(), '/review/start', 'has-reviews');
     };
