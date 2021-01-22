@@ -48,7 +48,7 @@
 /* Initialise navigation styles */
 .custom-lessons-and-reviews-button,
 .navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
-.navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-reviews) > span {
+.navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-lessons) > span {
     background: var(--dark-grey);
 }
 
