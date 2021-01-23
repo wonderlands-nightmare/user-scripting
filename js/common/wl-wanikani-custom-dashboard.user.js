@@ -114,10 +114,7 @@ function appendDashboardContentHTML(data) {
         ${ generateSummaryHTML(reviewSummaryData, 'custom-lessons-and-reviews-summary reviews-summary', '復習（' + reviewSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button reviews-button', '復習を開始') }
         ${ generateSummaryHTML(totalSummaryData, 'custom-lessons-and-reviews-summary totals-summary', '漢字と部首と単語が合計') }
         ${ nextReviewsHTML.nextReviewHTML }
-    `;
-    let customLessonsAndReviewsAfterContent = `
         ${ nextReviewsHTML.futureReviewsHTML }
-        ${ levelProgressItemsTableHTML }
     `;
     let customDashboardProgressContent = `
         ${ generateSummaryHTML(apprenticeSummaryData, 'custom-dashboard-progress-summary apprentice-summary', '見習（' + apprenticeSummaryData.totalCount + '）', true, 'custom-progress-summary-button apprentice', '見せて') }
@@ -140,7 +137,7 @@ function appendDashboardContentHTML(data) {
     let customDashboardProgressElement = $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress');
 
     customLessonsAndReviewsElement.append(customLessonsAndReviewsContent);
-    $(customLessonsAndReviewsAfterContent).insertAfter(customLessonsAndReviewsElement);
+    $(levelProgressItemsTableHTML).insertAfter(customLessonsAndReviewsElement);
     customDashboardProgressElement.append(customDashboardProgressContent);
     customDashboardProgressWrapperElement.append(customDashboardProgressAfterContent);
     $(criticalItemsTableHTML).insertAfter(customDashboardProgressWrapperElement);
