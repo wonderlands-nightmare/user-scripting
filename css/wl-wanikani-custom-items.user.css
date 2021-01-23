@@ -178,7 +178,6 @@
     position: absolute;
     z-index: 1;
     right: 110px;
-    top: 83px;
 }
 
 .custom-lessons-and-reviews-summary-tooltip.future-reviews::after {

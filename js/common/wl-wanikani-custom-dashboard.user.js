@@ -17,7 +17,9 @@ function generateDashboardWrapperHTML() {
                 <div class="row">
                     <div class="span12">
                         <section class="custom-section custom-lessons-and-reviews progress-and-forecast"></section>
-                        <section class="custom-section custom-dashboard-progress srs-progress"></section>
+                        <div class="custom-dashboard-progress-wrapper srs-progress">
+                            <section class="custom-section custom-dashboard-progress"></section>
+                        </div>
                         <div class="row"></div>
                     </div>
                 </div>
@@ -135,12 +137,13 @@ function appendDashboardContentHTML(data) {
 
     // Append custom dashboard content HTML to custom dashboard
     let customLessonsAndReviewsElement = $('.custom-dashboard .custom-section.custom-lessons-and-reviews');
-    let customDashboardProgressElement = $('.custom-dashboard .custom-section.custom-dashboard-progress');
+    let customDashboardProgressWrapperElement = $('.custom-dashboard .custom-dashboard-progress-wrapper');
+    let customDashboardProgressElement = $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress');
 
     customLessonsAndReviewsElement.append(customLessonsAndReviewsContent);
     $(customLessonsAndReviewsAfterContent).insertAfter(customLessonsAndReviewsElement);
     customDashboardProgressElement.append(customDashboardProgressContent);
-    $(customDashboardProgressAfterContent).insertAfter(customDashboardProgressElement);
+    customDashboardProgressWrapperElement.append(customDashboardProgressAfterContent);
 
     // Apply level progress circle, lesson/review and srs progress summary button effects, and next review tooltip hover
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);

@@ -89,7 +89,7 @@
      *  Check if WKOF is installed
      *************************************************/
     function wkofInstallCheck() {
-        if (!window.wkof) {
+        if (!wkof) {
             const script_name = 'Wanikani Custom Dashboard';
             let response = confirm(script_name + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
             if (response) {
