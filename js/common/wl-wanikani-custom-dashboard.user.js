@@ -16,7 +16,7 @@ function generateDashboardWrapperHTML() {
             <div class="container">
                 <div class="row">
                     <div class="span12">
-                        <section class="custom-section custom-lessons-and-reviews progress-and-forecase"></section>
+                        <section class="custom-section custom-lessons-and-reviews progress-and-forecast"></section>
                         <section class="custom-section custom-dashboard-progress srs-progress"></section>
                         <div class="row"></div>
                     </div>
