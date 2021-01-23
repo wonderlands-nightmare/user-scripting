@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.0
+// @version      1.1
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @match        https://www.wanikani.com/*
@@ -54,8 +54,10 @@
      *************************************************/
     // Run code if page URL is one of the whitelisted URLs
     if (Object.values(urlToExecuteOn.dashboard).includes(window.location.href)) {
+        wkofInstallCheck();
         addStylesAndFunctions();
         dashboardLoader();
+        generateDashboardWrapperHTML();
 
         wkof.include(wkofModules);
 
@@ -63,7 +65,7 @@
             .then(getWkofDataObject)
             .then(function(data) {
                 setWlWanikaniDebugMode(isDebug);
-                generateDashboardHTML(data);
+                appendDashboardContentHTML(data);
                 autoRefreshOnNextReviewHour(data.SummaryData);
                 updateShortcutNavigation('lessons');
                 updateShortcutNavigation('reviews');
@@ -92,6 +94,22 @@
 
         document.body.appendChild(script);
     };
+
+
+    /*************************************************
+     *  Check if WKOF is installed
+     *************************************************/
+    function wkofInstallCheck() {
+        if (!window.wkof) {
+            const script_name = 'Wanikani Item Inspector';
+            let response = confirm(script_name + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
+            if (response) {
+                window.location.href = 'https://community.wanikani.com/t/instructions-installing-wanikani-open-framework/28549';
+            };
+    
+            return;
+        };
+    }
 
 
     /*************************************************

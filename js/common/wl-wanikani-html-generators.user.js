@@ -63,7 +63,7 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
         </div>
     `;
 
-    wlWanikaniDebug('Finished generating custom items (' + customClass + ') table.');
+    wlWanikaniDebug('Finished generating custom items (' + customClass + ') table.', customTableHTML);
     return customTableHTML;
 };
 
