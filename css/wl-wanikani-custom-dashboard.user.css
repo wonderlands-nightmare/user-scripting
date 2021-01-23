@@ -73,6 +73,7 @@
 
 .custom-summary > h2 {
     font-size: 22px;
+    font-weight: normal;
     line-height: 20px;
 }
 
@@ -97,6 +98,10 @@
 .custom-summary > .custom-button:hover {
     color: var(--white);
     text-decoration: none;
+}
+
+.custom-summary.custom-dashboard-progress-summary > h2 {
+    font-size: 19px;
 }
 
 .custom-summary > .custom-button.custom-progress-summary-button {

@@ -292,6 +292,11 @@ function generateFutureReviewsHTML(data, nextReviewData) {
     let futureReviewsHTML = '';
     let returnHTML = [];
 
+    // Caters for empty nextReviewData array for when there are no more reviews coming up
+    if (!nextReviewData.length) {
+        nextReviewData = [{ text: '', count: 0, subjectIds: [] }];
+    }
+
     if (nextReviewData.length > 0) {
         $.each(nextReviewData, function(index, dataItem) {
             let nextReviewSummaryData = getSubjectData(data, 'next-review', dataItem.subjectIds);
