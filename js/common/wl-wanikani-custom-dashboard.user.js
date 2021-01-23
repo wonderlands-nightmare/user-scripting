@@ -132,7 +132,6 @@ function appendDashboardContentHTML(data) {
         ${ masterSummaryItemsTableHTML }
         ${ enlightenedSummaryItemsTableHTML }
         ${ burnedSummaryItemsTableHTML }
-        ${ criticalItemsTableHTML }
     `;
 
     // Append custom dashboard content HTML to custom dashboard
@@ -144,6 +143,7 @@ function appendDashboardContentHTML(data) {
     $(customLessonsAndReviewsAfterContent).insertAfter(customLessonsAndReviewsElement);
     customDashboardProgressElement.append(customDashboardProgressContent);
     customDashboardProgressWrapperElement.append(customDashboardProgressAfterContent);
+    $(criticalItemsTableHTML).insertAfter(customDashboardProgressWrapperElement);
 
     // Apply level progress circle, lesson/review and srs progress summary button effects, and next review tooltip hover
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
