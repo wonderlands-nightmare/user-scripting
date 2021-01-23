@@ -4,7 +4,7 @@
 // @version      1.1
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
-// @match        https://www.wanikani.com/*
+// @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/master/wl-wanikani-code-executor.user.js
 // @resource     COMMON_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/css/wl-wanikani-common-styles.user.css
 // @resource     ITEMS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/css/wl-wanikani-custom-items.user.css
@@ -27,14 +27,6 @@
     // WKOF modules required
     const wkofModules = 'Apiv2, ItemData';
 
-    // URLs to restrict certain code to
-    const urlToExecuteOn = {
-        dashboard: {
-            one: 'https://www.wanikani.com/',
-            two: 'https://www.wanikani.com/dashboard'
-        }
-    };
-
     // General WKOF item data config
     const itemDataConfig = {
         wk_items: {
@@ -52,27 +44,24 @@
     /*************************************************
      *  Actual script execution code
      *************************************************/
-    // Run code if page URL is one of the whitelisted URLs
-    if (Object.values(urlToExecuteOn.dashboard).includes(window.location.href)) {
-        wkofInstallCheck();
-        addStylesAndFunctions();
-        dashboardLoader();
-        generateDashboardWrapperHTML();
+    wkofInstallCheck();
+    addStylesAndFunctions();
+    dashboardLoader();
+    generateDashboardWrapperHTML();
 
-        wkof.include(wkofModules);
+    wkof.include(wkofModules);
 
-        wkof.ready(wkofModules)
-            .then(getWkofDataObject)
-            .then(function(data) {
-                setWlWanikaniDebugMode(isDebug);
-                appendDashboardContentHTML(data);
-                autoRefreshOnNextReviewHour(data.SummaryData);
-                updateShortcutNavigation('lessons');
-                updateShortcutNavigation('reviews');
-                navShortcutReviewAndLessonButtonPulseEffect();
-                dashboardLoader(true);
-            });
-    }
+    wkof.ready(wkofModules)
+        .then(getWkofDataObject)
+        .then(function(data) {
+            setWlWanikaniDebugMode(isDebug);
+            appendDashboardContentHTML(data);
+            autoRefreshOnNextReviewHour(data.SummaryData);
+            updateShortcutNavigation('lessons');
+            updateShortcutNavigation('reviews');
+            navShortcutReviewAndLessonButtonPulseEffect();
+            dashboardLoader(true);
+        });
 
 
     /*************************************************
