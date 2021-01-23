@@ -101,7 +101,7 @@
      *************************************************/
     function wkofInstallCheck() {
         if (!window.wkof) {
-            const script_name = 'Wanikani Item Inspector';
+            const script_name = 'Wanikani Custom Dashboard';
             let response = confirm(script_name + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
             if (response) {
                 window.location.href = 'https://community.wanikani.com/t/instructions-installing-wanikani-open-framework/28549';
@@ -109,7 +109,7 @@
     
             return;
         };
-    }
+    };
 
 
     /*************************************************

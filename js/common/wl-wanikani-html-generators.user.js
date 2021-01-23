@@ -217,7 +217,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
     }
 
     return returnTooltipTextHTML;
-}
+};
 
 
 /*************************************************
@@ -279,7 +279,7 @@ function generateLevelProgressCircleHTML(data, size, thickness) {
     `;
 
     return levelProgressCircleHTML;
-}
+};
 
 
 /*************************************************
@@ -318,4 +318,4 @@ function generateFutureReviewsHTML(data, nextReviewData) {
 
     wlWanikaniDebug('Generated the following future reviews HTML.', returnHTML);
     return returnHTML;
-}
+};
