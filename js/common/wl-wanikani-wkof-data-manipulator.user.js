@@ -159,7 +159,9 @@ function getNextReviewTime(data) {
                 let nextReviewDataItem = {};
                 let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString([], { hour: '2-digit' });
 
-                nextReviewDataItem.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
+                nextReviewDataItem.text = refreshValue.toLocaleLowerCase().includes('am')
+                                        ? '午前' + refreshValue.toLocaleLowerCase().replace(' am', '時')
+                                        : '午後' + refreshValue.toLocaleLowerCase().replace(' pm', '時');
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
                 nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
 
