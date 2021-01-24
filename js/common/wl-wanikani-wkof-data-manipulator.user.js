@@ -157,7 +157,7 @@ function getNextReviewTime(data) {
         if (index != 0) {
             if (nextReviewItem.subject_ids.length > 0) {
                 let nextReviewDataItem = {};
-                let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' });
+                let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString([], { hour: '2-digit' });
 
                 nextReviewDataItem.text = refreshValue.includes('am') ? '午前' + refreshValue.replace(' am', '時') : '午後' + refreshValue.replace(' pm', '時');
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
