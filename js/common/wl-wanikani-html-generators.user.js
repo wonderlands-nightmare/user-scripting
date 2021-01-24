@@ -301,9 +301,10 @@ function generateFutureReviewsHTML(data, nextReviewData) {
         $.each(nextReviewData, function(index, dataItem) {
             let nextReviewSummaryData = getSubjectData(data, 'next-review', dataItem.subjectIds);
             let nextReviewCustomClass = index == 0 ? 'next-review-summary' : 'future-review-summary';
+            let nextReviewTotalCount = nextReviewSummaryData.totalCount >= 10000 ? '~' + (nextReviewSummaryData.totalCount / 1000).toFixed() + '千' : nextReviewSummaryData.totalCount;
             let nextReviewDataTitle = dataItem.text == ''
                                     ? '次の復習をなんでもない'
-                                    : dataItem.text +'の次の復習（' + nextReviewSummaryData.totalCount + '）';
+                                    : dataItem.text + 'の次の復習（' + nextReviewTotalCount + '）';
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass, nextReviewDataTitle));
         });
     
