@@ -8,167 +8,552 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
+// SECTION CSS code
+// ANCHOR wl-wanikani-common-styles.user.css
+const wlWanikaniCommonStylesCss = `
+/********************************
+ *  Global colours
+ ********************************/
+:root {
+    /* WaniKani colours */
+    --lesson-colour:             #ff00aa;
+    --lesson-colour-darker:      #bd007e;
+    --lesson-colour-lighter:     #fa7acf;
+    --review-colour:             #00aaff;
+    --review-colour-darker:      #0279b5;
+    --review-colour-lighter:     #80d4ff;
+    --transparent-lesson-colour: rgb(255, 0, 170, 0.2);
+    --transparent-review-colour: rgb(0, 170, 255, 0.2);
+
+    /* Common colours */
+    --dark-blue:                 #294ddb;
+    --dark-green:                #006400;
+    --gold:                      #ffd700;
+    --gold-darker:               #b5b014;
+    --green:                     #218139;
+    --light-blue:                #0093dd;
+    --maroon:                    #800000;
+    --pink:                      #dd0093;
+    --purple:                    #882d9e;
+
+    /* Shades */
+    --black:                     #000000;
+    --dark-grey:                 #6b6b6b;
+    --grey:                      #d5d5d5;
+    --light-grey:                #f4f4f4;
+    --white:                     #ffffff;
+
+    /* Odd colours */
+    --transparent-black:         rgba(0, 0, 0, 0.75);
+    --transparent-dark-blue:     rgb(41, 77, 219, 0.2);
+    --transparent-dark-green:    rgb(0, 100, 0, 0.2);
+    --transparent-gold:          rgb(255, 215, 0, 0.2);
+    --transparent-light-blue:    rgb(0, 147, 221, 0.2);
+    --transparent-maroon:        rgb(128, 0, 0, 0.2);
+    --transparent-pink:          rgb(221, 0, 147, 0.2);
+    --transparent-purple:        rgb(136, 45, 158, 0.2);
+}
+
+
+/********************************
+ *  Lesson/Review navigation styles
+ ********************************/
+/* Initialise navigation styles */
+.custom-lessons-and-reviews-button:not(.has-reviews):not(.has-lessons),
+.navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
+.navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-lessons) > span {
+    background: var(--dark-grey);
+}
+
+/* Add animations and styles to main and shortcut buttons */
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
+    background: var(--review-colour);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
+    background: var(--lesson-colour);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
+    --start-pulse: var(--review-colour-darker);
+    --end-pulse: var(--review-colour-lighter);
+    animation: buttonPulse 2s infinite; 
+} 
+
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
+    --start-pulse: var(--lesson-colour-darker);
+    --end-pulse: var(--lesson-colour-lighter);
+    animation: buttonPulse 2s infinite; 
+}
+
+/********************************
+ *  Animations
+ ********************************/
+@keyframes buttonPulse { 
+    0% { 
+        box-shadow: 0 0 0 0 var(--start-pulse); 
+    } 
+    70% { 
+        box-shadow: 0 0 0 7px var(--white); 
+    } 
+    100% { 
+        box-shadow: 0 0 0 0 var(--end-pulse); 
+    } 
+} 
+`;
+
+// ANCHOR wl-wanikani-custom-items.user.css
+const wlWanikaniCustomItemsCss = `
+/********************************
+ *  Items section and progress entry styles
+ ********************************/
+/* Main wrapper styles */
+ .custom-items { 
+    padding: 12px 24px; 
+    margin-bottom: 30px; 
+    background: var(--light-grey); 
+} 
+
+.custom-items section { 
+    margin-bottom: 0; 
+} 
+
+/* Progress entry styles */
+.custom-items section .progress-entries { 
+    grid-template-columns: none; 
+    display: flex; 
+} 
+
+.custom-items section .progress-entries .progress-entry { 
+    height: 40px; 
+} 
+
+.custom-items section .progress-entries .progress-entry.radical, 
+.custom-items section .progress-entries .progress-entry.kanji { 
+    width: 40px; 
+} 
+
+.custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
+    background: var(--dark-grey);
+}
+
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
+    height: 40px;
+    font-size: 21px;
+}
+
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
+    text-decoration: none;
+}
+
+/********************************
+ *  Item level and SRS level indicator styles
+ ********************************/  
+/* Level and SRS level indicator wrapper styles */
+.custom-items section .progress-entries .progress-entry a .progress-item-level,
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+    position: absolute;
+    width: 15px;
+    border: 0.5px solid var(--white);
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 14px;
+}
+
+/* Item level styles */
+.custom-items section .progress-entries .progress-entry a .progress-item-level { 
+    background: var(--dark-green);
+    bottom: -5px;
+    right: -5px;
+}
+
+/* Item SRS level styles */
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+    top: -5px;
+    right: -5px;
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-0 { 
+    background: var(--dark-green);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
+    background: var(--black);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
+    background: var(--dark-grey);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
+    background: var(--lesson-colour-lighter);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
+    background: var(--lesson-colour-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 { 
+    background: var(--purple);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-6 { 
+    background: var(--dark-blue);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-7 { 
+    background: var(--review-colour-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-8 { 
+    background: var(--gold-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-9 { 
+    background: var(--maroon);
+}
+
+/********************************
+ *  Tooltip styles
+ ********************************/  
+/* Item tooltip wrapper styles */
+.custom-item-tooltip .custom-item-tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--transparent-black);
+    color: var(--white);
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Item tooltip content styles */
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries {
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-readings {
+    background: var(--dark-green);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
+    background: var(--dark-grey);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-not-accepted-entries .custom-item-tooltip-text-entries.item-readings {
+    background: var(--maroon);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-not-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
+    background: var(--black);
+}
+  
+.custom-item-tooltip .custom-item-tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--transparent-black) transparent transparent transparent;
+}
+  
+.custom-item-tooltip:hover .custom-item-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Next review tooltip wrapper styles */
+.custom-lessons-and-reviews-summary-tooltip.future-reviews {
+    display: none;
+    background-color: var(--transparent-black);
+    color: var(--white);
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    right: 110px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: 0;
+    margin-left: -20px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent var(--transparent-black) transparent transparent;
+}
+
+/* Next review tooltip content styles */
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
+    width: auto;
+    background: var(--purple);
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+    padding: 10px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > h2 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > span {
+    margin: 0;
+    font-size: 12px;
+    line-height: 10px;
+}
+`;
+
+// ANCHOR wl-wanikani-custom-dashboard.user.css
+const wlWanikaniCustomDashboardCss = `
+/********************************
+ *  Progress summary gradients
+ ********************************/
+.custom-dashboard-progress .custom-dashboard-progress-summary.apprentice-summary {
+    background: linear-gradient(to right, var(--transparent-pink), var(--transparent-purple));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.guru-summary {
+    background: linear-gradient(to right, var(--transparent-purple), var(--transparent-dark-blue));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.master-summary {
+    background: linear-gradient(to right, var(--transparent-dark-blue), var(--transparent-light-blue));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.enlightened-summary {
+    background: linear-gradient(to right, var(--transparent-light-blue), var(--transparent-gold));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.burned-summary {
+    background: linear-gradient(to right, var(--transparent-gold), var(--transparent-maroon));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.lessons-summary {
+    background: linear-gradient(to right, var(--transparent-lesson-colour), var(--transparent-review-colour));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.reviews-summary {
+    background: linear-gradient(to right, var(--transparent-review-colour), var(--transparent-dark-green));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.totals-summary {
+    background: linear-gradient(to right, var(--transparent-dark-green), var(--transparent-purple));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.next-review-summary {
+    background: linear-gradient(to right, var(--transparent-purple), var(--transparent-maroon));
+}
+
+/********************************
+ *  Custom section and summary styles
+ ********************************/
+/* Green circle for completed/empty sections */
+.all-done .progress-entries:after,
+.all-done.custom-div:after {
+    content: '';
+    position: relative;
+    left: 50%;
+    width: 20px; 
+    height: 20px;
+    border: 1px solid var(--green);
+    border-radius: 50%;
+}
+
+/* Main custom section styles */
+.custom-section {
+    display: flex;
+    background: var(--grey);
+    border: var(--dark-grey) 1px solid;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px var(--dark-grey);
+}
+
+/* Custom summary styles */
+.custom-summary {
+    position: relative;
+    padding: 15px;
+    width: calc(100%/3);
+}
+
+.custom-summary:not(:last-child) {
+    border-right: var(--dark-grey) 1px solid;
+}
+
+.custom-summary > h2 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.custom-summary > span {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 25px;
+    margin-bottom: 3px;
+}
+
+.custom-summary > span.custom-summary-vocabulary {
+    margin-bottom: 50px;
+}
+
+/* Custom summary button styles */
+.custom-summary > .custom-button {
+    display: block;
+    position: absolute;
+    width: calc(100% - 50px);
+    bottom: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--white);
+}
+
+.custom-summary > .custom-button:hover {
+    color: var(--white);
+    text-decoration: none;
+}
+
+.custom-summary.custom-dashboard-progress-summary > h2 {
+    font-size: 19px;
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button {
+    background: var(--dark-grey);
+    border: 1px solid var(--dark-grey);
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button.selected {
+    background: var(--green);
+    border: 1px solid var(--black);
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button:hover,
+.custom-summary > .custom-button.custom-progress-summary-button.selected:hover {
+    background: var(--dark-green);
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+/********************************
+ *  Level progress styles
+ ********************************/
+/* Level progress indictor ring styles */
+.level-progress-indicator {
+    position: absolute;
+    padding-top: 10px;
+}
+
+.level-progress-indicator > span {
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 15px;
+    font-size: 10px;
+}
+
+.level-progress-indicator .progress-ring .progress-ring-circle {
+    transition: 0.35s stroke-dashoffset;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke: var(--lesson-colour);
+}
+
+.level-progress-indicator .progress-ring .progress-ring-circle-track {
+    stroke: var(--grey);
+}
+
+/* Level progress entry and div styles */
+.custom-div.progress-entries {
+    width: 100%;
+    padding: 20px 10px;
+}
+
+.custom-div.border-bottom {
+    border-bottom: var(--dark-grey) 1px solid;
+}
+
+.custom-div.kanji-in-progress .progress-entry:first-child {
+    margin-left: 65px;
+}
+
+/* Dashboard loader */
+.custom-dashboard-loader {
+    color: var(--dark-grey);
+    overflow: hidden;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    margin: 72px auto;
+    position: relative;
+    transform: translateZ(0);
+    animation: loaderDots 1.7s infinite ease, loaderSpin 1.7s infinite ease;
+    font-size: 90px;
+}
+
+/********************************
+ *  Animations
+ ********************************/  
+@keyframes loaderDots {
+    0% {
+        box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+        box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+        box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+        box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+        box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+        box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+}
+
+@keyframes loaderSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+`;
+
+// !SECTION CSS code
+
+
 // SECTION Javascript code
-// SECTION wl-wanikani-code-executor.user.js
-(function () {
-    /*************************************************
-     *  ANCHOR Variable initialisation
-     *************************************************/
-    // Change this to turn debugging on
-    const isDebug = false;
-
-    // WKOF modules required
-    const wkofModules = 'Apiv2, ItemData';
-
-    // General WKOF item data config
-    const itemDataConfig = {
-        wk_items: {
-            options: {
-                assignments: true,
-                review_statistics: true
-            },
-            filters: {
-                level: '1..+0'
-            }
-        }
-    };
-
-
-    /*************************************************
-     *  ANCHOR Actual script execution code
-     *************************************************/
-    wkofInstallCheck();
-    addStylesAndFunctions();
-    dashboardLoader();
-    generateDashboardWrapperHTML();
-
-    wkof.include(wkofModules);
-
-    wkof.ready(wkofModules)
-        .then(getWkofDataObject)
-        .then(function(data) {
-            setWlWanikaniDebugMode(isDebug);
-            appendDashboardContentHTML(data);
-            autoRefreshOnNextReviewHour(data.SummaryData);
-            updateShortcutNavigation('lessons');
-            updateShortcutNavigation('reviews');
-            navShortcutReviewAndLessonButtonPulseEffect();
-            dashboardLoader(true);
-        });
-
-
-    /*************************************************
-     *   ANCHOR Retrieves CSS and JS code through GM and adds to page
-     *************************************************/
-    // TODO Uncomment for deploy
-    // function addStyles(cssFileName) {
-    //     const styleCss = GM_getResourceText(cssFileName);
-    //     GM_addStyle(styleCss);
-    // };
-    
-    // function addFunctions(jsFileName) {
-    //     const functionJs = GM_getResourceText(jsFileName);
-
-    //     let script = document.createElement('script');
-
-    //     script.innerHTML = functionJs;
-    //     script.type = 'text/javascript';
-    //     script.className = 'custom-js';
-
-    //     document.body.appendChild(script);
-    // };
-
-    // TODO Used only for dev
-    function addStyles(styleCss) {
-        GM_addStyle(styleCss);
-    };
-    
-    function addFunctions(functionJs) {
-        let script = document.createElement('script');
-
-        script.innerHTML = functionJs;
-        script.type = 'text/javascript';
-        script.className = 'custom-js';
-
-        document.body.appendChild(script);
-    };
-
-
-    /*************************************************
-     *  ANCHOR Check if WKOF is installed
-     *************************************************/
-    function wkofInstallCheck() {
-        if (!wkof) {
-            const script_name = 'Wanikani Custom Dashboard';
-            let response = confirm(script_name + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
-            if (response) {
-                window.location.href = 'https://community.wanikani.com/t/instructions-installing-wanikani-open-framework/28549';
-            };
-    
-            return;
-        };
-    };
-
-
-    /*************************************************
-     *  ANCHOR Get the primary WKOF data for all other functions
-     *************************************************/
-    async function getWkofDataObject() {
-        console.log('Running WKOF data retrieval.');
-        let getWkofData = {};
-
-        getWkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
-        getWkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
-        getWkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
-        
-        console.log('WKOF data retrieval complete.');
-        return getWkofData;
-    };
-
-
-
-    /*************************************************
-     *  ANCHOR Execution function for adding CSS and JS code to page
-     *  Done for simplicity since it's a simple function call
-     *************************************************/
-    // TODO Uncomment for deploy
-    // function addStylesAndFunctions() {
-    //     console.log('Running Add CSS and JS functions.');
-    //     // Add styles
-    //     addStyles("COMMON_CSS");
-    //     addStyles("ITEMS_CSS");
-    //     addStyles("DASHBOARD_CSS");
-
-    //     // Add functions
-    //     addFunctions("COMMON_JS");
-    //     addFunctions("WKOF_DATA_JS");
-    //     addFunctions("HTML_GEN_JS");
-    //     addFunctions("DASHBOARD_JS");
-    //     console.log('All Add CSS and JS functions have loaded.');
-    // };
-    // TODO Used only for dev
-    function addStylesAndFunctions() {
-        console.log('Running Add CSS and JS functions.');
-        // Add styles
-        addStyles(wlWanikaniCommonStylesCss);
-        addStyles(wlWanikaniCustomItemsCss);
-        addStyles(wlWanikaniCustomDashboardCss);
-
-        // Functions don't need importing
-        console.log('All Add CSS and JS functions have loaded.');
-    };
-
-
-    /*************************************************
-     *  ANCHOR Add pulse effect to the lesson/review navigation shortcuts
-     *************************************************/
-    function navShortcutReviewAndLessonButtonPulseEffect() {
-        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--lessons > a', $('.navigation-shortcuts .navigation-shortcut--lessons > a > span').text(), '/lesson/session', 'has-lessons');
-        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--reviews > a', $('.navigation-shortcuts .navigation-shortcut--reviews > a > span').text(), '/review/start', 'has-reviews');
-    };
-})();
-// !SECTION wl-wanikani-code-executor.user.js
-
 // SECTION wl-wanikani-common-functions.user.js
 /*************************************************
  *  ANCHOR Common debugger function
@@ -1038,548 +1423,164 @@ function appendDashboardContentHTML(data) {
     wlWanikaniDebug('Generated all content HTML and appended to custom dashboard.');
 };
 // !SECTION wl-wanikani-custom-dashboard.user.js
+
+// SECTION wl-wanikani-code-executor.user.js
+(function () {
+    /*************************************************
+     *  ANCHOR Variable initialisation
+     *************************************************/
+    // Change this to turn debugging on
+    const isDebug = false;
+
+    // WKOF modules required
+    const wkofModules = 'Apiv2, ItemData';
+
+    // General WKOF item data config
+    const itemDataConfig = {
+        wk_items: {
+            options: {
+                assignments: true,
+                review_statistics: true
+            },
+            filters: {
+                level: '1..+0'
+            }
+        }
+    };
+
+
+    /*************************************************
+     *  ANCHOR Actual script execution code
+     *************************************************/
+    wkofInstallCheck();
+    addStylesAndFunctions();
+    dashboardLoader();
+    generateDashboardWrapperHTML();
+
+    wkof.include(wkofModules);
+
+    wkof.ready(wkofModules)
+        .then(getWkofDataObject)
+        .then(function(data) {
+            setWlWanikaniDebugMode(isDebug);
+            appendDashboardContentHTML(data);
+            autoRefreshOnNextReviewHour(data.SummaryData);
+            updateShortcutNavigation('lessons');
+            updateShortcutNavigation('reviews');
+            navShortcutReviewAndLessonButtonPulseEffect();
+            dashboardLoader(true);
+        });
+
+
+    /*************************************************
+     *   ANCHOR Retrieves CSS and JS code through GM and adds to page
+     *************************************************/
+    // TODO Uncomment for deploy
+    // function addStyles(cssFileName) {
+    //     const styleCss = GM_getResourceText(cssFileName);
+    //     GM_addStyle(styleCss);
+    // };
+    
+    // function addFunctions(jsFileName) {
+    //     const functionJs = GM_getResourceText(jsFileName);
+
+    //     let script = document.createElement('script');
+
+    //     script.innerHTML = functionJs;
+    //     script.type = 'text/javascript';
+    //     script.className = 'custom-js';
+
+    //     document.body.appendChild(script);
+    // };
+
+    // TODO Used only for dev
+    function addStyles(styleCss) {
+        GM_addStyle(styleCss);
+    };
+    
+    function addFunctions(functionJs) {
+        let script = document.createElement('script');
+
+        script.innerHTML = functionJs;
+        script.type = 'text/javascript';
+        script.className = 'custom-js';
+
+        document.body.appendChild(script);
+    };
+
+
+    /*************************************************
+     *  ANCHOR Check if WKOF is installed
+     *************************************************/
+    function wkofInstallCheck() {
+        if (!wkof) {
+            const script_name = 'Wanikani Custom Dashboard';
+            let response = confirm(script_name + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
+            if (response) {
+                window.location.href = 'https://community.wanikani.com/t/instructions-installing-wanikani-open-framework/28549';
+            };
+    
+            return;
+        };
+    };
+
+
+    /*************************************************
+     *  ANCHOR Get the primary WKOF data for all other functions
+     *************************************************/
+    async function getWkofDataObject() {
+        console.log('Running WKOF data retrieval.');
+        let getWkofData = {};
+
+        getWkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
+        getWkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
+        getWkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
+        
+        console.log('WKOF data retrieval complete.');
+        return getWkofData;
+    };
+
+
+
+    /*************************************************
+     *  ANCHOR Execution function for adding CSS and JS code to page
+     *  Done for simplicity since it's a simple function call
+     *************************************************/
+    // TODO Uncomment for deploy
+    // function addStylesAndFunctions() {
+    //     console.log('Running Add CSS and JS functions.');
+    //     // Add styles
+    //     addStyles("COMMON_CSS");
+    //     addStyles("ITEMS_CSS");
+    //     addStyles("DASHBOARD_CSS");
+
+    //     // Add functions
+    //     addFunctions("COMMON_JS");
+    //     addFunctions("WKOF_DATA_JS");
+    //     addFunctions("HTML_GEN_JS");
+    //     addFunctions("DASHBOARD_JS");
+    //     console.log('All Add CSS and JS functions have loaded.');
+    // };
+    // TODO Used only for dev
+    function addStylesAndFunctions() {
+        console.log('Running Add CSS and JS functions.');
+        // Add styles
+        addStyles(wlWanikaniCommonStylesCss);
+        addStyles(wlWanikaniCustomItemsCss);
+        addStyles(wlWanikaniCustomDashboardCss);
+
+        // Functions don't need importing
+        console.log('All Add CSS and JS functions have loaded.');
+    };
+
+
+    /*************************************************
+     *  ANCHOR Add pulse effect to the lesson/review navigation shortcuts
+     *************************************************/
+    function navShortcutReviewAndLessonButtonPulseEffect() {
+        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--lessons > a', $('.navigation-shortcuts .navigation-shortcut--lessons > a > span').text(), '/lesson/session', 'has-lessons');
+        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--reviews > a', $('.navigation-shortcuts .navigation-shortcut--reviews > a > span').text(), '/review/start', 'has-reviews');
+    };
+})();
+// !SECTION wl-wanikani-code-executor.user.js
 // !SECTION Javascript code
-
-// SECTION CSS code
-// ANCHOR wl-wanikani-common-styles.user.css
-const wlWanikaniCommonStylesCss = `
-/********************************
- *  Global colours
- ********************************/
-:root {
-    /* WaniKani colours */
-    --lesson-colour:             #ff00aa;
-    --lesson-colour-darker:      #bd007e;
-    --lesson-colour-lighter:     #fa7acf;
-    --review-colour:             #00aaff;
-    --review-colour-darker:      #0279b5;
-    --review-colour-lighter:     #80d4ff;
-    --transparent-lesson-colour: rgb(255, 0, 170, 0.2);
-    --transparent-review-colour: rgb(0, 170, 255, 0.2);
-
-    /* Common colours */
-    --dark-blue:                 #294ddb;
-    --dark-green:                #006400;
-    --gold:                      #ffd700;
-    --gold-darker:               #b5b014;
-    --green:                     #218139;
-    --light-blue:                #0093dd;
-    --maroon:                    #800000;
-    --pink:                      #dd0093;
-    --purple:                    #882d9e;
-
-    /* Shades */
-    --black:                     #000000;
-    --dark-grey:                 #6b6b6b;
-    --grey:                      #d5d5d5;
-    --light-grey:                #f4f4f4;
-    --white:                     #ffffff;
-
-    /* Odd colours */
-    --transparent-black:         rgba(0, 0, 0, 0.75);
-    --transparent-dark-blue:     rgb(41, 77, 219, 0.2);
-    --transparent-dark-green:    rgb(0, 100, 0, 0.2);
-    --transparent-gold:          rgb(255, 215, 0, 0.2);
-    --transparent-light-blue:    rgb(0, 147, 221, 0.2);
-    --transparent-maroon:        rgb(128, 0, 0, 0.2);
-    --transparent-pink:          rgb(221, 0, 147, 0.2);
-    --transparent-purple:        rgb(136, 45, 158, 0.2);
-}
-
-
-/********************************
- *  Lesson/Review navigation styles
- ********************************/
-/* Initialise navigation styles */
-.custom-lessons-and-reviews-button:not(.has-reviews):not(.has-lessons),
-.navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
-.navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-lessons) > span {
-    background: var(--dark-grey);
-}
-
-/* Add animations and styles to main and shortcut buttons */
-.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
-.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
-    background: var(--review-colour);
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
-
-.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
-.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
-    background: var(--lesson-colour);
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
-
-.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
-.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
-    --start-pulse: var(--review-colour-darker);
-    --end-pulse: var(--review-colour-lighter);
-    animation: buttonPulse 2s infinite; 
-} 
-
-.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
-.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
-    --start-pulse: var(--lesson-colour-darker);
-    --end-pulse: var(--lesson-colour-lighter);
-    animation: buttonPulse 2s infinite; 
-}
-
-/********************************
- *  Animations
- ********************************/
-@keyframes buttonPulse { 
-    0% { 
-        box-shadow: 0 0 0 0 var(--start-pulse); 
-    } 
-    70% { 
-        box-shadow: 0 0 0 7px var(--white); 
-    } 
-    100% { 
-        box-shadow: 0 0 0 0 var(--end-pulse); 
-    } 
-} 
-`;
-
-// ANCHOR wl-wanikani-custom-items.user.css
-const wlWanikaniCustomItemsCss = `
-/********************************
- *  Items section and progress entry styles
- ********************************/
-/* Main wrapper styles */
- .custom-items { 
-    padding: 12px 24px; 
-    margin-bottom: 30px; 
-    background: var(--light-grey); 
-} 
-
-.custom-items section { 
-    margin-bottom: 0; 
-} 
-
-/* Progress entry styles */
-.custom-items section .progress-entries { 
-    grid-template-columns: none; 
-    display: flex; 
-} 
-
-.custom-items section .progress-entries .progress-entry { 
-    height: 40px; 
-} 
-
-.custom-items section .progress-entries .progress-entry.radical, 
-.custom-items section .progress-entries .progress-entry.kanji { 
-    width: 40px; 
-} 
-
-.custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
-    background: var(--dark-grey);
-}
-
-.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
-    height: 40px;
-    font-size: 21px;
-}
-
-.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
-    text-decoration: none;
-}
-
-/********************************
- *  Item level and SRS level indicator styles
- ********************************/  
-/* Level and SRS level indicator wrapper styles */
-.custom-items section .progress-entries .progress-entry a .progress-item-level,
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
-    position: absolute;
-    width: 15px;
-    border: 0.5px solid var(--white);
-    border-radius: 50%;
-    font-size: 9px;
-    font-weight: bold;
-    line-height: 14px;
-}
-
-/* Item level styles */
-.custom-items section .progress-entries .progress-entry a .progress-item-level { 
-    background: var(--dark-green);
-    bottom: -5px;
-    right: -5px;
-}
-
-/* Item SRS level styles */
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
-    top: -5px;
-    right: -5px;
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-0 { 
-    background: var(--dark-green);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
-    background: var(--black);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
-    background: var(--dark-grey);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
-    background: var(--lesson-colour-lighter);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
-    background: var(--lesson-colour-darker);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 { 
-    background: var(--purple);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-6 { 
-    background: var(--dark-blue);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-7 { 
-    background: var(--review-colour-darker);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-8 { 
-    background: var(--gold-darker);
-}
-
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-9 { 
-    background: var(--maroon);
-}
-
-/********************************
- *  Tooltip styles
- ********************************/  
-/* Item tooltip wrapper styles */
-.custom-item-tooltip .custom-item-tooltip-text {
-    visibility: hidden;
-    width: 200px;
-    background-color: var(--transparent-black);
-    color: var(--white);
-    text-align: center;
-    border-radius: 5px;
-    padding: 10px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -110px;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-/* Item tooltip content styles */
-.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries {
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-}
-
-.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-readings {
-    background: var(--dark-green);
-}
-
-.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
-    background: var(--dark-grey);
-}
-
-.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-not-accepted-entries .custom-item-tooltip-text-entries.item-readings {
-    background: var(--maroon);
-}
-
-.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-not-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
-    background: var(--black);
-}
-  
-.custom-item-tooltip .custom-item-tooltip-text::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: var(--transparent-black) transparent transparent transparent;
-}
-  
-.custom-item-tooltip:hover .custom-item-tooltip-text {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Next review tooltip wrapper styles */
-.custom-lessons-and-reviews-summary-tooltip.future-reviews {
-    display: none;
-    background-color: var(--transparent-black);
-    color: var(--white);
-    text-align: center;
-    border-radius: 5px;
-    position: absolute;
-    z-index: 1;
-    right: 110px;
-}
-
-.custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
-    content: "";
-    position: absolute;
-    top: 60px;
-    left: 0;
-    margin-left: -20px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent var(--transparent-black) transparent transparent;
-}
-
-/* Next review tooltip content styles */
-.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
-    width: auto;
-    background: var(--purple);
-    border-radius: 5px;
-    border: none;
-    margin: 10px;
-    padding: 10px;
-}
-
-.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > h2 {
-    margin: 0 0 5px 0;
-    font-size: 20px;
-    line-height: 15px;
-}
-
-.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > span {
-    margin: 0;
-    font-size: 12px;
-    line-height: 10px;
-}
-`;
-
-// ANCHOR wl-wanikani-custom-dashboard.user.css
-const wlWanikaniCustomDashboardCss = `
-/********************************
- *  Progress summary gradients
- ********************************/
-.custom-dashboard-progress .custom-dashboard-progress-summary.apprentice-summary {
-    background: linear-gradient(to right, var(--transparent-pink), var(--transparent-purple));
-}
-
-.custom-dashboard-progress .custom-dashboard-progress-summary.guru-summary {
-    background: linear-gradient(to right, var(--transparent-purple), var(--transparent-dark-blue));
-}
-
-.custom-dashboard-progress .custom-dashboard-progress-summary.master-summary {
-    background: linear-gradient(to right, var(--transparent-dark-blue), var(--transparent-light-blue));
-}
-
-.custom-dashboard-progress .custom-dashboard-progress-summary.enlightened-summary {
-    background: linear-gradient(to right, var(--transparent-light-blue), var(--transparent-gold));
-}
-
-.custom-dashboard-progress .custom-dashboard-progress-summary.burned-summary {
-    background: linear-gradient(to right, var(--transparent-gold), var(--transparent-maroon));
-}
-
-.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.lessons-summary {
-    background: linear-gradient(to right, var(--transparent-lesson-colour), var(--transparent-review-colour));
-}
-
-.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.reviews-summary {
-    background: linear-gradient(to right, var(--transparent-review-colour), var(--transparent-dark-green));
-}
-
-.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.totals-summary {
-    background: linear-gradient(to right, var(--transparent-dark-green), var(--transparent-purple));
-}
-
-.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.next-review-summary {
-    background: linear-gradient(to right, var(--transparent-purple), var(--transparent-maroon));
-}
-
-/********************************
- *  Custom section and summary styles
- ********************************/
-/* Green circle for completed/empty sections */
-.all-done .progress-entries:after,
-.all-done.custom-div:after {
-    content: '';
-    position: relative;
-    left: 50%;
-    width: 20px; 
-    height: 20px;
-    border: 1px solid var(--green);
-    border-radius: 50%;
-}
-
-/* Main custom section styles */
-.custom-section {
-    display: flex;
-    background: var(--grey);
-    border: var(--dark-grey) 1px solid;
-    border-radius: 5px;
-    box-shadow: inset 0 0 10px var(--dark-grey);
-}
-
-/* Custom summary styles */
-.custom-summary {
-    position: relative;
-    padding: 15px;
-    width: calc(100%/3);
-}
-
-.custom-summary:not(:last-child) {
-    border-right: var(--dark-grey) 1px solid;
-}
-
-.custom-summary > h2 {
-    font-size: 20px;
-    font-weight: normal;
-    line-height: 20px;
-}
-
-.custom-summary > span {
-    display: inline-block;
-    font-size: 15px;
-    line-height: 25px;
-    margin-bottom: 3px;
-}
-
-.custom-summary > span.custom-summary-vocabulary {
-    margin-bottom: 50px;
-}
-
-/* Custom summary button styles */
-.custom-summary > .custom-button {
-    display: block;
-    position: absolute;
-    width: calc(100% - 50px);
-    bottom: 15px;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 15px;
-    color: var(--white);
-}
-
-.custom-summary > .custom-button:hover {
-    color: var(--white);
-    text-decoration: none;
-}
-
-.custom-summary.custom-dashboard-progress-summary > h2 {
-    font-size: 19px;
-}
-
-.custom-summary > .custom-button.custom-progress-summary-button {
-    background: var(--dark-grey);
-    border: 1px solid var(--dark-grey);
-}
-
-.custom-summary > .custom-button.custom-progress-summary-button.selected {
-    background: var(--green);
-    border: 1px solid var(--black);
-}
-
-.custom-summary > .custom-button.custom-progress-summary-button:hover,
-.custom-summary > .custom-button.custom-progress-summary-button.selected:hover {
-    background: var(--dark-green);
-    transition: 0.5s;
-    cursor: pointer;
-}
-
-/********************************
- *  Level progress styles
- ********************************/
-/* Level progress indictor ring styles */
-.level-progress-indicator {
-    position: absolute;
-    padding-top: 10px;
-}
-
-.level-progress-indicator > span {
-    position: absolute;
-    margin-top: 20px;
-    margin-left: 15px;
-    font-size: 10px;
-}
-
-.level-progress-indicator .progress-ring .progress-ring-circle {
-    transition: 0.35s stroke-dashoffset;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
-    stroke: var(--lesson-colour);
-}
-
-.level-progress-indicator .progress-ring .progress-ring-circle-track {
-    stroke: var(--grey);
-}
-
-/* Level progress entry and div styles */
-.custom-div.progress-entries {
-    width: 100%;
-    padding: 20px 10px;
-}
-
-.custom-div.border-bottom {
-    border-bottom: var(--dark-grey) 1px solid;
-}
-
-.custom-div.kanji-in-progress .progress-entry:first-child {
-    margin-left: 65px;
-}
-
-/* Dashboard loader */
-.custom-dashboard-loader {
-    color: var(--dark-grey);
-    overflow: hidden;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    margin: 72px auto;
-    position: relative;
-    transform: translateZ(0);
-    animation: loaderDots 1.7s infinite ease, loaderSpin 1.7s infinite ease;
-    font-size: 90px;
-}
-
-/********************************
- *  Animations
- ********************************/  
-@keyframes loaderDots {
-    0% {
-        box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-    }
-    5%,
-    95% {
-        box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-    }
-    10%,
-    59% {
-        box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
-    }
-    20% {
-        box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
-    }
-    38% {
-        box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
-    }
-    100% {
-        box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-    }
-}
-
-@keyframes loaderSpin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-`;
-
-// !SECTION CSS code
