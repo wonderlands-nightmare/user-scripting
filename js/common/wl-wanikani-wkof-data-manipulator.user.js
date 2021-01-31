@@ -5,12 +5,12 @@
 // ==/UserScript==
 
 /*************************************************
- *  Variable initialisation.
+ *  ANCHOR Variable initialisation
  *************************************************/
-// Global data variable
+// NOTE Global data variable
 let wkofItemsData = {};
 
-// Used for specific filtering configurations
+// NOTE Used for specific filtering configurations
 const wanikaniSrsStages = {
     'locked': {'locked': -1 },
     'initiate': { 'initiate': 0 },
@@ -31,12 +31,11 @@ const wanikaniSrsStages = {
 
 
 /*************************************************
- *  Critical item filter
+ *  ANCHOR Critical item filter
  *************************************************/
 function isCritical(item) {
     wlWanikaniDebug('Check if critical.');
     // 1 - appr1, 2 - appr2, 3 - appr3, 4 - appr4, 5 - guru1, 6 - guru2, 7 - mast, 8 - enli
-
     if ("assignments" in item) {
         const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
         const isApprentice = Object.values(wanikaniSrsStages.apprentice).includes(item.assignments.srs_stage);
@@ -52,9 +51,9 @@ function isCritical(item) {
 
 
 /*************************************************
- *  Sorting functions
+ *  ANCHOR Sorting functions
  *************************************************/
-// Sorts items based on critical level
+// NOTE Sorts items based on critical level
 function criticalSort(itemsToSort) {
     return itemsToSort.sort(function(a, b) {
                return (a.critical_level == b.critical_level)
@@ -63,7 +62,7 @@ function criticalSort(itemsToSort) {
            });
 }
 
-// Sorts items based on level
+// NOTE Sorts items based on level
 function levelSort(itemsToSort) {
     return itemsToSort.sort(function(a, b) {
                return (a.data.level == b.data.level)
@@ -74,7 +73,8 @@ function levelSort(itemsToSort) {
 
 
 /*************************************************
- *  Generate critical items data object
+ *  ANCHOR Generate critical items data object
+ *  TODO Refactor or remove
  *************************************************/
 function getCriticalItemsData(items) {
     wlWanikaniDebug('Getting critical items.', items);
@@ -89,7 +89,7 @@ function getCriticalItemsData(items) {
 
 
 /*************************************************
- *  Generate kanji/radical/vocabulary subject data object
+ *  ANCHOR Generate kanji/radical/vocabulary subject data object
  *************************************************/
 function getSubjectData(data, type, subjectIds = []) {
     wlWanikaniDebug('Retrieving ' + type + ' subject data.');
@@ -145,7 +145,7 @@ function getSubjectData(data, type, subjectIds = []) {
 
 
 /*************************************************
- *  Generate next review data object
+ *  ANCHOR Generate next review data object
  *************************************************/
 function getNextReviewTime(data) {
     wlWanikaniDebug('Getting next review data.', data);
@@ -176,7 +176,7 @@ function getNextReviewTime(data) {
 
 
 /*************************************************
- *  Generate level progress data object
+ *  ANCHOR Generate level progress data object
  *************************************************/
 function getLevelProgress(data) {
     wlWanikaniDebug('Getting level progress data.');
@@ -221,7 +221,7 @@ function getLevelProgress(data) {
         }
     });
     
-    // Calculation for how many kanji are needed to pass the level 
+    // NOTE Calculation for how many kanji are needed to pass the level 
     progressData.KanjiToPass = Math.ceil(
         (progressData.Kanji.InProgress.length + progressData.Kanji.Passed.length + progressData.Kanji.Locked.length)
         * 0.9);

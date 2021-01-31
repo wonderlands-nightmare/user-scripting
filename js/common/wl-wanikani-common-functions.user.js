@@ -5,17 +5,17 @@
 // ==/UserScript==
 
 /*************************************************
- *  Common debugger function
+ *  ANCHOR Common debugger function
  *************************************************/
-// Only used to initialise variable for code in this file
+// NOTE Only used to initialise variable for code in this file
 let debugMode = false;
 
-// Called from main userscript to set debug mode
+// NOTE Called from main userscript to set debug mode
 function setWlWanikaniDebugMode(debugModeBoolean) {
     debugMode = debugModeBoolean;
 };
 
-// Actual debug function
+// NOTE Actual debug function
 function wlWanikaniDebug(debugMessage, debugItem = '') {
     if (debugMode) {
         console.log(debugMessage, debugItem);
@@ -23,7 +23,7 @@ function wlWanikaniDebug(debugMessage, debugItem = '') {
 };
 
 /*************************************************
- *  Add pulse effect for lesson and review buttons
+ *  ANCHOR Add pulse effect for lesson and review buttons
  *************************************************/
 function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, buttonHref, buttonClass) {
     if (buttonCount > 0) {
@@ -35,7 +35,7 @@ function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, button
 };
 
 /*************************************************
- *  Add reload timer for auto-refresh on next review time
+ *  ANCHOR Add reload timer for auto-refresh on next review time
  *************************************************/
 function autoRefreshOnNextReviewHour(summaryData) {
     let nextRefreshValue = '';
@@ -72,7 +72,7 @@ function autoRefreshOnNextReviewHour(summaryData) {
 
 
 /*************************************************
- *  Set level progress indicator fill
+ *  ANCHOR Set level progress indicator fill
  *************************************************/
 function setLevelProgressCircle(percent) {
     let circle = $('.level-progress-indicator .progress-ring circle.progress-ring-circle');
@@ -90,7 +90,7 @@ function setLevelProgressCircle(percent) {
 
 
 /*************************************************
- *  Add a loading animation to the page while the dashboard HTML
+ *  ANCHOR Add a loading animation to the page while the dashboard HTML
  *  is generated
  *************************************************/
 function dashboardLoader(loaded = false) {
@@ -102,7 +102,7 @@ function dashboardLoader(loaded = false) {
         }
     }
     else {
-        // Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
+        // NOTE Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
         if ($('.' + loaderClass).length > 0) {
             $('.' + loaderClass).remove();
         }
@@ -117,7 +117,7 @@ function dashboardLoader(loaded = false) {
 
 
 /*************************************************
- *  Alter the Lesson and Review shortcut navigations to be in 
+ *  ANCHOR Alter the Lesson and Review shortcut navigations to be in 
  *  Japanese
  *************************************************/
 function updateShortcutNavigation(item) {
@@ -140,7 +140,7 @@ function updateShortcutNavigation(item) {
 
 
 /*************************************************
- *  Add slide toggle effects to the SRS Progress Summary 'show' 
+ *  ANCHOR Add slide toggle effects to the SRS Progress Summary 'show' 
  *  buttons to show SRS Progress Summary information
  *************************************************/
 function setProgressSummaryButtonEffects() {
@@ -161,7 +161,7 @@ function setProgressSummaryButtonEffects() {
 
 
 /*************************************************
- *  Add hover effect for Next Review summary to show reviews
+ *  ANCHOR Add hover effect for Next Review summary to show reviews
  *  over the next 24hrs
  *************************************************/
 function setFutureReviewsTooltip() {

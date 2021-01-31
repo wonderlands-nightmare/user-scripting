@@ -4,14 +4,10 @@
 // @author       Wonderlands-Nightmares
 // ==/UserScript==
 
-/*************************************************
- *  Variable initialisation.
- *************************************************/
-// Add code
-
+// TODO Refactor or remove Critical Items code
 
 /*************************************************
- *  Get appropriate image or slug for a kanji/radical/vocabulary
+ *  ANCHOR Get appropriate image or slug for a kanji/radical/vocabulary
  *  item provided
  *************************************************/
 function itemsCharacterCallback (item){
@@ -30,7 +26,7 @@ function itemsCharacterCallback (item){
 
 
 /*************************************************
- *  Kanji/radical/vocabulary item meaning or reading filters
+ *  ANCHOR Kanji/radical/vocabulary item meaning or reading filters
  *************************************************/
 function isAccepted(item) {
     return item.accepted_answer == true;
@@ -42,7 +38,7 @@ function isNotAccepted(item) {
 
 
 /*************************************************
- *  Custom item table HTML generator
+ *  ANCHOR Custom item table HTML generator
  *************************************************/
 function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML, headerCount = false) {
     wlWanikaniDebug('Generating custom items table (' + customClass + ') HTML with the following data.', customItemsData);
@@ -69,7 +65,7 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
 
 
 /*************************************************
- *  Custom items HTML generator
+ *  ANCHOR Custom items HTML generator
  *************************************************/
 function generateCustomItemsHTML(items, type = '') {
     wlWanikaniDebug('Generating custom items HTML.');
@@ -112,7 +108,7 @@ function generateCustomItemsHTML(items, type = '') {
 
 
 /*************************************************
- *  Custom item tooltip wrapper HTML generator
+ *  ANCHOR Custom item tooltip wrapper HTML generator
  *************************************************/
 function generateItemTooltipHTML(item) {
     let tooltipTextHTML = '';
@@ -139,7 +135,7 @@ function generateItemTooltipHTML(item) {
 
 
 /*************************************************
- *  Custom item tooltip content HTML generator
+ *  ANCHOR Custom item tooltip content HTML generator
  *************************************************/
 function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customClass) {
     let returnTooltipTextHTML = '';
@@ -221,7 +217,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 
 
 /*************************************************
- *  Custom summary HTML generator
+ *  ANCHOR Custom summary HTML generator
  *************************************************/
 function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton = false, buttonClasses = '', buttonText = '') {
     wlWanikaniDebug('Generating summary HTML.');
@@ -250,7 +246,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
 
 
 /*************************************************
- *  Level progress circle HTML generator
+ *  ANCHOR Level progress circle HTML generator
  *************************************************/
 function generateLevelProgressCircleHTML(data, size, thickness) {
     let levelProgressCircleHTML = `
@@ -283,7 +279,7 @@ function generateLevelProgressCircleHTML(data, size, thickness) {
 
 
 /*************************************************
- *  Next reviews summary HTML generator
+ *  ANCHOR Next reviews summary HTML generator
  *************************************************/
 function generateFutureReviewsHTML(data, nextReviewData) {
     wlWanikaniDebug('Generating future reviews HTML with the following data.', nextReviewData);
@@ -292,7 +288,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
     let futureReviewsHTML = '';
     let returnHTML = [];
 
-    // Caters for empty nextReviewData array for when there are no more reviews coming up
+    // NOTE Caters for empty nextReviewData array for when there are no more reviews coming up
     if (!nextReviewData.length) {
         nextReviewData = [{ text: '', count: 0, subjectIds: [] }];
     }

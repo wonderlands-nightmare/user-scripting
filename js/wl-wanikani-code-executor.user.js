@@ -19,15 +19,15 @@
 
 (function () {
     /*************************************************
-     *  Variable initialisation.
+     *  ANCHOR Variable initialisation
      *************************************************/
-    // Change this to turn debugging on
+    // NOTE Change this to turn debugging on
     const isDebug = false;
 
-    // WKOF modules required
+    // NOTE WKOF modules required
     const wkofModules = 'Apiv2, ItemData';
 
-    // General WKOF item data config
+    // NOTE General WKOF item data config
     const itemDataConfig = {
         wk_items: {
             options: {
@@ -42,7 +42,7 @@
 
 
     /*************************************************
-     *  Actual script execution code
+     *  ANCHOR Actual script execution code
      *************************************************/
     wkofInstallCheck();
     addStylesAndFunctions();
@@ -65,7 +65,7 @@
 
 
     /*************************************************
-     *  Retrieves CSS and JS code through GM and adds to page
+     *   ANCHOR Retrieves CSS and JS code through GM and adds to page
      *************************************************/
     function addStyles(cssFileName) {
         const styleCss = GM_getResourceText(cssFileName);
@@ -86,7 +86,7 @@
 
 
     /*************************************************
-     *  Check if WKOF is installed
+     *  ANCHOR Check if WKOF is installed
      *************************************************/
     function wkofInstallCheck() {
         if (!wkof) {
@@ -102,7 +102,7 @@
 
 
     /*************************************************
-     *  Get the primary WKOF data for all other functions
+     *  ANCHOR Get the primary WKOF data for all other functions
      *************************************************/
     async function getWkofDataObject() {
         console.log('Running WKOF data retrieval.');
@@ -119,17 +119,15 @@
 
 
     /*************************************************
-     *  Execution function for addinc CSS and JS code to page,
-     *  done for simplicity since it's a simple function call
+     *  ANCHOR Execution function for adding CSS and JS code to page
+     *  Done for simplicity since it's a simple function call
      *************************************************/
     function addStylesAndFunctions() {
         console.log('Running Add CSS and JS functions.');
-        // Add styles
         addStyles("COMMON_CSS");
         addStyles("ITEMS_CSS");
         addStyles("DASHBOARD_CSS");
 
-        // Add functions
         addFunctions("COMMON_JS");
         addFunctions("WKOF_DATA_JS");
         addFunctions("HTML_GEN_JS");
@@ -139,7 +137,7 @@
 
 
     /*************************************************
-     *  Add pulse effect to the lesson/review navigation shortcuts
+     *  ANCHOR Add pulse effect to the lesson/review navigation shortcuts
      *************************************************/
     function navShortcutReviewAndLessonButtonPulseEffect() {
         addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--lessons > a', $('.navigation-shortcuts .navigation-shortcut--lessons > a > span').text(), '/lesson/session', 'has-lessons');
