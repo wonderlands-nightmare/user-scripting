@@ -1430,7 +1430,7 @@ function appendDashboardContentHTML(data) {
      *  ANCHOR Variable initialisation
      *************************************************/
     // Change this to turn debugging on
-    const isDebug = false;
+    const isDebug = true;
 
     // WKOF modules required
     const wkofModules = 'Apiv2, ItemData';
