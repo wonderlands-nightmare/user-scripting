@@ -4,15 +4,13 @@
 // @author       Wonderlands-Nightmares
 // ==/UserScript==
 
-// TODO Refactor or remove Critical Items code
-
 /*************************************************
  *  ANCHOR Get appropriate image or slug for a kanji/radical/vocabulary
  *  item provided
  *************************************************/
 function itemsCharacterCallback (item){
     let itemsData = item.data;
-    
+
     if (itemsData.characters != null) {
         return itemsData.characters;
     }
@@ -44,9 +42,9 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
     wlWanikaniDebug('Generating custom items table (' + customClass + ') HTML with the following data.', customItemsData);
 
     let headerMessageCount = headerCount ? '（' + customItemsData.length + '）' : '';
-    let headerMessage = (customItemsData.length == 0) 
-                        ? 'ごめんなさい, 君は' + headerMessageType + 'ありません.'
-                        : '君は' + headerMessageType + '項目あります!' + headerMessageCount;
+    let headerMessage = (customItemsData.length == 0)
+                        ? 'ごめんなさい, 君は' + headerMessageType + '項目をありません.'
+                        : '君は' + headerMessageType + '項目をあります!' + headerMessageCount;
 
     let customTableHTML = `
         <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">
@@ -74,16 +72,9 @@ function generateCustomItemsHTML(items, type = '') {
 
     if (items.length > 0) {
         $.each(items, function(index, item) {
-            let itemAddedStyle = '';
             let itemSrsLevel = '';
             let itemType = item.object;
             let customItemTooltipHTML = generateItemTooltipHTML(item);
-
-            if (type == 'critical') {
-                if (item.critical_level > 0) {
-                    itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
-                }
-            }
 
             if ('assignments' in item) {
                 itemSrsLevel = '<span class="progress-item-srs-level srs-level-' + item.assignments.srs_stage + '">' + item.assignments.srs_stage + '</span>';
@@ -92,7 +83,7 @@ function generateCustomItemsHTML(items, type = '') {
             customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ customItemTooltipHTML }
-                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'locked' ? type : '' }" lang="ja" ${ itemAddedStyle }>
+                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'locked' ? type : '' }" lang="ja">
                             <div>${ itemsCharacterCallback(item) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
                             ${ itemSrsLevel }
@@ -177,7 +168,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
                 <div class="custom-item-tooltip-text-entries item-readings onyomi">音読み：${ itemReadingOnyomiTooltipItems }</div>
                 `;
             }
-            
+
             if (itemReadingKunyomiTooltipItems != '') {
                 returnTooltipTextHTML += `
                 <div class="custom-item-tooltip-text-entries item-readings kunyomi">訓読み：${ itemReadingKunyomiTooltipItems }</div>
@@ -229,7 +220,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
             </a>
     `
     : '';
-    
+
     let summaryHTML = `
         <div class="custom-summary ${ htmlClasses }">
             <h2>${ divHeaderText }</h2>
@@ -303,7 +294,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
                                     : dataItem.text + 'の次の復習（' + nextReviewTotalCount + '）';
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass, nextReviewDataTitle));
         });
-    
+
         if (nextReviewData.length > 1) {
             futureReviewsHTML += `<span class="custom-lessons-and-reviews-summary-tooltip future-reviews">`;
 
@@ -320,4 +311,21 @@ function generateFutureReviewsHTML(data, nextReviewData) {
 
     wlWanikaniDebug('Generated the following future reviews HTML.', returnHTML);
     return returnHTML;
+};
+
+/*************************************************
+ *  ANCHOR Difficult Items Table HTML generator
+ *************************************************/
+function generateDifficultItemsSection(data,  insertAfterElement = '.custom-dashboard .custom-dashboard-progress-wrapper') {
+    const difficultItemsClass = 'custom-dashboard-difficult-items';
+
+    if ($('.' + difficultItemsClass).length > 0) {
+        $('.' + difficultItemsClass).remove();
+    }
+
+    let difficultItemsData = getDifficultItemsData(data);
+    let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
+    let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems, difficultItemsClass, '苦労', difficultItemsHTML, true);
+
+    $(difficultItemsTableHTML).insertAfter(insertAfterElement);
 };

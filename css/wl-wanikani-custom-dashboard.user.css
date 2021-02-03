@@ -140,9 +140,11 @@
 
 .level-progress-indicator > span {
     position: absolute;
+    width: 31px;
     margin-top: 20px;
     margin-left: 15px;
     font-size: 10px;
+    text-align: center;
 }
 
 .level-progress-indicator .progress-ring .progress-ring-circle {

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.1.3
+// @version      1.2
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -21,13 +21,14 @@
     /*************************************************
      *  ANCHOR Variable initialisation
      *************************************************/
-    // NOTE Change this to turn debugging on
-    const isDebug = false;
+    // Change this to turn debugging on
+    const isDebug = true;
 
-    // NOTE WKOF modules required
-    const wkofModules = 'Apiv2, ItemData';
+    // WKOF modules required
+    const wkofSettingsModules = 'Menu, Settings';
+    const wkofDataModules = 'Apiv2, ItemData';
 
-    // NOTE General WKOF item data config
+    // General WKOF item data config
     const itemDataConfig = {
         wk_items: {
             options: {
@@ -49,14 +50,19 @@
     dashboardLoader();
     generateDashboardWrapperHTML();
 
-    wkof.include(wkofModules);
-
-    wkof.ready(wkofModules)
+    wkof.include(wkofSettingsModules);
+    wkof.ready(wkofSettingsModules)
+        .then(loadWkofMenu)
+        .then(loadWkofSettings);
+    
+    wkof.include(wkofDataModules);
+    wkof.ready(wkofDataModules)
         .then(getWkofDataObject)
         .then(function(data) {
+            wkofItemsData.AllData = data;
             setWlWanikaniDebugMode(isDebug);
-            appendDashboardContentHTML(data);
-            autoRefreshOnNextReviewHour(data.SummaryData);
+            appendDashboardContentHTML(wkofItemsData.AllData);
+            autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
             updateShortcutNavigation('lessons');
             updateShortcutNavigation('reviews');
             navShortcutReviewAndLessonButtonPulseEffect();
@@ -90,12 +96,11 @@
      *************************************************/
     function wkofInstallCheck() {
         if (!wkof) {
-            const script_name = 'Wanikani Custom Dashboard';
-            let response = confirm(script_name + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
+            let response = confirm(scriptName + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
             if (response) {
                 window.location.href = 'https://community.wanikani.com/t/instructions-installing-wanikani-open-framework/28549';
             };
-    
+
             return;
         };
     };
@@ -111,7 +116,7 @@
         getWkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
         getWkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
         getWkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
-        
+
         console.log('WKOF data retrieval complete.');
         return getWkofData;
     };
@@ -124,14 +129,18 @@
      *************************************************/
     function addStylesAndFunctions() {
         console.log('Running Add CSS and JS functions.');
+        // Add styles
         addStyles("COMMON_CSS");
         addStyles("ITEMS_CSS");
         addStyles("DASHBOARD_CSS");
 
+        // Add functions
         addFunctions("COMMON_JS");
         addFunctions("WKOF_DATA_JS");
         addFunctions("HTML_GEN_JS");
         addFunctions("DASHBOARD_JS");
+        console.log('All Add CSS and JS functions have loaded.');
+
         console.log('All Add CSS and JS functions have loaded.');
     };
 

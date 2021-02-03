@@ -31,61 +31,46 @@ const wanikaniSrsStages = {
 
 
 /*************************************************
- *  ANCHOR Critical item filter
+ *  ANCHOR Difficult item filter
  *************************************************/
-function isCritical(item) {
-    wlWanikaniDebug('Check if critical.');
-    // 1 - appr1, 2 - appr2, 3 - appr3, 4 - appr4, 5 - guru1, 6 - guru2, 7 - mast, 8 - enli
-    if ("assignments" in item) {
-        const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
-        const isApprentice = Object.values(wanikaniSrsStages.apprentice).includes(item.assignments.srs_stage);
-        const itemCritical = isLowerLevel && isApprentice;
-
-        if (itemCritical) {
-            item.critical_level = (wkofItemsData.SafeLevel - item.data.level)/item.assignments.srs_stage;
-
-            return item;
+function isDifficult(dataItems) {
+    wlWanikaniDebug('Check if difficult.', dataItems);
+    
+    let returnItems = []
+    $.each(dataItems, function (index, dataItem) {
+        if ("assignments" in dataItem) {
+            if ((dataItem.data.level <= wkofItemsData.SafeLevel) && (dataItem.assignments.srs_stage <= wkof.settings[scriptId].srs_stage)) {
+                returnItems.push(dataItem);
+            }
         }
-    }
+    });
+    
+    return returnItems;
 };
-
-
-/*************************************************
- *  ANCHOR Sorting functions
- *************************************************/
-// NOTE Sorts items based on critical level
-function criticalSort(itemsToSort) {
-    return itemsToSort.sort(function(a, b) {
-               return (a.critical_level == b.critical_level)
-                   ? a.assignments.srs_stage - b.assignments.srs_stage
-                   : b.critical_level - a.critical_level;
-           });
-}
 
 // NOTE Sorts items based on level
 function levelSort(itemsToSort) {
     return itemsToSort.sort(function(a, b) {
-               return (a.data.level == b.data.level)
-                   ? a.assignments.srs_stage - b.assignments.srs_stage
-                   : a.data.level - b.data.level;
-           });
-}
+        return (a.data.level == b.data.level)
+             ? a.assignments.srs_stage - b.assignments.srs_stage
+             : a.data.level - b.data.level;
+    });
+};
 
 
 /*************************************************
- *  ANCHOR Generate critical items data object
- *  TODO Refactor or remove
+ *  ANCHOR Generate difficult items data object
  *************************************************/
-function getCriticalItemsData(items) {
-    wlWanikaniDebug('Getting critical items.', items);
-    
-    wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
-    wkofItemsData.CustomItems = items.ItemsData.filter(isCritical);
-    wkofItemsData.CustomItems = criticalSort(wkofItemsData.CustomItems);
+function getDifficultItemsData(data) {
+    wlWanikaniDebug('Getting difficult items.', data);
 
-    wlWanikaniDebug('Got critical items, show data.', wkofItemsData);
+    wkofItemsData.SafeLevel = data.UsersData.data.level - wkof.settings[scriptId].safe_level;
+    wkofItemsData.DifficultItems = isDifficult(data.ItemsData);
+    wkofItemsData.DifficultItems = levelSort(wkofItemsData.DifficultItems);
+
+    wlWanikaniDebug('Got difficult items, show data.', wkofItemsData);
     return wkofItemsData;
-}; 
+};
 
 
 /*************************************************
@@ -138,7 +123,7 @@ function getSubjectData(data, type, subjectIds = []) {
     returnData.kanji = (returnData.kanji.length > 0) ? levelSort(returnData.kanji) : [];
     returnData.radical = (returnData.radical.length > 0) ? levelSort(returnData.radical) : [];
     returnData.vocabulary = (returnData.vocabulary.length > 0) ? levelSort(returnData.vocabulary) : [];
-    
+
     wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
     return returnData;
 };
@@ -169,7 +154,7 @@ function getNextReviewTime(data) {
             }
         }
     });
-    
+
     wlWanikaniDebug('Next review data.', nextReviewData);
     return nextReviewData;
 };
@@ -180,7 +165,7 @@ function getNextReviewTime(data) {
  *************************************************/
 function getLevelProgress(data) {
     wlWanikaniDebug('Getting level progress data.');
-    
+
     let progressData = {
         Kanji: {
             InProgress: new Array(),
@@ -220,12 +205,12 @@ function getLevelProgress(data) {
             }
         }
     });
-    
-    // NOTE Calculation for how many kanji are needed to pass the level 
+
+    // NOTE Calculation for how many kanji are needed to pass the level
     progressData.KanjiToPass = Math.ceil(
         (progressData.Kanji.InProgress.length + progressData.Kanji.Passed.length + progressData.Kanji.Locked.length)
         * 0.9);
-    
+
     wlWanikaniDebug('Level progress data.', progressData);
     return progressData;
 };

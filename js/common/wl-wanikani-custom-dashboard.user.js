@@ -34,7 +34,7 @@ function generateDashboardWrapperHTML() {
 
     // NOTE Add custom dashboard wrapper to page
     $(dashboardWrapperHTML).insertAfter('.footer-adjustment .custom-dashboard-loader');
-    
+
     wlWanikaniDebug('Generated the following custom dashboard wrapper HTML.', dashboardWrapperHTML);
 };
 
@@ -44,11 +44,6 @@ function generateDashboardWrapperHTML() {
  *************************************************/
 function appendDashboardContentHTML(data) {
     wlWanikaniDebug('Generating custom dashboard content HTML with the following data.', data);
-
-    // NOTE Get critical items data and generate HTML for section
-    let criticalItemsData = getCriticalItemsData(data);
-    let criticalItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems, 'critical');
-    let criticalItemsTableHTML = generateCustomItemsTableHTML(criticalItemsData.CustomItems, 'custom-dashboard-critical-items', 'クリティカル', criticalItemsHTML, true);
 
     // NOTE Get level progress data and generate HTML for section
     let levelProgressData = getLevelProgress(data);
@@ -107,7 +102,7 @@ function appendDashboardContentHTML(data) {
     let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master', '主人', masterSummaryItemsHTML);
     let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened', '悟りを開いた', enlightenedSummaryItemsHTML);
     let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned', '焼け', burnedSummaryItemsHTML);
-    
+
     // NOTE Generate custom dashboard content HTML
     let customLessonsAndReviewsContent = `
         ${ generateSummaryHTML(lessonSummaryData, 'custom-lessons-and-reviews-summary lessons-summary', '授業（' + lessonSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button lessons-button', '授業を開始') }
@@ -141,7 +136,11 @@ function appendDashboardContentHTML(data) {
     $(levelProgressItemsTableHTML).insertAfter(customLessonsAndReviewsElement);
     customDashboardProgressElement.append(customDashboardProgressContent);
     customDashboardProgressWrapperElement.append(customDashboardProgressAfterContent);
-    $(criticalItemsTableHTML).insertAfter(customDashboardProgressWrapperElement);
+
+    // NOTE Load difficult items if enabled
+    if (wkof.settings[scriptId].show_difficult_items) {
+        generateDifficultItemsSection(data);
+    }
 
     // NOTE Apply level progress circle, lesson/review and srs progress summary button effects, and next review tooltip hover
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
@@ -149,6 +148,6 @@ function appendDashboardContentHTML(data) {
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
     setProgressSummaryButtonEffects();
     setFutureReviewsTooltip();
-    
+
     wlWanikaniDebug('Generated all content HTML and appended to custom dashboard.');
 };

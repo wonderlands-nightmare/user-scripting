@@ -5,17 +5,24 @@
 // ==/UserScript==
 
 /*************************************************
+ *  ANCHOR Variable initialisations
+ *************************************************/
+const scriptName = 'Wanikani Custom Dashboard';
+const scriptId = 'wanikani_custom_dashboard';
+
+
+/*************************************************
  *  ANCHOR Common debugger function
  *************************************************/
-// NOTE Only used to initialise variable for code in this file
+// Only used to initialise variable for code in this file
 let debugMode = false;
 
-// NOTE Called from main userscript to set debug mode
+// Called from main userscript to set debug mode
 function setWlWanikaniDebugMode(debugModeBoolean) {
     debugMode = debugModeBoolean;
 };
 
-// NOTE Actual debug function
+// Actual debug function
 function wlWanikaniDebug(debugMessage, debugItem = '') {
     if (debugMode) {
         console.log(debugMessage, debugItem);
@@ -60,7 +67,7 @@ function autoRefreshOnNextReviewHour(summaryData) {
             objHasReviews = true;
         }
     };
-    
+
     if (timeoutValue <= 0) {
         location.reload();
     }
@@ -102,7 +109,7 @@ function dashboardLoader(loaded = false) {
         }
     }
     else {
-        // NOTE Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
+        // Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
         if ($('.' + loaderClass).length > 0) {
             $('.' + loaderClass).remove();
         }
@@ -117,7 +124,7 @@ function dashboardLoader(loaded = false) {
 
 
 /*************************************************
- *  ANCHOR Alter the Lesson and Review shortcut navigations to be in 
+ *  ANCHOR Alter the Lesson and Review shortcut navigations to be in
  *  Japanese
  *************************************************/
 function updateShortcutNavigation(item) {
@@ -140,19 +147,19 @@ function updateShortcutNavigation(item) {
 
 
 /*************************************************
- *  ANCHOR Add slide toggle effects to the SRS Progress Summary 'show' 
+ *  ANCHOR Add slide toggle effects to the SRS Progress Summary 'show'
  *  buttons to show SRS Progress Summary information
  *************************************************/
 function setProgressSummaryButtonEffects() {
     $('.custom-dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each(function (index, item) {
-        let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');    
+        let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');
         let progressSummarySection = $('.custom-dashboard .custom-dashboard-summary-items.' + currentProgressType);
 
         progressSummarySection.slideToggle();
-        
+
         $(this).on('click', function() {
             wlWanikaniDebug('Clicked class type: ', currentProgressType);
-            
+
             $(this).toggleClass('selected');
             progressSummarySection.slideToggle();
         });
@@ -174,3 +181,78 @@ function setFutureReviewsTooltip() {
         }
     );
 }
+
+/*************************************************
+ *  ANCHOR Loads WKOF settings
+ *************************************************/
+function loadWkofSettings() {
+    let defaults = {
+        show_difficult_items: false,
+        safe_level: 3,
+        srs_stage: 4
+    };
+    wkof.Settings.load(scriptId, defaults);
+}
+
+/*************************************************
+ *  ANCHOR Loads WKOF menu
+ *************************************************/
+function loadWkofMenu() {
+    let config = {
+        name: scriptId,
+        submenu: 'Settings',
+        title: scriptName,
+        on_click: openSettings
+    };
+
+    wkof.Menu.insert_script_link(config);
+}
+
+/*************************************************
+ *  ANCHOR Initiates WKOF settings on open
+ *************************************************/
+function openSettings(items) {
+    var config = {
+        script_id: scriptId,
+        title: scriptName,
+        content: {
+            show_difficult_items: {
+                type: 'checkbox',
+                label: 'Show Difficult Items section',
+                hover_tip: 'Check if you want to see the Difficult Items section. Defaults to not show.',
+                default: false
+            },
+            safe_level: {
+                type: 'number',
+                label: '"Safe Level" difference',
+                hover_tip: 'This is a number that is subtracted from your current level, and defines what the maximum level of the Difficult Items is to show. Defaults to 3.',
+                multi: false,
+                min: 0,
+                max: 59,
+                default: 3
+            },
+            srs_stage: {
+                type: 'dropdown',
+                label: 'SRS Stage cap',
+                hover_tip: 'The maximum SRS stage that a Difficult Item can be shown with. Default is Apprentice 4.',
+                content: {
+                    1: 'Apprentice 1',
+                    2: 'Apprentice 2',
+                    3: 'Apprentice 3',
+                    4: 'Apprentice 4',
+                    5: 'Guru 1',
+                    6: 'Guru 2',
+                    7: 'Master',
+                    8: 'Enlightened',
+                    9: 'Burned'
+                },
+                default: 4
+            }
+        },
+        on_save: (()=>{
+            generateDifficultItemsSection(wkofItemsData.AllData);
+        })
+    };
+    let dialog = new wkof.Settings(config);
+    dialog.open();
+};

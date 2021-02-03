@@ -66,46 +66,46 @@ const wlWanikaniCommonStylesCss = `
 }
 
 /* Add animations and styles to main and shortcut buttons */
-.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews,
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
     background: var(--review-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons,
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
     background: var(--lesson-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
-.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews,
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews {
     --start-pulse: var(--review-colour-darker);
     --end-pulse: var(--review-colour-lighter);
-    animation: buttonPulse 2s infinite; 
-} 
+    animation: buttonPulse 2s infinite;
+}
 
-.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
-.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons,
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons {
     --start-pulse: var(--lesson-colour-darker);
     --end-pulse: var(--lesson-colour-lighter);
-    animation: buttonPulse 2s infinite; 
+    animation: buttonPulse 2s infinite;
 }
 
 /********************************
  *  Animations
  ********************************/
-@keyframes buttonPulse { 
-    0% { 
-        box-shadow: 0 0 0 0 var(--start-pulse); 
-    } 
-    70% { 
-        box-shadow: 0 0 0 7px var(--white); 
-    } 
-    100% { 
-        box-shadow: 0 0 0 0 var(--end-pulse); 
-    } 
-} 
+@keyframes buttonPulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--start-pulse);
+    }
+    70% {
+        box-shadow: 0 0 0 7px var(--white);
+    }
+    100% {
+        box-shadow: 0 0 0 0 var(--end-pulse);
+    }
+}
 `;
 
 // ANCHOR wl-wanikani-custom-items.user.css
@@ -114,50 +114,50 @@ const wlWanikaniCustomItemsCss = `
  *  Items section and progress entry styles
  ********************************/
 /* Main wrapper styles */
- .custom-items { 
-    padding: 12px 24px; 
-    margin-bottom: 30px; 
-    background: var(--light-grey); 
-} 
+ .custom-items {
+    padding: 12px 24px;
+    margin-bottom: 30px;
+    background: var(--light-grey);
+}
 
-.custom-items section { 
-    margin-bottom: 0; 
-} 
+.custom-items section {
+    margin-bottom: 0;
+}
 
 /* Progress entry styles */
-.custom-items section .progress-entries { 
-    grid-template-columns: none; 
-    display: flex; 
-} 
+.custom-items section .progress-entries {
+    grid-template-columns: none;
+    display: flex;
+}
 
-.custom-items section .progress-entries .progress-entry { 
-    height: 40px; 
-} 
+.custom-items section .progress-entries .progress-entry {
+    height: 40px;
+}
 
-.custom-items section .progress-entries .progress-entry.radical, 
-.custom-items section .progress-entries .progress-entry.kanji { 
-    width: 40px; 
-} 
+.custom-items section .progress-entries .progress-entry.radical,
+.custom-items section .progress-entries .progress-entry.kanji {
+    width: 40px;
+}
 
 .custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
     background: var(--dark-grey);
 }
 
-.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon {
     height: 40px;
     font-size: 21px;
 }
 
-.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover {
     text-decoration: none;
 }
 
 /********************************
  *  Item level and SRS level indicator styles
- ********************************/  
+ ********************************/
 /* Level and SRS level indicator wrapper styles */
 .custom-items section .progress-entries .progress-entry a .progress-item-level,
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level {
     position: absolute;
     width: 15px;
     border: 0.5px solid var(--white);
@@ -168,61 +168,61 @@ const wlWanikaniCustomItemsCss = `
 }
 
 /* Item level styles */
-.custom-items section .progress-entries .progress-entry a .progress-item-level { 
+.custom-items section .progress-entries .progress-entry a .progress-item-level {
     background: var(--dark-green);
     bottom: -5px;
     right: -5px;
 }
 
 /* Item SRS level styles */
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level {
     top: -5px;
     right: -5px;
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-0 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-0 {
     background: var(--dark-green);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 {
     background: var(--black);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 {
     background: var(--dark-grey);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 {
     background: var(--lesson-colour-lighter);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 {
     background: var(--lesson-colour-darker);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 {
     background: var(--purple);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-6 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-6 {
     background: var(--dark-blue);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-7 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-7 {
     background: var(--review-colour-darker);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-8 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-8 {
     background: var(--gold-darker);
 }
 
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-9 { 
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-9 {
     background: var(--maroon);
 }
 
 /********************************
  *  Tooltip styles
- ********************************/  
+ ********************************/
 /* Item tooltip wrapper styles */
 .custom-item-tooltip .custom-item-tooltip-text {
     visibility: hidden;
@@ -263,7 +263,7 @@ const wlWanikaniCustomItemsCss = `
 .custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-not-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
     background: var(--black);
 }
-  
+
 .custom-item-tooltip .custom-item-tooltip-text::after {
     content: "";
     position: absolute;
@@ -274,7 +274,7 @@ const wlWanikaniCustomItemsCss = `
     border-style: solid;
     border-color: var(--transparent-black) transparent transparent transparent;
 }
-  
+
 .custom-item-tooltip:hover .custom-item-tooltip-text {
     visibility: visible;
     opacity: 1;
@@ -376,7 +376,7 @@ const wlWanikaniCustomDashboardCss = `
     content: '';
     position: relative;
     left: 50%;
-    width: 20px; 
+    width: 20px;
     height: 20px;
     border: 1px solid var(--green);
     border-radius: 50%;
@@ -470,9 +470,11 @@ const wlWanikaniCustomDashboardCss = `
 
 .level-progress-indicator > span {
     position: absolute;
+    width: 31px;
     margin-top: 20px;
     margin-left: 15px;
     font-size: 10px;
+    text-align: center;
 }
 
 .level-progress-indicator .progress-ring .progress-ring-circle {
@@ -516,7 +518,7 @@ const wlWanikaniCustomDashboardCss = `
 
 /********************************
  *  Animations
- ********************************/  
+ ********************************/
 @keyframes loaderDots {
     0% {
         box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
@@ -555,6 +557,14 @@ const wlWanikaniCustomDashboardCss = `
 
 // SECTION Javascript code
 // SECTION wl-wanikani-common-functions.user.js
+
+/*************************************************
+ *  ANCHOR Variable initialisations
+ *************************************************/
+const scriptName = 'Wanikani Custom Dashboard';
+const scriptId = 'wanikani_custom_dashboard';
+
+
 /*************************************************
  *  ANCHOR Common debugger function
  *************************************************/
@@ -611,7 +621,7 @@ function autoRefreshOnNextReviewHour(summaryData) {
             objHasReviews = true;
         }
     };
-    
+
     if (timeoutValue <= 0) {
         location.reload();
     }
@@ -668,7 +678,7 @@ function dashboardLoader(loaded = false) {
 
 
 /*************************************************
- *  ANCHOR Alter the Lesson and Review shortcut navigations to be in 
+ *  ANCHOR Alter the Lesson and Review shortcut navigations to be in
  *  Japanese
  *************************************************/
 function updateShortcutNavigation(item) {
@@ -691,19 +701,19 @@ function updateShortcutNavigation(item) {
 
 
 /*************************************************
- *  ANCHOR Add slide toggle effects to the SRS Progress Summary 'show' 
+ *  ANCHOR Add slide toggle effects to the SRS Progress Summary 'show'
  *  buttons to show SRS Progress Summary information
  *************************************************/
 function setProgressSummaryButtonEffects() {
     $('.custom-dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each(function (index, item) {
-        let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');    
+        let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');
         let progressSummarySection = $('.custom-dashboard .custom-dashboard-summary-items.' + currentProgressType);
 
         progressSummarySection.slideToggle();
-        
+
         $(this).on('click', function() {
             wlWanikaniDebug('Clicked class type: ', currentProgressType);
-            
+
             $(this).toggleClass('selected');
             progressSummarySection.slideToggle();
         });
@@ -725,6 +735,81 @@ function setFutureReviewsTooltip() {
         }
     );
 }
+
+/*************************************************
+ *  ANCHOR Loads WKOF settings
+ *************************************************/
+function loadWkofSettings() {
+    let defaults = {
+        show_difficult_items: false,
+        safe_level: 3,
+        srs_stage: 4
+    };
+    wkof.Settings.load(scriptId, defaults);
+}
+
+/*************************************************
+ *  ANCHOR Loads WKOF menu
+ *************************************************/
+function loadWkofMenu() {
+    let config = {
+        name: scriptId,
+        submenu: 'Settings',
+        title: scriptName,
+        on_click: openSettings
+    };
+
+    wkof.Menu.insert_script_link(config);
+}
+
+/*************************************************
+ *  ANCHOR Initiates WKOF settings on open
+ *************************************************/
+function openSettings(items) {
+    var config = {
+        script_id: scriptId,
+        title: scriptName,
+        content: {
+            show_difficult_items: {
+                type: 'checkbox',
+                label: 'Show Difficult Items section',
+                hover_tip: 'Check if you want to see the Difficult Items section. Defaults to not show.',
+                default: false
+            },
+            safe_level: {
+                type: 'number',
+                label: '"Safe Level" difference',
+                hover_tip: 'This is a number that is subtracted from your current level, and defines what the maximum level of the Difficult Items is to show. Defaults to 3.',
+                multi: false,
+                min: 0,
+                max: 59,
+                default: 3
+            },
+            srs_stage: {
+                type: 'dropdown',
+                label: 'SRS Stage cap',
+                hover_tip: 'The maximum SRS stage that a Difficult Item can be shown with. Default is Apprentice 4.',
+                content: {
+                    1: 'Apprentice 1',
+                    2: 'Apprentice 2',
+                    3: 'Apprentice 3',
+                    4: 'Apprentice 4',
+                    5: 'Guru 1',
+                    6: 'Guru 2',
+                    7: 'Master',
+                    8: 'Enlightened',
+                    9: 'Burned'
+                },
+                default: 4
+            }
+        },
+        on_save: (()=>{
+            generateDifficultItemsSection(wkofItemsData.AllData);
+        })
+    };
+    let dialog = new wkof.Settings(config);
+    dialog.open();
+};
 // !SECTION wl-wanikani-common-functions.user.js
 
 // SECTION wl-wanikani-wkof-data-maniplators.user.js
@@ -755,61 +840,46 @@ const wanikaniSrsStages = {
 
 
 /*************************************************
- *  ANCHOR Critical item filter
+ *  ANCHOR Difficult item filter
  *************************************************/
-function isCritical(item) {
-    wlWanikaniDebug('Check if critical.');
-    // 1 - appr1, 2 - appr2, 3 - appr3, 4 - appr4, 5 - guru1, 6 - guru2, 7 - mast, 8 - enli
-    if ("assignments" in item) {
-        const isLowerLevel = item.data.level <= wkofItemsData.SafeLevel ? true : false;
-        const isApprentice = Object.values(wanikaniSrsStages.apprentice).includes(item.assignments.srs_stage);
-        const itemCritical = isLowerLevel && isApprentice;
-
-        if (itemCritical) {
-            item.critical_level = (wkofItemsData.SafeLevel - item.data.level)/item.assignments.srs_stage;
-
-            return item;
+function isDifficult(dataItems) {
+    wlWanikaniDebug('Check if difficult.', dataItems);
+    
+    let returnItems = []
+    $.each(dataItems, function (index, dataItem) {
+        if ("assignments" in dataItem) {
+            if ((dataItem.data.level <= wkofItemsData.SafeLevel) && (dataItem.assignments.srs_stage <= wkof.settings[scriptId].srs_stage)) {
+                returnItems.push(dataItem);
+            }
         }
-    }
+    });
+    
+    return returnItems;
 };
-
-
-/*************************************************
- *  ANCHOR Sorting functions
- *************************************************/
-// NOTE Sorts items based on critical level
-function criticalSort(itemsToSort) {
-    return itemsToSort.sort(function(a, b) {
-               return (a.critical_level == b.critical_level)
-                   ? a.assignments.srs_stage - b.assignments.srs_stage
-                   : b.critical_level - a.critical_level;
-           });
-}
 
 // NOTE Sorts items based on level
 function levelSort(itemsToSort) {
     return itemsToSort.sort(function(a, b) {
-               return (a.data.level == b.data.level)
-                   ? a.assignments.srs_stage - b.assignments.srs_stage
-                   : a.data.level - b.data.level;
-           });
-}
+        return (a.data.level == b.data.level)
+             ? a.assignments.srs_stage - b.assignments.srs_stage
+             : a.data.level - b.data.level;
+    });
+};
 
 
 /*************************************************
- *  ANCHOR Generate critical items data object
- *  TODO Refactor or remove
+ *  ANCHOR Generate difficult items data object
  *************************************************/
-function getCriticalItemsData(items) {
-    wlWanikaniDebug('Getting critical items.', items);
-    
-    wkofItemsData.SafeLevel = items.UsersData.data.level - 3;
-    wkofItemsData.CustomItems = items.ItemsData.filter(isCritical);
-    wkofItemsData.CustomItems = criticalSort(wkofItemsData.CustomItems);
+function getDifficultItemsData(data) {
+    wlWanikaniDebug('Getting difficult items.', data);
 
-    wlWanikaniDebug('Got critical items, show data.', wkofItemsData);
+    wkofItemsData.SafeLevel = data.UsersData.data.level - wkof.settings[scriptId].safe_level;
+    wkofItemsData.DifficultItems = isDifficult(data.ItemsData);
+    wkofItemsData.DifficultItems = levelSort(wkofItemsData.DifficultItems);
+
+    wlWanikaniDebug('Got difficult items, show data.', wkofItemsData);
     return wkofItemsData;
-}; 
+};
 
 
 /*************************************************
@@ -862,7 +932,7 @@ function getSubjectData(data, type, subjectIds = []) {
     returnData.kanji = (returnData.kanji.length > 0) ? levelSort(returnData.kanji) : [];
     returnData.radical = (returnData.radical.length > 0) ? levelSort(returnData.radical) : [];
     returnData.vocabulary = (returnData.vocabulary.length > 0) ? levelSort(returnData.vocabulary) : [];
-    
+
     wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
     return returnData;
 };
@@ -893,7 +963,7 @@ function getNextReviewTime(data) {
             }
         }
     });
-    
+
     wlWanikaniDebug('Next review data.', nextReviewData);
     return nextReviewData;
 };
@@ -904,7 +974,7 @@ function getNextReviewTime(data) {
  *************************************************/
 function getLevelProgress(data) {
     wlWanikaniDebug('Getting level progress data.');
-    
+
     let progressData = {
         Kanji: {
             InProgress: new Array(),
@@ -944,12 +1014,12 @@ function getLevelProgress(data) {
             }
         }
     });
-    
-    // NOTE Calculation for how many kanji are needed to pass the level 
+
+    // NOTE Calculation for how many kanji are needed to pass the level
     progressData.KanjiToPass = Math.ceil(
         (progressData.Kanji.InProgress.length + progressData.Kanji.Passed.length + progressData.Kanji.Locked.length)
         * 0.9);
-    
+
     wlWanikaniDebug('Level progress data.', progressData);
     return progressData;
 };
@@ -962,7 +1032,7 @@ function getLevelProgress(data) {
  *************************************************/
 function itemsCharacterCallback (item){
     let itemsData = item.data;
-    
+
     if (itemsData.characters != null) {
         return itemsData.characters;
     }
@@ -994,9 +1064,9 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
     wlWanikaniDebug('Generating custom items table (' + customClass + ') HTML with the following data.', customItemsData);
 
     let headerMessageCount = headerCount ? '（' + customItemsData.length + '）' : '';
-    let headerMessage = (customItemsData.length == 0) 
-                        ? 'ごめんなさい, 君は' + headerMessageType + 'ありません.'
-                        : '君は' + headerMessageType + '項目あります!' + headerMessageCount;
+    let headerMessage = (customItemsData.length == 0)
+                        ? 'ごめんなさい, 君は' + headerMessageType + '項目をありません.'
+                        : '君は' + headerMessageType + '項目をあります!' + headerMessageCount;
 
     let customTableHTML = `
         <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">
@@ -1024,16 +1094,9 @@ function generateCustomItemsHTML(items, type = '') {
 
     if (items.length > 0) {
         $.each(items, function(index, item) {
-            let itemAddedStyle = '';
             let itemSrsLevel = '';
             let itemType = item.object;
             let customItemTooltipHTML = generateItemTooltipHTML(item);
-
-            if (type == 'critical') {
-                if (item.critical_level > 0) {
-                    itemAddedStyle = 'style="box-shadow: inset 0 0 ' + (item.critical_level * 25) + 'px black"';
-                }
-            }
 
             if ('assignments' in item) {
                 itemSrsLevel = '<span class="progress-item-srs-level srs-level-' + item.assignments.srs_stage + '">' + item.assignments.srs_stage + '</span>';
@@ -1042,7 +1105,7 @@ function generateCustomItemsHTML(items, type = '') {
             customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ customItemTooltipHTML }
-                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'locked' ? type : '' }" lang="ja" ${ itemAddedStyle }>
+                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'locked' ? type : '' }" lang="ja">
                             <div>${ itemsCharacterCallback(item) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
                             ${ itemSrsLevel }
@@ -1127,7 +1190,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
                 <div class="custom-item-tooltip-text-entries item-readings onyomi">音読み：${ itemReadingOnyomiTooltipItems }</div>
                 `;
             }
-            
+
             if (itemReadingKunyomiTooltipItems != '') {
                 returnTooltipTextHTML += `
                 <div class="custom-item-tooltip-text-entries item-readings kunyomi">訓読み：${ itemReadingKunyomiTooltipItems }</div>
@@ -1179,7 +1242,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
             </a>
     `
     : '';
-    
+
     let summaryHTML = `
         <div class="custom-summary ${ htmlClasses }">
             <h2>${ divHeaderText }</h2>
@@ -1253,7 +1316,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
                                     : dataItem.text + 'の次の復習（' + nextReviewTotalCount + '）';
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass, nextReviewDataTitle));
         });
-    
+
         if (nextReviewData.length > 1) {
             futureReviewsHTML += `<span class="custom-lessons-and-reviews-summary-tooltip future-reviews">`;
 
@@ -1270,6 +1333,23 @@ function generateFutureReviewsHTML(data, nextReviewData) {
 
     wlWanikaniDebug('Generated the following future reviews HTML.', returnHTML);
     return returnHTML;
+};
+
+/*************************************************
+ *  ANCHOR Difficult Items Table HTML generator
+ *************************************************/
+function generateDifficultItemsSection(data,  insertAfterElement = '.custom-dashboard .custom-dashboard-progress-wrapper') {
+    const difficultItemsClass = 'custom-dashboard-difficult-items';
+
+    if ($('.' + difficultItemsClass).length > 0) {
+        $('.' + difficultItemsClass).remove();
+    }
+
+    let difficultItemsData = getDifficultItemsData(data);
+    let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
+    let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems, difficultItemsClass, '苦労', difficultItemsHTML, true);
+
+    $(difficultItemsTableHTML).insertAfter(insertAfterElement);
 };
 // !SECTION wl-wanikani-html-generators.user.js
 
@@ -1304,7 +1384,7 @@ function generateDashboardWrapperHTML() {
 
     // NOTE Add custom dashboard wrapper to page
     $(dashboardWrapperHTML).insertAfter('.footer-adjustment .custom-dashboard-loader');
-    
+
     wlWanikaniDebug('Generated the following custom dashboard wrapper HTML.', dashboardWrapperHTML);
 };
 
@@ -1314,11 +1394,6 @@ function generateDashboardWrapperHTML() {
  *************************************************/
 function appendDashboardContentHTML(data) {
     wlWanikaniDebug('Generating custom dashboard content HTML with the following data.', data);
-
-    // NOTE Get critical items data and generate HTML for section
-    let criticalItemsData = getCriticalItemsData(data);
-    let criticalItemsHTML = generateCustomItemsHTML(criticalItemsData.CustomItems, 'critical');
-    let criticalItemsTableHTML = generateCustomItemsTableHTML(criticalItemsData.CustomItems, 'custom-dashboard-critical-items', 'クリティカル', criticalItemsHTML, true);
 
     // NOTE Get level progress data and generate HTML for section
     let levelProgressData = getLevelProgress(data);
@@ -1377,7 +1452,7 @@ function appendDashboardContentHTML(data) {
     let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData, 'custom-dashboard-summary-items master', '主人', masterSummaryItemsHTML);
     let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened', '悟りを開いた', enlightenedSummaryItemsHTML);
     let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned', '焼け', burnedSummaryItemsHTML);
-    
+
     // NOTE Generate custom dashboard content HTML
     let customLessonsAndReviewsContent = `
         ${ generateSummaryHTML(lessonSummaryData, 'custom-lessons-and-reviews-summary lessons-summary', '授業（' + lessonSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button lessons-button', '授業を開始') }
@@ -1411,7 +1486,11 @@ function appendDashboardContentHTML(data) {
     $(levelProgressItemsTableHTML).insertAfter(customLessonsAndReviewsElement);
     customDashboardProgressElement.append(customDashboardProgressContent);
     customDashboardProgressWrapperElement.append(customDashboardProgressAfterContent);
-    $(criticalItemsTableHTML).insertAfter(customDashboardProgressWrapperElement);
+
+    // NOTE Load difficult items if enabled
+    if (wkof.settings[scriptId].show_difficult_items) {
+        generateDifficultItemsSection(data);
+    }
 
     // NOTE Apply level progress circle, lesson/review and srs progress summary button effects, and next review tooltip hover
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
@@ -1419,7 +1498,7 @@ function appendDashboardContentHTML(data) {
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
     setProgressSummaryButtonEffects();
     setFutureReviewsTooltip();
-    
+
     wlWanikaniDebug('Generated all content HTML and appended to custom dashboard.');
 };
 // !SECTION wl-wanikani-custom-dashboard.user.js
@@ -1433,7 +1512,8 @@ function appendDashboardContentHTML(data) {
     const isDebug = true;
 
     // WKOF modules required
-    const wkofModules = 'Apiv2, ItemData';
+    const wkofSettingsModules = 'Menu, Settings';
+    const wkofDataModules = 'Apiv2, ItemData';
 
     // General WKOF item data config
     const itemDataConfig = {
@@ -1457,14 +1537,19 @@ function appendDashboardContentHTML(data) {
     dashboardLoader();
     generateDashboardWrapperHTML();
 
-    wkof.include(wkofModules);
-
-    wkof.ready(wkofModules)
+    wkof.include(wkofSettingsModules);
+    wkof.ready(wkofSettingsModules)
+        .then(loadWkofMenu)
+        .then(loadWkofSettings);
+    
+    wkof.include(wkofDataModules);
+    wkof.ready(wkofDataModules)
         .then(getWkofDataObject)
         .then(function(data) {
+            wkofItemsData.AllData = data;
             setWlWanikaniDebugMode(isDebug);
-            appendDashboardContentHTML(data);
-            autoRefreshOnNextReviewHour(data.SummaryData);
+            appendDashboardContentHTML(wkofItemsData.AllData);
+            autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
             updateShortcutNavigation('lessons');
             updateShortcutNavigation('reviews');
             navShortcutReviewAndLessonButtonPulseEffect();
@@ -1480,7 +1565,7 @@ function appendDashboardContentHTML(data) {
     //     const styleCss = GM_getResourceText(cssFileName);
     //     GM_addStyle(styleCss);
     // };
-    
+
     // function addFunctions(jsFileName) {
     //     const functionJs = GM_getResourceText(jsFileName);
 
@@ -1497,16 +1582,6 @@ function appendDashboardContentHTML(data) {
     function addStyles(styleCss) {
         GM_addStyle(styleCss);
     };
-    
-    function addFunctions(functionJs) {
-        let script = document.createElement('script');
-
-        script.innerHTML = functionJs;
-        script.type = 'text/javascript';
-        script.className = 'custom-js';
-
-        document.body.appendChild(script);
-    };
 
 
     /*************************************************
@@ -1514,12 +1589,11 @@ function appendDashboardContentHTML(data) {
      *************************************************/
     function wkofInstallCheck() {
         if (!wkof) {
-            const script_name = 'Wanikani Custom Dashboard';
-            let response = confirm(script_name + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
+            let response = confirm(scriptName + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
             if (response) {
                 window.location.href = 'https://community.wanikani.com/t/instructions-installing-wanikani-open-framework/28549';
             };
-    
+
             return;
         };
     };
@@ -1535,7 +1609,7 @@ function appendDashboardContentHTML(data) {
         getWkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
         getWkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
         getWkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
-        
+
         console.log('WKOF data retrieval complete.');
         return getWkofData;
     };
