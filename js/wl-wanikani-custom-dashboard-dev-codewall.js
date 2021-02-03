@@ -1344,11 +1344,13 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.custom-dash
         $('.' + difficultItemsClass).remove();
     }
 
-    let difficultItemsData = getDifficultItemsData(data);
-    let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
-    let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems, difficultItemsClass, '苦労', difficultItemsHTML, true);
+    if (wkof.settings[scriptId].show_difficult_items) {
+        let difficultItemsData = getDifficultItemsData(data);
+        let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
+        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems, difficultItemsClass, '苦労', difficultItemsHTML, true);
 
-    $(difficultItemsTableHTML).insertAfter(insertAfterElement);
+        $(difficultItemsTableHTML).insertAfter(insertAfterElement);
+    }
 };
 // !SECTION wl-wanikani-html-generators.user.js
 
