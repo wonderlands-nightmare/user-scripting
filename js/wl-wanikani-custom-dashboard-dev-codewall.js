@@ -555,7 +555,6 @@ const wlWanikaniCustomDashboardCss = `
 // !SECTION CSS code
 
 
-// SECTION Javascript code
 // SECTION wl-wanikani-common-functions.user.js
 
 /*************************************************
@@ -1657,4 +1656,3 @@ function appendDashboardContentHTML(data) {
     };
 })();
 // !SECTION wl-wanikani-code-executor.user.js
-// !SECTION Javascript code
