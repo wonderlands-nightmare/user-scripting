@@ -21,6 +21,9 @@
     /*************************************************
      *  ANCHOR Variable initialisation
      *************************************************/
+    // Change this to turn debugging on
+    const isDebug = false;
+
     // WKOF modules required
     const wkofSettingsModules = 'Menu, Settings';
     const wkofDataModules = 'Apiv2, ItemData';
