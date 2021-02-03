@@ -21,9 +21,6 @@
     /*************************************************
      *  ANCHOR Variable initialisation
      *************************************************/
-    // Change this to turn debugging on
-    const isDebug = false;
-
     // WKOF modules required
     const wkofSettingsModules = 'Menu, Settings';
     const wkofDataModules = 'Apiv2, ItemData';
@@ -60,7 +57,6 @@
         .then(getWkofDataObject)
         .then(function(data) {
             wkofItemsData.AllData = data;
-            setWlWanikaniDebugMode(isDebug);
             appendDashboardContentHTML(wkofItemsData.AllData);
             autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
             updateShortcutNavigation('lessons');

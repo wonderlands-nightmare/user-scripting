@@ -14,17 +14,9 @@ const scriptId = 'wanikani_custom_dashboard';
 /*************************************************
  *  ANCHOR Common debugger function
  *************************************************/
-// Only used to initialise variable for code in this file
-let debugMode = false;
-
-// Called from main userscript to set debug mode
-function setWlWanikaniDebugMode(debugModeBoolean) {
-    debugMode = debugModeBoolean;
-};
-
 // Actual debug function
 function wlWanikaniDebug(debugMessage, debugItem = '') {
-    if (debugMode) {
+    if (wkof.settings[scriptId].debug) {
         console.log(debugMessage, debugItem);
     }
 };
@@ -189,7 +181,8 @@ function loadWkofSettings() {
     let defaults = {
         show_difficult_items: false,
         safe_level: 3,
-        srs_stage: 4
+        srs_stage: 4,
+        debug: false
     };
     wkof.Settings.load(scriptId, defaults);
 }
@@ -247,6 +240,12 @@ function openSettings(items) {
                     9: 'Burned'
                 },
                 default: 4
+            },
+            debug: {
+                type: 'checkbox',
+                label: 'Turn on consol debug',
+                hover_tip: 'Useful for reporting bugs and providing or viewing loaded data.',
+                default: false
             }
         },
         on_save: (()=>{
