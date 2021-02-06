@@ -1,0 +1,24 @@
+/***************************
+ * Custom styling for WaniKani Custom Dashboard settings
+ ***************************/
+ #wkof_ds div[role="dialog"] {
+    width: 30%;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+#wkof_ds #wkofs_wanikani_custom_dashboard #wanikani_custom_dashboard_translations_page .wcd-dialog-item {
+    padding: 5px;
+    background: var(--grey);
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+}
+
+#wkof_ds #wkofs_wanikani_custom_dashboard #wanikani_custom_dashboard_translations_page .wcd-dialog-word {
+    display: inline-block;
+}

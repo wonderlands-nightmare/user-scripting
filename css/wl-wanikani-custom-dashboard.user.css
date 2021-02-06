@@ -135,7 +135,7 @@
 /* Level progress indictor ring styles */
 .level-progress-indicator {
     position: absolute;
-    padding-top: 10px;
+    margin-top: 35px;
 }
 
 .level-progress-indicator > span {
@@ -161,14 +161,14 @@
 /* Level progress entry and div styles */
 .custom-div.progress-entries {
     width: 100%;
-    padding: 20px 10px;
+    padding: 0 10px 20px 10px;
 }
 
 .custom-div.border-bottom {
     border-bottom: var(--dark-grey) 1px solid;
 }
 
-.custom-div.kanji-in-progress .progress-entry:first-child {
+.custom-div.kanji-in-progress .progress-entry:first-of-type {
     margin-left: 65px;
 }
 

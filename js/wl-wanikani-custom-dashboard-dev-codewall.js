@@ -130,6 +130,10 @@ const wlWanikaniCustomItemsCss = `
     display: flex;
 }
 
+.custom-items section .progress-entries .progress-entry-header {
+    width: 100%;
+}
+
 .custom-items section .progress-entries .progress-entry {
     height: 40px;
 }
@@ -465,7 +469,7 @@ const wlWanikaniCustomDashboardCss = `
 /* Level progress indictor ring styles */
 .level-progress-indicator {
     position: absolute;
-    padding-top: 10px;
+    margin-top: 35px;
 }
 
 .level-progress-indicator > span {
@@ -491,14 +495,14 @@ const wlWanikaniCustomDashboardCss = `
 /* Level progress entry and div styles */
 .custom-div.progress-entries {
     width: 100%;
-    padding: 20px 10px;
+    padding: 0 10px 20px 10px;
 }
 
 .custom-div.border-bottom {
     border-bottom: var(--dark-grey) 1px solid;
 }
 
-.custom-div.kanji-in-progress .progress-entry:first-child {
+.custom-div.kanji-in-progress .progress-entry:first-of-type {
     margin-left: 65px;
 }
 
@@ -552,6 +556,35 @@ const wlWanikaniCustomDashboardCss = `
 }
 `;
 
+/***************************
+ * ANCHOR wl-wanikani-settings-dialog.user.css
+ ***************************/
+const wlWanikaniSettingsDialogStylesCss = `
+/***************************
+ * Custom styling for WaniKani Custom Dashboard settings
+ ***************************/
+#wkof_ds div[role="dialog"] {
+    width: 30%;
+    height: fit-content;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+#wkof_ds #wkofs_wanikani_custom_dashboard #wanikani_custom_dashboard_translations_page .wcd-dialog-item {
+    padding: 5px;
+    background: var(--grey);
+    border: 1px solid var(--light-grey);
+    border-radius: 5px;
+}
+
+#wkof_ds #wkofs_wanikani_custom_dashboard #wanikani_custom_dashboard_translations_page .wcd-dialog-word {
+    display: inline-block;
+}
+`;
 // !SECTION CSS code
 
 
@@ -765,50 +798,171 @@ function loadWkofMenu() {
  *  ANCHOR Initiates WKOF settings on open
  *************************************************/
 function openSettings(items) {
-    var config = {
+    let config = {
         script_id: scriptId,
         title: scriptName,
         content: {
-            show_difficult_items: {
-                type: 'checkbox',
-                label: 'Show Difficult Items section',
-                hover_tip: 'Check if you want to see the Difficult Items section. Defaults to not show.',
-                default: false
-            },
-            safe_level: {
-                type: 'number',
-                label: '"Safe Level" difference',
-                hover_tip: 'This is a number that is subtracted from your current level, and defines what the maximum level of the Difficult Items is to show. Defaults to 3.',
-                multi: false,
-                min: 0,
-                max: 59,
-                default: 3
-            },
-            srs_stage: {
-                type: 'dropdown',
-                label: 'SRS Stage cap',
-                hover_tip: 'The maximum SRS stage that a Difficult Item can be shown with. Default is Apprentice 4.',
+            wanikani_custom_dashabord_tabset: {
+                type: 'tabset',
                 content: {
-                    1: 'Apprentice 1',
-                    2: 'Apprentice 2',
-                    3: 'Apprentice 3',
-                    4: 'Apprentice 4',
-                    5: 'Guru 1',
-                    6: 'Guru 2',
-                    7: 'Master',
-                    8: 'Enlightened',
-                    9: 'Burned'
-                },
-                default: 4
+                    settings_page: {
+                        type: 'page',
+                        label: 'Settings',
+                        hover_tip: 'Main WaniKani Custom Dashboard settings.',
+                        content: {
+                            show_difficult_items: {
+                                type: 'checkbox',
+                                label: 'Show Difficult Items section',
+                                hover_tip: 'Check if you want to see the Difficult Items section. Defaults to not show.',
+                                default: false
+                            },
+                            safe_level: {
+                                type: 'number',
+                                label: '"Safe Level" difference',
+                                hover_tip: 'This is a number that is subtracted from your current level, and defines what the maximum level of the Difficult Items is to show. Defaults to 3.',
+                                multi: false,
+                                min: 0,
+                                max: 59,
+                                default: 3
+                            },
+                            srs_stage: {
+                                type: 'dropdown',
+                                label: 'SRS Stage cap',
+                                hover_tip: 'The maximum SRS stage that a Difficult Item can be shown with. Default is Apprentice 4.',
+                                content: {
+                                    1: 'Apprentice 1',
+                                    2: 'Apprentice 2',
+                                    3: 'Apprentice 3',
+                                    4: 'Apprentice 4',
+                                    5: 'Guru 1',
+                                    6: 'Guru 2',
+                                    7: 'Master',
+                                    8: 'Enlightened',
+                                    9: 'Burned'
+                                },
+                                default: 4
+                            }
+                        }
+                    },
+                    translations_page: {
+                        type: 'page',
+                        label: 'Translations',
+                        hover_tip: 'Having trouble with all the Japanese? Here are the translations!',
+                        content: {
+                            words_phrases_group: {
+                                type: 'group',
+                                label: 'Words',
+                                content: {
+                                    words_html: {
+                                        type: 'html',
+                                        html: '<div class="wcd-dialog-item wcd-dialog-word">授業</br>じゅぎょう</br>Lesson</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">復習</br>ふくしゅう</br>Review</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">漢字</br>かんじ</br>Kanji</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">部首</br>ぶしゅ</br>Radical</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">単語</br>たんご</br>Vocabulary</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">見習</br>みんあらい</br>Apprentice</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">達人</br>たつじん</br>Guru</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">主人</br>しゅじん</br>Master</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">悟りを開いた</br>さとりをあいた</br>Enlightened</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">焼け</br>やけ</br>Burned</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">見せて</br>みせて</br>Look at</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">音読み</br>おんよみ</br>Onyomi</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">訓読み</br>きんよみ</br>Kunyomi</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">名乗り</br>なのり</br>Nanori</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">苦労</br>くろう</br>Difficult</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">レベルすすむ</br>れべるすすむ</br>Level progress</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-word">漢字ロック</br>かんじろっく</br>Kanji locked</div>'
+                                    }
+                                }
+                            },
+                            sentences_phrases_group: {
+                                type: 'group',
+                                label: 'Sentences and phrases',
+                                content: {
+                                    sentences_phrases_html: {
+                                        type: 'html',
+                                        html: '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">漢字と部首と単語が合計'
+                                            + '</br>かんじとぶしゅとたんごがごうけい'
+                                            + '</br>Total number of kanji, radicals and vocabulary'
+                                            + '</br>A general statement sentence.</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">次の復習をなんでもない'
+                                            + '</br>つぎのふくしゅをなんでもない'
+                                            + '</br>No next review'
+                                            + '</br>Highlights when there is no reviews available for the next 24 hours.</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">午前__時の次の復習　・　午後__時の次の復習'
+                                            + '</br>ごぜん__じのつぎのふくしゅ　・　ごご__じのつぎのふくしゅ'
+                                            + '</br>Next review at __ am/pm'
+                                            + '</br>These two statements are repeated with the hour that the review is due. 前（ぜん）is AM and 後（ご）is PM.</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__を開始'
+                                            + '</br>__をかいし'
+                                            + '</br>__ start'
+                                            + '</br>This phrase is repeated for both Lesson and Review section buttons.</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__進行中'
+                                            + '</br>__しんこうちゅう'
+                                            + '</br>__ in progress'
+                                            + '</br>This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__合格'
+                                            + '</br>__ごうかく'
+                                            + '</br>__ passed'
+                                            + '</br>This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">君は__項目をあります!'
+                                            + '</br>きみは__こうもくをあります'
+                                            + '</br>You have __ items!'
+                                            + '</br>This sentence is repeated when there are items to be looked at in all main sections.</div>'
+                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">ごめんなさい, 君は__項目をありません.'
+                                            + '</br>ごめんなさい、君は__こうもくをありません。'
+                                            + "</br>Sorry, you don't have any __ items."
+                                            + '</br>This sentence is repeated when there are no items to be looked at in any of the main sections.</div>'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
-        on_save: (()=>{
+        on_save: (() => {
             generateDifficultItemsSection(wkofItemsData.AllData);
+        }),
+        on_close: (() => {
+            if ($('.custom-dialog-css').length > 0) {
+                $('.custom-dialog-css').remove();
+            }
         })
     };
     let dialog = new wkof.Settings(config);
     dialog.open();
+    removeInlineCssFromSettingsDialog();
 };
+
+
+/*************************************************
+ *  ANCHOR Removes inline styles from WaniKani Custom Dashboard dialog
+ *************************************************/
+function removeInlineCssFromSettingsDialog() {
+    let elementsToRemoveInlineStylesFrom = {
+        mainDialog: '#wkof_ds div[role="dialog"]',
+        mainDialogContent: '#wkof_ds #wkofs_wanikani_custom_dashboard.ui-dialog .ui-dialog-content'
+    };
+
+    if ($('.custom-dialog-css').length == 0) {
+        // TODO uncomment for release
+        // const dialogCss = GM_getResourceText("DIALOG_CSS");
+        // TODO for dev only
+        const dialogCss = wlWanikaniSettingsDialogStylesCss;
+
+        let style = document.createElement('style');
+
+        style.innerHTML = dialogCss;
+        style.className = 'custom-dialog-css';
+
+        document.head.appendChild(style);
+    }
+
+    $.each(elementsToRemoveInlineStylesFrom, function (index) {
+        $(elementsToRemoveInlineStylesFrom[index]).removeAttr('style');
+    });
+}
 // !SECTION wl-wanikani-common-functions.user.js
 
 // SECTION wl-wanikani-wkof-data-maniplators.user.js
@@ -1407,18 +1561,23 @@ function appendDashboardContentHTML(data) {
     let levelProgressItemsHTML = `
         ${ levelProgressCircleHTML }
         <div class="progress-entries custom-div border-bottom kanji-in-progress ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
+            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">漢字進行中</h2>
             ${ levelProgressKanjiInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-in-progress ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
+            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">部首進行中</h2>
             ${ levelProgressRadicalsInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom kanji-passed ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
+            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">漢字合格</h2>
             ${ levelProgressKanjiPassedHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-passed ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
+            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">部首合格</h2>
             ${ levelProgressRadicalsPassedHTML }
         </div>
         <div class="progress-entries custom-div kanji-locked ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
+            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">漢字ロック</h2>
             ${ levelProgressKanjiLockedHTML }
         </div>
     `;

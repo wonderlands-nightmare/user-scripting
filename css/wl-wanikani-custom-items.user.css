@@ -16,7 +16,11 @@
 .custom-items section .progress-entries { 
     grid-template-columns: none; 
     display: flex; 
-} 
+}
+
+.custom-items section .progress-entries .progress-entry-header {
+    width: 100%;
+}
 
 .custom-items section .progress-entries .progress-entry { 
     height: 40px; 
