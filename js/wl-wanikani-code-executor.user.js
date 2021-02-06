@@ -142,7 +142,8 @@
         addFunctions("DASHBOARD_JS");
         
         // Get CSS for dialog styles
-        wcdDialogCss = GM_getResourceText("DIALOG_CSS");
+        const dialogCss = GM_getResourceText("DIALOG_CSS");
+        setDialogCss(dialogCss);
 
         console.log('All Add CSS and JS functions have loaded.');
     };
