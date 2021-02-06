@@ -32,6 +32,12 @@ function wlWanikaniDebug(debugMessage, debugItem = '') {
     }
 };
 
+function setDialogCss(dialogCss) {
+    wcdDialogCss = dialogCss;
+}
+
+
+
 /*************************************************
  *  ANCHOR Add pulse effect for lesson and review buttons
  *************************************************/
