@@ -34,7 +34,8 @@ function wlWanikaniDebug(debugMessage, debugItem = '') {
 
 function setDialogCss(dialogCss) {
     wcdDialogCss = dialogCss;
-}
+    wlWanikaniDebug('Dialog CSS is', wcdDialogCss);
+};
 
 
 
