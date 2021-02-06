@@ -2,7 +2,6 @@
 // @name         WaniKani Custom Dashboard Common Functions
 // @namespace    https://github.com/wonderlands-nightmare
 // @author       Wonderlands-Nightmares
-// @grant        GM_getResourceText
 // ==/UserScript==
 
 /*************************************************
@@ -10,6 +9,9 @@
  *************************************************/
 const scriptName = 'Wanikani Custom Dashboard';
 const scriptId = 'wanikani_custom_dashboard';
+
+// For dialog CSS since this file can't use GM
+let wcdDialogCss = '';
 
 
 /*************************************************
@@ -361,11 +363,9 @@ function removeInlineCssFromSettingsDialog() {
     };
 
     if ($('.custom-dialog-css').length == 0) {
-        const dialogCss = GM_getResourceText("DIALOG_CSS");
-
         let style = document.createElement('style');
 
-        style.innerHTML = dialogCss;
+        style.innerHTML = wcdDialogCss;
         style.className = 'custom-dialog-css';
 
         document.head.appendChild(style);

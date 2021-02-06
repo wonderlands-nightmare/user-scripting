@@ -596,6 +596,9 @@ const wlWanikaniSettingsDialogStylesCss = `
 const scriptName = 'Wanikani Custom Dashboard';
 const scriptId = 'wanikani_custom_dashboard';
 
+// For dialog CSS since this file can't use GM
+let wcdDialogCss = '';
+
 
 /*************************************************
  *  ANCHOR Common debugger function
@@ -946,14 +949,9 @@ function removeInlineCssFromSettingsDialog() {
     };
 
     if ($('.custom-dialog-css').length == 0) {
-        // TODO uncomment for release
-        // const dialogCss = GM_getResourceText("DIALOG_CSS");
-        // TODO for dev only
-        const dialogCss = wlWanikaniSettingsDialogStylesCss;
-
         let style = document.createElement('style');
 
-        style.innerHTML = dialogCss;
+        style.innerHTML = wcdDialogCss;
         style.className = 'custom-dialog-css';
 
         document.head.appendChild(style);
@@ -1793,6 +1791,10 @@ function appendDashboardContentHTML(data) {
     //     addFunctions("WKOF_DATA_JS");
     //     addFunctions("HTML_GEN_JS");
     //     addFunctions("DASHBOARD_JS");
+
+    //    // Get CSS for dialog styles
+    //    wcdDialogCss = GM_getResourceText("DIALOG_CSS");
+
     //     console.log('All Add CSS and JS functions have loaded.');
     // };
     // TODO Used only for dev
@@ -1802,6 +1804,10 @@ function appendDashboardContentHTML(data) {
         addStyles(wlWanikaniCommonStylesCss);
         addStyles(wlWanikaniCustomItemsCss);
         addStyles(wlWanikaniCustomDashboardCss);
+
+        
+        // Get CSS for dialog styles
+        wcdDialogCss = wlWanikaniSettingsDialogStylesCss;
 
         // Functions don't need importing
         console.log('All Add CSS and JS functions have loaded.');

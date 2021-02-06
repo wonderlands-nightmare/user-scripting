@@ -140,7 +140,9 @@
         addFunctions("WKOF_DATA_JS");
         addFunctions("HTML_GEN_JS");
         addFunctions("DASHBOARD_JS");
-        console.log('All Add CSS and JS functions have loaded.');
+        
+        // Get CSS for dialog styles
+        wcdDialogCss = GM_getResourceText("DIALOG_CSS");
 
         console.log('All Add CSS and JS functions have loaded.');
     };
