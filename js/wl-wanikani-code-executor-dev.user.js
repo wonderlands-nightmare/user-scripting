@@ -1,19 +1,19 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4
+// @version      1.3.1
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/develop/wl-wanikani-code-executor.user.js
-// @resource     COMMON_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-common-styles.user.css
-// @resource     ITEMS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-custom-items.user.css
-// @resource     DASHBOARD_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-custom-dashboard.user.css
-// @resource     DIALOG_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-settings-dialog.user.css
-// @resource     COMMON_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-common-functions.user.js
-// @resource     WKOF_DATA_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-wkof-data-manipulator.user.js
-// @resource     HTML_GEN_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-html-generators.user.js
-// @resource     DASHBOARD_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-custom-dashboard.user.js
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-common-styles.user.css
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-custom-items.user.css
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-custom-dashboard.user.css
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/css/wl-wanikani-settings-dialog.user.css
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-common-functions.user.js
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-wkof-data-manipulator.user.js
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-html-generators.user.js
+// @require      https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/js/common/wl-wanikani-custom-dashboard.user.js
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // ==/UserScript==
@@ -47,7 +47,7 @@
      *  ANCHOR Actual script execution code
      *************************************************/
     wkofInstallCheck();
-    addStylesAndFunctions();
+    //addStylesAndFunctions();
     dashboardLoader();
     generateDashboardWrapperHTML();
 

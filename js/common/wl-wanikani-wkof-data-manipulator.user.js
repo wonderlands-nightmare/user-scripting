@@ -31,8 +31,9 @@ const wanikaniSrsStages = {
 
 
 /*************************************************
- *  ANCHOR Difficult item filter
+ *  ANCHOR Item filters and sorting
  *************************************************/
+// NOTE Filters items based on Safe Level
 function isDifficult(dataItems) {
     wlWanikaniDebug('Check if difficult.', dataItems);
     
@@ -48,8 +49,8 @@ function isDifficult(dataItems) {
     return returnItems;
 };
 
-// NOTE Sorts items based on level
-function levelSort(itemsToSort) {
+// NOTE Sorts items based on item level
+function itemLevelSort(itemsToSort) {
     return itemsToSort.sort(function(a, b) {
         return (a.data.level == b.data.level)
              ? a.assignments.srs_stage - b.assignments.srs_stage
@@ -66,7 +67,7 @@ function getDifficultItemsData(data) {
 
     wkofItemsData.SafeLevel = data.UsersData.data.level - wkof.settings[scriptId].safe_level;
     wkofItemsData.DifficultItems = isDifficult(data.ItemsData);
-    wkofItemsData.DifficultItems = levelSort(wkofItemsData.DifficultItems);
+    wkofItemsData.DifficultItems = itemLevelSort(wkofItemsData.DifficultItems);
 
     wlWanikaniDebug('Got difficult items, show data.', wkofItemsData);
     return wkofItemsData;
@@ -79,7 +80,11 @@ function getDifficultItemsData(data) {
 function getSubjectData(data, type, subjectIds = []) {
     wlWanikaniDebug('Retrieving ' + type + ' subject data.');
 
-    let returnData = { kanji: new Array(), radical: new Array(), vocabulary: new Array() };
+    let returnData = {
+        kanji: new Array(),
+        radical: new Array(),
+        vocabulary: new Array()
+    };
     let isLessonOrReview = false;
     let counter = 0;
 
@@ -120,9 +125,9 @@ function getSubjectData(data, type, subjectIds = []) {
 
     returnData.totalCount = counter;
     returnData.length = returnData.kanji.length + returnData.radical.length + returnData.vocabulary.length;
-    returnData.kanji = (returnData.kanji.length > 0) ? levelSort(returnData.kanji) : [];
-    returnData.radical = (returnData.radical.length > 0) ? levelSort(returnData.radical) : [];
-    returnData.vocabulary = (returnData.vocabulary.length > 0) ? levelSort(returnData.vocabulary) : [];
+    returnData.kanji = (returnData.kanji.length > 0) ? itemLevelSort(returnData.kanji) : [];
+    returnData.radical = (returnData.radical.length > 0) ? itemLevelSort(returnData.radical) : [];
+    returnData.vocabulary = (returnData.vocabulary.length > 0) ? itemLevelSort(returnData.vocabulary) : [];
 
     wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
     return returnData;
@@ -178,6 +183,7 @@ function getLevelProgress(data) {
         }
     };
 
+    // NOTE Level Progress data assignment
     $.each(data.ItemsData, function(index, item) {
         if (item.data.level == data.UsersData.data.level) {
             if (item.object == 'kanji') {
@@ -205,6 +211,12 @@ function getLevelProgress(data) {
             }
         }
     });
+
+    // NOTE Sorting items by SRS level
+    progressData.Kanji.InProgress = (progressData.Kanji.InProgress.length > 0) ? itemLevelSort(progressData.Kanji.InProgress) : [];
+    progressData.Kanji.Passed = (progressData.Kanji.Passed.length > 0) ? itemLevelSort(progressData.Kanji.Passed) : [];
+    progressData.Radicals.InProgress = (progressData.Radicals.InProgress.length > 0) ? itemLevelSort(progressData.Radicals.InProgress) : [];
+    progressData.Radicals.Passed = (progressData.Radicals.Passed.length > 0) ? itemLevelSort(progressData.Radicals.Passed) : [];
 
     // NOTE Calculation for how many kanji are needed to pass the level
     progressData.KanjiToPass = Math.ceil(
