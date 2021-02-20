@@ -22,7 +22,7 @@ function initialiseMainSummaryComponent() {
         ${ nextReviewsHTML.futureReviewsHTML }
     `;
 
-    customLessonsAndReviewsElement.append(customLessonsAndReviewsContent);
+    $('.custom-dashboard .custom-section.custom-lessons-and-reviews').append(customLessonsAndReviewsContent);
 
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');

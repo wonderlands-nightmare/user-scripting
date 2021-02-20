@@ -44,8 +44,8 @@ function initialiseSrsSummaryComponent() {
         ${ burnedSummaryItemsTableHTML }
     `;
     
-    customDashboardProgressElement.append(customDashboardProgressContent);
-    customDashboardProgressWrapperElement.append(customDashboardProgressAfterContent);
+    $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress').append(customDashboardProgressContent);
+    $('.custom-dashboard .custom-dashboard-progress-wrapper').append(customDashboardProgressAfterContent);
 
     setProgressSummaryButtonEffects();
 }

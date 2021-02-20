@@ -32,7 +32,7 @@ function isDifficult(dataItems) {
 /*************************************************
  *  ANCHOR Difficult Items Table HTML generator
  *************************************************/
-function generateDifficultItemsSection(data,  insertAfterElement = customDashboardProgressWrapperElement) {
+function generateDifficultItemsSection(data,  insertAfterElement = '.custom-dashboard .custom-dashboard-progress-wrapper') {
     const difficultItemsClass = 'custom-dashboard-difficult-items';
 
     if ($('.' + difficultItemsClass).length > 0) {

@@ -20,11 +20,6 @@ const wanikaniSrsStages = {
     'burned': { 'burned': 9 }
 };
 
-// NOTE Custom dashboard elements
-let customLessonsAndReviewsElement = $('.custom-dashboard .custom-section.custom-lessons-and-reviews');
-let customDashboardProgressWrapperElement = $('.custom-dashboard .custom-dashboard-progress-wrapper');
-let customDashboardProgressElement = $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress');
-
 
 /*************************************************
  *  ANCHOR Item filters and sorting
