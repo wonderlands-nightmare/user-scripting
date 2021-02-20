@@ -21,9 +21,9 @@ const wanikaniSrsStages = {
 };
 
 // NOTE Custom dashboard elements
-const customLessonsAndReviewsElement = $('.custom-dashboard .custom-section.custom-lessons-and-reviews');
-const customDashboardProgressWrapperElement = $('.custom-dashboard .custom-dashboard-progress-wrapper');
-const customDashboardProgressElement = $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress');
+let customLessonsAndReviewsElement = $('.custom-dashboard .custom-section.custom-lessons-and-reviews');
+let customDashboardProgressWrapperElement = $('.custom-dashboard .custom-dashboard-progress-wrapper');
+let customDashboardProgressElement = $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress');
 
 
 /*************************************************
