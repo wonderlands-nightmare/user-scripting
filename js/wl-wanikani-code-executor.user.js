@@ -29,19 +29,6 @@
     const wkofSettingsModules = 'Menu, Settings';
     const wkofDataModules = 'Apiv2, ItemData';
 
-    // General WKOF item data config
-    const itemDataConfig = {
-        wk_items: {
-            options: {
-                assignments: true,
-                review_statistics: true
-            },
-            filters: {
-                level: '1..+0'
-            }
-        }
-    };
-
 
     /*************************************************
      *  ANCHOR Actual script execution code
@@ -74,6 +61,21 @@
     /*************************************************
      *   ANCHOR Retrieves CSS and JS code through GM and adds to page
      *************************************************/
+    function addResources(resourceName) {
+        // Get resource file contents
+        const styleCss = GM_getResourceText(resourceName + "_CSS");
+        const functionJs = GM_getResourceText(resourceName + "_JS");
+
+        // Set JS script element
+        let script = document.createElement('script');
+        script.innerHTML = functionJs;
+        script.type = 'text/javascript';
+        script.className = 'custom-js';
+
+        // Append resources to page
+        document.body.appendChild(script);
+        GM_addStyle(styleCss);
+    }
     function addStyles(cssFileName) {
         const styleCss = GM_getResourceText(cssFileName);
         GM_addStyle(styleCss);
@@ -90,38 +92,6 @@
 
         document.body.appendChild(script);
     };
-
-
-    /*************************************************
-     *  ANCHOR Check if WKOF is installed
-     *************************************************/
-    function wkofInstallCheck() {
-        if (!wkof) {
-            let response = confirm(scriptName + ' requires WaniKani Open Framework.\n Click "OK" to be forwarded to installation instructions.');
-            if (response) {
-                window.location.href = 'https://community.wanikani.com/t/instructions-installing-wanikani-open-framework/28549';
-            };
-
-            return;
-        };
-    };
-
-
-    /*************************************************
-     *  ANCHOR Get the primary WKOF data for all other functions
-     *************************************************/
-    async function getWkofDataObject() {
-        console.log('Running WKOF data retrieval.');
-        let getWkofData = {};
-
-        getWkofData.UsersData = await wkof.Apiv2.fetch_endpoint('user');
-        getWkofData.SummaryData = await wkof.Apiv2.fetch_endpoint('summary');
-        getWkofData.ItemsData = await wkof.ItemData.get_items(itemDataConfig);
-
-        console.log('WKOF data retrieval complete.');
-        return getWkofData;
-    };
-
 
 
     /*************************************************
@@ -145,14 +115,5 @@
         wcdDialogCss = GM_getResourceText("DIALOG_CSS");
 
         console.log('All Add CSS and JS functions have loaded.');
-    };
-
-
-    /*************************************************
-     *  ANCHOR Add pulse effect to the lesson/review navigation shortcuts
-     *************************************************/
-    function navShortcutReviewAndLessonButtonPulseEffect() {
-        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--lessons > a', $('.navigation-shortcuts .navigation-shortcut--lessons > a > span').text(), '/lesson/session', 'has-lessons');
-        addReviewAndLessonButtonPulseEffect('.navigation-shortcuts .navigation-shortcut--reviews > a', $('.navigation-shortcuts .navigation-shortcut--reviews > a > span').text(), '/review/start', 'has-reviews');
     };
 })();

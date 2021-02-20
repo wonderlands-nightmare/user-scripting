@@ -1,0 +1,101 @@
+/********************************
+ *  Lesson/Review navigation styles
+ ********************************/
+/* Initialise navigation styles */
+.custom-lessons-and-reviews-button:not(.has-reviews):not(.has-lessons),
+.navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
+.navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-lessons) > span {
+    background: var(--dark-grey);
+}
+
+/* Add animations and styles to main and shortcut buttons */
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
+    background: var(--review-colour);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
+    background: var(--lesson-colour);
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
+    --start-pulse: var(--review-colour-darker);
+    --end-pulse: var(--review-colour-lighter);
+    animation: buttonPulse 2s infinite; 
+} 
+
+.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
+    --start-pulse: var(--lesson-colour-darker);
+    --end-pulse: var(--lesson-colour-lighter);
+    animation: buttonPulse 2s infinite; 
+}
+
+
+/********************************
+ *  Tooltip styles
+ ********************************/
+/* Next review tooltip wrapper styles */
+.custom-lessons-and-reviews-summary-tooltip.future-reviews {
+    display: none;
+    background-color: var(--transparent-black);
+    color: var(--white);
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    right: 110px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: 0;
+    margin-left: -20px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent var(--transparent-black) transparent transparent;
+}
+
+/* Next review tooltip content styles */
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
+    width: auto;
+    background: var(--purple);
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+    padding: 10px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > h2 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > span {
+    margin: 0;
+    font-size: 12px;
+    line-height: 10px;
+}
+
+
+/********************************
+ *  Animations
+ ********************************/
+ @keyframes buttonPulse { 
+    0% { 
+        box-shadow: 0 0 0 0 var(--start-pulse); 
+    } 
+    70% { 
+        box-shadow: 0 0 0 7px var(--white); 
+    } 
+    100% { 
+        box-shadow: 0 0 0 0 var(--end-pulse); 
+    } 
+}

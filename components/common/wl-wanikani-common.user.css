@@ -1,0 +1,287 @@
+/********************************
+ *  Global colours
+ ********************************/
+ :root {
+    /* WaniKani colours */
+    --lesson-colour:             #ff00aa;
+    --lesson-colour-darker:      #bd007e;
+    --lesson-colour-lighter:     #fa7acf;
+    --review-colour:             #00aaff;
+    --review-colour-darker:      #0279b5;
+    --review-colour-lighter:     #80d4ff;
+    --transparent-lesson-colour: rgb(255, 0, 170, 0.2);
+    --transparent-review-colour: rgb(0, 170, 255, 0.2);
+
+    /* Common colours */
+    --dark-blue:                 #294ddb;
+    --dark-green:                #006400;
+    --gold:                      #ffd700;
+    --gold-darker:               #b5b014;
+    --green:                     #218139;
+    --light-blue:                #0093dd;
+    --maroon:                    #800000;
+    --pink:                      #dd0093;
+    --purple:                    #882d9e;
+
+    /* Shades */
+    --black:                     #000000;
+    --dark-grey:                 #6b6b6b;
+    --grey:                      #d5d5d5;
+    --light-grey:                #f4f4f4;
+    --white:                     #ffffff;
+
+    /* Odd colours */
+    --transparent-black:         rgba(0, 0, 0, 0.75);
+    --transparent-dark-blue:     rgb(41, 77, 219, 0.2);
+    --transparent-dark-green:    rgb(0, 100, 0, 0.2);
+    --transparent-gold:          rgb(255, 215, 0, 0.2);
+    --transparent-light-blue:    rgb(0, 147, 221, 0.2);
+    --transparent-maroon:        rgb(128, 0, 0, 0.2);
+    --transparent-pink:          rgb(221, 0, 147, 0.2);
+    --transparent-purple:        rgb(136, 45, 158, 0.2);
+}
+
+
+/********************************
+ *  Custom section and summary styles
+ ********************************/
+/* Green circle for completed/empty sections */
+.all-done .progress-entries:after,
+.all-done.custom-div:after {
+    content: '';
+    position: relative;
+    left: 50%;
+    width: 20px; 
+    height: 20px;
+    border: 1px solid var(--green);
+    border-radius: 50%;
+}
+
+/* Main custom section styles */
+.custom-section {
+    display: flex;
+    background: var(--grey);
+    border: var(--dark-grey) 1px solid;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px var(--dark-grey);
+}
+
+/* Custom summary styles */
+.custom-summary {
+    position: relative;
+    padding: 15px;
+    width: calc(100%/3);
+}
+
+.custom-summary:not(:last-child) {
+    border-right: var(--dark-grey) 1px solid;
+}
+
+.custom-summary > h2 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.custom-summary > span {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 25px;
+    margin-bottom: 3px;
+}
+
+.custom-summary > span.custom-summary-vocabulary {
+    margin-bottom: 50px;
+}
+
+/* Custom summary button styles */
+.custom-summary > .custom-button {
+    display: block;
+    position: absolute;
+    width: calc(100% - 50px);
+    bottom: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--white);
+}
+
+.custom-summary > .custom-button:hover {
+    color: var(--white);
+    text-decoration: none;
+}
+
+
+/********************************
+ *  Items section and progress entry styles
+ ********************************/
+/* Main wrapper styles */
+.custom-items { 
+    padding: 12px 24px; 
+    margin-bottom: 30px; 
+    background: var(--light-grey); 
+} 
+
+.custom-items section { 
+    margin-bottom: 0; 
+} 
+
+/* Progress entry styles */
+.custom-items section .progress-entries { 
+    grid-template-columns: none; 
+    display: flex; 
+}
+
+.custom-items section .progress-entries .progress-entry-header {
+    width: 100%;
+}
+
+.custom-items section .progress-entries .progress-entry { 
+    height: 40px; 
+} 
+
+.custom-items section .progress-entries .progress-entry.radical, 
+.custom-items section .progress-entries .progress-entry.kanji { 
+    width: 40px; 
+}
+
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
+    height: 40px;
+    font-size: 21px;
+}
+
+.custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
+    text-decoration: none;
+}
+
+
+/********************************
+ *  Item level and SRS level indicator styles
+ ********************************/  
+/* Level and SRS level indicator wrapper styles */
+.custom-items section .progress-entries .progress-entry a .progress-item-level,
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+    position: absolute;
+    width: 15px;
+    border: 0.5px solid var(--white);
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 14px;
+}
+
+/* Item level styles */
+.custom-items section .progress-entries .progress-entry a .progress-item-level { 
+    background: var(--dark-green);
+    bottom: -5px;
+    right: -5px;
+}
+
+/* Item SRS level styles */
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
+    top: -5px;
+    right: -5px;
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-0 { 
+    background: var(--dark-green);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-1 { 
+    background: var(--black);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-2 { 
+    background: var(--dark-grey);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-3 { 
+    background: var(--lesson-colour-lighter);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-4 { 
+    background: var(--lesson-colour-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-5 { 
+    background: var(--purple);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-6 { 
+    background: var(--dark-blue);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-7 { 
+    background: var(--review-colour-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-8 { 
+    background: var(--gold-darker);
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level.srs-level-9 { 
+    background: var(--maroon);
+}
+
+
+/********************************
+ *  Tooltip styles
+ ********************************/
+/* Item tooltip wrapper styles */
+.custom-item-tooltip .custom-item-tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--transparent-black);
+    color: var(--white);
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -110px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Item tooltip content styles */
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-entries {
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-readings {
+    background: var(--dark-green);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
+    background: var(--dark-grey);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-not-accepted-entries .custom-item-tooltip-text-entries.item-readings {
+    background: var(--maroon);
+}
+
+.custom-item-tooltip .custom-item-tooltip-text .custom-item-tooltip-text-not-accepted-entries .custom-item-tooltip-text-entries.item-meanings {
+    background: var(--black);
+}
+  
+.custom-item-tooltip .custom-item-tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--transparent-black) transparent transparent transparent;
+}
+  
+.custom-item-tooltip:hover .custom-item-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
