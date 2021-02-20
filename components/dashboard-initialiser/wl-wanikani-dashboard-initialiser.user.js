@@ -17,6 +17,19 @@ let wkofItemsData = {};
 
 
 /*************************************************
+ *  ANCHOR Add pulse effect for lesson and review buttons
+ *************************************************/
+function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, buttonHref, buttonClass) {
+    if (buttonCount > 0) {
+        $(buttonSelector).addClass(buttonClass).attr('href', buttonHref);
+    }
+    else {
+        $(buttonSelector).removeClass(buttonClass);
+    }
+};
+
+
+/*************************************************
  *  ANCHOR Add a loading animation to the page while the dashboard HTML
  *  is generated
  *************************************************/

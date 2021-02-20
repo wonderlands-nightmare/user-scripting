@@ -31,19 +31,6 @@ function initialiseMainSummaryComponent() {
 
 
 /*************************************************
- *  ANCHOR Add pulse effect for lesson and review buttons
- *************************************************/
-function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, buttonHref, buttonClass) {
-    if (buttonCount > 0) {
-        $(buttonSelector).addClass(buttonClass).attr('href', buttonHref);
-    }
-    else {
-        $(buttonSelector).removeClass(buttonClass);
-    }
-};
-
-
-/*************************************************
  *  ANCHOR Next reviews summary HTML generator
  *************************************************/
 function generateFutureReviewsHTML(data, nextReviewData) {
