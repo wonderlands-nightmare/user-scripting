@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.3.2.3
+// @version      1.3.2.4
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -46,12 +46,11 @@
             css: 'WKOF_CSS'
         },
         customTheme: {
+            js: 'THEME_JS',
             1: { // Default theme
-                js: '',
                 css: 'DEFAULT_THEME_CSS'
             },
             2: { // Dark theme
-                js: '',
                 css: 'DARK_THEME_CSS'
             }
         },
@@ -106,7 +105,7 @@
     wkof.ready(wkofDataModules)
         .then(getWkofDataObject)
         .then(function(data) {
-            addResources(['mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+            addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
             wkofItemsData.AllData = data;
             setCustomDashboardTheme();
         })
@@ -122,28 +121,28 @@
 
 
     /*************************************************
-     *  ANCHOR Retrieves Userscript resource text through GM
-     *  Separated so that other JS scripts can call GM if needed
-     *************************************************/
-    function getResourceText(resourceName, resourceType = '') {
-        return resourceType == 'js' 
-             ? GM_getResourceText(resourceName)
-             : GM_getResourceText(resourceName);
-    };
-
-
-    /*************************************************
      *  ANCHOR Retrieves CSS and JS code through GM and adds to page
      *  Required to be in executor script due to GM functions
      *************************************************/
     function addResources(resourceNames) {
         $.each(resourceNames, function(index, resourceName) {
             const jsResource = dashboardResources[resourceName].js;
-            const cssResource = dashboardResources[resourceName].css;
+            const cssResource = '';
+
+            // Required for custom themes since GM is not available in other files
+            if (resourceName == 'customTheme') {
+                customThemeCss = {
+                    1: GM_getResourceText(dashboardResources[resourceName][1].css),
+                    2: GM_getResourceText(dashboardResources[resourceName][2].css)
+                }
+            }
+            else {
+                cssResource = dashboardResources[resourceName].css;
+            }
             
             // Add JS resource if specified
             if (jsResource != '') {
-                const functionJs = getResourceText(jsResource, 'js');
+                const functionJs = GM_getResourceText(jsResource);
 
                 let script = document.createElement('script');
                 script.innerHTML = functionJs;
@@ -155,7 +154,7 @@
 
             // Add CSS resource if specified
             if (cssResource != '') {
-                const styleCss = getResourceText(cssResource);
+                const styleCss = GM_getResourceText(cssResource);
                 
                 if (resourceName == 'wkof') {
                     wcdDialogCss = styleCss;

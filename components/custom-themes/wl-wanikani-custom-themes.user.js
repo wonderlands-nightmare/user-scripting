@@ -1,4 +1,14 @@
 /*************************************************
+ *  ANCHOR Variable initialisations
+ *************************************************/
+// For theme CSS since this file can't use GM
+let customThemeCss = {
+    1: '',
+    2: ''
+};
+
+
+/*************************************************
  *  ANCHOR Sets custom dashboard theme on save/load
  *************************************************/
 function setCustomDashboardTheme() {
@@ -8,7 +18,7 @@ function setCustomDashboardTheme() {
 
     let style = document.createElement('style');
 
-    style.innerHTML = getResourceText(dashboardResources.customTheme[wkof.settings[scriptId].selected_theme].css);
+    style.innerHTML = customThemeCss[wkof.settings[scriptId].selected_theme];
     style.className = 'custom-dashboard-theme-css';
 
     document.head.appendChild(style);
