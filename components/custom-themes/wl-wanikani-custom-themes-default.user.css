@@ -1,0 +1,42 @@
+/********************************
+ *  Global colours
+ ********************************/
+ :root {
+    /* WaniKani colours */
+    --lesson-colour:             #ff00aa;
+    --lesson-colour-darker:      #bd007e;
+    --lesson-colour-lighter:     #fa7acf;
+    --review-colour:             #00aaff;
+    --review-colour-darker:      #0279b5;
+    --review-colour-lighter:     #80d4ff;
+    --transparent-lesson-colour: rgb(255, 0, 170, 0.2);
+    --transparent-review-colour: rgb(0, 170, 255, 0.2);
+
+    /* Common colours */
+    --dark-blue:                 #294ddb;
+    --dark-green:                #006400;
+    --gold:                      #ffd700;
+    --gold-darker:               #b5b014;
+    --green:                     #218139;
+    --light-blue:                #0093dd;
+    --maroon:                    #800000;
+    --pink:                      #dd0093;
+    --purple:                    #882d9e;
+
+    /* Shades */
+    --black:                     #000000;
+    --dark-grey:                 #6b6b6b;
+    --grey:                      #d5d5d5;
+    --light-grey:                #f4f4f4;
+    --white:                     #ffffff;
+
+    /* Odd colours */
+    --transparent-black:         rgba(0, 0, 0, 0.75);
+    --transparent-dark-blue:     rgb(41, 77, 219, 0.2);
+    --transparent-dark-green:    rgb(0, 100, 0, 0.2);
+    --transparent-gold:          rgb(255, 215, 0, 0.2);
+    --transparent-light-blue:    rgb(0, 147, 221, 0.2);
+    --transparent-maroon:        rgb(128, 0, 0, 0.2);
+    --transparent-pink:          rgb(221, 0, 147, 0.2);
+    --transparent-purple:        rgb(136, 45, 158, 0.2);
+}

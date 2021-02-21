@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.3.2
+// @version      1.3.2.1
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/develop/wl-wanikani-code-executor-dev.user.js
 // @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.js
 // @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.css
+// @resource     DEFAULT_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/custom-themes/wl-wanikani-custom-themes-default.user.css
+// @resource     DARK_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/custom-themes/wl-wanikani-custom-themes-dark.user.css
 // @resource     INIT_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.js
 // @resource     INIT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.css
 // @resource     DEBUG_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/debug/wl-wanikani-debug.user.js
@@ -42,6 +44,14 @@
         wkof: {
             js: 'WKOF_JS',
             css: 'WKOF_CSS'
+        },
+        defaultTheme: {
+            js: '',
+            css: 'DEFAULT_THEME_CSS'
+        },
+        darkTheme: {
+            js: '',
+            css: 'DARK_THEME_CSS'
         },
         dashboardInitialiser: {
             js: 'INIT_JS',
@@ -109,6 +119,17 @@
 
 
     /*************************************************
+     *  ANCHOR Retrieves Userscript resource text through GM
+     *  Separated so that other JS scripts can call GM if needed
+     *************************************************/
+    function getResourceText(resourceName, resourceType = '') {
+        return resourceType == 'js' 
+             ? GM_getResourceText(resourceName)
+             : GM_getResourceText(resourceName);
+    };
+
+
+    /*************************************************
      *  ANCHOR Retrieves CSS and JS code through GM and adds to page
      *  Required to be in executor script due to GM functions
      *************************************************/
@@ -117,9 +138,9 @@
             const jsResource = dashboardResources[resourceName].js;
             const cssResource = dashboardResources[resourceName].css;
             
-            // Add CSS resource if specified
+            // Add JS resource if specified
             if (jsResource != '') {
-                const functionJs = GM_getResourceText(jsResource);
+                const functionJs = getResourceText(jsResource, 'js');
 
                 let script = document.createElement('script');
                 script.innerHTML = functionJs;
@@ -131,7 +152,7 @@
 
             // Add CSS resource if specified
             if (cssResource != '') {
-                const styleCss = GM_getResourceText(cssResource);
+                const styleCss = getResourceText(cssResource);
                 
                 if (resourceName == 'wkof') {
                     wcdDialogCss = styleCss;
