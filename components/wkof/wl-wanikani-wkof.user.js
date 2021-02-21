@@ -220,6 +220,7 @@ function openSettings(items) {
         },
         on_save: (() => {
             generateDifficultItemsSection(wkofItemsData.AllData);
+            setCustomDashboardTheme();
         }),
         on_close: (() => {
             if ($('.custom-dialog-css').length > 0) {
@@ -254,21 +255,4 @@ function removeInlineCssFromSettingsDialog() {
     $.each(elementsToRemoveInlineStylesFrom, function (index) {
         $(elementsToRemoveInlineStylesFrom[index]).removeAttr('style');
     });
-}
-
-
-/*************************************************
- *  ANCHOR Sets custom dashboard theme on save/load
- *************************************************/
-function setCustomDashboardTheme() {
-    if ($('.custom-dashboard-theme-css').length > 0) {
-        $('.custom-dashboard-theme-css').remove();
-    }
-
-    let style = document.createElement('style');
-
-    style.innerHTML = getResourceText(dashboardResources.customTheme[wkof.settings[scriptId].selected_theme].css);
-    style.className = 'custom-dashboard-theme-css';
-
-    document.head.appendChild(style);
 }
