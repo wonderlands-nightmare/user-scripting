@@ -60,7 +60,7 @@ function loadWkofSettings() {
         show_difficult_items: false,
         safe_level: 3,
         srs_stage: 4,
-        selected_theme: defaultTheme
+        selected_theme: 1
     };
     wkof.Settings.load(scriptId, defaults);
 }
@@ -134,10 +134,10 @@ function openSettings(items) {
                                 label: 'Custom Dashboard theme',
                                 hover_tip: 'Select your prefered theme for the custom dashboard.',
                                 content: {
-                                    defaultTheme: 'Default',
-                                    darkTheme: 'Dark'
+                                    1: 'Default',
+                                    2: 'Dark'
                                 },
-                                default: defaultTheme
+                                default: 1
                             }
                         }
                     },
@@ -260,14 +260,14 @@ function removeInlineCssFromSettingsDialog() {
 /*************************************************
  *  ANCHOR Sets custom dashboard theme on save/load
  *************************************************/
-function setCustomDashboardTheme(themeName) {
+function setCustomDashboardTheme() {
     if ($('.custom-dashboard-theme-css').length > 0) {
         $('.custom-dashboard-theme-css').remove();
     }
 
     let style = document.createElement('style');
 
-    style.innerHTML = getResourceText(dashboardResources[wkof.settings[scriptId].selected_theme].css);
+    style.innerHTML = getResourceText(dashboardResources.customTheme[wkof.settings[scriptId].selected_theme].css);
     style.className = 'custom-dashboard-theme-css';
 
     document.head.appendChild(style);

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.3.2.1
+// @version      1.3.2.2
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -45,13 +45,15 @@
             js: 'WKOF_JS',
             css: 'WKOF_CSS'
         },
-        defaultTheme: {
-            js: '',
-            css: 'DEFAULT_THEME_CSS'
-        },
-        darkTheme: {
-            js: '',
-            css: 'DARK_THEME_CSS'
+        customTheme: {
+            1: { // Default theme
+                js: '',
+                css: 'DEFAULT_THEME_CSS'
+            },
+            2: { // Dark theme
+                js: '',
+                css: 'DARK_THEME_CSS'
+            }
         },
         dashboardInitialiser: {
             js: 'INIT_JS',
