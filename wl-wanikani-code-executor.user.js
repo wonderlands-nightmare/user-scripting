@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.3.1
+// @version      1.3.2
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -132,7 +132,13 @@
             // Add CSS resource if specified
             if (cssResource != '') {
                 const styleCss = GM_getResourceText(cssResource);
-                GM_addStyle(styleCss);
+                
+                if (resourceName == 'wkof') {
+                    wcdDialogCss = styleCss;
+                }
+                else {
+                    GM_addStyle(styleCss);
+                }
             }
         });
     };
