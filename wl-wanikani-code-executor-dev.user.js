@@ -1,11 +1,10 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.3.2.6
+// @version      1.3.2.7
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
-// @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/develop/wl-wanikani-code-executor-dev.user.js
 // @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.js
 // @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.css
 // @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/custom-themes/wl-wanikani-custom-themes.user.js
@@ -130,17 +129,6 @@
             const jsResource = dashboardResources[resourceName].js;
             let cssResource = '';
 
-            // Required for custom themes since GM is not available in other files
-            if (resourceName == 'customTheme') {
-                customThemeCss = {
-                    1: GM_getResourceText(dashboardResources[resourceName][1].css),
-                    2: GM_getResourceText(dashboardResources[resourceName][2].css)
-                }
-            }
-            else {
-                cssResource = dashboardResources[resourceName].css;
-            }
-            
             // Add JS resource if specified
             if (jsResource != '') {
                 const functionJs = GM_getResourceText(jsResource);
@@ -151,6 +139,17 @@
                 script.className = 'custom-js';
 
                 document.body.appendChild(script);
+            }
+
+            // Required for custom themes since GM is not available in other files
+            if (resourceName == 'customTheme') {
+                customThemeCss = {
+                    1: GM_getResourceText(dashboardResources[resourceName][1].css),
+                    2: GM_getResourceText(dashboardResources[resourceName][2].css)
+                }
+            }
+            else {
+                cssResource = dashboardResources[resourceName].css;
             }
 
             // Add CSS resource if specified
