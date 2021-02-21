@@ -8,6 +8,7 @@
 // @updateURL    https://github.com/wonderlands-nightmare/custom-scripting/blob/develop/wl-wanikani-code-executor-dev.user.js
 // @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.js
 // @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.css
+// @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/custom-themes/wl-wanikani-custom-themes.user.js
 // @resource     DEFAULT_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/custom-themes/wl-wanikani-custom-themes-default.user.css
 // @resource     DARK_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/custom-themes/wl-wanikani-custom-themes-dark.user.css
 // @resource     INIT_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.js
