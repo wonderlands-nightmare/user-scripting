@@ -1,48 +1,4 @@
 /********************************
- *  Global colours
- ********************************/
-:root {
-    /* WaniKani colours */
-    --lesson-colour:             #ff00aa;
-    --lesson-colour-darker:      #bd007e;
-    --lesson-colour-lighter:     #fa7acf;
-    --review-colour:             #00aaff;
-    --review-colour-darker:      #0279b5;
-    --review-colour-lighter:     #80d4ff;
-    --transparent-lesson-colour: rgb(255, 0, 170, 0.2);
-    --transparent-review-colour: rgb(0, 170, 255, 0.2);
-
-    /* Common colours */
-    --dark-blue:                 #294ddb;
-    --dark-green:                #006400;
-    --gold:                      #ffd700;
-    --gold-darker:               #b5b014;
-    --green:                     #218139;
-    --light-blue:                #0093dd;
-    --maroon:                    #800000;
-    --pink:                      #dd0093;
-    --purple:                    #882d9e;
-
-    /* Shades */
-    --black:                     #000000;
-    --dark-grey:                 #6b6b6b;
-    --grey:                      #d5d5d5;
-    --light-grey:                #f4f4f4;
-    --white:                     #ffffff;
-
-    /* Odd colours */
-    --transparent-black:         rgba(0, 0, 0, 0.75);
-    --transparent-dark-blue:     rgb(41, 77, 219, 0.2);
-    --transparent-dark-green:    rgb(0, 100, 0, 0.2);
-    --transparent-gold:          rgb(255, 215, 0, 0.2);
-    --transparent-light-blue:    rgb(0, 147, 221, 0.2);
-    --transparent-maroon:        rgb(128, 0, 0, 0.2);
-    --transparent-pink:          rgb(221, 0, 147, 0.2);
-    --transparent-purple:        rgb(136, 45, 158, 0.2);
-}
-
-
-/********************************
  *  Lesson/Review navigation styles
  ********************************/
 /* Initialise navigation styles */
@@ -79,10 +35,60 @@
     animation: buttonPulse 2s infinite; 
 }
 
+
+/********************************
+ *  Tooltip styles
+ ********************************/
+/* Next review tooltip wrapper styles */
+.custom-lessons-and-reviews-summary-tooltip.future-reviews {
+    display: none;
+    background-color: var(--transparent-black);
+    color: var(--white);
+    text-align: center;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 1;
+    right: 110px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
+    content: "";
+    position: absolute;
+    top: 60px;
+    left: 0;
+    margin-left: -20px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent var(--transparent-black) transparent transparent;
+}
+
+/* Next review tooltip content styles */
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
+    width: auto;
+    background: var(--purple);
+    border-radius: 5px;
+    border: none;
+    margin: 10px;
+    padding: 10px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > h2 {
+    margin: 0 0 5px 0;
+    font-size: 20px;
+    line-height: 15px;
+}
+
+.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > span {
+    margin: 0;
+    font-size: 12px;
+    line-height: 10px;
+}
+
+
 /********************************
  *  Animations
  ********************************/
-@keyframes buttonPulse { 
+ @keyframes buttonPulse { 
     0% { 
         box-shadow: 0 0 0 0 var(--start-pulse); 
     } 
@@ -92,4 +98,4 @@
     100% { 
         box-shadow: 0 0 0 0 var(--end-pulse); 
     } 
-} 
+}

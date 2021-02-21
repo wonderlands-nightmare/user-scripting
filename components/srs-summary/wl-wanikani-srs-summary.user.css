@@ -1,0 +1,63 @@
+/********************************
+ *  Progress summary gradients
+ ********************************/
+ .custom-dashboard-progress .custom-dashboard-progress-summary.apprentice-summary {
+    background: linear-gradient(to right, var(--transparent-pink), var(--transparent-purple));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.guru-summary {
+    background: linear-gradient(to right, var(--transparent-purple), var(--transparent-dark-blue));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.master-summary {
+    background: linear-gradient(to right, var(--transparent-dark-blue), var(--transparent-light-blue));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.enlightened-summary {
+    background: linear-gradient(to right, var(--transparent-light-blue), var(--transparent-gold));
+}
+
+.custom-dashboard-progress .custom-dashboard-progress-summary.burned-summary {
+    background: linear-gradient(to right, var(--transparent-gold), var(--transparent-maroon));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.lessons-summary {
+    background: linear-gradient(to right, var(--transparent-lesson-colour), var(--transparent-review-colour));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.reviews-summary {
+    background: linear-gradient(to right, var(--transparent-review-colour), var(--transparent-dark-green));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.totals-summary {
+    background: linear-gradient(to right, var(--transparent-dark-green), var(--transparent-purple));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.next-review-summary {
+    background: linear-gradient(to right, var(--transparent-purple), var(--transparent-maroon));
+}
+
+
+/********************************
+ *  Custom section and summary styles
+ ********************************/
+ .custom-summary.custom-dashboard-progress-summary > h2 {
+    font-size: 19px;
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button {
+    background: var(--dark-grey);
+    border: 1px solid var(--dark-grey);
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button.selected {
+    background: var(--green);
+    border: 1px solid var(--black);
+}
+
+.custom-summary > .custom-button.custom-progress-summary-button:hover,
+.custom-summary > .custom-button.custom-progress-summary-button.selected:hover {
+    background: var(--dark-green);
+    transition: 0.5s;
+    cursor: pointer;
+}

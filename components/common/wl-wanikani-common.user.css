@@ -1,8 +1,124 @@
 /********************************
+ *  Global colours
+ ********************************/
+ :root {
+    /* WaniKani colours */
+    --lesson-colour:             #ff00aa;
+    --lesson-colour-darker:      #bd007e;
+    --lesson-colour-lighter:     #fa7acf;
+    --review-colour:             #00aaff;
+    --review-colour-darker:      #0279b5;
+    --review-colour-lighter:     #80d4ff;
+    --transparent-lesson-colour: rgb(255, 0, 170, 0.2);
+    --transparent-review-colour: rgb(0, 170, 255, 0.2);
+
+    /* Common colours */
+    --dark-blue:                 #294ddb;
+    --dark-green:                #006400;
+    --gold:                      #ffd700;
+    --gold-darker:               #b5b014;
+    --green:                     #218139;
+    --light-blue:                #0093dd;
+    --maroon:                    #800000;
+    --pink:                      #dd0093;
+    --purple:                    #882d9e;
+
+    /* Shades */
+    --black:                     #000000;
+    --dark-grey:                 #6b6b6b;
+    --grey:                      #d5d5d5;
+    --light-grey:                #f4f4f4;
+    --white:                     #ffffff;
+
+    /* Odd colours */
+    --transparent-black:         rgba(0, 0, 0, 0.75);
+    --transparent-dark-blue:     rgb(41, 77, 219, 0.2);
+    --transparent-dark-green:    rgb(0, 100, 0, 0.2);
+    --transparent-gold:          rgb(255, 215, 0, 0.2);
+    --transparent-light-blue:    rgb(0, 147, 221, 0.2);
+    --transparent-maroon:        rgb(128, 0, 0, 0.2);
+    --transparent-pink:          rgb(221, 0, 147, 0.2);
+    --transparent-purple:        rgb(136, 45, 158, 0.2);
+}
+
+
+/********************************
+ *  Custom section and summary styles
+ ********************************/
+/* Green circle for completed/empty sections */
+.all-done .progress-entries:after,
+.all-done.custom-div:after {
+    content: '';
+    position: relative;
+    left: 50%;
+    width: 20px; 
+    height: 20px;
+    border: 1px solid var(--green);
+    border-radius: 50%;
+}
+
+/* Main custom section styles */
+.custom-section {
+    display: flex;
+    background: var(--grey);
+    border: var(--dark-grey) 1px solid;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px var(--dark-grey);
+}
+
+/* Custom summary styles */
+.custom-summary {
+    position: relative;
+    padding: 15px;
+    width: calc(100%/3);
+}
+
+.custom-summary:not(:last-child) {
+    border-right: var(--dark-grey) 1px solid;
+}
+
+.custom-summary > h2 {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.custom-summary > span {
+    display: inline-block;
+    font-size: 15px;
+    line-height: 25px;
+    margin-bottom: 3px;
+}
+
+.custom-summary > span.custom-summary-vocabulary {
+    margin-bottom: 50px;
+}
+
+/* Custom summary button styles */
+.custom-summary > .custom-button {
+    display: block;
+    position: absolute;
+    width: calc(100% - 50px);
+    bottom: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--white);
+}
+
+.custom-summary > .custom-button:hover {
+    color: var(--white);
+    text-decoration: none;
+}
+
+
+/********************************
  *  Items section and progress entry styles
  ********************************/
 /* Main wrapper styles */
- .custom-items { 
+.custom-items { 
     padding: 12px 24px; 
     margin-bottom: 30px; 
     background: var(--light-grey); 
@@ -29,10 +145,6 @@
 .custom-items section .progress-entries .progress-entry.radical, 
 .custom-items section .progress-entries .progress-entry.kanji { 
     width: 40px; 
-} 
-
-.custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
-    background: var(--dark-grey);
 }
 
 .custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon { 
@@ -43,6 +155,7 @@
 .custom-items section .progress-entries .progress-entry.vocabulary .vocabulary-icon:hover { 
     text-decoration: none;
 }
+
 
 /********************************
  *  Item level and SRS level indicator styles
@@ -112,9 +225,10 @@
     background: var(--maroon);
 }
 
+
 /********************************
  *  Tooltip styles
- ********************************/  
+ ********************************/
 /* Item tooltip wrapper styles */
 .custom-item-tooltip .custom-item-tooltip-text {
     visibility: hidden;
@@ -170,49 +284,4 @@
 .custom-item-tooltip:hover .custom-item-tooltip-text {
     visibility: visible;
     opacity: 1;
-}
-
-/* Next review tooltip wrapper styles */
-.custom-lessons-and-reviews-summary-tooltip.future-reviews {
-    display: none;
-    background-color: var(--transparent-black);
-    color: var(--white);
-    text-align: center;
-    border-radius: 5px;
-    position: absolute;
-    z-index: 1;
-    right: 110px;
-}
-
-.custom-lessons-and-reviews-summary-tooltip.future-reviews::after {
-    content: "";
-    position: absolute;
-    top: 60px;
-    left: 0;
-    margin-left: -20px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent var(--transparent-black) transparent transparent;
-}
-
-/* Next review tooltip content styles */
-.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
-    width: auto;
-    background: var(--purple);
-    border-radius: 5px;
-    border: none;
-    margin: 10px;
-    padding: 10px;
-}
-
-.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > h2 {
-    margin: 0 0 5px 0;
-    font-size: 20px;
-    line-height: 15px;
-}
-
-.custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary > span {
-    margin: 0;
-    font-size: 12px;
-    line-height: 10px;
 }

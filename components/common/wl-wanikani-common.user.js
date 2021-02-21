@@ -1,8 +1,38 @@
-// ==UserScript==
-// @name         WaniKani Custom Dashboard HTML Generators
-// @namespace    https://github.com/wonderlands-nightmare
-// @author       Wonderlands-Nightmares
-// ==/UserScript==
+/*************************************************
+ *  ANCHOR Variable initialisation
+ *************************************************/
+// NOTE Used for specific filtering configurations
+const wanikaniSrsStages = {
+    'locked': {'locked': -1 },
+    'initiate': { 'initiate': 0 },
+    'apprentice': {
+        'apprentice1': 1,
+        'apprentice2': 2,
+        'apprentice3': 3,
+        'apprentice4': 4
+    },
+    'guru': {
+        'guru1': 5,
+        'guru2': 6
+    },
+    'master': { 'master': 7 },
+    'enlightened': { 'enlightened': 8 },
+    'burned': { 'burned': 9 }
+};
+
+
+/*************************************************
+ *  ANCHOR Item filters and sorting
+ *************************************************/
+// NOTE Sorts items based on item level
+function itemLevelSort(itemsToSort) {
+    return itemsToSort.sort(function(a, b) {
+        return (a.data.level == b.data.level)
+             ? a.assignments.srs_stage - b.assignments.srs_stage
+             : a.data.level - b.data.level;
+    });
+};
+
 
 /*************************************************
  *  ANCHOR Get appropriate image or slug for a kanji/radical/vocabulary
@@ -32,6 +62,66 @@ function isAccepted(item) {
 
 function isNotAccepted(item) {
     return item.accepted_answer == false;
+};
+
+
+/*************************************************
+ *  ANCHOR Generate kanji/radical/vocabulary subject data object
+ *************************************************/
+function getSubjectData(data, type, subjectIds = []) {
+    wlWanikaniDebug('Retrieving ' + type + ' subject data.');
+
+    let returnData = {
+        kanji: new Array(),
+        radical: new Array(),
+        vocabulary: new Array()
+    };
+    let isLessonOrReview = false;
+    let counter = 0;
+
+    if (type == 'lesson') {
+        isLessonOrReview = true;
+        subjectIds = data.SummaryData.data.lessons[0].subject_ids;
+    }
+    else if (type == 'review') {
+        isLessonOrReview = true;
+        subjectIds = data.SummaryData.data.reviews[0].subject_ids;
+    }
+    else if (type == 'next-review') {
+        isLessonOrReview = true;
+    }
+
+    $.each(data.ItemsData, function(index, dataItem) {
+        if (isLessonOrReview) {
+            if (Object.values(subjectIds).includes(dataItem.id)) {
+                returnData[dataItem.object].push(dataItem);
+                counter++;
+            }
+        }
+        else {
+            if ("assignments" in dataItem) {
+                if (type == 'total') {
+                    returnData[dataItem.object].push(dataItem);
+                    counter++;
+                }
+                else {
+                    if (Object.values(wanikaniSrsStages[type]).includes(dataItem.assignments.srs_stage)) {
+                        returnData[dataItem.object].push(dataItem);
+                        counter++;
+                    }
+                }
+            }
+        }
+    })
+
+    returnData.totalCount = counter;
+    returnData.length = returnData.kanji.length + returnData.radical.length + returnData.vocabulary.length;
+    returnData.kanji = (returnData.kanji.length > 0) ? itemLevelSort(returnData.kanji) : [];
+    returnData.radical = (returnData.radical.length > 0) ? itemLevelSort(returnData.radical) : [];
+    returnData.vocabulary = (returnData.vocabulary.length > 0) ? itemLevelSort(returnData.vocabulary) : [];
+
+    wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
+    return returnData;
 };
 
 
@@ -233,101 +323,4 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
 
     wlWanikaniDebug('Generated the following summary HTML.', summaryHTML);
     return summaryHTML;
-};
-
-
-/*************************************************
- *  ANCHOR Level progress circle HTML generator
- *************************************************/
-function generateLevelProgressCircleHTML(data, size, thickness) {
-    let levelProgressCircleHTML = `
-        <div class="level-progress-indicator">
-            <span>${ data.Kanji.Passed.length } / ${ data.KanjiToPass }</span>
-            <svg
-            class="progress-ring"
-            width="${ size }"
-            height="${ size }">
-                <circle
-                    class="progress-ring-circle-track"
-                    stroke-width="${ thickness }"
-                    fill="transparent"
-                    r="${ (size / 2) - thickness }"
-                    cx="${ size / 2 }"
-                    cy="${ size / 2 }"/>
-                <circle
-                    class="progress-ring-circle"
-                    stroke-width="${ thickness }"
-                    fill="transparent"
-                    r="${ (size / 2) - thickness }"
-                    cx="${ size / 2 }"
-                    cy="${ size / 2 }"/>
-            </svg>
-        </div>
-    `;
-
-    return levelProgressCircleHTML;
-};
-
-
-/*************************************************
- *  ANCHOR Next reviews summary HTML generator
- *************************************************/
-function generateFutureReviewsHTML(data, nextReviewData) {
-    wlWanikaniDebug('Generating future reviews HTML with the following data.', nextReviewData);
-
-    let nextReviewHTMLData = [];
-    let futureReviewsHTML = '';
-    let returnHTML = [];
-
-    // NOTE Caters for empty nextReviewData array for when there are no more reviews coming up
-    if (!nextReviewData.length) {
-        nextReviewData = [{ text: '', count: 0, subjectIds: [] }];
-    }
-
-    if (nextReviewData.length > 0) {
-        $.each(nextReviewData, function(index, dataItem) {
-            let nextReviewSummaryData = getSubjectData(data, 'next-review', dataItem.subjectIds);
-            let nextReviewCustomClass = index == 0 ? 'next-review-summary' : 'future-review-summary';
-            let nextReviewTotalCount = nextReviewSummaryData.totalCount >= 10000 ? '~' + (nextReviewSummaryData.totalCount / 1000).toFixed() + '千' : nextReviewSummaryData.totalCount;
-            let nextReviewDataTitle = dataItem.text == ''
-                                    ? '次の復習をなんでもない'
-                                    : dataItem.text + 'の次の復習（' + nextReviewTotalCount + '）';
-            nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass, nextReviewDataTitle));
-        });
-
-        if (nextReviewData.length > 1) {
-            futureReviewsHTML += `<span class="custom-lessons-and-reviews-summary-tooltip future-reviews">`;
-
-            $.each(nextReviewHTMLData, function(index, htmlItem) {
-                futureReviewsHTML += index > 0 ? htmlItem : '';
-            });
-
-            futureReviewsHTML += `</span>`;
-        }
-
-        returnHTML.nextReviewHTML = nextReviewHTMLData[0];
-        returnHTML.futureReviewsHTML = futureReviewsHTML;
-    }
-
-    wlWanikaniDebug('Generated the following future reviews HTML.', returnHTML);
-    return returnHTML;
-};
-
-/*************************************************
- *  ANCHOR Difficult Items Table HTML generator
- *************************************************/
-function generateDifficultItemsSection(data,  insertAfterElement = '.custom-dashboard .custom-dashboard-progress-wrapper') {
-    const difficultItemsClass = 'custom-dashboard-difficult-items';
-
-    if ($('.' + difficultItemsClass).length > 0) {
-        $('.' + difficultItemsClass).remove();
-    }
-
-    if (wkof.settings[scriptId].show_difficult_items) {
-        let difficultItemsData = getDifficultItemsData(data);
-        let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
-        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems, difficultItemsClass, '苦労', difficultItemsHTML, true);
-
-        $(difficultItemsTableHTML).insertAfter(insertAfterElement);
-    }
 };
