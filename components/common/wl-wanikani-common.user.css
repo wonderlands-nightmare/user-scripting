@@ -29,7 +29,7 @@
     width: calc(100%/3);
 }
 
-.custom-summary:not(:last-child) {
+.custom-summary:not(:last-child):not(.next-review-summary) {
     border-right: var(--common-border) 1px solid;
 }
 
@@ -81,7 +81,8 @@
 } 
 
 .custom-items section { 
-    margin-bottom: 0; 
+    background: var(--section-items-background);
+    margin-bottom: 0;
 } 
 
 /* Progress entry styles */

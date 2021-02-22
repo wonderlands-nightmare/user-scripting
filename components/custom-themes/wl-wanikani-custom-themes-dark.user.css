@@ -3,13 +3,14 @@
  ********************************/
  :root {
     /* Miscellaneous */
-    --all-done-ring-colour:                   #218139;
+    --all-done-ring-colour:                   #00ff40;
     --item-level-icon-background:             #006400;
     --level-progress-ring-track:              #d5d5d5;
     --loader-colour:                          #6b6b6b;
     /* Wrappers */
-    --section-background:                     #d5d5d5;
-    --section-underlayer-background:          #f4f4f4;
+    --section-background:                     rgba(0, 0, 0, 0.75);
+    --section-items-background:               rgba(0, 0, 0, 0.75);
+    --section-underlayer-background:          rgba(0, 0, 0, 0.75);
     /* Button */
     --button-background:                      #6b6b6b;
     --button-border:                          #6b6b6b;
@@ -27,7 +28,7 @@
     --review-mid-pulse-colour:                #ffffff;
     /* Common */
     --common-border:                          #6b6b6b;
-    --text-colour:                            #ffffff;
+    --text-colour:                            #000000;
     /* Tooltip */
     --next-review-item-background:            #882d9e;
     --tooltip-background:                     rgba(0, 0, 0, 0.75);
@@ -41,7 +42,7 @@
     /* Kanji/Vocabulary/Radical */
     --kanji-item:                             #f100a1;
     --kanji-locked:                           #6b6b6b;
-    /* Multis  */
+    /* Multis */
     --srs-icon-background-0:                  #006400;
     --srs-icon-background-1:                  #000000;
     --srs-icon-background-2:                  #6b6b6b;
@@ -63,4 +64,32 @@
     --main-summary-background-3:              rgb(0, 100, 0, 0.2);
     --main-summary-background-4:              rgb(136, 45, 158, 0.2);
     --main-summary-background-5:              rgb(128, 0, 0, 0.2);
+
+    /* Dark theme extra colours */
+    --common-dark-background: rgba(0, 0, 0, 0.75);
+    --common-dark-text-colour: #ffffff;
+}
+
+
+/********************************
+ *  Dark theme colour overrides
+ ********************************/ 
+.global-header,
+body,
+footer {
+    background-color: var(--common-dark-background);
+}
+
+.global-header {
+    border-bottom: 1px solid var(--common-dark-background);
+}
+
+.sitemap__section-header,
+body {
+    color: var(--common-dark-text-colour);
+}
+
+h2 {
+    text-shadow: none;
+    font-weight: normal;
 }
