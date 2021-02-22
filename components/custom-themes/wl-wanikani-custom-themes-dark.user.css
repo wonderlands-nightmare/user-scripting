@@ -21,14 +21,14 @@
     --lesson-colour:                          #ff00aa;
     --lesson-colour-darker:                   #bd007e;
     --lesson-colour-lighter:                  #fa7acf;
-    --lesson-mid-pulse-colour:                #ffffff;
+    --lesson-mid-pulse-colour:                rgb(255, 0, 170, 0.2);
     --review-colour:                          #00aaff;
     --review-colour-darker:                   #0279b5;
     --review-colour-lighter:                  #80d4ff;
-    --review-mid-pulse-colour:                #ffffff;
+    --review-mid-pulse-colour:                rgb(0, 170, 255, 0.2);
     /* Common */
-    --common-border:                          #6b6b6b;
-    --text-colour:                            #000000;
+    --common-border:                          #ffffff;
+    --text-colour:                            #ffffff;
     /* Tooltip */
     --next-review-item-background:            #882d9e;
     --tooltip-background:                     rgba(0, 0, 0, 0.75);
@@ -42,6 +42,8 @@
     /* Kanji/Vocabulary/Radical */
     --kanji-item:                             #f100a1;
     --kanji-locked:                           #6b6b6b;
+    --radical-item:                           #00a1f1;
+    --vocabulary-item:                        #a100f1;
     /* Multis */
     --srs-icon-background-0:                  #006400;
     --srs-icon-background-1:                  #000000;
@@ -66,30 +68,71 @@
     --main-summary-background-5:              rgb(128, 0, 0, 0.2);
 
     /* Dark theme extra colours */
-    --common-dark-background: rgba(0, 0, 0, 0.75);
-    --common-dark-text-colour: #ffffff;
+    --common-theme-background:                rgba(0, 0, 0, 0.75);
+    --common-theme-text-colour:               #ffffff;
+    --navigation-menu-border:                 #696969;
 }
 
 
 /********************************
  *  Dark theme colour overrides
  ********************************/ 
-.global-header,
+.global-header {
+    background: var(--common-theme-background);
+}
+
 body,
 footer {
-    background-color: var(--common-dark-background);
+    background-color: var(--common-theme-background);
 }
 
 .global-header {
-    border-bottom: 1px solid var(--common-dark-background);
+    border-bottom: 1px solid var(--common-theme-background);
 }
 
 .sitemap__section-header,
+.navigation-shortcut > a,
 body {
-    color: var(--common-dark-text-colour);
+    color: var(--common-theme-text-colour);
 }
 
+.navigation-shortcut > a,
 h2 {
     text-shadow: none;
     font-weight: normal;
+}
+
+.sitemap__section-header[data-expanded="true"],
+.sitemap__section-header:focus,
+.sitemap__section-header:hover {
+    border-color: var(--navigation-menu-border);
+}
+
+.sitemap__section-header--radicals[data-expanded="true"],
+.sitemap__section-header--radicals:focus,
+.sitemap__section-header--radicals:hover {
+    border-color: var(--radical-item);
+    color: var(--radical-item);
+}
+
+.sitemap__section-header--kanji[data-expanded="true"],
+.sitemap__section-header--kanji:focus,
+.sitemap__section-header--kanji:hover {
+    border-color: var(--kanji-item);
+    color: var(--kanji-item);
+}
+
+.sitemap__section-header--vocabulary[data-expanded="true"],
+.sitemap__section-header--vocabulary:focus,
+.sitemap__section-header--vocabulary:hover {
+    border-color: var(--vocabulary-item);
+    color: var(--vocabulary-item);
+}
+
+#search__trigger {
+    color: var(--common-theme-text-colour);
+}
+
+#search__trigger:hover {
+    border-color: var(--navigation-menu-border);
 }

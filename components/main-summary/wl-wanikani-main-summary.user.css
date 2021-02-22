@@ -8,6 +8,11 @@
     background: var(--button-background);
 }
 
+.navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
+.navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-lessons) > span {
+    border: 1px solid var(--button-background);
+}
+
 /* Add animations and styles to main and shortcut buttons */
 .custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
