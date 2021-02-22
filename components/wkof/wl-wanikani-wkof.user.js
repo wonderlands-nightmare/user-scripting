@@ -183,7 +183,7 @@ function openSettings(items) {
                                             + '</br>Total number of kanji, radicals and vocabulary'
                                             + '</br>A general statement sentence.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">次の復習をなんでもない'
-                                            + '</br>つぎのふくしゅをなんでもない'
+                                            + '</br>つぎのふくしゅうをなんでもない'
                                             + '</br>No next review'
                                             + '</br>Highlights when there is no reviews available for the next 24 hours.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">午前__時の次の復習　・　午後__時の次の復習'

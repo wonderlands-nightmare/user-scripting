@@ -1,6 +1,23 @@
 /********************************
  *  Level progress styles
  ********************************/
+/* Summary background gradients */
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.lessons-summary {
+    background: linear-gradient(to right, var(--main-summary-background-1), var(--main-summary-background-2));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.reviews-summary {
+    background: linear-gradient(to right, var(--main-summary-background-2), var(--main-summary-background-3));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.totals-summary {
+    background: linear-gradient(to right, var(--main-summary-background-3), var(--main-summary-background-4));
+}
+
+.custom-lessons-and-reviews .custom-lessons-and-reviews-summary.next-review-summary {
+    background: linear-gradient(to right, var(--main-summary-background-4), var(--main-summary-background-5));
+}
+
 /* Level progress indictor ring styles */
 .level-progress-indicator {
     position: absolute;
@@ -20,11 +37,11 @@
     transition: 0.35s stroke-dashoffset;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
-    stroke: var(--lesson-colour);
+    stroke: var(--kanji-item);
 }
 
 .level-progress-indicator .progress-ring .progress-ring-circle-track {
-    stroke: var(--grey);
+    stroke: var(--level-progress-ring-track);
 }
 
 /* Level progress entry and div styles */
@@ -34,7 +51,7 @@
 }
 
 .custom-div.border-bottom {
-    border-bottom: var(--dark-grey) 1px solid;
+    border-bottom: var(--common-border) 1px solid;
 }
 
 .custom-div.kanji-in-progress .progress-entry:first-of-type {
@@ -45,5 +62,5 @@
  *  Items section and progress entry styles
  ********************************/
  .custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
-    background: var(--dark-grey);
+    background: var(--kanji-locked);
 }
