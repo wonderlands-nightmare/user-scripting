@@ -136,3 +136,7 @@ h2 {
 #search__trigger:hover {
     border-color: var(--navigation-menu-border);
 }
+
+#search #main-ico-search {
+    color: var(--common-theme-background);
+}
