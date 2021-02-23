@@ -105,10 +105,15 @@ function getNextReviewTime(data) {
             if (nextReviewItem.subject_ids.length > 0) {
                 let nextReviewDataItem = {};
                 let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString([], { hour: '2-digit' });
+                refreshValue = refreshValue.toLocaleLowerCase();
 
-                nextReviewDataItem.text = refreshValue.toLocaleLowerCase().includes('am')
-                                        ? '午前' + refreshValue.toLocaleLowerCase().replace(' am', '時')
-                                        : '午後' + refreshValue.toLocaleLowerCase().replace(' pm', '時');
+                // Double ternary to cater for browsers using 24 hour time
+                nextReviewDataItem.text = refreshValue.includes('am')
+                                        ? '午前' + refreshValue.replace(' am', '時')
+                                        : (refreshValue.includes('pm')
+                                          ? '午後' + refreshValue.replace(' pm', '時')
+                                          : refreshValue + '時'
+                                        );
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
                 nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
 
