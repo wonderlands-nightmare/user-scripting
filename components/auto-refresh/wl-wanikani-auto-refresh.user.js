@@ -30,6 +30,6 @@ function autoRefreshOnNextReviewHour(summaryData) {
     }
     else {
         setTimeout(autoRefreshOnNextReviewHour, timeoutValue, summaryData);
-        console.log('Auto refresh set for ' + new Date(nextRefreshValue).toLocaleTimeString("en-AU", { timeZone: "Australia/Melbourne", hour: '2-digit' }));
+        console.log('Auto refresh set for ' + new Date(nextRefreshValue).toLocaleTimeString([], { hour: '2-digit' }));
     }
 };
