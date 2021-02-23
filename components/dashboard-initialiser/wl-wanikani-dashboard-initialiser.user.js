@@ -40,9 +40,6 @@ function dashboardLoader(loaded = false) {
         if ($('.' + loaderClass).length > 0) {
             $('.' + loaderClass).remove();
         }
-
-        // Dashboard seems to sit under the WaniKani Header, so this is to force window to top
-        window.scrollTo(window.top);
     }
     else {
         // Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
@@ -56,6 +53,9 @@ function dashboardLoader(loaded = false) {
 
         $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
     }
+
+    // Dashboard seems to sit under the WaniKani Header, so this is to force window to top
+    window.scrollTo(window.top);
 }
 
 
