@@ -1,6 +1,6 @@
 /* Dashboard loader */
 .custom-dashboard-loader {
-    color: var(--dark-grey);
+    color: var(--loader-colour);
     overflow: hidden;
     width: 1em;
     height: 1em;

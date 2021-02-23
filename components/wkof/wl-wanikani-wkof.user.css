@@ -14,8 +14,8 @@
 
 #wkof_ds #wkofs_wanikani_custom_dashboard #wanikani_custom_dashboard_translations_page .wcd-dialog-item {
     padding: 5px;
-    background: var(--grey);
-    border: 1px solid var(--light-grey);
+    background: var(--translation-item-background);
+    border: 1px solid var(--translation-item-border);
     border-radius: 5px;
 }
 

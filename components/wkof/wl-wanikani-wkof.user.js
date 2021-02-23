@@ -59,7 +59,8 @@ function loadWkofSettings() {
     let defaults = {
         show_difficult_items: false,
         safe_level: 3,
-        srs_stage: 4
+        srs_stage: 4,
+        selected_theme: 1
     };
     wkof.Settings.load(scriptId, defaults);
 }
@@ -127,6 +128,16 @@ function openSettings(items) {
                                     9: 'Burned'
                                 },
                                 default: 4
+                            },
+                            selected_theme: {
+                                type: 'dropdown',
+                                label: 'Custom Dashboard theme',
+                                hover_tip: 'Select your prefered theme for the custom dashboard.',
+                                content: {
+                                    1: 'Default',
+                                    2: 'Dark'
+                                },
+                                default: 1
                             }
                         }
                     },
@@ -172,7 +183,7 @@ function openSettings(items) {
                                             + '</br>Total number of kanji, radicals and vocabulary'
                                             + '</br>A general statement sentence.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">次の復習をなんでもない'
-                                            + '</br>つぎのふくしゅをなんでもない'
+                                            + '</br>つぎのふくしゅうをなんでもない'
                                             + '</br>No next review'
                                             + '</br>Highlights when there is no reviews available for the next 24 hours.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">午前__時の次の復習　・　午後__時の次の復習'
@@ -209,6 +220,7 @@ function openSettings(items) {
         },
         on_save: (() => {
             generateDifficultItemsSection(wkofItemsData.AllData);
+            setCustomDashboardTheme();
         }),
         on_close: (() => {
             if ($('.custom-dialog-css').length > 0) {

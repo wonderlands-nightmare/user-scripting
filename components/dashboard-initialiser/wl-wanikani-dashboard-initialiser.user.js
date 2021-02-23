@@ -53,6 +53,9 @@ function dashboardLoader(loaded = false) {
 
         $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
     }
+
+    // Dashboard seems to sit under the WaniKani Header, so this is to force window to top
+    window.scrollTo(window.top);
 }
 
 

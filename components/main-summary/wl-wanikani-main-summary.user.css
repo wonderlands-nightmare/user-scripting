@@ -5,7 +5,19 @@
 .custom-lessons-and-reviews-button:not(.has-reviews):not(.has-lessons),
 .navigation-shortcuts .navigation-shortcut--reviews > a:not(.has-reviews) > span,
 .navigation-shortcuts .navigation-shortcut--lessons > a:not(.has-lessons) > span {
-    background: var(--dark-grey);
+    background: var(--button-background);
+}
+
+.navigation-shortcuts .navigation-shortcut > a {
+    border: 2px solid var(--button-background);
+}
+
+.navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews {
+    border: 2px solid var(--review-colour);
+}
+
+.navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons {
+    border: 2px solid var(--lesson-colour);
 }
 
 /* Add animations and styles to main and shortcut buttons */
@@ -24,6 +36,7 @@
 .custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
     --start-pulse: var(--review-colour-darker);
+    --mid-pulse: var(--review-mid-pulse-colour);
     --end-pulse: var(--review-colour-lighter);
     animation: buttonPulse 2s infinite; 
 } 
@@ -31,6 +44,7 @@
 .custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
     --start-pulse: var(--lesson-colour-darker);
+    --mid-pulse: var(--lesson-mid-pulse-colour);
     --end-pulse: var(--lesson-colour-lighter);
     animation: buttonPulse 2s infinite; 
 }
@@ -42,8 +56,8 @@
 /* Next review tooltip wrapper styles */
 .custom-lessons-and-reviews-summary-tooltip.future-reviews {
     display: none;
-    background-color: var(--transparent-black);
-    color: var(--white);
+    background-color: var(--tooltip-background);
+    color: var(--text-colour);
     text-align: center;
     border-radius: 5px;
     position: absolute;
@@ -59,13 +73,13 @@
     margin-left: -20px;
     border-width: 10px;
     border-style: solid;
-    border-color: transparent var(--transparent-black) transparent transparent;
+    border-color: transparent var(--tooltip-background) transparent transparent;
 }
 
 /* Next review tooltip content styles */
 .custom-lessons-and-reviews-summary-tooltip.future-reviews .custom-lessons-and-reviews-summary.future-review-summary {
     width: auto;
-    background: var(--purple);
+    background: var(--next-review-item-background);
     border-radius: 5px;
     border: none;
     margin: 10px;
@@ -93,7 +107,7 @@
         box-shadow: 0 0 0 0 var(--start-pulse); 
     } 
     70% { 
-        box-shadow: 0 0 0 7px var(--white); 
+        box-shadow: 0 0 0 7px var(--mid-pulse); 
     } 
     100% { 
         box-shadow: 0 0 0 0 var(--end-pulse); 

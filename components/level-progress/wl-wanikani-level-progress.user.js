@@ -13,23 +13,23 @@ function initialiseLevelProgressComponent() {
     let levelProgressItemsHTML = `
         ${ levelProgressCircleHTML }
         <div class="progress-entries custom-div border-bottom kanji-in-progress ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">漢字進行中</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">漢字進行中</h2>
             ${ levelProgressKanjiInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-in-progress ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">部首進行中</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">部首進行中</h2>
             ${ levelProgressRadicalsInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom kanji-passed ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">漢字合格</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">漢字合格</h2>
             ${ levelProgressKanjiPassedHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-passed ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">部首合格</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">部首合格</h2>
             ${ levelProgressRadicalsPassedHTML }
         </div>
         <div class="progress-entries custom-div kanji-locked ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-black text-left leading-none tracking-normal font-bold">漢字ロック</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">漢字ロック</h2>
             ${ levelProgressKanjiLockedHTML }
         </div>
     `;

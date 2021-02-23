@@ -138,8 +138,8 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
 
     let customTableHTML = `
         <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">
-            <section class="rounded bg-white p-3 -mx-3">
-                <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-black text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${ headerMessage }</h2>
+            <section class="rounded p-3 -mx-3">
+                <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${ headerMessage }</h2>
                 <div class="progress-entries">
                     ${ customItemsHTML }
                 </div>

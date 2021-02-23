@@ -1,0 +1,143 @@
+/********************************
+ *  Dark theme colours
+ ********************************/
+ :root {
+    /* Miscellaneous */
+    --all-done-ring-colour:                   #00ff40;
+    --item-level-icon-background:             #006400;
+    --level-progress-ring-track:              #d5d5d5;
+    --loader-colour:                          #6b6b6b;
+    /* Wrappers */
+    --section-background:                     rgba(0, 0, 0, 0.75);
+    --section-items-background:               rgba(0, 0, 0, 0.75);
+    --section-underlayer-background:          rgba(0, 0, 0, 0.75);
+    /* Button */
+    --button-background:                      #6b6b6b;
+    --button-border:                          #6b6b6b;
+    --summary-button-hover-background:        #006400;
+    --summary-button-selected-background:     #218139;
+    --summary-button-selected-border:         #000000;
+    /* Review/Lesson */
+    --lesson-colour:                          #ff00aa;
+    --lesson-colour-darker:                   #bd007e;
+    --lesson-colour-lighter:                  #fa7acf;
+    --lesson-mid-pulse-colour:                rgb(255, 0, 170, 0.2);
+    --review-colour:                          #00aaff;
+    --review-colour-darker:                   #0279b5;
+    --review-colour-lighter:                  #80d4ff;
+    --review-mid-pulse-colour:                rgb(0, 170, 255, 0.2);
+    /* Common */
+    --common-border:                          #ffffff;
+    --text-colour:                            #ffffff;
+    /* Tooltip */
+    --next-review-item-background:            #882d9e;
+    --tooltip-background:                     rgba(0, 0, 0, 0.75);
+    --tooltip-not-right-meaning-background:   #000000;
+    --tooltip-not-right-reading-background:   #800000;
+    --tooltip-right-meaning-background:       #6b6b6b;
+    --tooltip-right-reading-background:       #006400;
+    /* Dialog */
+    --translation-item-background:            #d5d5d5;
+    --translation-item-border:                #f4f4f4;
+    /* Kanji/Vocabulary/Radical */
+    --kanji-item:                             #f100a1;
+    --kanji-locked:                           #6b6b6b;
+    --radical-item:                           #00a1f1;
+    --vocabulary-item:                        #a100f1;
+    /* Multis */
+    --srs-icon-background-0:                  #006400;
+    --srs-icon-background-1:                  #000000;
+    --srs-icon-background-2:                  #6b6b6b;
+    --srs-icon-background-3:                  #fa7acf;
+    --srs-icon-background-4:                  #bd007e;
+    --srs-icon-background-5:                  #882d9e;
+    --srs-icon-background-6:                  #294ddb;
+    --srs-icon-background-7:                  #0279b5;
+    --srs-icon-background-8:                  #b5b014;
+    --srs-icon-background-9:                  #800000;
+    --srs-stage-background-1:                 rgb(221, 0, 147, 0.2);
+    --srs-stage-background-2:                 rgb(136, 45, 158, 0.2);
+    --srs-stage-background-3:                 rgb(41, 77, 219, 0.2);
+    --srs-stage-background-4:                 rgb(0, 147, 221, 0.2);
+    --srs-stage-background-5:                 rgb(255, 215, 0, 0.2);
+    --srs-stage-background-6:                 rgb(128, 0, 0, 0.2);
+    --main-summary-background-1:              rgb(255, 0, 170, 0.2);
+    --main-summary-background-2:              rgb(0, 170, 255, 0.2);
+    --main-summary-background-3:              rgb(0, 100, 0, 0.2);
+    --main-summary-background-4:              rgb(136, 45, 158, 0.2);
+    --main-summary-background-5:              rgb(128, 0, 0, 0.2);
+
+    /* Dark theme extra colours */
+    --common-theme-background:                rgba(0, 0, 0, 0.75);
+    --common-theme-text-colour:               #ffffff;
+    --navigation-menu-border:                 #696969;
+}
+
+
+/********************************
+ *  Dark theme colour overrides
+ ********************************/ 
+.global-header {
+    background: var(--common-theme-background);
+}
+
+body,
+footer {
+    background-color: var(--common-theme-background);
+}
+
+.global-header {
+    border-bottom: 1px solid var(--common-theme-background);
+}
+
+.sitemap__section-header,
+.navigation-shortcut > a,
+body {
+    color: var(--common-theme-text-colour);
+}
+
+.navigation-shortcut > a,
+h2 {
+    text-shadow: none;
+    font-weight: normal;
+}
+
+.sitemap__section-header[data-expanded="true"],
+.sitemap__section-header:focus,
+.sitemap__section-header:hover {
+    border-color: var(--navigation-menu-border);
+}
+
+.sitemap__section-header--radicals[data-expanded="true"],
+.sitemap__section-header--radicals:focus,
+.sitemap__section-header--radicals:hover {
+    border-color: var(--radical-item);
+    color: var(--radical-item);
+}
+
+.sitemap__section-header--kanji[data-expanded="true"],
+.sitemap__section-header--kanji:focus,
+.sitemap__section-header--kanji:hover {
+    border-color: var(--kanji-item);
+    color: var(--kanji-item);
+}
+
+.sitemap__section-header--vocabulary[data-expanded="true"],
+.sitemap__section-header--vocabulary:focus,
+.sitemap__section-header--vocabulary:hover {
+    border-color: var(--vocabulary-item);
+    color: var(--vocabulary-item);
+}
+
+#search__trigger,
+#search.in .search-heading {
+    color: var(--common-theme-text-colour);
+}
+
+#search__trigger:hover {
+    border-color: var(--navigation-menu-border);
+}
+
+#search #main-ico-search {
+    color: var(--common-theme-background);
+}
