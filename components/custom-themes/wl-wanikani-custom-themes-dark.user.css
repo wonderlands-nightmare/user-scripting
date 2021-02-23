@@ -129,14 +129,12 @@ h2 {
     color: var(--vocabulary-item);
 }
 
-#search__trigger {
+#search__trigger,
+#search.in .search-heading,
+#search #main-ico-search {
     color: var(--common-theme-text-colour);
 }
 
 #search__trigger:hover {
     border-color: var(--navigation-menu-border);
-}
-
-#search #main-ico-search {
-    color: var(--common-theme-background);
 }
