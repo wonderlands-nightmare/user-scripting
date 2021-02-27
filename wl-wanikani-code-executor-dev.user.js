@@ -25,8 +25,8 @@
 // @resource     DIFFICULT_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/difficult-items/wl-wanikani-difficult-items.user.js
 // @resource     DIFFICULT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/difficult-items/wl-wanikani-difficult-items.user.css
 // @resource     REFRESH_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/auto-refresh/wl-wanikani-auto-refresh.user.js
-// @resource     ADDITIONAL_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/auto-refresh/wl-wanikani-additional.user.js
-// @resource     ADDITIONAL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/auto-refresh/wl-wanikani-additional.user.css
+// @resource     ADDITIONAL_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/additional/wl-wanikani-additional.user.js
+// @resource     ADDITIONAL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/additional/wl-wanikani-additional.user.css
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // ==/UserScript==
