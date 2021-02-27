@@ -4,13 +4,13 @@
 function skipReviewLessonSummary() {
     if (wkof.settings[scriptId].skip_session_summary) {
         skipAfterLessonSession();
+        skipAfterReviewSession();
         skipSummaryOnHomeButtonClick();
     }
 };
 
-function skipAfterSession() {
+function skipAfterLessonSession() {
     if ($('#screen-lesson-done .btn-set').length > 0) {
-        console.log('adding skip button');
         let skipLessonSummaryButton = `
             <li id="lesson-skip-to-homepage">
                 <a href="https://www.wanikani.com/dashboard">
@@ -20,6 +20,13 @@ function skipAfterSession() {
         `;
 
         $('#screen-lesson-done .btn-set').append(skipLessonSummaryButton);
+    }
+};
+
+function skipAfterReviewSession() {
+    let reviewInputButton = $('#reviews #question #answer-form fieldset > button');
+    if (reviewInputButton.length > 0) {
+        reviewInputButton.attr('href', '/dashboard');
     }
 };
 

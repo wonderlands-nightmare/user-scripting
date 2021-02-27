@@ -3,6 +3,8 @@
  *************************************************/
 const scriptName = 'Wanikani Custom Dashboard';
 const scriptId = 'wanikani_custom_dashboard';
+const dashboardUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(dashboard)?$/;
+const sessionUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(lesson|review)\/session$/;
 
 // For dialog CSS since this file can't use GM
 let wcdDialogCss = '';
@@ -226,8 +228,13 @@ function openSettings(items) {
             }
         },
         on_save: (() => {
-            generateDifficultItemsSection(wkofItemsData.AllData);
-            setCustomDashboardTheme();
+            if (window.location.href.match(dashboardUrlRegEx)) {
+                generateDifficultItemsSection(wkofItemsData.AllData);
+                setCustomDashboardTheme();
+            }
+            if (window.location.href.match(sessionUrlRegEx)) {
+                skipReviewLessonSummary();
+            }
         }),
         on_close: (() => {
             if ($('.custom-dialog-css').length > 0) {

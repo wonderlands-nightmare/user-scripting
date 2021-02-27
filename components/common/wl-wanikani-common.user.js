@@ -324,24 +324,3 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
     wlWanikaniDebug('Generated the following summary HTML.', summaryHTML);
     return summaryHTML;
 };
-
-
-/*************************************************
- *  ANCHOR Iterator to check if WKOF settings are ready
- *************************************************/
-function wkofSettingsChecker(interationCount = 0) {
-    const wkofSettings = wkof.settings[scriptId];
-
-    if (wkofSettings == undefined) {
-        if(interationCount <= 10){
-            setTimeout(function(){
-                interationCount++;
-                wkofSettingsChecker(interationCount);
-            }, 250);
-        }
-        else {
-            console.log('Checked for WKOF settings ' + interationCount + ' times.');
-        }
-    }
-    
-}

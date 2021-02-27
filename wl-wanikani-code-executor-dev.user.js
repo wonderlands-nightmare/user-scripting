@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.3
+// @version      1.4.4
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -95,10 +95,6 @@
         }
     }
 
-    const dashboardUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(dashboard)?$/;
-    const sessionUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(lesson|review)\/session$/;
-
-    
 
     /*************************************************
      *  ANCHOR Actual script execution code
@@ -111,11 +107,8 @@
     wkof.ready(wkofSettingsModules)
         .then(loadWkofMenu)
         .then(loadWkofSettings);
-
-    wkofSettingsChecker();
     
     if (window.location.href.match(dashboardUrlRegEx)) {
-        console.log('running on ' + window.location.href);
         wkof.include(wkofDataModules);
         wkof.ready(wkofDataModules)
             .then(getWkofDataObject)
@@ -136,9 +129,11 @@
     }
 
     if (window.location.href.match(sessionUrlRegEx)) {
-        console.log('running on ' + window.location.href);
-        addResources(['additional']);
-        skipReviewLessonSummary();
+        // Timeout needed for now to wait for settings to be ready
+        setTimeout(function() {
+            addResources(['additional']);
+            skipReviewLessonSummary();
+        }, 1000);
     }
 
 
