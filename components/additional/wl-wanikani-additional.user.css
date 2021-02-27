@@ -1,0 +1,15 @@
+/********************************
+ *  Additional functions variables
+ *  Kept separate from theming
+ ********************************/
+:root {
+    --white-text:   #ffffff;
+}
+
+/********************************
+ *  Skip lesson/review summary styles
+ ********************************/
+/* Lesson "Go to Homepage" button */
+#screen-lesson-done .btn-set #lesson-skip-to-homepage {
+    color: var(--white-text);
+}

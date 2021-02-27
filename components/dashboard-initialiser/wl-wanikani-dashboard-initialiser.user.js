@@ -90,7 +90,7 @@ function updateShortcutNavigation(item) {
  *  ANCHOR Generate custom dashboard wrapper
  *************************************************/
 function generateDashboardWrapperHTML() {
-    wlWanikaniDebug('Generating custom dashboard wrapper HTML.');
+    wlWanikaniDebug('html', '==Dashboard Initialiser: generateDashboardWrapperHTML== Generating custom dashboard wrapper HTML:');
 
     // NOTE Generate custom dashboard wrapper HTML, empty div with 'row' class is for other script compatibility
     let dashboardWrapperHTML = `
@@ -117,5 +117,5 @@ function generateDashboardWrapperHTML() {
     // NOTE Add custom dashboard wrapper to page
     $(dashboardWrapperHTML).insertAfter('.footer-adjustment .custom-dashboard-loader');
 
-    wlWanikaniDebug('Generated the following custom dashboard wrapper HTML.', dashboardWrapperHTML);
+    wlWanikaniDebug('html', '==Dashboard Initialiser: generateDashboardWrapperHTML== Generated the following custom dashboard wrapper HTML:', { main_html: dashboardWrapperHTML });
 };

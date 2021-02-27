@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.1
+// @version      1.4.2
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
+// @include      /^https://(www|preview).wanikani.com/(lesson|review)/session$/
 // @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/wkof/wl-wanikani-wkof.user.js
 // @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/wkof/wl-wanikani-wkof.user.css
 // @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/custom-themes/wl-wanikani-custom-themes.user.js
@@ -24,6 +25,8 @@
 // @resource     DIFFICULT_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/difficult-items/wl-wanikani-difficult-items.user.js
 // @resource     DIFFICULT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/difficult-items/wl-wanikani-difficult-items.user.css
 // @resource     REFRESH_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/auto-refresh/wl-wanikani-auto-refresh.user.js
+// @resource     ADDITIONAL_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/additional/wl-wanikani-additional.user.js
+// @resource     ADDITIONAL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/additional/wl-wanikani-additional.user.css
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // ==/UserScript==
@@ -32,18 +35,23 @@
     /*************************************************
      *  ANCHOR Variable initialisation
      *************************************************/
-    // Change this to turn debugging on
-    const isDebug = false;
-
     // WKOF modules required
     const wkofSettingsModules = 'Menu, Settings';
     const wkofDataModules = 'Apiv2, ItemData';
 
     // Dashboard resources
     const dashboardResources = {
-        wkof: {
-            js: 'WKOF_JS',
-            css: 'WKOF_CSS'
+        additional: {
+            js: 'ADDITIONAL_JS',
+            css: 'ADDITIONAL_CSS'
+        },
+        autoRefresh: {
+            js: 'REFRESH_JS',
+            css: ''
+        },
+        common: {
+            js: 'COMMON_JS',
+            css: 'COMMON_CSS'
         },
         customTheme: {
             js: 'THEME_JS',
@@ -62,62 +70,72 @@
             js: 'DEBUG_JS',
             css: ''
         },
-        common: {
-            js: 'COMMON_JS',
-            css: 'COMMON_CSS'
-        },
-        mainSummary: {
-            js: 'MAIN_JS',
-            css: 'MAIN_CSS'
+        difficultItems: {
+            js: 'DIFFICULT_JS',
+            css: 'DIFFICULT_CSS'
         },
         levelProgress: {
             js: 'LEVEL_JS',
             css: 'LEVEL_CSS'
         },
+        mainSummary: {
+            js: 'MAIN_JS',
+            css: 'MAIN_CSS'
+        },
         srsSummary: {
             js: 'SRS_JS',
             css: 'SRS_CSS'
         },
-        difficultItems: {
-            js: 'DIFFICULT_JS',
-            css: 'DIFFICULT_CSS'
-        },
-        autoRefresh: {
-            js: 'REFRESH_JS',
-            css: ''
+        wkof: {
+            js: 'WKOF_JS',
+            css: 'WKOF_CSS'
         }
     }
-    
+
 
     /*************************************************
      *  ANCHOR Actual script execution code
      *************************************************/
-    addResources(['wkof', 'dashboardInitialiser', 'debug', 'common']);
+    addResources(['wkof']);
     wkofInstallCheck();
-    initialiseDashboardInitialiserComponent();
 
     wkof.include(wkofSettingsModules);
     wkof.ready(wkofSettingsModules)
         .then(loadWkofMenu)
         .then(loadWkofSettings);
+
+    setTimeout(function() {
+        addResources(['dashboardInitialiser', 'debug', 'common']);
+        initialiseDashboardInitialiserComponent();
+    }, 1000);
     
-    wkof.include(wkofDataModules);
-    wkof.ready(wkofDataModules)
-        .then(getWkofDataObject)
-        .then(function(data) {
-            addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
-            wkofItemsData.AllData = data;
-            setCustomDashboardTheme();
-        })
-        .then(function() {
-            setWlWanikaniDebugMode(isDebug);
-            initialiseMainSummaryComponent();
-            initialiseLevelProgressComponent();
-            initialiseSrsSummaryComponent();
-            initialiseDifficultItemsComponent();
-            autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
-            dashboardLoader(true);
-        });
+    if (window.location.href.match(dashboardUrlRegEx)) {
+        wkof.include(wkofDataModules);
+        wkof.ready(wkofDataModules)
+            .then(getWkofDataObject)
+            .then(function(data) {
+                addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+                wkofItemsData.AllData = data;
+                wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
+                setCustomDashboardTheme();
+            })
+            .then(function() {
+                initialiseMainSummaryComponent();
+                initialiseLevelProgressComponent();
+                initialiseSrsSummaryComponent();
+                initialiseDifficultItemsComponent();
+                autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
+                dashboardLoader(true);
+            });
+    }
+
+    if (window.location.href.match(sessionUrlRegEx)) {
+        // Timeout needed for now to wait for settings to be ready
+        setTimeout(function() {
+            addResources(['additional']);
+            skipReviewLessonSummary();
+        }, 1000);
+    }
 
 
     /*************************************************

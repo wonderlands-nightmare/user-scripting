@@ -69,7 +69,7 @@ function isNotAccepted(item) {
  *  ANCHOR Generate kanji/radical/vocabulary subject data object
  *************************************************/
 function getSubjectData(data, type, subjectIds = []) {
-    wlWanikaniDebug('Retrieving ' + type + ' subject data.');
+    wlWanikaniDebug('data', '==Common: getSubjectData== Retrieving ' + type + ' subject data, using the following subject ids (if any, otherwise using all data):', subjectIds);
 
     let returnData = {
         kanji: new Array(),
@@ -120,7 +120,7 @@ function getSubjectData(data, type, subjectIds = []) {
     returnData.radical = (returnData.radical.length > 0) ? itemLevelSort(returnData.radical) : [];
     returnData.vocabulary = (returnData.vocabulary.length > 0) ? itemLevelSort(returnData.vocabulary) : [];
 
-    wlWanikaniDebug('Retrieved ' + type + ' subject data.', returnData);
+    wlWanikaniDebug('data', '==Common: getSubjectData== Retrieved ' + type + ' subject data:', returnData);
     return returnData;
 };
 
@@ -129,7 +129,7 @@ function getSubjectData(data, type, subjectIds = []) {
  *  ANCHOR Custom item table HTML generator
  *************************************************/
 function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML, headerCount = false) {
-    wlWanikaniDebug('Generating custom items table (' + customClass + ') HTML with the following data.', customItemsData);
+    wlWanikaniDebug('data', '==Common: generateCustomItemsTableHTML== Generating custom items table (' + customClass + ') HTML with the following data:', customItemsData);
 
     let headerMessageCount = headerCount ? '（' + customItemsData.length + '）' : '';
     let headerMessage = (customItemsData.length == 0)
@@ -147,7 +147,7 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
         </div>
     `;
 
-    wlWanikaniDebug('Finished generating custom items (' + customClass + ') table.', customTableHTML);
+    wlWanikaniDebug('html', '==Common: generateCustomItemsTableHTML== Finished generating custom items (' + customClass + ') table HTML:', { main_html: customTableHTML });
     return customTableHTML;
 };
 
@@ -155,8 +155,8 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
 /*************************************************
  *  ANCHOR Custom items HTML generator
  *************************************************/
-function generateCustomItemsHTML(items, type = '') {
-    wlWanikaniDebug('Generating custom items HTML.');
+function generateCustomItemsHTML(items, type) {
+    wlWanikaniDebug('data', '==Common: generateCustomItemsHTML== Generating custom items (' + type + ') HTML with the following data:', items);
 
     let customItemsHTML = '';
 
@@ -173,7 +173,7 @@ function generateCustomItemsHTML(items, type = '') {
             customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ customItemTooltipHTML }
-                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'locked' ? type : '' }" lang="ja">
+                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'kanji-locked' ? 'locked' : '' }" lang="ja">
                             <div>${ itemsCharacterCallback(item) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
                             ${ itemSrsLevel }
@@ -183,7 +183,7 @@ function generateCustomItemsHTML(items, type = '') {
         });
     }
 
-    wlWanikaniDebug('Generated the following custom items HTML.', customItemsHTML);
+    wlWanikaniDebug('html', '==Common: generateCustomItemsHTML== Generated the following custom items (' + type + ') HTML:', { main_html: customItemsHTML });
     return customItemsHTML;
 };
 
@@ -301,7 +301,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
  *  ANCHOR Custom summary HTML generator
  *************************************************/
 function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton = false, buttonClasses = '', buttonText = '') {
-    wlWanikaniDebug('Generating summary HTML.');
+    wlWanikaniDebug('data', '==Common: generateSummaryHTML== Generating summary (' + htmlClasses + ') HTML:');
 
     let buttonHTML = hasButton
     ? `
@@ -321,6 +321,6 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
         </div>
     `;
 
-    wlWanikaniDebug('Generated the following summary HTML.', summaryHTML);
+    wlWanikaniDebug('html', '==Common: generateSummaryHTML== Generated the following summary (' + htmlClasses + ') HTML:', { main_html: summaryHTML });
     return summaryHTML;
 };

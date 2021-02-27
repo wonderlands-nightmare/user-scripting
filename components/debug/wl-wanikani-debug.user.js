@@ -1,17 +1,13 @@
 /*************************************************
  *  ANCHOR Common debugger function
  *************************************************/
-// Only used to initialise variable for code in this file
-let debugMode = false;
+// Mainly used to identify when the page needs reloading on settings change
+let dataDebugMode = wkof.settings[scriptId].debug_data;
+let htmlDebugMode = wkof.settings[scriptId].debug_html;
 
-// Called from main userscript to set debug mode
-function setWlWanikaniDebugMode(debugModeBoolean) {
-    debugMode = debugModeBoolean;
-};
-
-// Actual debug function
-function wlWanikaniDebug(debugMessage, debugItem = '') {
-    if (debugMode) {
+// Data debug function
+function wlWanikaniDebug(debugType, debugMessage, debugItem = '') {
+    if ((dataDebugMode && debugType == 'data') || (htmlDebugMode && debugType == 'html')) {
         console.log(debugMessage, debugItem);
     }
 };

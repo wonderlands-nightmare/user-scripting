@@ -3,6 +3,9 @@
  *************************************************/
 const scriptName = 'Wanikani Custom Dashboard';
 const scriptId = 'wanikani_custom_dashboard';
+const dashboardUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(dashboard)?$/;
+const sessionUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(lesson|review)\/session$/;
+const reviewSummaryUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/review$/;
 
 // For dialog CSS since this file can't use GM
 let wcdDialogCss = '';
@@ -60,7 +63,8 @@ function loadWkofSettings() {
         show_difficult_items: false,
         safe_level: 3,
         srs_stage: 4,
-        selected_theme: 1
+        selected_theme: 1,
+        skip_session_summary: false
     };
     wkof.Settings.load(scriptId, defaults);
 }
@@ -97,47 +101,89 @@ function openSettings(items) {
                         label: 'Settings',
                         hover_tip: 'Main WaniKani Custom Dashboard settings.',
                         content: {
-                            show_difficult_items: {
-                                type: 'checkbox',
-                                label: 'Show Difficult Items section',
-                                hover_tip: 'Check if you want to see the Difficult Items section. Defaults to not show.',
-                                default: false
-                            },
-                            safe_level: {
-                                type: 'number',
-                                label: '"Safe Level" difference',
-                                hover_tip: 'This is a number that is subtracted from your current level, and defines what the maximum level of the Difficult Items is to show. Defaults to 3.',
-                                multi: false,
-                                min: 0,
-                                max: 59,
-                                default: 3
-                            },
-                            srs_stage: {
-                                type: 'dropdown',
-                                label: 'SRS Stage cap',
-                                hover_tip: 'The maximum SRS stage that a Difficult Item can be shown with. Default is Apprentice 4.',
+                            primary_settings: {
+                                type: 'group',
+                                label: 'Dashboard settings',
                                 content: {
-                                    1: 'Apprentice 1',
-                                    2: 'Apprentice 2',
-                                    3: 'Apprentice 3',
-                                    4: 'Apprentice 4',
-                                    5: 'Guru 1',
-                                    6: 'Guru 2',
-                                    7: 'Master',
-                                    8: 'Enlightened',
-                                    9: 'Burned'
-                                },
-                                default: 4
+                                    difficult_items_header: {
+                                        type: 'section',
+                                        label: 'Difficult items'
+                                    },
+                                    show_difficult_items: {
+                                        type: 'checkbox',
+                                        label: 'Show Difficult Items section',
+                                        hover_tip: 'Check if you want to see the Difficult Items section. Defaults to not show.',
+                                        default: false
+                                    },
+                                    safe_level: {
+                                        type: 'number',
+                                        label: '"Safe Level" difference',
+                                        hover_tip: 'This is a number that is subtracted from your current level, and defines what the maximum level of the Difficult Items is to show. Defaults to 3.',
+                                        multi: false,
+                                        min: 0,
+                                        max: 59,
+                                        default: 3
+                                    },
+                                    srs_stage: {
+                                        type: 'dropdown',
+                                        label: 'SRS Stage cap',
+                                        hover_tip: 'The maximum SRS stage that a Difficult Item can be shown with. Default is Apprentice 4.',
+                                        content: {
+                                            1: 'Apprentice 1',
+                                            2: 'Apprentice 2',
+                                            3: 'Apprentice 3',
+                                            4: 'Apprentice 4',
+                                            5: 'Guru 1',
+                                            6: 'Guru 2',
+                                            7: 'Master',
+                                            8: 'Enlightened',
+                                            9: 'Burned'
+                                        },
+                                        default: 4
+                                    },
+                                    themes_header: {
+                                        type: 'section',
+                                        label: 'Custom themes'
+                                    },
+                                    selected_theme: {
+                                        type: 'dropdown',
+                                        label: 'Select theme',
+                                        hover_tip: 'Select your prefered theme for the custom dashboard.',
+                                        content: {
+                                            1: 'Default',
+                                            2: 'Dark'
+                                        },
+                                        default: 1
+                                    },
+                                    debug_header: {
+                                        type: 'section',
+                                        label: 'Debugging'
+                                    },
+                                    debug_data: {
+                                        type: 'checkbox',
+                                        label: 'Enable data debugging',
+                                        hover_tip: 'Check if you want to enable debugging for the WKOF data used and generated.',
+                                        default: false
+                                    },
+                                    debug_html: {
+                                        type: 'checkbox',
+                                        label: 'Enable HTML debugging',
+                                        hover_tip: 'Check if you want to enable debugging for the HTML used and generated.',
+                                        default: false
+                                    }
+                                }
                             },
-                            selected_theme: {
-                                type: 'dropdown',
-                                label: 'Custom Dashboard theme',
-                                hover_tip: 'Select your prefered theme for the custom dashboard.',
+                            additional_settings: {
+                                type: 'group',
+                                label: 'Additional settings',
                                 content: {
-                                    1: 'Default',
-                                    2: 'Dark'
-                                },
-                                default: 1
+                                    skip_session_summary: {
+                                        type: 'checkbox',
+                                        label: 'Skip session summaries',
+                                        hover_tip: 'Check if you want to skip the summary pages after lesson and review sessions.',
+                                        default: false
+                                    }
+                                }
                             }
                         }
                     },
@@ -219,8 +265,17 @@ function openSettings(items) {
             }
         },
         on_save: (() => {
-            generateDifficultItemsSection(wkofItemsData.AllData);
-            setCustomDashboardTheme();
+            if (window.location.href.match(dashboardUrlRegEx)) {
+                generateDifficultItemsSection(wkofItemsData.AllData);
+                setCustomDashboardTheme();
+                // Annoying if statement cause we don't need to reload if deselecting
+                if ((!dataDebugMode && wkof.settings[scriptId].debug_data) || (!htmlDebugMode && wkof.settings[scriptId].debug_html)) {
+                    window.location.reload();
+                }
+            }
+            if (window.location.href.match(sessionUrlRegEx)) {
+                skipReviewLessonSummary();
+            }
         }),
         on_close: (() => {
             if ($('.custom-dialog-css').length > 0) {

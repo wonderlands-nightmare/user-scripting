@@ -5,11 +5,11 @@ function initialiseLevelProgressComponent() {
     // NOTE Get level progress data and generate HTML for section
     let levelProgressData = getLevelProgress(wkofItemsData.AllData);
     let levelProgressCircleHTML = generateLevelProgressCircleHTML(levelProgressData, 60, 6);
-    let levelProgressKanjiInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress);
-    let levelProgressRadicalsInProgressHTML = generateCustomItemsHTML(levelProgressData.Radicals.InProgress);
-    let levelProgressKanjiPassedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Passed);
-    let levelProgressRadicalsPassedHTML = generateCustomItemsHTML(levelProgressData.Radicals.Passed);
-    let levelProgressKanjiLockedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Locked, 'locked');
+    let levelProgressKanjiInProgressHTML = generateCustomItemsHTML(levelProgressData.Kanji.InProgress, 'kanji-in-progress');
+    let levelProgressRadicalsInProgressHTML = generateCustomItemsHTML(levelProgressData.Radicals.InProgress, 'radicals-in-progress');
+    let levelProgressKanjiPassedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Passed, 'kanji-passed');
+    let levelProgressRadicalsPassedHTML = generateCustomItemsHTML(levelProgressData.Radicals.Passed, 'radicals-passed');
+    let levelProgressKanjiLockedHTML = generateCustomItemsHTML(levelProgressData.Kanji.Locked, 'kanji-locked');
     let levelProgressItemsHTML = `
         ${ levelProgressCircleHTML }
         <div class="progress-entries custom-div border-bottom kanji-in-progress ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
@@ -35,6 +35,7 @@ function initialiseLevelProgressComponent() {
     `;
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
 
+    wlWanikaniDebug('html', '==Level Progress: initialiseLevelProgressComponent== Generated the following Level Progress HTML', { main_html: levelProgressItemsTableHTML });
     $(levelProgressItemsTableHTML).insertAfter($('.custom-dashboard .custom-section.custom-lessons-and-reviews'));
 
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
@@ -70,6 +71,7 @@ function generateLevelProgressCircleHTML(data, size, thickness) {
         </div>
     `;
 
+    wlWanikaniDebug('html', '==Level Progress: generateLevelProgressCircleHTML== Generated the following Level Progress circle HTML', { main_html: levelProgressCircleHTML });
     return levelProgressCircleHTML;
 };
 
@@ -88,7 +90,7 @@ function setLevelProgressCircle(percent) {
 
     const offset = circumference - percent / 100 * circumference;
     circleObj.style.strokeDashoffset = offset;
-    wlWanikaniDebug('Circle object.', circleObj);
+    wlWanikaniDebug('data', '==Level Progress: setLevelProgressCircle== Circle object:', circleObj);
 };
 
 
@@ -96,7 +98,7 @@ function setLevelProgressCircle(percent) {
  *  ANCHOR Generate level progress data object
  *************************************************/
 function getLevelProgress(data) {
-    wlWanikaniDebug('Getting level progress data.');
+    wlWanikaniDebug('data', '==Level Progress: getLevelProgress== Getting level progress data with the following input data:', data);
 
     let progressData = {
         Kanji: {
@@ -150,6 +152,6 @@ function getLevelProgress(data) {
         (progressData.Kanji.InProgress.length + progressData.Kanji.Passed.length + progressData.Kanji.Locked.length)
         * 0.9);
 
-    wlWanikaniDebug('Level progress data.', progressData);
+    wlWanikaniDebug('data', '==Level Progress: getLevelProgress== Got the level progress data:', progressData);
     return progressData;
 };

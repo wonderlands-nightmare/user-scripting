@@ -14,7 +14,7 @@ function initialiseDifficultItemsComponent() {
  *************************************************/
 // NOTE Filters items based on Safe Level
 function isDifficult(dataItems) {
-    wlWanikaniDebug('Check if difficult.', dataItems);
+    wlWanikaniDebug('data', '==Difficult Items: isDifficult== Filter difficult items with the following data:', dataItems);
     
     let returnItems = []
     $.each(dataItems, function (index, dataItem) {
@@ -24,7 +24,8 @@ function isDifficult(dataItems) {
             }
         }
     });
-    
+
+    wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of difficult items:', returnItems);
     return returnItems;
 };
 
@@ -40,10 +41,12 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.custom-dash
     }
 
     if (wkof.settings[scriptId].show_difficult_items) {
+        wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generating difficult items section and appending to:', insertAfterElement);
         let difficultItemsData = getDifficultItemsData(data);
         let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
         let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems, difficultItemsClass, '苦労', difficultItemsHTML, true);
 
+        wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generated the following difficult items HTML:', { main_html: difficultItemsTableHTML });
         $(difficultItemsTableHTML).insertAfter(insertAfterElement);
     }
 };
@@ -53,12 +56,12 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.custom-dash
  *  ANCHOR Generate difficult items data object
  *************************************************/
 function getDifficultItemsData(data) {
-    wlWanikaniDebug('Getting difficult items.', data);
+    wlWanikaniDebug('data', '==Difficult Items: getDifficultItemsData== Getting difficult items data.');
 
     wkofItemsData.SafeLevel = data.UsersData.data.level - wkof.settings[scriptId].safe_level;
     wkofItemsData.DifficultItems = isDifficult(data.ItemsData);
     wkofItemsData.DifficultItems = itemLevelSort(wkofItemsData.DifficultItems);
 
-    wlWanikaniDebug('Got difficult items, show data.', wkofItemsData);
+    wlWanikaniDebug('data', '==Difficult Items: getDifficultItemsData== Got difficult items and appended to global wkofItemsData variable (see all except wkofItemsData.AllData):', wkofItemsData);
     return wkofItemsData;
 };
