@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.2
+// @version      1.4.3
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -111,6 +111,8 @@
     wkof.ready(wkofSettingsModules)
         .then(loadWkofMenu)
         .then(loadWkofSettings);
+
+    wkofSettingsChecker();
     
     if (window.location.href.match(dashboardUrlRegEx)) {
         console.log('running on ' + window.location.href);
