@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.1.2
+// @version      1.4.2
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -107,7 +107,7 @@
     setTimeout(function() {
         addResources(['dashboardInitialiser', 'debug', 'common']);
         initialiseDashboardInitialiserComponent();
-    }, 1000);
+    }, 1500);
     
     if (window.location.href.match(dashboardUrlRegEx)) {
         wkof.include(wkofDataModules);
@@ -134,7 +134,7 @@
         setTimeout(function() {
             addResources(['additional']);
             skipReviewLessonSummary();
-        }, 1000);
+        }, 1500);
     }
 
 
