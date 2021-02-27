@@ -1,13 +1,16 @@
 /*************************************************
- *  ANCHOR Skip review/lesson summary after session
+ *  ANCHOR Skip review/lesson summary after session functions
  *************************************************/
-function skipReviewLessonSummary() {
+// NOTE Skip summary initialiser
+ function skipReviewLessonSummary() {
     const skipSetting = wkof.settings[scriptId].skip_session_summary;
     skipAfterLessonSession(skipSetting);
     skipAfterReviewSession(skipSetting);
     skipSummaryOnHomeButtonClick(skipSetting);
 };
 
+
+// NOTE Add button to use after lesson session
 function skipAfterLessonSession(skip) {
     let lessonButtonSet = $('#screen-lesson-done .btn-set');
     if (lessonButtonSet.length > 0) {
@@ -29,18 +32,23 @@ function skipAfterLessonSession(skip) {
     }
 };
 
+
+// NOTE Force URL redirect on button click once reviews are complete
 function skipAfterReviewSession(skip) {
-    let reviewInputButton = $('#reviews #question #answer-form fieldset > button');
-    if (reviewInputButton.length > 0) {
-        if (skip) {
-            reviewInputButton.attr('href', '/dashboard');
-        }
-        else {
-            reviewInputButton.removeAttr('href');
-        }
+    if (skip) {
+        $('#reviews #question #answer-form button').on('click.skipToHomepage', function() {
+            if ($('#reviews #question #stats #available-count').text() == 0) {
+                window.location = 'https://www.wanikani.com';
+            }
+        });
+    }
+    else {
+        $('#reviews #question #answer-form button').off('click.skipToHomepage');
     }
 };
 
+
+// NOTE Change HREF on both session sets
 function skipSummaryOnHomeButtonClick(skip) {
     let sessionHomeButton = $('#question #summary-button > a');
     if (sessionHomeButton.length > 0) {
