@@ -60,7 +60,8 @@ function loadWkofSettings() {
         show_difficult_items: false,
         safe_level: 3,
         srs_stage: 4,
-        selected_theme: 1
+        selected_theme: 1,
+        skip_session_summary: false
     };
     wkof.Settings.load(scriptId, defaults);
 }
@@ -138,6 +139,12 @@ function openSettings(items) {
                                     2: 'Dark'
                                 },
                                 default: 1
+                            },
+                            skip_session_summary: {
+                                type: 'checkbox',
+                                label: 'Skip session summaries',
+                                hover_tip: 'Check if you want to skip the summary pages after lesson and review sessions.',
+                                default: false
                             }
                         }
                     },
