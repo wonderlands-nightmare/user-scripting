@@ -105,6 +105,10 @@ function openSettings(items) {
                                 type: 'group',
                                 label: 'Dashboard settings',
                                 content: {
+                                    difficult_items_header: {
+                                        type: 'section',
+                                        label: 'Difficult items'
+                                    },
                                     show_difficult_items: {
                                         type: 'checkbox',
                                         label: 'Show Difficult Items section',
@@ -137,15 +141,35 @@ function openSettings(items) {
                                         },
                                         default: 4
                                     },
+                                    themes_header: {
+                                        type: 'section',
+                                        label: 'Custom themes'
+                                    },
                                     selected_theme: {
                                         type: 'dropdown',
-                                        label: 'Custom Dashboard theme',
+                                        label: 'Select theme',
                                         hover_tip: 'Select your prefered theme for the custom dashboard.',
                                         content: {
                                             1: 'Default',
                                             2: 'Dark'
                                         },
                                         default: 1
+                                    },
+                                    debug_header: {
+                                        type: 'section',
+                                        label: 'Debugging'
+                                    },
+                                    debug_data: {
+                                        type: 'checkbox',
+                                        label: 'Enable data debugging',
+                                        hover_tip: 'Check if you want to enable debugging for the WKOF data used and generated.',
+                                        default: false
+                                    },
+                                    debug_html: {
+                                        type: 'checkbox',
+                                        label: 'Enable HTML debugging',
+                                        hover_tip: 'Check if you want to enable debugging for the HTML used and generated.',
+                                        default: false
                                     }
                                 }
                             },
@@ -244,6 +268,10 @@ function openSettings(items) {
             if (window.location.href.match(dashboardUrlRegEx)) {
                 generateDifficultItemsSection(wkofItemsData.AllData);
                 setCustomDashboardTheme();
+                // Annoying if statement cause we don't need to reload if deselecting
+                if ((!dataDebugMode && wkof.settings[scriptId].debug_data) || (!htmlDebugMode && wkof.settings[scriptId].debug_html)) {
+                    window.location.reload();
+                }
             }
             if (window.location.href.match(sessionUrlRegEx)) {
                 skipReviewLessonSummary();

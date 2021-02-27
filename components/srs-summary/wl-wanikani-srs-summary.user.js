@@ -2,22 +2,19 @@
  *  ANCHOR Component initialisation
  *************************************************/
 function initialiseSrsSummaryComponent() {
-    // NOTE Get lesson, review, and srs level data
-    
+    // NOTE Get srs level data
     let apprenticeSummaryData = getSubjectData(wkofItemsData.AllData, 'apprentice');
     let guruSummaryData = getSubjectData(wkofItemsData.AllData, 'guru');
     let masterSummaryData = getSubjectData(wkofItemsData.AllData, 'master');
     let enlightenedSummaryData = getSubjectData(wkofItemsData.AllData, 'enlightened');
     let burnedSummaryData = getSubjectData(wkofItemsData.AllData, 'burned');
 
-    
-
     // NOTE Generate the custom items HTML for srs level summary and section
-    let apprenticeSummaryItemsHTML = `${ generateCustomItemsHTML(apprenticeSummaryData.kanji) }${ generateCustomItemsHTML(apprenticeSummaryData.radical) }${ generateCustomItemsHTML(apprenticeSummaryData.vocabulary) }`;
-    let guruSummaryItemsHTML = `${ generateCustomItemsHTML(guruSummaryData.kanji) }${ generateCustomItemsHTML(guruSummaryData.radical) }${ generateCustomItemsHTML(guruSummaryData.vocabulary) }`;
-    let masterSummaryItemsHTML = `${ generateCustomItemsHTML(masterSummaryData.kanji) }${ generateCustomItemsHTML(masterSummaryData.radical) }${ generateCustomItemsHTML(masterSummaryData.vocabulary) }`;
-    let enlightenedSummaryItemsHTML = `${ generateCustomItemsHTML(enlightenedSummaryData.kanji) }${ generateCustomItemsHTML(enlightenedSummaryData.radical) }${ generateCustomItemsHTML(enlightenedSummaryData.vocabulary) }`;
-    let burnedSummaryItemsHTML = `${ generateCustomItemsHTML(burnedSummaryData.kanji) }${ generateCustomItemsHTML(burnedSummaryData.radical) }${ generateCustomItemsHTML(burnedSummaryData.vocabulary) }`;
+    let apprenticeSummaryItemsHTML = `${ generateCustomItemsHTML(apprenticeSummaryData.kanji, 'apprentice-kanji') }${ generateCustomItemsHTML(apprenticeSummaryData.radical, 'apprentice-radical') }${ generateCustomItemsHTML(apprenticeSummaryData.vocabulary, 'apprentice-vocabulary') }`;
+    let guruSummaryItemsHTML = `${ generateCustomItemsHTML(guruSummaryData.kanji, 'guru-kanji') }${ generateCustomItemsHTML(guruSummaryData.radical, 'guru-radical') }${ generateCustomItemsHTML(guruSummaryData.vocabulary, 'guru-vocabulary') }`;
+    let masterSummaryItemsHTML = `${ generateCustomItemsHTML(masterSummaryData.kanji, 'master-kanji') }${ generateCustomItemsHTML(masterSummaryData.radical, 'master-radical') }${ generateCustomItemsHTML(masterSummaryData.vocabulary, 'master-vocabulary') }`;
+    let enlightenedSummaryItemsHTML = `${ generateCustomItemsHTML(enlightenedSummaryData.kanji, 'enlightened-kanji') }${ generateCustomItemsHTML(enlightenedSummaryData.radical, 'enlightened-radical') }${ generateCustomItemsHTML(enlightenedSummaryData.vocabulary, 'enlightened-vocabulary') }`;
+    let burnedSummaryItemsHTML = `${ generateCustomItemsHTML(burnedSummaryData.kanji, 'burned-kanji') }${ generateCustomItemsHTML(burnedSummaryData.radical, 'burned-radical') }${ generateCustomItemsHTML(burnedSummaryData.vocabulary, 'burned-vocabulary') }`;
 
     // NOTE Generate HTML for srs level section
     let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData, 'custom-dashboard-summary-items apprentice', '見習', apprenticeSummaryItemsHTML);
@@ -26,8 +23,7 @@ function initialiseSrsSummaryComponent() {
     let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData, 'custom-dashboard-summary-items enlightened', '悟りを開いた', enlightenedSummaryItemsHTML);
     let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData, 'custom-dashboard-summary-items burned', '焼け', burnedSummaryItemsHTML);
 
-    // NOTE Generate custom dashboard content HTML
-    
+    // NOTE Generate SRS Summary content HTML
     let enlightenedSummaryTotalCount = enlightenedSummaryData.totalCount >= 10000 ? '~' + (enlightenedSummaryData.totalCount / 1000).toFixed() + '千' : enlightenedSummaryData.totalCount;
     let customDashboardProgressContent = `
         ${ generateSummaryHTML(apprenticeSummaryData, 'custom-dashboard-progress-summary apprentice-summary', '見習（' + apprenticeSummaryData.totalCount + '）', true, 'custom-progress-summary-button apprentice', '見せて') }
@@ -44,6 +40,7 @@ function initialiseSrsSummaryComponent() {
         ${ burnedSummaryItemsTableHTML }
     `;
     
+    wlWanikaniDebug('html', '==SRS Summary: initialiseSrsSummaryComponent== Generated the following SRS Summary HTML:', { main_summary: customDashboardProgressContent, summary_details: customDashboardProgressAfterContent });
     $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress').append(customDashboardProgressContent);
     $('.custom-dashboard .custom-dashboard-progress-wrapper').append(customDashboardProgressAfterContent);
 
@@ -63,7 +60,7 @@ function setProgressSummaryButtonEffects() {
         progressSummarySection.slideToggle();
 
         $(this).on('click', function() {
-            wlWanikaniDebug('Clicked class type: ', currentProgressType);
+            wlWanikaniDebug('data', '==SRS Summary: setProgressSummaryButtonEffects== Clicked class type: ', currentProgressType);
 
             $(this).toggleClass('selected');
             progressSummarySection.slideToggle();

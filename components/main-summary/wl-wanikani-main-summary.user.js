@@ -2,19 +2,15 @@
  *  ANCHOR Component initialisation
  *************************************************/
 function initialiseMainSummaryComponent() {
-    
-    //
     let lessonSummaryData = getSubjectData(wkofItemsData.AllData, 'lesson');
     let reviewSummaryData = getSubjectData(wkofItemsData.AllData, 'review');
 
-    // NOTE Get total kanji/radical/vocabulary data
     let totalSummaryData = getSubjectData(wkofItemsData.AllData, 'total');
 
-    // NOTE Get next review data and generate HTML for summary
     let nextReviewData = getNextReviewTime(wkofItemsData.AllData);
     let nextReviewsHTML = generateFutureReviewsHTML(wkofItemsData.AllData, nextReviewData);
 
-    let customLessonsAndReviewsContent = `
+    let mainSummaryHTML = `
         ${ generateSummaryHTML(lessonSummaryData, 'custom-lessons-and-reviews-summary lessons-summary', '授業（' + lessonSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button lessons-button', '授業を開始') }
         ${ generateSummaryHTML(reviewSummaryData, 'custom-lessons-and-reviews-summary reviews-summary', '復習（' + reviewSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button reviews-button', '復習を開始') }
         ${ generateSummaryHTML(totalSummaryData, 'custom-lessons-and-reviews-summary totals-summary', '漢字と部首と単語が合計') }
@@ -22,7 +18,8 @@ function initialiseMainSummaryComponent() {
         ${ nextReviewsHTML.futureReviewsHTML }
     `;
 
-    $('.custom-dashboard .custom-section.custom-lessons-and-reviews').append(customLessonsAndReviewsContent);
+    wlWanikaniDebug('html', '==Main Summary: initialiseMainSummaryComponent== Generated the following Main Summary HTML:', { main_html: mainSummaryHTML });
+    $('.custom-dashboard .custom-section.custom-lessons-and-reviews').append(mainSummaryHTML);
 
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
     addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
@@ -34,8 +31,6 @@ function initialiseMainSummaryComponent() {
  *  ANCHOR Next reviews summary HTML generator
  *************************************************/
 function generateFutureReviewsHTML(data, nextReviewData) {
-    wlWanikaniDebug('Generating future reviews HTML with the following data.', nextReviewData);
-
     let nextReviewHTMLData = [];
     let futureReviewsHTML = '';
     let returnHTML = [];
@@ -70,7 +65,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
         returnHTML.futureReviewsHTML = futureReviewsHTML;
     }
 
-    wlWanikaniDebug('Generated the following future reviews HTML.', returnHTML);
+    wlWanikaniDebug('html', '==Main Summary: generateFutureReviewsHTML== Generated the following future reviews HTML:', { main_html: returnHTML });
     return returnHTML;
 };
 
@@ -95,7 +90,7 @@ function setFutureReviewsTooltip() {
  *  ANCHOR Generate next review data object
  *************************************************/
 function getNextReviewTime(data) {
-    wlWanikaniDebug('Getting next review data.', data);
+    wlWanikaniDebug('data', '==Main Summary: getNextReviewTime== Getting next review data.');
 
     let nextReviewData = [];
     let summaryReviewsData = data.SummaryData.data.reviews;
@@ -122,6 +117,6 @@ function getNextReviewTime(data) {
         }
     });
 
-    wlWanikaniDebug('Next review data.', nextReviewData);
+    wlWanikaniDebug('data', '==Main Summary: getNextReviewTime== Got the following next review data:', nextReviewData);
     return nextReviewData;
 };

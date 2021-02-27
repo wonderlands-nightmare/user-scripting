@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.1.1
+// @version      1.4.1.2
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -35,18 +35,23 @@
     /*************************************************
      *  ANCHOR Variable initialisation
      *************************************************/
-    // Change this to turn debugging on
-    const isDebug = false;
-
     // WKOF modules required
     const wkofSettingsModules = 'Menu, Settings';
     const wkofDataModules = 'Apiv2, ItemData';
 
     // Dashboard resources
     const dashboardResources = {
-        wkof: {
-            js: 'WKOF_JS',
-            css: 'WKOF_CSS'
+        additional: {
+            js: 'ADDITIONAL_JS',
+            css: 'ADDITIONAL_CSS'
+        },
+        autoRefresh: {
+            js: 'REFRESH_JS',
+            css: ''
+        },
+        common: {
+            js: 'COMMON_JS',
+            css: 'COMMON_CSS'
         },
         customTheme: {
             js: 'THEME_JS',
@@ -65,33 +70,25 @@
             js: 'DEBUG_JS',
             css: ''
         },
-        common: {
-            js: 'COMMON_JS',
-            css: 'COMMON_CSS'
-        },
-        mainSummary: {
-            js: 'MAIN_JS',
-            css: 'MAIN_CSS'
+        difficultItems: {
+            js: 'DIFFICULT_JS',
+            css: 'DIFFICULT_CSS'
         },
         levelProgress: {
             js: 'LEVEL_JS',
             css: 'LEVEL_CSS'
         },
+        mainSummary: {
+            js: 'MAIN_JS',
+            css: 'MAIN_CSS'
+        },
         srsSummary: {
             js: 'SRS_JS',
             css: 'SRS_CSS'
         },
-        difficultItems: {
-            js: 'DIFFICULT_JS',
-            css: 'DIFFICULT_CSS'
-        },
-        autoRefresh: {
-            js: 'REFRESH_JS',
-            css: ''
-        },
-        additional: {
-            js: 'ADDITIONAL_JS',
-            css: 'ADDITIONAL_CSS'
+        wkof: {
+            js: 'WKOF_JS',
+            css: 'WKOF_CSS'
         }
     }
 
@@ -99,14 +96,18 @@
     /*************************************************
      *  ANCHOR Actual script execution code
      *************************************************/
-    addResources(['wkof', 'dashboardInitialiser', 'debug', 'common']);
+    addResources(['wkof']);
     wkofInstallCheck();
-    initialiseDashboardInitialiserComponent();
 
     wkof.include(wkofSettingsModules);
     wkof.ready(wkofSettingsModules)
         .then(loadWkofMenu)
         .then(loadWkofSettings);
+
+    setTimeout(function() {
+        addResources(['dashboardInitialiser', 'debug', 'common']);
+        initialiseDashboardInitialiserComponent();
+    }, 1000);
     
     if (window.location.href.match(dashboardUrlRegEx)) {
         wkof.include(wkofDataModules);
@@ -115,10 +116,10 @@
             .then(function(data) {
                 addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
                 wkofItemsData.AllData = data;
+                wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
                 setCustomDashboardTheme();
             })
             .then(function() {
-                setWlWanikaniDebugMode(isDebug);
                 initialiseMainSummaryComponent();
                 initialiseLevelProgressComponent();
                 initialiseSrsSummaryComponent();
