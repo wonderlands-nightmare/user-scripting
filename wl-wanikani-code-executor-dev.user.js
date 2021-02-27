@@ -5,6 +5,7 @@
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
+// @include      /^https://(www|preview).wanikani.com/(lesson|review)/session$/
 // @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.js
 // @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/wkof/wl-wanikani-wkof.user.css
 // @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/custom-themes/wl-wanikani-custom-themes.user.js
@@ -24,6 +25,8 @@
 // @resource     DIFFICULT_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/difficult-items/wl-wanikani-difficult-items.user.js
 // @resource     DIFFICULT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/difficult-items/wl-wanikani-difficult-items.user.css
 // @resource     REFRESH_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/auto-refresh/wl-wanikani-auto-refresh.user.js
+// @resource     ADDITIONAL_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/auto-refresh/wl-wanikani-additional.user.js
+// @resource     ADDITIONAL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/develop/components/auto-refresh/wl-wanikani-additional.user.css
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // ==/UserScript==
@@ -85,8 +88,16 @@
         autoRefresh: {
             js: 'REFRESH_JS',
             css: ''
+        },
+        additional: {
+            js: 'ADDITIONAL_JS',
+            css: 'ADDITIONAL_CSS'
         }
     }
+
+    const dashboardUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(dashboard)?$/;
+    const sessionUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(lesson|review)\/session$/;
+
     
 
     /*************************************************
@@ -101,23 +112,32 @@
         .then(loadWkofMenu)
         .then(loadWkofSettings);
     
-    wkof.include(wkofDataModules);
-    wkof.ready(wkofDataModules)
-        .then(getWkofDataObject)
-        .then(function(data) {
-            addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
-            wkofItemsData.AllData = data;
-            setCustomDashboardTheme();
-        })
-        .then(function() {
-            setWlWanikaniDebugMode(isDebug);
-            initialiseMainSummaryComponent();
-            initialiseLevelProgressComponent();
-            initialiseSrsSummaryComponent();
-            initialiseDifficultItemsComponent();
-            autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
-            dashboardLoader(true);
-        });
+    if (window.location.href.match(dashboardUrlRegEx)) {
+        console.log('running on ' + window.location.href);
+        wkof.include(wkofDataModules);
+        wkof.ready(wkofDataModules)
+            .then(getWkofDataObject)
+            .then(function(data) {
+                addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+                wkofItemsData.AllData = data;
+                setCustomDashboardTheme();
+            })
+            .then(function() {
+                setWlWanikaniDebugMode(isDebug);
+                initialiseMainSummaryComponent();
+                initialiseLevelProgressComponent();
+                initialiseSrsSummaryComponent();
+                initialiseDifficultItemsComponent();
+                autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
+                dashboardLoader(true);
+            });
+    }
+
+    if (window.location.href.match(sessionUrlRegEx)) {
+        console.log('running on ' + window.location.href);
+        addResources(['additional']);
+        skipReviewLessonSummary();
+    }
 
 
     /*************************************************
