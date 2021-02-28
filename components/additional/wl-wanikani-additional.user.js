@@ -36,6 +36,11 @@ function addAdditionalStyles(skip, type, cssText) {
 
 // NOTE Add button to use after lesson session
 function skipAfterLessonSession(skip) {
+    let lessonQuizButton = $('#screen-lesson-ready .btn-set #lesson-ready-end');
+    let lessonQuizButtonOriginalContent = `
+        <i class="icon-arrow-left"></i>
+        Need more time
+    `;
     let lessonReadyButton = $('#screen-lesson-ready .btn-set #lesson-ready-end');
     let lessonReadyButtonOriginalContent = `
         <i class="icon-arrow-left"></i>
@@ -53,6 +58,17 @@ function skipAfterLessonSession(skip) {
         </a>
     `;
     
+    if (lessonQuizButton.length > 0) {
+        if (skip) {
+            lessonQuizButton.html(newButtonContent);
+        }
+        else {
+            if (lessonQuizButton.find('.lesson-skip-to-homepage').length > 0) {
+                lessonQuizButton.html(lessonQuizButtonOriginalContent);
+            }
+        }
+    }
+
     if (lessonReadyButton.length > 0) {
         if (skip) {
             lessonReadyButton.html(newButtonContent);
