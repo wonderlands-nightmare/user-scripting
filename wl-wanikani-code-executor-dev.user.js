@@ -107,7 +107,7 @@
     setTimeout(function() {
         addResources(['dashboardInitialiser', 'debug', 'common']);
         initialiseDashboardInitialiserComponent();
-    }, 1500);
+    }, 1000);
     
     if (window.location.href.match(dashboardUrlRegEx)) {
         wkof.include(wkofDataModules);
@@ -134,7 +134,7 @@
         setTimeout(function() {
             addResources(['additional']);
             skipReviewLessonSummary();
-        }, 1500);
+        }, 1000);
     }
 
 
