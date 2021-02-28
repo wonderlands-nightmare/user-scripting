@@ -85,7 +85,7 @@ function skipAfterReviewSession(skip) {
                 if ($('#reviews #question #stats #available-count').text() == 0) {
                     window.location = 'https://www.wanikani.com';
                 }
-            }, 500);
+            }, 150);
         });
     }
     else {
