@@ -1,13 +1,37 @@
 /*************************************************
+ *  ANCHOR Variable initilisation
+ *************************************************/
+let lessonSkipButtonCss = '';
+
+/*************************************************
  *  ANCHOR Skip review/lesson summary after session functions
  *************************************************/
 // NOTE Skip summary initialiser
  function skipReviewLessonSummary() {
     const skipSetting = wkof.settings[scriptId].skip_session_summary;
+    addAdditionalStyles(skipSetting, 'skip-summary', lessonSkipButtonCss);
     skipAfterLessonSession(skipSetting);
     skipAfterReviewSession(skipSetting);
     skipSummaryOnHomeButtonClick(skipSetting);
 };
+
+
+function addAdditionalStyles(skip, type, cssText) {
+    if ($('.custom-' + type + '-css').length > 0) {
+        $('.custom-' + type + '-css').remove();
+    }
+
+    if (skip){
+        if ($('.custom-' + type + '-css').length == 0) {
+            let style = document.createElement('style');
+    
+            style.innerHTML = cssText;
+            style.className = 'custom-' + type + '-css';
+    
+            document.head.appendChild(style);
+        }
+    }
+}
 
 
 // NOTE Add button to use after lesson session
