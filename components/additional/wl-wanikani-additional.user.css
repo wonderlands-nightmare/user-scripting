@@ -10,6 +10,7 @@
  *  Skip lesson/review summary styles
  ********************************/
 /* Lesson "Go to Homepage" button */
-#screen-lesson-done .btn-set #lesson-skip-to-homepage {
+#screen-lesson-ready .btn-set #lesson-ready-end .lesson-skip-to-homepage,
+#screen-lesson-done .btn-set #lesson-ready-end .lesson-skip-to-homepage {
     color: var(--white-text);
 }
