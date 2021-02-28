@@ -31,22 +31,22 @@ function skipAfterLessonSession(skip) {
     
     if (lessonReadyButton.length > 0) {
         if (skip) {
-            lessonReadyButton.text(newButtonContent);
+            lessonReadyButton.html(newButtonContent);
         }
         else {
             if (lessonReadyButton.find('.lesson-skip-to-homepage').length > 0) {
-                lessonReadyButton.text(lessonReadyButtonOriginalContent);
+                lessonReadyButton.html(lessonReadyButtonOriginalContent);
             }
         }
     }
 
     if (lessonDoneEndButton.length > 0) {
         if (skip) {
-            lessonDoneEndButton.text(newButtonContent);
+            lessonDoneEndButton.html(newButtonContent);
         }
         else {
             if (lessonDoneEndButton.find('.lesson-skip-to-homepage').length > 0) {
-                lessonDoneEndButton.text(lessonDoneButtonOriginalContent);
+                lessonDoneEndButton.html(lessonDoneButtonOriginalContent);
             }
         }
     }
