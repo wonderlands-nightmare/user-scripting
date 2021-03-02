@@ -141,3 +141,7 @@ h2 {
 #search #main-ico-search {
     color: var(--common-theme-background);
 }
+
+.dashboard .container .row .span12 .system-alert {
+    box-shadow: 0 1px 0 var(--common-theme-background);
+}
