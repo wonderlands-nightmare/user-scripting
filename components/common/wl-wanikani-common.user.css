@@ -13,7 +13,7 @@
     border-radius: 50%;
 }
 
-/* Main custom section styles - progress-and-forecast required for override */
+/* Main custom section styles */
 .custom-section {
     display: flex;
     background: var(--section-background);
