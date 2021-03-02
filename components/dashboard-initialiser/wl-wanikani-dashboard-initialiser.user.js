@@ -40,6 +40,8 @@ function dashboardLoader(loaded = false) {
         if ($('.' + loaderClass).length > 0) {
             $('.' + loaderClass).remove();
         }
+        
+        $('.dashboard').show();
     }
     else {
         // Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
@@ -47,9 +49,7 @@ function dashboardLoader(loaded = false) {
             $('.' + loaderClass).remove();
         }
 
-        if ($('.dashboard').length > 0) {
-            $('.dashboard').remove();
-        }
+        $('.dashboard').hide();
 
         $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
     }
@@ -92,30 +92,28 @@ function updateShortcutNavigation(item) {
 function generateDashboardWrapperHTML() {
     wlWanikaniDebug('html', '==Dashboard Initialiser: generateDashboardWrapperHTML== Generating custom dashboard wrapper HTML:');
 
-    // NOTE Generate custom dashboard wrapper HTML, empty div with 'row' class is for other script compatibility
+    let mainDashboard = $('.dashboard .container .row .span12');
+    
+    // NOTE Custom dashboard wrapper HTML, empty div with 'row' class is for other script compatibility
     let dashboardWrapperHTML = `
-        <div class="custom-dashboard">
-            <div class="container">
-                <div class="row">
-                    <div class="span12">
-                        <section class="custom-section custom-lessons-and-reviews progress-and-forecast"></section>
-                        <div class="custom-dashboard-progress-wrapper srs-progress">
-                            <section class="custom-section custom-dashboard-progress"></section>
-                        </div>
-                        <div class="row"></div>
-                    </div>
-                </div>
-            </div>
+        <section class="custom-section custom-lessons-and-reviews progress-and-forecast"></section>
+        <div class="custom-dashboard-progress-wrapper srs-progress">
+            <section class="custom-section custom-dashboard-progress"></section>
         </div>
+        <div class="row"></div>
     `;
 
-    // NOTE Remove any existing custom dashboard just in case
-    if ($('.custom-dashboard').length > 0) {
-        $('.custom-dashboard').remove();
-    }
+    // NOTE Remove any existing dashboard elements
+    mainDashboard.find('> div').remove();
+    mainDashboard.find('> .srs-progress').remove();
 
-    // NOTE Add custom dashboard wrapper to page
-    $(dashboardWrapperHTML).insertAfter('.footer-adjustment .custom-dashboard-loader');
+    // Purely in case cache issue occurs, it cleans out the section the above removes wouldn't
+    if (mainDashboard.find('> .custom-lessons-and-reviews').length > 0) {
+        mainDashboard.find('> .custom-lessons-and-reviews').remove();
+    }
+    
+    // NOTE Add custom dashboard wrappers to page
+    mainDashboard.append(dashboardWrapperHTML);
 
     wlWanikaniDebug('html', '==Dashboard Initialiser: generateDashboardWrapperHTML== Generated the following custom dashboard wrapper HTML:', { main_html: dashboardWrapperHTML });
 };
