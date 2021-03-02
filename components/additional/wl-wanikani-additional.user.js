@@ -36,7 +36,7 @@ function addAdditionalStyles(skip, type, cssText) {
 
 // NOTE Add button to use after lesson session
 function skipAfterLessonSession(skip) {
-    let lessonQuizButton = $('#screen-lesson-ready .btn-set #lesson-ready-end');
+    let lessonQuizButton = $('#screen-quiz-ready .btn-set #quiz-ready-read-lessons');
     let lessonQuizButtonOriginalContent = `
         <i class="icon-arrow-left"></i>
         Need more time
