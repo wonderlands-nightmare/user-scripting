@@ -21,19 +21,19 @@
 }
 
 /* Add animations and styles to main and shortcut buttons */
-.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
+.dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews > span {
     background: var(--review-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
+.dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons > span {
     background: var(--lesson-colour);
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
 
-.custom-dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
+.dashboard .custom-lessons-and-reviews-button.reviews-button.has-reviews, 
 .navigation-shortcuts .navigation-shortcut--reviews > a.has-reviews { 
     --start-pulse: var(--review-colour-darker);
     --mid-pulse: var(--review-mid-pulse-colour);
@@ -41,7 +41,7 @@
     animation: buttonPulse 2s infinite; 
 } 
 
-.custom-dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
+.dashboard .custom-lessons-and-reviews-button.lessons-button.has-lessons, 
 .navigation-shortcuts .navigation-shortcut--lessons > a.has-lessons { 
     --start-pulse: var(--lesson-colour-darker);
     --mid-pulse: var(--lesson-mid-pulse-colour);

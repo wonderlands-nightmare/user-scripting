@@ -19,10 +19,10 @@ function initialiseMainSummaryComponent() {
     `;
 
     wlWanikaniDebug('html', '==Main Summary: initialiseMainSummaryComponent== Generated the following Main Summary HTML:', { main_html: mainSummaryHTML });
-    $('.custom-dashboard .custom-section.custom-lessons-and-reviews').append(mainSummaryHTML);
+    $('.dashboard .custom-section.custom-lessons-and-reviews').append(mainSummaryHTML);
 
-    addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
-    addReviewAndLessonButtonPulseEffect('.custom-dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
+    addReviewAndLessonButtonPulseEffect('.dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
+    addReviewAndLessonButtonPulseEffect('.dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
     setFutureReviewsTooltip();
 };
 
@@ -75,12 +75,12 @@ function generateFutureReviewsHTML(data, nextReviewData) {
  *  over the next 24hrs
  *************************************************/
 function setFutureReviewsTooltip() {
-    $('.custom-dashboard .custom-lessons-and-reviews .custom-summary.custom-lessons-and-reviews-summary.next-review-summary').hover(
+    $('.dashboard .custom-lessons-and-reviews .custom-summary.custom-lessons-and-reviews-summary.next-review-summary').hover(
         function(){
-            $('.custom-dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').show();
+            $('.dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').show();
         },
         function(){
-            $('.custom-dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').hide();
+            $('.dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').hide();
         }
     );
 }

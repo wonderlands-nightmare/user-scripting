@@ -36,7 +36,7 @@ function initialiseLevelProgressComponent() {
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
 
     wlWanikaniDebug('html', '==Level Progress: initialiseLevelProgressComponent== Generated the following Level Progress HTML', { main_html: levelProgressItemsTableHTML });
-    $(levelProgressItemsTableHTML).insertAfter($('.custom-dashboard .custom-section.custom-lessons-and-reviews'));
+    $(levelProgressItemsTableHTML).insertAfter($('.dashboard .custom-section.custom-lessons-and-reviews'));
 
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
 }

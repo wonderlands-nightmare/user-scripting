@@ -41,8 +41,8 @@ function initialiseSrsSummaryComponent() {
     `;
     
     wlWanikaniDebug('html', '==SRS Summary: initialiseSrsSummaryComponent== Generated the following SRS Summary HTML:', { main_summary: customDashboardProgressContent, summary_details: customDashboardProgressAfterContent });
-    $('.custom-dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress').append(customDashboardProgressContent);
-    $('.custom-dashboard .custom-dashboard-progress-wrapper').append(customDashboardProgressAfterContent);
+    $('.dashboard .custom-dashboard-progress-wrapper .custom-section.custom-dashboard-progress').append(customDashboardProgressContent);
+    $('.dashboard .custom-dashboard-progress-wrapper').append(customDashboardProgressAfterContent);
 
     setProgressSummaryButtonEffects();
 }
@@ -53,9 +53,9 @@ function initialiseSrsSummaryComponent() {
  *  buttons to show SRS Progress Summary information
  *************************************************/
 function setProgressSummaryButtonEffects() {
-    $('.custom-dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each(function (index, item) {
+    $('.dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each(function (index, item) {
         let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');
-        let progressSummarySection = $('.custom-dashboard .custom-dashboard-summary-items.' + currentProgressType);
+        let progressSummarySection = $('.dashboard .custom-dashboard-summary-items.' + currentProgressType);
 
         progressSummarySection.slideToggle();
 
