@@ -10,11 +10,13 @@
  *  Skip lesson/review summary styles
  ********************************/
 /* Lesson "Go to Homepage" button */
+#screen-quiz-ready .btn-set #quiz-ready-read-lessons,
 #screen-lesson-ready .btn-set #lesson-ready-end,
 #screen-lesson-done .btn-set #lesson-ready-end {
     padding: 0;
 }
 
+#screen-quiz-ready .btn-set #quiz-ready-read-lessons .lesson-skip-to-homepage,
 #screen-lesson-ready .btn-set #lesson-ready-end .lesson-skip-to-homepage,
 #screen-lesson-done .btn-set #lesson-ready-end .lesson-skip-to-homepage {
     display: block;
