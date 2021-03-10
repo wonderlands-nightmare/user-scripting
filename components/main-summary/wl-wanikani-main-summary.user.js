@@ -123,7 +123,9 @@ function getNextReviewTime(data) {
     });
 
     if (nextReviewData[0].subjectIds.length > 0) {
-        wkofItemsData.NextRevewItems = [wkofItemsData.NextRevewItems, nextReviewData[0].subjectIds];
+        wkofItemsData.NextRevewItems = (wkofItemsData.NextRevewItems == null) 
+                                     ? wkofItemsData.NextRevewItems
+                                     : wkofItemsData.NextRevewItems.push(nextReviewData[0].subjectIds);
     }
 
     wlWanikaniDebug('data', '==Main Summary: getNextReviewTime== Got the following next review data:', nextReviewData);
