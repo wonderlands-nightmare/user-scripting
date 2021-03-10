@@ -117,13 +117,13 @@ function getNextReviewTime(data) {
         }
         else {
             if (nextReviewItem.subject_ids.length > 0) {
-                wkofItemsData.NextRevewItems.concat(nextReviewItem.subject_ids);
+                wkofItemsData.NextRevewItems = wkofItemsData.NextRevewItems.concat(nextReviewItem.subject_ids);
             }
         }
     });
 
     if (nextReviewData[0].subjectIds.length > 0) {
-        wkofItemsData.NextRevewItems.concat(nextReviewData[0].subjectIds);
+        wkofItemsData.NextRevewItems = wkofItemsData.NextRevewItems.concat(nextReviewData[0].subjectIds);
     }
 
     wlWanikaniDebug('data', '==Main Summary: getNextReviewTime== Got the following next review data:', nextReviewData);
