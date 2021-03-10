@@ -64,8 +64,10 @@ function loadWkofSettings() {
         safe_level: 3,
         srs_stage: 4,
         selected_theme: 1,
-        skip_session_summary: false
+        skip_session_summary: false,
+        identify_upcoming_difficult_items: false
     };
+    
     wkof.Settings.load(scriptId, defaults);
 }
 
@@ -181,6 +183,12 @@ function openSettings(items) {
                                         type: 'checkbox',
                                         label: 'Skip session summaries',
                                         hover_tip: 'Check if you want to skip the summary pages after lesson and review sessions.',
+                                        default: false
+                                    },
+                                    identify_upcoming_difficult_items: {
+                                        type: 'checkbox',
+                                        label: 'Identify upcoming difficult items for review',
+                                        hover_tip: 'Check if you want to highlight the difficult items that are avaialble within the current or next review period.',
                                         default: false
                                     }
                                 }

@@ -20,6 +20,12 @@ function isDifficult(dataItems) {
     $.each(dataItems, function (index, dataItem) {
         if ("assignments" in dataItem) {
             if ((dataItem.data.level <= wkofItemsData.SafeLevel) && (dataItem.assignments.srs_stage <= wkof.settings[scriptId].srs_stage)) {
+                if (wkof.settings[scriptId].identify_upcoming_difficult_items) {
+                    dataItem.upcoming = (dataItem.assignments.srs_stage == wkof.settings[scriptId].srs_stage 
+                                         && Object.values(wkofItemsData.NextRevewItems).includes(dataItem.id))
+                                      ? true
+                                      : false;
+                }
                 returnItems.push(dataItem);
             }
         }

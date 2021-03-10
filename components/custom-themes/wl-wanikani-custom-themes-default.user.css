@@ -7,6 +7,8 @@
     --item-level-icon-background:             #006400;
     --level-progress-ring-track:              #d5d5d5;
     --loader-colour:                          #6b6b6b;
+    --srs-upcoming-pulse-start:               #000000;
+    --srs-upcoming-pulse-end:                 #d5d5d5;
     /* Wrappers */
     --section-background:                     #d5d5d5;
     --section-items-background:               #ffffff;

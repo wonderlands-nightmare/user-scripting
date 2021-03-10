@@ -167,7 +167,17 @@ function generateCustomItemsHTML(items, type) {
             let customItemTooltipHTML = generateItemTooltipHTML(item);
 
             if ('assignments' in item) {
-                itemSrsLevel = '<span class="progress-item-srs-level srs-level-' + item.assignments.srs_stage + '">' + item.assignments.srs_stage + '</span>';
+                let upcomingClass = '';
+                
+                if ('upcoming' in item) {
+                    upcomingClass = item.upcoming ? ' is-upcoming' : '';
+                }
+
+                itemSrsLevel = `
+                    <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }${ upcomingClass }">
+                        ${ item.assignments.srs_stage }
+                    </span>
+                `;
             }
 
             customItemsHTML += `
