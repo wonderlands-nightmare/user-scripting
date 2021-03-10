@@ -8,6 +8,7 @@
     --level-progress-ring-track:              #d5d5d5;
     --loader-colour:                          #6b6b6b;
     --srs-upcoming-pulse-start:               #ffffff;
+    --srs-upcoming-pulse-mid:                 #00ff40;
     --srs-upcoming-pulse-end:                 #d5d5d5;
     /* Wrappers */
     --section-background:                     rgba(0, 0, 0, 0.75);

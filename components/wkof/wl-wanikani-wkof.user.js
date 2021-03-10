@@ -188,7 +188,7 @@ function openSettings(items) {
                                     identify_upcoming_difficult_items: {
                                         type: 'checkbox',
                                         label: 'Identify difficult items in the SRS Stage cap in the current or next hour review list',
-                                        hover_tip: 'Check if you want to highlight the difficult items that are avaialble within the current or next review period that, if passed, will progress up above the currently set SRS Stage cap.',
+                                        hover_tip: 'Check if you want to highlight the difficult items that are avaialble within the current or next review period (not future) that, if passed, will progress up above the currently set SRS Stage cap.',
                                         default: false
                                     }
                                 }
