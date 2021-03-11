@@ -32,6 +32,7 @@ function isDifficult(dataItems) {
     });
 
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of difficult items:', returnItems);
+    wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of upcoming difficult items:', returnItems.filter(function(item) { return item.upcoming == true; }));
     return returnItems;
 };
 
