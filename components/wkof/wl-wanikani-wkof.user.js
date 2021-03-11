@@ -143,6 +143,12 @@ function openSettings(items) {
                                         },
                                         default: 4
                                     },
+                                    identify_upcoming_difficult_items: {
+                                        type: 'checkbox',
+                                        label: 'Highlight items that may move out of difficult items list',
+                                        hover_tip: 'Check if you want to highlight the difficult items that are avaialble within the current or next review period (not future) that, if passed, will progress up above the currently set SRS Stage cap.',
+                                        default: false
+                                    },
                                     themes_header: {
                                         type: 'section',
                                         label: 'Custom themes'
@@ -183,12 +189,6 @@ function openSettings(items) {
                                         type: 'checkbox',
                                         label: 'Skip session summaries',
                                         hover_tip: 'Check if you want to skip the summary pages after lesson and review sessions.',
-                                        default: false
-                                    },
-                                    identify_upcoming_difficult_items: {
-                                        type: 'checkbox',
-                                        label: 'Identify difficult items in the SRS Stage cap in the current or next hour review list',
-                                        hover_tip: 'Check if you want to highlight the difficult items that are avaialble within the current or next review period (not future) that, if passed, will progress up above the currently set SRS Stage cap.',
                                         default: false
                                     }
                                 }
