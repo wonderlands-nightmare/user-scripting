@@ -26,13 +26,22 @@ function isDifficult(dataItems) {
                                       ? true
                                       : false;
                 }
+                else {
+                    if ('upcoming' in dataItem) {
+                        delete dataItem.upcoming;
+                    }
+                }
                 returnItems.push(dataItem);
             }
         }
     });
 
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of difficult items:', returnItems);
-    wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of upcoming difficult items:', returnItems.filter(function(item) { return item.upcoming == true; }));
+    wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of upcoming difficult items:', returnItems.filter(function(item) { 
+        if ('upcoming' in dataItem) {
+            return item.upcoming == true;
+        }
+    }));
     return returnItems;
 };
 
