@@ -20,12 +20,28 @@ function isDifficult(dataItems) {
     $.each(dataItems, function (index, dataItem) {
         if ("assignments" in dataItem) {
             if ((dataItem.data.level <= wkofItemsData.SafeLevel) && (dataItem.assignments.srs_stage <= wkof.settings[scriptId].srs_stage)) {
+                if (wkof.settings[scriptId].identify_upcoming_difficult_items) {
+                    dataItem.upcoming = (dataItem.assignments.srs_stage == wkof.settings[scriptId].srs_stage 
+                                         && Object.values(wkofItemsData.NextRevewItems).includes(dataItem.id))
+                                      ? true
+                                      : false;
+                }
+                else {
+                    if ('upcoming' in dataItem) {
+                        delete dataItem.upcoming;
+                    }
+                }
                 returnItems.push(dataItem);
             }
         }
     });
 
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of difficult items:', returnItems);
+    wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of upcoming difficult items:', returnItems.filter(function(item) { 
+        if ('upcoming' in item) {
+            return item.upcoming == true;
+        }
+    }));
     return returnItems;
 };
 

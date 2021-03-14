@@ -1,0 +1,39 @@
+/********************************
+ *  SRS level indicator styles
+ ********************************/  
+.custom-items section .progress-entries .progress-entry a.kanji-icon .progress-item-srs-level.is-upcoming {
+    --start-pulse: var(--srs-upcoming-pulse-start);
+    --mid-pulse: var(--srs-upcoming-pulse-mid);
+    --end-pulse: var(--srs-upcoming-pulse-end);
+    animation: srsPulse 2s infinite; 
+}
+
+.custom-items section .progress-entries .progress-entry a.radical-icon .progress-item-srs-level.is-upcoming {
+    --start-pulse: var(--srs-upcoming-pulse-start);
+    --mid-pulse: var(--srs-upcoming-pulse-mid);
+    --end-pulse: var(--srs-upcoming-pulse-end);
+    animation: srsPulse 2s infinite; 
+}
+
+.custom-items section .progress-entries .progress-entry a.vocabulary-icon .progress-item-srs-level.is-upcoming {
+    --start-pulse: var(--srs-upcoming-pulse-start);
+    --mid-pulse: var(--srs-upcoming-pulse-mid);
+    --end-pulse: var(--srs-upcoming-pulse-end);
+    animation: srsPulse 2s infinite; 
+}
+
+
+/********************************
+ *  Animations
+ ********************************/
+ @keyframes srsPulse { 
+    0% { 
+        box-shadow: 0 0 0 0 var(--start-pulse); 
+    } 
+    70% { 
+        box-shadow: 0 0 0 3px var(--mid-pulse); 
+    } 
+    100% { 
+        box-shadow: 0 0 0 0 var(--end-pulse); 
+    } 
+}

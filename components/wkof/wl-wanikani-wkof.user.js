@@ -64,8 +64,10 @@ function loadWkofSettings() {
         safe_level: 3,
         srs_stage: 4,
         selected_theme: 1,
-        skip_session_summary: false
+        skip_session_summary: false,
+        identify_upcoming_difficult_items: false
     };
+    
     wkof.Settings.load(scriptId, defaults);
 }
 
@@ -140,6 +142,12 @@ function openSettings(items) {
                                             9: 'Burned'
                                         },
                                         default: 4
+                                    },
+                                    identify_upcoming_difficult_items: {
+                                        type: 'checkbox',
+                                        label: 'Highlight items that may move out of difficult items list',
+                                        hover_tip: 'Check if you want to highlight the difficult items that are avaialble within the current or next review period (not future) that, if passed, will progress up above the currently set SRS Stage cap.',
+                                        default: false
                                     },
                                     themes_header: {
                                         type: 'section',

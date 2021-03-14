@@ -13,7 +13,12 @@ function initialiseDashboardInitialiserComponent() {
  *  ANCHOR Variable initialisation
  *************************************************/
 // NOTE Global data variable
-let wkofItemsData = {};
+let wkofItemsData = {
+    AllData: {},
+    DifficultItems: {},
+    NextRevewItems: new Array(),
+    SafeLevel: {}
+};
 
 
 /*************************************************
