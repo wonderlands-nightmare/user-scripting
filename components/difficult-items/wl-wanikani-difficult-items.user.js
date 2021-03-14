@@ -38,7 +38,7 @@ function isDifficult(dataItems) {
 
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of difficult items:', returnItems);
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of upcoming difficult items:', returnItems.filter(function(item) { 
-        if ('upcoming' in dataItem) {
+        if ('upcoming' in item) {
             return item.upcoming == true;
         }
     }));
