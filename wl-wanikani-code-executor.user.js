@@ -6,27 +6,27 @@
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
 // @include      /^https://(www|preview).wanikani.com/(lesson|review)/session$/
-// @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/wkof/wl-wanikani-wkof.user.js
-// @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/wkof/wl-wanikani-wkof.user.css
-// @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/custom-themes/wl-wanikani-custom-themes.user.js
-// @resource     DEFAULT_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/custom-themes/wl-wanikani-custom-themes-default.user.css
-// @resource     DARK_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/custom-themes/wl-wanikani-custom-themes-dark.user.css
-// @resource     INIT_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.js
-// @resource     INIT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.css
-// @resource     DEBUG_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/debug/wl-wanikani-debug.user.js
-// @resource     COMMON_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/common/wl-wanikani-common.user.js
-// @resource     COMMON_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/common/wl-wanikani-common.user.css
-// @resource     MAIN_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/main-summary/wl-wanikani-main-summary.user.js
-// @resource     MAIN_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/main-summary/wl-wanikani-main-summary.user.css
-// @resource     LEVEL_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/level-progress/wl-wanikani-level-progress.user.js
-// @resource     LEVEL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/level-progress/wl-wanikani-level-progress.user.css
-// @resource     SRS_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/srs-summary/wl-wanikani-srs-summary.user.js
-// @resource     SRS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/srs-summary/wl-wanikani-srs-summary.user.css
-// @resource     DIFFICULT_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/difficult-items/wl-wanikani-difficult-items.user.js
-// @resource     DIFFICULT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/difficult-items/wl-wanikani-difficult-items.user.css
-// @resource     REFRESH_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/auto-refresh/wl-wanikani-auto-refresh.user.js
-// @resource     ADDITIONAL_JS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/additional/wl-wanikani-additional.user.js
-// @resource     ADDITIONAL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/custom-scripting/master/components/additional/wl-wanikani-additional.user.css
+// @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/wkof/wl-wanikani-wkof.user.js
+// @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/wkof/wl-wanikani-wkof.user.css
+// @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/custom-themes/wl-wanikani-custom-themes.user.js
+// @resource     DEFAULT_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/custom-themes/wl-wanikani-custom-themes-default.user.css
+// @resource     DARK_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/custom-themes/wl-wanikani-custom-themes-dark.user.css
+// @resource     INIT_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.js
+// @resource     INIT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.css
+// @resource     DEBUG_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/debug/wl-wanikani-debug.user.js
+// @resource     COMMON_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/common/wl-wanikani-common.user.js
+// @resource     COMMON_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/common/wl-wanikani-common.user.css
+// @resource     MAIN_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/main-summary/wl-wanikani-main-summary.user.js
+// @resource     MAIN_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/main-summary/wl-wanikani-main-summary.user.css
+// @resource     LEVEL_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/level-progress/wl-wanikani-level-progress.user.js
+// @resource     LEVEL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/level-progress/wl-wanikani-level-progress.user.css
+// @resource     SRS_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/srs-summary/wl-wanikani-srs-summary.user.js
+// @resource     SRS_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/srs-summary/wl-wanikani-srs-summary.user.css
+// @resource     DIFFICULT_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/difficult-items/wl-wanikani-difficult-items.user.js
+// @resource     DIFFICULT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/difficult-items/wl-wanikani-difficult-items.user.css
+// @resource     REFRESH_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/auto-refresh/wl-wanikani-auto-refresh.user.js
+// @resource     ADDITIONAL_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/additional/wl-wanikani-additional.user.js
+// @resource     ADDITIONAL_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/additional/wl-wanikani-additional.user.css
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // ==/UserScript==
