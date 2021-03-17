@@ -35,6 +35,7 @@
     /* Tooltip */
     --next-review-item-background:            #882d9e;
     --tooltip-background:                     rgba(0, 0, 0, 0.75);
+    --tooltip-border:                         rgba(0, 0, 0, 0.75);
     --tooltip-not-right-meaning-background:   #000000;
     --tooltip-not-right-reading-background:   #800000;
     --tooltip-right-meaning-background:       #6b6b6b;

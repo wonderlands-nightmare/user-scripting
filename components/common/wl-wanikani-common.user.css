@@ -191,6 +191,7 @@
     visibility: hidden;
     width: 200px;
     background-color: var(--tooltip-background);
+    border: 1px solid var(--tooltip-border);
     color: var(--text-colour);
     text-align: center;
     border-radius: 5px;
@@ -235,7 +236,7 @@
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    border-color: var(--tooltip-background) transparent transparent transparent;
+    border-color: var(--tooltip-border) transparent transparent transparent;
 }
   
 .custom-item-tooltip:hover .custom-item-tooltip-text {
