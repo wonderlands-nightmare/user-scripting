@@ -168,7 +168,8 @@ function openSettings(items) {
                                         label: 'Select compatability theme',
                                         hover_tip: 'Select a compatability theme for third party themes.',
                                         content: {
-                                            1: 'WaniKani Breeze Dark'
+                                            1: 'None',
+                                            2: 'WaniKani Breeze Dark'
                                         },
                                         default: 1
                                     },
