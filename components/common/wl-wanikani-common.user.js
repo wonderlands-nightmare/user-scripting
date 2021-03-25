@@ -45,7 +45,7 @@ function itemsCharacterCallback (item){
         return itemsData.characters;
     }
     else if (itemsData.character_images != null){
-        return `<img class="radical-image" alt="${ itemsData.slug }" src="https://cdn.wanikani.com/subjects/images/${ item.id }-${ itemsData.slug }-original.png" data-dark-url="${ character_images[0].url }"/>`;
+        return `<img class="radical-image" alt="${ itemsData.slug }" src="https://cdn.wanikani.com/subjects/images/${ item.id }-${ itemsData.slug }-original.png" data-dark-url="${ itemsData.character_images[0].url }"/>`;
     }
     else {
         return itemsData.slug;
