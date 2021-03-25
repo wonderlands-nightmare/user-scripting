@@ -67,7 +67,6 @@ function isAccepted(item) {
 };
 
 
-
 function isNotAccepted(item) {
     return item.accepted_answer == false;
 };
@@ -182,7 +181,7 @@ function generateCustomItemsHTML(items, type) {
                 }
 
                 itemSrsLevel = `
-                    <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }${ upcomingClass } check-text-colour">
+                    <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }${ upcomingClass }">
                         ${ item.assignments.srs_stage }
                     </span>
                 `;
@@ -193,7 +192,7 @@ function generateCustomItemsHTML(items, type) {
                         ${ customItemTooltipHTML }
                         <a href="${ item.data.document_url }" class="${ itemType }-icon check-text-colour ${ type == 'kanji-locked' ? 'locked' : '' }" lang="ja">
                             <div>${ itemsCharacterCallback(item) }</div>
-                            <span class="progress-item-level check-text-colour">${ item.data.level }</span>
+                            <span class="progress-item-level">${ item.data.level }</span>
                             ${ itemSrsLevel }
                         </a>
                     </div>
@@ -348,11 +347,17 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
  *  ANCHOR Dynamically set white or black text colours
  *************************************************/
 function setTextColour() {
+    let setTextColourDebugData = new Array();
+
     $.each($('.check-text-colour'), function(index, element) {
+        setTextColourDebugData.push(element);
+        
         let textColour = getContrastYIQ($(element).css('background-color'));
 
         $(element).attr('style', 'color: ' + textColour + ' !important');
     });
+
+    wlWanikaniDebug('data', '==Common: setTextColour== Updated the following elements:', setTextColourDebugData);
 };
 
 // NOTE Colour checker
