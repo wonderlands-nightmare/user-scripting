@@ -60,7 +60,6 @@ function isAccepted(item) {
     return item.accepted_answer == true;
 };
 
-
 function isNotAccepted(item) {
     return item.accepted_answer == false;
 };
