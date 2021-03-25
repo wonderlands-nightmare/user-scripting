@@ -163,10 +163,10 @@ function openSettings(items) {
                                         },
                                         default: 1
                                     },
-                                    selected_compatability_theme: {
+                                    selected_compatibility_theme: {
                                         type: 'dropdown',
-                                        label: 'Select compatability theme',
-                                        hover_tip: 'Select a compatability theme for third party themes.',
+                                        label: 'Select compatibility theme',
+                                        hover_tip: 'Select a compatibility theme for third party themes.',
                                         content: {
                                             1: 'None',
                                             2: 'WaniKani Breeze Dark'
@@ -286,7 +286,7 @@ function openSettings(items) {
             if (window.location.href.match(dashboardUrlRegEx)) {
                 generateDifficultItemsSection(wkofItemsData.AllData);
                 setCustomDashboardTheme();
-                setCustomDashboardCompatabilityTheme();
+                setCustomDashboardCompatibilityTheme();
                 setTextColour();
                 // Annoying if statement cause we don't need to reload if deselecting
                 if (

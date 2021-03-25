@@ -63,12 +63,12 @@
                 css: 'DARK_THEME_CSS'
             }         
         },
-        customCompatabilityTheme: {
+        customCompatibilityTheme: {
             js: '',
-            1: { // No compatability theme
+            1: { // No compatibility theme
                 css: ''
             },
-            2: { // WaniKani Breeze Dark compatability theme
+            2: { // WaniKani Breeze Dark compatibility theme
                 css: 'WK_BREEZE_DARK_THEME_CSS'
             }            
         },
@@ -124,11 +124,11 @@
         wkof.ready(wkofDataModules)
             .then(getWkofDataObject)
             .then(function(data) {
-                addResources(['customTheme', 'customCompatabilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+                addResources(['customTheme', 'customCompatibilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
                 wkofItemsData.AllData = data;
                 wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
                 setCustomDashboardTheme();
-                setCustomDashboardCompatabilityTheme();
+                setCustomDashboardCompatibilityTheme();
             })
             .then(function() {
                 initialiseMainSummaryComponent();
@@ -178,8 +178,8 @@
                     2: GM_getResourceText(dashboardResources[resourceName][2].css)
                 }
             }
-            else if (resourceName == 'customCompatabilityTheme') {
-                customCompatabilityThemeCss = {
+            else if (resourceName == 'customCompatibilityTheme') {
+                customCompatibilityThemeCss = {
                     1: '',
                     2: GM_getResourceText(dashboardResources[resourceName][2].css)
                 }

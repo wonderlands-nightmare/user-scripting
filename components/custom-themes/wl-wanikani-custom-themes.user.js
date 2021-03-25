@@ -6,7 +6,7 @@ let customThemeCss = {
     1: '',
     2: ''
 };
-let customCompatabilityThemeCss = {
+let customCompatibilityThemeCss = {
     1: ''
 };
 
@@ -28,15 +28,15 @@ function setCustomDashboardTheme() {
 }
 
 // NOTE For making theming compatible with UserStyles
-function setCustomDashboardCompatabilityTheme() {
-    if ($('.custom-dashboard-compatability-theme-css').length > 0) {
-        $('.custom-dashboard-compatability-theme-css').remove();
+function setCustomDashboardCompatibilityTheme() {
+    if ($('.custom-dashboard-compatibility-theme-css').length > 0) {
+        $('.custom-dashboard-compatibility-theme-css').remove();
     }
 
     let style = document.createElement('style');
 
-    style.innerHTML = customCompatabilityThemeCss[wkof.settings[scriptId].selected_compatability_theme];
-    style.className = 'custom-dashboard-compatability-theme-css';
+    style.innerHTML = customCompatibilityThemeCss[wkof.settings[scriptId].selected_compatibility_theme];
+    style.className = 'custom-dashboard-compatibility-theme-css';
 
     document.head.appendChild(style);
 }
