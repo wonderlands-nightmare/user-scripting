@@ -288,7 +288,11 @@ function openSettings(items) {
                 setCustomDashboardTheme();
                 setCustomDashboardCompatabilityTheme();
                 // Annoying if statement cause we don't need to reload if deselecting
-                if ((!dataDebugMode && wkof.settings[scriptId].debug_data) || (!htmlDebugMode && wkof.settings[scriptId].debug_html)) {
+                if (
+                    (!dataDebugMode && wkof.settings[scriptId].debug_data)
+                 || (!htmlDebugMode && wkof.settings[scriptId].debug_html)
+                 || (wkof.settings[scriptId].selected_compatability_theme)
+                ) {
                     window.location.reload();
                 }
             }
