@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.5.7
+// @version      1.4.5.8
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -175,8 +175,7 @@
             if (resourceName == 'customTheme') {
                 customThemeCss = {
                     1: GM_getResourceText(dashboardResources[resourceName][1].css),
-                    2: GM_getResourceText(dashboardResources[resourceName][2].css),
-                    3: GM_getResourceText(dashboardResources[resourceName][3].css)
+                    2: GM_getResourceText(dashboardResources[resourceName][2].css)
                 }
             }
             else if (resourceName == 'customCompatabilityTheme') {
