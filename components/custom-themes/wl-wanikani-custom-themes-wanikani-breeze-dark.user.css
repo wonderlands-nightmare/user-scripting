@@ -1,0 +1,20 @@
+/********************************
+ *  WaniKani Breeze Dark theme colour overrides
+ ********************************/
+.navigation-shortcuts {
+    margin-right: 10px;
+}
+
+.navigation-shortcut a span {
+    color: var(--page-background) !important;
+}
+
+.custom-items {
+    padding: 0 12px;
+    background: none;
+}
+
+.custom-items section .progress-entries .progress-entry a .progress-item-level,
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level {
+    color: var(--text-colour) !important;
+}

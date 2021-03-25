@@ -122,8 +122,9 @@
 .custom-items section .progress-entries .progress-entry a .progress-item-srs-level { 
     position: absolute;
     width: 15px;
-    border: 0.5px solid var(--text-colour);
+    border: 0.5px solid var(--progress-level-colour);
     border-radius: 50%;
+    color: var(--text-colour);
     font-size: 9px;
     font-weight: bold;
     line-height: 14px;

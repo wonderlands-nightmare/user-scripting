@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.5
+// @version      1.4.6
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -11,6 +11,7 @@
 // @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/develop/components/custom-themes/wl-wanikani-custom-themes.user.js
 // @resource     DEFAULT_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/develop/components/custom-themes/wl-wanikani-custom-themes-default.user.css
 // @resource     DARK_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/develop/components/custom-themes/wl-wanikani-custom-themes-dark.user.css
+// @resource     WK_BREEZE_DARK_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/develop/components/custom-themes/wl-wanikani-custom-themes-wanikani-breeze-dark.user.css
 // @resource     INIT_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/develop/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.js
 // @resource     INIT_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/develop/components/dashboard-initialiser/wl-wanikani-dashboard-initialiser.user.css
 // @resource     DEBUG_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/develop/components/debug/wl-wanikani-debug.user.js
@@ -60,7 +61,16 @@
             },
             2: { // Dark theme
                 css: 'DARK_THEME_CSS'
-            }
+            }         
+        },
+        customCompatibilityTheme: {
+            js: '',
+            1: { // No compatibility theme
+                css: ''
+            },
+            2: { // WaniKani Breeze Dark compatibility theme
+                css: 'WK_BREEZE_DARK_THEME_CSS'
+            }            
         },
         dashboardInitialiser: {
             js: 'INIT_JS',
@@ -114,10 +124,11 @@
         wkof.ready(wkofDataModules)
             .then(getWkofDataObject)
             .then(function(data) {
-                addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+                addResources(['customTheme', 'customCompatibilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
                 wkofItemsData.AllData = data;
                 wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
                 setCustomDashboardTheme();
+                setCustomDashboardCompatibilityTheme();
             })
             .then(function() {
                 initialiseMainSummaryComponent();
@@ -125,6 +136,7 @@
                 initialiseSrsSummaryComponent();
                 initialiseDifficultItemsComponent();
                 autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
+                setTextColour();
                 dashboardLoader(true);
             });
     }
@@ -163,6 +175,12 @@
             if (resourceName == 'customTheme') {
                 customThemeCss = {
                     1: GM_getResourceText(dashboardResources[resourceName][1].css),
+                    2: GM_getResourceText(dashboardResources[resourceName][2].css)
+                }
+            }
+            else if (resourceName == 'customCompatibilityTheme') {
+                customCompatibilityThemeCss = {
+                    1: '',
                     2: GM_getResourceText(dashboardResources[resourceName][2].css)
                 }
             }

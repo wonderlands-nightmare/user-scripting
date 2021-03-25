@@ -45,7 +45,7 @@ function itemsCharacterCallback (item){
         return itemsData.characters;
     }
     else if (itemsData.character_images != null){
-        return '<img class="radical-image" alt="' + itemsData.slug + '" src="https://cdn.wanikani.com/subjects/images/' + item.id + '-' + itemsData.slug + '-original.png"/>';
+        return `<img class="radical-image" alt="${ itemsData.slug }" src="https://cdn.wanikani.com/subjects/images/${ item.id }-${ itemsData.slug }-original.png" data-dark-url="${ itemsData.character_images[0].url }"/>`;
     }
     else {
         return itemsData.slug;
@@ -183,7 +183,7 @@ function generateCustomItemsHTML(items, type) {
             customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ customItemTooltipHTML }
-                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'kanji-locked' ? 'locked' : '' }" lang="ja">
+                        <a href="${ item.data.document_url }" class="${ itemType }-icon check-text-colour ${ type == 'kanji-locked' ? 'locked' : '' }" lang="ja">
                             <div>${ itemsCharacterCallback(item) }</div>
                             <span class="progress-item-level">${ item.data.level }</span>
                             ${ itemSrsLevel }
@@ -322,7 +322,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
     : '';
 
     let summaryHTML = `
-        <div class="custom-summary ${ htmlClasses }">
+        <div class="custom-summary ${ htmlClasses } check-text-colour">
             <h2>${ divHeaderText }</h2>
             <span class="custom-summary-kanji">漢字（${ summaryData.kanji.length }）</span>
             <span class="custom-summary-radical">部首（${ summaryData.radical.length }）</span>
@@ -333,4 +333,36 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
 
     wlWanikaniDebug('html', '==Common: generateSummaryHTML== Generated the following summary (' + htmlClasses + ') HTML:', { main_html: summaryHTML });
     return summaryHTML;
+};
+
+
+/*************************************************
+ *  ANCHOR Dynamically set white or black text colours
+ *************************************************/
+function setTextColour() {
+    let setTextColourDebugData = new Array();
+
+    $.each($('.check-text-colour'), function(index, element) {
+        setTextColourDebugData.push(element);
+        
+        let textColour = getContrastYIQ($(element).css('background-color'));
+
+        $(element).attr('style', 'color: ' + textColour + ' !important');
+
+        if ($(element).has('img') && textColour == '#000000') {
+            let imageElement = $(element).find('img');
+            
+            $(imageElement).attr('src', $(imageElement).attr('data-dark-url'));
+        }
+    });
+
+    wlWanikaniDebug('data', '==Common: setTextColour== Updated the following elements:', setTextColourDebugData);
+};
+
+// NOTE Colour checker
+function getContrastYIQ(colour){
+    let rgbValues = colour.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+    let yiq = ((rgbValues[1]*299)+(rgbValues[2]*587)+(rgbValues[3]*114))/1000;
+    
+    return (yiq >= 128) ? '#000000' : '#ffffff';
 };

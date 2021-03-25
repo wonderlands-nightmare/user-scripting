@@ -12,6 +12,10 @@
     margin: auto;
 }
 
+#wkof_ds #wkofs_wanikani_custom_dashboard #wanikani_custom_dashboard_translations_page legend {
+    width: 100%;
+}
+
 #wkof_ds #wkofs_wanikani_custom_dashboard #wanikani_custom_dashboard_translations_page .wcd-dialog-item {
     padding: 5px;
     background: var(--translation-item-background);
