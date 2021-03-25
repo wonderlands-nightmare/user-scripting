@@ -20,8 +20,6 @@ const wanikaniSrsStages = {
     'burned': { 'burned': 9 }
 };
 
-let useDarkRadicalImage = false;
-
 
 /*************************************************
  *  ANCHOR Item filters and sorting
@@ -47,11 +45,7 @@ function itemsCharacterCallback (item){
         return itemsData.characters;
     }
     else if (itemsData.character_images != null){
-        let radicalUrl = useDarkRadicalImage
-                       ? character_images[0].url
-                       : `https://cdn.wanikani.com/subjects/images/${ item.id }-${ itemsData.slug }-original.png`
-        
-        return `<img class="radical-image" alt="${ itemsData.slug }" src="${ radicalUrl }"/>`;
+        return `<img class="radical-image" alt="${ itemsData.slug }" src="https://cdn.wanikani.com/subjects/images/${ item.id }-${ itemsData.slug }-original.png" data-dark-url="${ character_images[0].url }"/>`;
     }
     else {
         return itemsData.slug;
@@ -355,6 +349,12 @@ function setTextColour() {
         let textColour = getContrastYIQ($(element).css('background-color'));
 
         $(element).attr('style', 'color: ' + textColour + ' !important');
+
+        if ($(element).has('img') && textColour == '#000000') {
+            let imageElement = $(element).find('img');
+            
+            $(imageElement).attr('src', $(imageElement).attr('data-dark-url'));
+        }
     });
 
     wlWanikaniDebug('data', '==Common: setTextColour== Updated the following elements:', setTextColourDebugData);
@@ -364,9 +364,6 @@ function setTextColour() {
 function getContrastYIQ(colour){
     let rgbValues = colour.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
     let yiq = ((rgbValues[1]*299)+(rgbValues[2]*587)+(rgbValues[3]*114))/1000;
-    let darkText = (yiq >= 128);
-
-    useDarkRadicalImage = darkText;
-
-    return darkText ? '#000000' : '#ffffff';
+    
+    return (yiq >= 128) ? '#000000' : '#ffffff';
 };
