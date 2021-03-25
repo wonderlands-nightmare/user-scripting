@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WaniKani Custom Dashboard - DEV
+// @name         WaniKani Custom Dashboard
 // @namespace    https://github.com/wonderlands-nightmare
 // @version      1.4.6
 // @description  A collection of custom scripts for editing the wanikani experience.

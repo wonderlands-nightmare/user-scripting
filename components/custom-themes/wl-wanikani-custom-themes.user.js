@@ -7,7 +7,8 @@ let customThemeCss = {
     2: ''
 };
 let customCompatibilityThemeCss = {
-    1: ''
+    1: '',
+    2: ''
 };
 
 
