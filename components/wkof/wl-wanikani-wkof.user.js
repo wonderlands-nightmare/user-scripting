@@ -245,35 +245,35 @@ function openSettings(items) {
                                         html: '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">漢字と部首と単語が合計'
                                             + '</br>かんじとぶしゅとたんごがごうけい'
                                             + '</br>Total number of kanji, radicals and vocabulary'
-                                            + '</br>A general statement sentence.</div>'
+                                            + '</br>Notes: A general statement sentence.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">次の復習をなんでもない'
                                             + '</br>つぎのふくしゅうをなんでもない'
                                             + '</br>No next review'
-                                            + '</br>Highlights when there is no reviews available for the next 24 hours.</div>'
+                                            + '</br>Notes: Highlights when there is no reviews available for the next 24 hours.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">午前__時の次の復習　・　午後__時の次の復習'
                                             + '</br>ごぜん__じのつぎのふくしゅ　・　ごご__じのつぎのふくしゅ'
                                             + '</br>Next review at __ am/pm'
-                                            + '</br>These two statements are repeated with the hour that the review is due. 前（ぜん）is AM and 後（ご）is PM.</div>'
+                                            + '</br>Notes: These two statements are repeated with the hour that the review is due. 前（ぜん）is AM and 後（ご）is PM.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__を開始'
                                             + '</br>__をかいし'
                                             + '</br>__ start'
-                                            + '</br>This phrase is repeated for both Lesson and Review section buttons.</div>'
+                                            + '</br>Notes: This phrase is repeated for both Lesson and Review section buttons.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__進行中'
                                             + '</br>__しんこうちゅう'
                                             + '</br>__ in progress'
-                                            + '</br>This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
+                                            + '</br>Notes: This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__合格'
                                             + '</br>__ごうかく'
                                             + '</br>__ passed'
-                                            + '</br>This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
+                                            + '</br>Notes: This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">君は__項目をあります!'
                                             + '</br>きみは__こうもくをあります'
                                             + '</br>You have __ items!'
-                                            + '</br>This sentence is repeated when there are items to be looked at in all main sections.</div>'
+                                            + '</br>Notes: This sentence is repeated when there are items to be looked at in all main sections.</div>'
                                             + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">ごめんなさい, 君は__項目をありません.'
                                             + '</br>ごめんなさい、君は__こうもくをありません。'
                                             + "</br>Sorry, you don't have any __ items."
-                                            + '</br>This sentence is repeated when there are no items to be looked at in any of the main sections.</div>'
+                                            + '</br>Notes: This sentence is repeated when there are no items to be looked at in any of the main sections.</div>'
                                     }
                                 }
                             }
@@ -291,7 +291,6 @@ function openSettings(items) {
                 if (
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
                  || (!htmlDebugMode && wkof.settings[scriptId].debug_html)
-                 || (wkof.settings[scriptId].selected_compatability_theme)
                 ) {
                     window.location.reload();
                 }

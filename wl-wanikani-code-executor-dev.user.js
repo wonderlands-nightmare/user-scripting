@@ -136,7 +136,6 @@
                 initialiseSrsSummaryComponent();
                 initialiseDifficultItemsComponent();
                 autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
-                setTextColour();
                 dashboardLoader(true);
             });
     }

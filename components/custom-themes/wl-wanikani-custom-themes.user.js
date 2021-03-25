@@ -39,4 +39,6 @@ function setCustomDashboardCompatabilityTheme() {
     style.className = 'custom-dashboard-compatability-theme-css';
 
     document.head.appendChild(style);
+
+    setTextColour();
 }
