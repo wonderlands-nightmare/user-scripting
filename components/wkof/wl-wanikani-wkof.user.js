@@ -287,6 +287,7 @@ function openSettings(items) {
                 generateDifficultItemsSection(wkofItemsData.AllData);
                 setCustomDashboardTheme();
                 setCustomDashboardCompatabilityTheme();
+                setTextColour();
                 // Annoying if statement cause we don't need to reload if deselecting
                 if (
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
