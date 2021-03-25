@@ -159,8 +159,16 @@ function openSettings(items) {
                                         hover_tip: 'Select your prefered theme for the custom dashboard.',
                                         content: {
                                             1: 'Default',
-                                            2: 'Dark',
-                                            3: 'WaniKani Breeze Dark'
+                                            2: 'Dark'
+                                        },
+                                        default: 1
+                                    },
+                                    selected_compatability_theme: {
+                                        type: 'dropdown',
+                                        label: 'Select compatability theme',
+                                        hover_tip: 'Select a compatability theme for third party themes.',
+                                        content: {
+                                            1: 'WaniKani Breeze Dark'
                                         },
                                         default: 1
                                     },
@@ -277,6 +285,7 @@ function openSettings(items) {
             if (window.location.href.match(dashboardUrlRegEx)) {
                 generateDifficultItemsSection(wkofItemsData.AllData);
                 setCustomDashboardTheme();
+                setCustomDashboardCompatabilityTheme();
                 // Annoying if statement cause we don't need to reload if deselecting
                 if ((!dataDebugMode && wkof.settings[scriptId].debug_data) || (!htmlDebugMode && wkof.settings[scriptId].debug_html)) {
                     window.location.reload();

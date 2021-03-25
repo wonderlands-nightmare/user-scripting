@@ -66,6 +66,12 @@
                 css: 'WK_BREEZE_DARK_THEME_CSS'
             }            
         },
+        customCompatabilityTheme: {
+            js: '',
+            1: { // WaniKani Breeze Dark theme
+                css: 'WK_BREEZE_DARK_THEME_CSS'
+            }            
+        },
         dashboardInitialiser: {
             js: 'INIT_JS',
             css: 'INIT_CSS'
@@ -118,10 +124,11 @@
         wkof.ready(wkofDataModules)
             .then(getWkofDataObject)
             .then(function(data) {
-                addResources(['customTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+                addResources(['customTheme', 'customCompatabilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
                 wkofItemsData.AllData = data;
                 wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
                 setCustomDashboardTheme();
+                setCustomDashboardCompatabilityTheme();
             })
             .then(function() {
                 initialiseMainSummaryComponent();
@@ -170,6 +177,11 @@
                     1: GM_getResourceText(dashboardResources[resourceName][1].css),
                     2: GM_getResourceText(dashboardResources[resourceName][2].css),
                     3: GM_getResourceText(dashboardResources[resourceName][3].css)
+                }
+            }
+            else if (resourceName == 'customCompatabilityTheme') {
+                customCompatabilityThemeCss = {
+                    1: GM_getResourceText(dashboardResources[resourceName][1].css)
                 }
             }
             else {
