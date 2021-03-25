@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.5.5
+// @version      1.4.5.6
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -61,10 +61,7 @@
             },
             2: { // Dark theme
                 css: 'DARK_THEME_CSS'
-            },
-            3: { // WaniKani Breeze Dark theme
-                css: 'WK_BREEZE_DARK_THEME_CSS'
-            }            
+            }         
         },
         customCompatabilityTheme: {
             js: '',
@@ -185,7 +182,7 @@
             else if (resourceName == 'customCompatabilityTheme') {
                 customCompatabilityThemeCss = {
                     1: '',
-                    2: GM_getResourceText(dashboardResources[resourceName][1].css)
+                    2: GM_getResourceText(dashboardResources[resourceName][2].css)
                 }
             }
             else {
