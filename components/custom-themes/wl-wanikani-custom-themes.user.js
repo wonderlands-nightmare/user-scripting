@@ -4,7 +4,8 @@
 // For theme CSS since this file can't use GM
 let customThemeCss = {
     1: '',
-    2: ''
+    2: '',
+    3: ''
 };
 
 

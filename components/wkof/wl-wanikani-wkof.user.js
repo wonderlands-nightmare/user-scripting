@@ -159,7 +159,8 @@ function openSettings(items) {
                                         hover_tip: 'Select your prefered theme for the custom dashboard.',
                                         content: {
                                             1: 'Default',
-                                            2: 'Dark'
+                                            2: 'Dark',
+                                            3: 'WaniKani Breeze Dark'
                                         },
                                         default: 1
                                     },

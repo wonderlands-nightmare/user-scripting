@@ -20,6 +20,8 @@ const wanikaniSrsStages = {
     'burned': { 'burned': 9 }
 };
 
+let useDarkRadicalImage = false;
+
 
 /*************************************************
  *  ANCHOR Item filters and sorting
@@ -45,7 +47,11 @@ function itemsCharacterCallback (item){
         return itemsData.characters;
     }
     else if (itemsData.character_images != null){
-        return '<img class="radical-image" alt="' + itemsData.slug + '" src="https://cdn.wanikani.com/subjects/images/' + item.id + '-' + itemsData.slug + '-original.png"/>';
+        let radicalUrl = useDarkRadicalImage
+                       ? character_images[0].url
+                       : `https://cdn.wanikani.com/subjects/images/${ item.id }-${ itemsData.slug }-original.png`
+        
+        return `<img class="radical-image" alt="${ itemsData.slug }" src="${ radicalUrl }"/>`;
     }
     else {
         return itemsData.slug;
@@ -59,6 +65,8 @@ function itemsCharacterCallback (item){
 function isAccepted(item) {
     return item.accepted_answer == true;
 };
+
+
 
 function isNotAccepted(item) {
     return item.accepted_answer == false;
@@ -174,7 +182,7 @@ function generateCustomItemsHTML(items, type) {
                 }
 
                 itemSrsLevel = `
-                    <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }${ upcomingClass }">
+                    <span class="progress-item-srs-level srs-level-${ item.assignments.srs_stage }${ upcomingClass } check-text-colour">
                         ${ item.assignments.srs_stage }
                     </span>
                 `;
@@ -183,9 +191,9 @@ function generateCustomItemsHTML(items, type) {
             customItemsHTML += `
                     <div class="custom-item-tooltip progress-entry relative rounded-tr rounded-tl ${ itemType }">
                         ${ customItemTooltipHTML }
-                        <a href="${ item.data.document_url }" class="${ itemType }-icon ${ type == 'kanji-locked' ? 'locked' : '' }" lang="ja">
+                        <a href="${ item.data.document_url }" class="${ itemType }-icon check-text-colour ${ type == 'kanji-locked' ? 'locked' : '' }" lang="ja">
                             <div>${ itemsCharacterCallback(item) }</div>
-                            <span class="progress-item-level">${ item.data.level }</span>
+                            <span class="progress-item-level check-text-colour">${ item.data.level }</span>
                             ${ itemSrsLevel }
                         </a>
                     </div>
@@ -322,7 +330,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
     : '';
 
     let summaryHTML = `
-        <div class="custom-summary ${ htmlClasses }">
+        <div class="custom-summary ${ htmlClasses } check-text-colour">
             <h2>${ divHeaderText }</h2>
             <span class="custom-summary-kanji">漢字（${ summaryData.kanji.length }）</span>
             <span class="custom-summary-radical">部首（${ summaryData.radical.length }）</span>
@@ -333,4 +341,27 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
 
     wlWanikaniDebug('html', '==Common: generateSummaryHTML== Generated the following summary (' + htmlClasses + ') HTML:', { main_html: summaryHTML });
     return summaryHTML;
+};
+
+
+/*************************************************
+ *  ANCHOR Dynamically set white or black text colours
+ *************************************************/
+function setTextColour() {
+    $.each($('.check-text-colour'), function(index, element) {
+        let textColour = getContrastYIQ($(element).css('background-color'));
+
+        $(element).attr('style', 'color: ' + textColour + ' !important');
+    });
+};
+
+// NOTE Colour checker
+function getContrastYIQ(colour){
+    let rgbValues = colour.match(/rgba?\((\d{1,3}), ?(\d{1,3}), ?(\d{1,3})\)?(?:, ?(\d(?:\.\d?))\))?/);
+    let yiq = ((rgbValues[1]*299)+(rgbValues[2]*587)+(rgbValues[3]*114))/1000;
+    let darkText = (yiq >= 128);
+
+    useDarkRadicalImage = darkText;
+
+    return darkText ? '#000000' : '#ffffff';
 };
