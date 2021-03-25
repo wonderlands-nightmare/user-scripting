@@ -6,7 +6,7 @@
 }
 
 .navigation-shortcut a span {
-    color: var(--page-background);
+    color: var(--page-background) !important;
 }
 
 .custom-items {
