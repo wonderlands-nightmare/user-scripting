@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.6
+// @version      1.4.6.1
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -112,42 +112,39 @@
     wkof.include(wkofSettingsModules);
     wkof.ready(wkofSettingsModules)
         .then(loadWkofMenu)
-        .then(loadWkofSettings);
-
-    setTimeout(function() {
-        addResources(['dashboardInitialiser', 'debug', 'common']);
-        initialiseDashboardInitialiserComponent();
-    }, 1000);
-    
-    if (window.location.href.match(dashboardUrlRegEx)) {
-        wkof.include(wkofDataModules);
-        wkof.ready(wkofDataModules)
-            .then(getWkofDataObject)
-            .then(function(data) {
-                addResources(['customTheme', 'customCompatibilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
-                wkofItemsData.AllData = data;
-                wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
-                setCustomDashboardTheme();
-                setCustomDashboardCompatibilityTheme();
-            })
-            .then(function() {
-                initialiseMainSummaryComponent();
-                initialiseLevelProgressComponent();
-                initialiseSrsSummaryComponent();
-                initialiseDifficultItemsComponent();
-                autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
-                setTextColour();
-                dashboardLoader(true);
-            });
-    }
-
-    if (window.location.href.match(sessionUrlRegEx)) {
-        // Timeout needed for now to wait for settings to be ready
-        setTimeout(function() {
-            addResources(['additional']);
-            skipReviewLessonSummary();
-        }, 1000);
-    }
+        .then(loadWkofSettings)
+        .then(function() {
+            addResources(['dashboardInitialiser', 'debug', 'common']);
+            initialiseDashboardInitialiserComponent();
+        })
+        .then(function() {
+            if (window.location.href.match(dashboardUrlRegEx)) {
+                wkof.include(wkofDataModules);
+                wkof.ready(wkofDataModules)
+                    .then(getWkofDataObject)
+                    .then(function(data) {
+                        addResources(['customTheme', 'customCompatibilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+                        wkofItemsData.AllData = data;
+                        wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
+                        setCustomDashboardTheme();
+                        setCustomDashboardCompatibilityTheme();
+                    })
+                    .then(function() {
+                        initialiseMainSummaryComponent();
+                        initialiseLevelProgressComponent();
+                        initialiseSrsSummaryComponent();
+                        initialiseDifficultItemsComponent();
+                        autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
+                        setTextColour();
+                        dashboardLoader(true);
+                    });
+            }
+        
+            if (window.location.href.match(sessionUrlRegEx)) {
+                addResources(['additional']);
+                skipReviewLessonSummary();
+            }
+        });
 
 
     /*************************************************
