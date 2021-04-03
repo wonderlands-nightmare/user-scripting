@@ -334,7 +334,7 @@ function generateTranslationWords() {
 function generateTranslationPhrases() {
     let translationPhrasesHTML = '';
 
-    $.each(translationText.words, function(index, textItem) {
+    $.each(translationText.phrases, function(index, textItem) {
         translationPhrasesHTML += `
             <div class="wcd-dialog-item wcd-dialog-sentence-phrase">
                 ${ textItem.jp_kanji }

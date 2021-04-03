@@ -17,8 +17,8 @@ function initialiseMainSummaryComponent() {
                              , translationText.words.lesson.en_meaning + '（' + lessonSummaryData.totalCount + '）'
                              , true
                              , 'custom-lessons-and-reviews-button lessons-button'
-                             , translationText.words.lesson_review_start.jp_kanji.replace('__', translationText.words.lesson.jp_kanji)
-                             , translationText.words.lesson_review_start.en_meaning.replace('__', translationText.words.lesson.en_meaning)
+                             , translationText.phrases.lesson_review_start.jp_kanji.replace('__', translationText.words.lesson.jp_kanji)
+                             , translationText.phrases.lesson_review_start.en_meaning.replace('__', translationText.words.lesson.en_meaning)
         ) }
         ${ generateSummaryHTML(reviewSummaryData
                              , 'custom-lessons-and-reviews-summary reviews-summary'
@@ -26,8 +26,8 @@ function initialiseMainSummaryComponent() {
                              , translationText.words.review.en_meaning + '（' + reviewSummaryData.totalCount + '）'
                              , true
                              , 'custom-lessons-and-reviews-button reviews-button'
-                             , translationText.words.lesson_review_start.jp_kanji.replace('__', translationText.words.review.jp_kanji)
-                             , translationText.words.lesson_review_start.en_meaning.replace('__', translationText.words.review.en_meaning)
+                             , translationText.phrases.lesson_review_start.jp_kanji.replace('__', translationText.words.review.jp_kanji)
+                             , translationText.phrases.lesson_review_start.en_meaning.replace('__', translationText.words.review.en_meaning)
         ) }
         ${ generateSummaryHTML(totalSummaryData
                              , 'custom-lessons-and-reviews-summary totals-summary'
@@ -70,7 +70,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
                                      : translationText.phrases.next_review.jp_kanji.replace('__', dataItem.text)  + '（' + nextReviewTotalCount + '）';
             let nextReviewDataHeaderHoverText = dataItem.text == ''
                                               ? translationText.phrases.no_next_review.en_meaning
-                                              : translationText.phrases.next_review.jp_kanji.replace('__', dataItem.hoverText)  + '（' + nextReviewTotalCount + '）';
+                                              : translationText.phrases.next_review.en_meaning.replace('__', dataItem.hoverText)  + '（' + nextReviewTotalCount + '）';
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData
                                                       , 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass
                                                       , nextReviewDataHeader
