@@ -36,9 +36,13 @@ function initialiseLevelProgressComponent() {
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
 
     wlWanikaniDebug('html', '==Level Progress: initialiseLevelProgressComponent== Generated the following Level Progress HTML', { main_html: levelProgressItemsTableHTML });
+    if ($('.custom-dashboard-progress-items').length > 0) {
+        $('.custom-dashboard-progress-items').remove();
+    }
     $(levelProgressItemsTableHTML).insertAfter($('.dashboard .custom-section.custom-lessons-and-reviews'));
 
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
+    readyToLevelUp(levelProgressData);
 }
 
 
@@ -155,3 +159,30 @@ function getLevelProgress(data) {
     wlWanikaniDebug('data', '==Level Progress: getLevelProgress== Got the level progress data:', progressData);
     return progressData;
 };
+
+
+/*************************************************
+ *  ANCHOR Set circle to pulse when ready to level up
+ *************************************************/
+function readyToLevelUp(levelData) {
+    if (wkof.settings[scriptId].identify_level_up) {
+        let levelCircle = $('.level-progress-indicator .progress-ring');
+        let kanjiLeftToPass = levelData.Kanji.KanjiToPass - levelData.Kanji.Passed.length;
+        if (kanjiLeftToPass == 1) {
+            let kanjiInNextReview = 0;
+
+            $.each(levelData.Kanji.InProgress, function(index, inProgressItem) {
+                if (Object.values(subjectIds).includes(inProgressItem.data.id) && (inProgressItem.assignments.srs_stage == 4)) {
+                    kanjiInNextReview++;
+                }
+            });
+
+            if (kanjiInNextReview > 0) {
+                $(levelCircle).addClass('level-up');
+            }
+            else {
+                $(levelCircle).removeClass('level-up');
+            }
+        }
+    }
+ };

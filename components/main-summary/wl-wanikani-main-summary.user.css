@@ -111,7 +111,7 @@
 /********************************
  *  Animations
  ********************************/
- @keyframes buttonPulse { 
+@keyframes buttonPulse { 
     0% { 
         box-shadow: 0 0 0 0 var(--start-pulse); 
     } 

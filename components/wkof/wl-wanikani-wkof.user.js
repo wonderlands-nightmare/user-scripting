@@ -63,9 +63,10 @@ function loadWkofSettings() {
         show_difficult_items: false,
         safe_level: 3,
         srs_stage: 4,
+        identify_upcoming_difficult_items: false,
+        identify_level_up: false,
         selected_theme: 1,
-        skip_session_summary: false,
-        identify_upcoming_difficult_items: false
+        skip_session_summary: false
     };
     
     wkof.Settings.load(scriptId, defaults);
@@ -188,6 +189,16 @@ function openSettings(items) {
                                         label: 'Enable HTML debugging',
                                         hover_tip: 'Check if you want to enable debugging for the HTML used and generated.',
                                         default: false
+                                    },
+                                    other_dashboard_settings_header: {
+                                        type: 'section',
+                                        label: 'Other dashboard settings'
+                                    },
+                                    identify_level_up: {
+                                        type: 'checkbox',
+                                        label: 'Identify if you might level up',
+                                        hover_tip: 'Check if you want to identify if you might be able to level up in your current reviews or reviews in the immediate next review set.',
+                                        default: false
                                     }
                                 }
                             },
@@ -288,6 +299,7 @@ function openSettings(items) {
                 setCustomDashboardTheme();
                 setCustomDashboardCompatibilityTheme();
                 setTextColour();
+                initialiseLevelProgressComponent();
                 // Annoying if statement cause we don't need to reload if deselecting
                 if (
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
