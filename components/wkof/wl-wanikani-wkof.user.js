@@ -181,13 +181,13 @@ function openSettings(items) {
                                     },
                                     debug_data: {
                                         type: 'checkbox',
-                                        label: 'Enable data debugging',
+                                        label: 'Enable data debugging (refreshes on enable)',
                                         hover_tip: 'Check if you want to enable debugging for the WKOF data used and generated.',
                                         default: false
                                     },
                                     debug_html: {
                                         type: 'checkbox',
-                                        label: 'Enable HTML debugging',
+                                        label: 'Enable HTML debugging (refreshes on enable)',
                                         hover_tip: 'Check if you want to enable debugging for the HTML used and generated.',
                                         default: false
                                     },
@@ -203,7 +203,7 @@ function openSettings(items) {
                                     },
                                     show_hover_translation: {
                                         type: 'checkbox',
-                                        label: 'Show translations on hover',
+                                        label: 'Show translations on hover (refreshes on changed value)',
                                         hover_tip: 'Check if you want the english translations to show on mouse hover on the dashboard kanji.',
                                         default: false
                                     }
@@ -265,6 +265,8 @@ function openSettings(items) {
                 if (
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
                  || (!htmlDebugMode && wkof.settings[scriptId].debug_html)
+                 || (!showHoverTranslation && wkof.settings[scriptId].show_hover_translation)
+                 || (showHoverTranslation && !wkof.settings[scriptId].show_hover_translation)
                 ) {
                     window.location.reload();
                 }

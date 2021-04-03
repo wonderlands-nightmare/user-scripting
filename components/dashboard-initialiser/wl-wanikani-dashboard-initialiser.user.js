@@ -20,6 +20,8 @@ let wkofItemsData = {
     SafeLevel: {}
 };
 
+let showHoverTranslation = wkof.settings[scriptId].show_hover_translation;
+
 const translationText = {
     words: {
         lesson: {
@@ -223,7 +225,7 @@ function updateShortcutNavigation(item) {
 
     navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
     
-    if (wkof.settings[scriptId].show_hover_translation) {
+    if (showHoverTranslation) {
         navItem.attr('title', newItemHoverText);
     }
     else {
@@ -282,7 +284,7 @@ function generateDashboardWrapperHTML() {
  *  ANCHOR Generate custom dashboard wrapper
  *************************************************/
 function getHoverTitle(hoverText) {
-    if (wkof.settings[scriptId].show_hover_translation) {
+    if (showHoverTranslation) {
         hoverText = ` title="${ hoverText }"`;
     }
     else {
