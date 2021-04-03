@@ -298,8 +298,9 @@ function openSettings(items) {
                 generateDifficultItemsSection(wkofItemsData.AllData);
                 setCustomDashboardTheme();
                 setCustomDashboardCompatibilityTheme();
-                setTextColour();
                 initialiseLevelProgressComponent();
+                // Must happen after everything else to force text colour check
+                setTextColour();
                 // Annoying if statement cause we don't need to reload if deselecting
                 if (
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
