@@ -281,9 +281,12 @@ function generateDashboardWrapperHTML() {
 /*************************************************
  *  ANCHOR Generate custom dashboard wrapper
  *************************************************/
-function getHoverTitle(hoverText = '') {
+function getHoverTitle(hoverText) {
     if (wkof.settings[scriptId].show_hover_translation) {
         hoverText = ` title="${ hoverText }"`;
+    }
+    else {
+        hoverText = '';
     }
 
     return hoverText;
