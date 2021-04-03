@@ -20,6 +20,151 @@ let wkofItemsData = {
     SafeLevel: {}
 };
 
+const translationText = {
+    words: {
+        lesson: {
+            en_meaning: 'Lesson',
+            jp_kanji: '授業',
+            jp_reading: 'じゅぎょう'
+        },
+        review: {
+            en_meaning: 'Review',
+            jp_kanji: '復習',
+            jp_reading: 'ふくしゅう'
+        },
+        kanji: {
+            en_meaning: 'Kanji',
+            jp_kanji: '漢字',
+            jp_reading: 'かんじ'
+        },
+        radical: {
+            en_meaning: 'Radical',
+            jp_kanji: '部首',
+            jp_reading: 'ぶしゅ'
+        },
+        vocabulary: {
+            en_meaning: 'Vocabulary',
+            jp_kanji: '単語',
+            jp_reading: 'たんご'
+        },
+        apprentice: {
+            en_meaning: 'Apprentice',
+            jp_kanji: '見習',
+            jp_reading: 'みならい'
+        },
+        guru: {
+            en_meaning: 'Guru',
+            jp_kanji: '達人',
+            jp_reading: 'たつじん'
+        },
+        master: {
+            en_meaning: 'Master',
+            jp_kanji: '主人',
+            jp_reading: 'しゅじん'
+        },
+        enlightened: {
+            en_meaning: 'Enlightened',
+            jp_kanji: '悟りを開いた',
+            jp_reading: 'さとりをひらいた'
+        },
+        burned: {
+            en_meaning: 'Burned',
+            jp_kanji: '焼け',
+            jp_reading: 'やけ'
+        },
+        look_at: {
+            en_meaning: 'Look at',
+            jp_kanji: '見せて',
+            jp_reading: 'みせて'
+        },
+        onyomi: {
+            en_meaning: 'Onyomi',
+            jp_kanji: '音読み',
+            jp_reading: 'おんよみ'
+        },
+        kunyomi: {
+            en_meaning: 'Kunyomi',
+            jp_kanji: '訓読み',
+            jp_reading: 'くんよみ'
+        },
+        nanori: {
+            en_meaning: 'Nanori',
+            jp_kanji: '名乗り',
+            jp_reading: 'なのり'
+        },
+        meaning: {
+            en_meaning: 'Meaning',
+            jp_kanji: '意味',
+            jp_reading: 'いみ'
+        },
+        difficult: {
+            en_meaning: 'Difficult',
+            jp_kanji: '苦労',
+            jp_reading: 'くろう'
+        },
+        level_progress: {
+            en_meaning: 'Level progress',
+            jp_kanji: 'レベルすすむ',
+            jp_reading: 'れべるすすむ'
+        },
+        kanji_locked: {
+            en_meaning: 'Kanji locked',
+            jp_kanji: '漢字ロック',
+            jp_reading: 'かんじろっく'
+        }
+    },
+    phrases: {
+        totals_summary: {
+            en_meaning: 'Total number of kanji, radicals and vocabulary',
+            en_notes: 'A general statement sentence.',
+            jp_kanji: '漢字と部首と単語が合計',
+            jp_reading: 'かんじとぶしゅとたんごがごうけい'
+        },
+        no_next_review: {
+            en_meaning: 'No next review',
+            en_notes: 'Highlights when there is no reviews available for the next 24 hours.',
+            jp_kanji: '次の復習をなんでもない',
+            jp_reading: 'つぎのふくしゅうをなんでもない'
+        },
+        next_review: {
+            en_meaning: 'Next review at __',
+            en_notes: 'This shows the hour that the next review is due. Hour prefixes 前（ぜん）is for AM, and 後（ご）is for PM.',
+            jp_kanji: '午__時の次の復習',
+            jp_reading: 'ご__じのつぎのふくしゅ'
+        },
+        lesson_review_start: {
+            en_meaning: '__ start',
+            en_notes: 'This phrase is repeated for both Lesson and Review section buttons.',
+            jp_kanji: '__を開始',
+            jp_reading: '__をかいし'
+        },
+        items_in_progress: {
+            en_meaning: '__ in progress',
+            en_notes: 'This phrase is repeated for Kanji and Radicals in the current Level Progress section.',
+            jp_kanji: '__進行中',
+            jp_reading: '__しんこうちゅう'
+        },
+        items_passed: {
+            en_meaning: '__ passed',
+            en_notes: 'This phrase is repeated for Kanji and Radicals in the current Level Progress section.',
+            jp_kanji: '__合格',
+            jp_reading: '__ごうかく'
+        },
+        have_items: {
+            en_meaning: 'You have __ items!',
+            en_notes: 'This sentence is repeated when there are items to be looked at in all main sections.',
+            jp_kanji: '君は__項目をあります!',
+            jp_reading: 'きみは__こうもくをあります'
+        },
+        have_no_items: {
+            en_meaning: "Sorry, you don't have any __ items.",
+            en_notes: 'This sentence is repeated when there are no items to be looked at in a main section.',
+            jp_kanji: 'ごめんなさい, 君は__項目をありません.',
+            jp_reading: 'ごめんなさい、君は__こうもくをありません.'
+        }
+    }
+};
+
 
 /*************************************************
  *  ANCHOR Add pulse effect for lesson and review buttons
@@ -71,11 +216,20 @@ function dashboardLoader(loaded = false) {
 function updateShortcutNavigation(item) {
     let navItem = $('.navigation-shortcut.navigation-shortcut--' + item + ' a');
     let navItemCount = $(navItem).find('span').text();
-    let newItemText = item == 'lessons' ? '授業' : '復習';
+    let newItemText = item == 'lessons' ? translationText.words.lesson.jp_kanji : translationText.words.review.jp_kanji;
+    let newItemHoverText = item == 'lessons' ? translationText.words.lesson.en_meaning : translationText.words.review.en_meaning;
     let navHref = item == 'lessons' ? '/lesson/session' : '/review/start';
     let navHasClass = item == 'lessons' ? 'has-lessons' : 'has-reviews';
 
     navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
+    
+    if (wkof.settings[scriptId].show_hover_translation) {
+        navItem.attr('title', newItemHoverText);
+    }
+    else {
+        navItem.removeAttr('title');
+    }
+
     $('.navigation-shortcuts').addClass('hidden');
 
     $(window).scroll(function() {
@@ -121,4 +275,18 @@ function generateDashboardWrapperHTML() {
     mainDashboard.append(dashboardWrapperHTML);
 
     wlWanikaniDebug('html', '==Dashboard Initialiser: generateDashboardWrapperHTML== Generated the following custom dashboard wrapper HTML:', { main_html: dashboardWrapperHTML });
+};
+
+
+/*************************************************
+ *  ANCHOR Generate custom dashboard wrapper
+ *************************************************/
+function getHoverTitle(hoverText) {
+    let hoverText = '';
+
+    if (wkof.settings[scriptId].show_hover_translation) {
+        hoverText = ` title="${ hoverText }"`;
+    }
+
+    return hoverText;
 };

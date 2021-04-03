@@ -128,18 +128,21 @@ function getSubjectData(data, type, subjectIds = []) {
 /*************************************************
  *  ANCHOR Custom item table HTML generator
  *************************************************/
-function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageType, customItemsHTML, headerCount = false) {
+function generateCustomItemsTableHTML(customItemsData, customClass, headerMessageText, headerTypeHoverText, customItemsHTML, headerCount = false) {
     wlWanikaniDebug('data', '==Common: generateCustomItemsTableHTML== Generating custom items table (' + customClass + ') HTML with the following data:', customItemsData);
 
     let headerMessageCount = headerCount ? '（' + customItemsData.length + '）' : '';
     let headerMessage = (customItemsData.length == 0)
-                        ? 'ごめんなさい, 君は' + headerMessageType + '項目をありません.'
-                        : '君は' + headerMessageType + '項目をあります!' + headerMessageCount;
+                        ? translationText.phrases.have_no_items.jp_kanji.replace('__', headerMessageText)
+                        : translationText.phrases.have_items.jp_kanji.replace('__', headerMessageText) + headerMessageCount;
+    let headerHoverText = (customItemsData.length == 0)
+                        ? getHoverTitle(translationText.phrases.have_no_items.en_meaning.replace('__', headerTypeHoverText))
+                        : getHoverTitle(translationText.phrases.have_items.en_meaning.replace('__', headerTypeHoverText) + headerMessageCount);
 
     let customTableHTML = `
         <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">
             <section class="rounded p-3 -mx-3">
-                <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2">${ headerMessage }</h2>
+                <h2 class="border-gray-100 border-solid border-0 border-b text-sm text-left leading-none tracking-normal font-bold mt-0 pb-2 mb-2"${ headerHoverText }>${ headerMessage }</h2>
                 <div class="progress-entries">
                     ${ customItemsHTML }
                 </div>
@@ -265,25 +268,33 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 
             if (itemReadingOnyomiTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings onyomi">音読み：${ itemReadingOnyomiTooltipItems }</div>
+                <div class="custom-item-tooltip-text-entries item-readings onyomi"${ getHoverTitle(translationText.words.onyomi.en_meaning) }>
+                    ${ translationText.words.onyomi.jp_kanji }：${ itemReadingOnyomiTooltipItems }
+                </div>
                 `;
             }
 
             if (itemReadingKunyomiTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings kunyomi">訓読み：${ itemReadingKunyomiTooltipItems }</div>
+                <div class="custom-item-tooltip-text-entries item-readings kunyomi"${ getHoverTitle(translationText.words.kunyomi.en_meaning) }>
+                    ${ translationText.words.kunyomi.jp_kanji }：${ itemReadingKunyomiTooltipItems }
+                </div>
                 `;
             }
 
             if (itemReadingNanoriTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings nanori">名乗り：${ itemReadingNanoriTooltipItems }</div>
+                <div class="custom-item-tooltip-text-entries item-readings nanori"${ getHoverTitle(translationText.words.nanori.en_meaning) }>
+                    ${ translationText.words.nanori.jp_kanji }：${ itemReadingNanoriTooltipItems }
+                </div>
                 `;
             }
 
             if (itemReadingOtherTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings vocabulary">単語：${ itemReadingOtherTooltipItems }</div>
+                <div class="custom-item-tooltip-text-entries item-readings vocabulary"${ getHoverTitle(translationText.words.vocabulary.en_meaning) }>
+                    ${ translationText.words.vocabulary.jp_kanji }：${ itemReadingOtherTooltipItems }
+                </div>
                 `;
             }
         }
@@ -294,7 +305,9 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
             });
 
             returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-meanings">${ itemMeaningTooltipItems }</div>
+                <div class="custom-item-tooltip-text-entries item-meanings"${ getHoverTitle(translationText.words.meaning.en_meaning) }>
+                    ${ translationText.words.meaning.jp_kanji }：${ itemMeaningTooltipItems }
+                </div>
             `;
         }
 
@@ -310,12 +323,12 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 /*************************************************
  *  ANCHOR Custom summary HTML generator
  *************************************************/
-function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton = false, buttonClasses = '', buttonText = '') {
+function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, divHeaderHoverText, hasButton = false, buttonClasses = '', buttonText = '', buttonHoverText = '') {
     wlWanikaniDebug('data', '==Common: generateSummaryHTML== Generating summary (' + htmlClasses + ') HTML:');
 
     let buttonHTML = hasButton
     ? `
-            <a class="custom-button ${ buttonClasses }">
+            <a class="custom-button ${ buttonClasses }"${ getHoverTitle(buttonHoverText) }>
                 <span>${ buttonText }</span>
             </a>
     `
@@ -323,10 +336,16 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, hasButton 
 
     let summaryHTML = `
         <div class="custom-summary ${ htmlClasses } check-text-colour">
-            <h2>${ divHeaderText }</h2>
-            <span class="custom-summary-kanji">漢字（${ summaryData.kanji.length }）</span>
-            <span class="custom-summary-radical">部首（${ summaryData.radical.length }）</span>
-            <span class="custom-summary-vocabulary">単語（${ summaryData.vocabulary.length }）</span>
+            <h2${ getHoverTitle(divHeaderHoverText) }>${ divHeaderText }</h2>
+            <span class="custom-summary-kanji"${ getHoverTitle(translationText.words.kanji.en_meaning) }>
+                ${ translationText.words.kanji.jp_kanji }（${ summaryData.kanji.length }）
+            </span>
+            <span class="custom-summary-radical"${ getHoverTitle(translationText.words.radical.en_meaning) }>
+                ${ translationText.words.radical.jp_kanji }（${ summaryData.radical.length }）
+            </span>
+            <span class="custom-summary-vocabulary"${ getHoverTitle(translationText.words.vocabulary.en_meaning) }>
+                ${ translationText.words.vocabulary.jp_kanji }（${ summaryData.vocabulary.length }）
+            </span>
             ${ buttonHTML }
         </div>
     `;
