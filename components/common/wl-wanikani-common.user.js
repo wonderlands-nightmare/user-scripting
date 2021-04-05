@@ -337,13 +337,13 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, divHeaderH
     let summaryHTML = `
         <div class="custom-summary ${ htmlClasses } check-text-colour">
             <h2${ getHoverTitle(divHeaderHoverText) }>${ divHeaderText }</h2>
-            <span class="custom-summary-kanji"${ getHoverTitle(translationText.words.kanji.en_meaning) }>
+            <span class="custom-summary-kanji"${ getHoverTitle(translationText.words.kanji.en_meaning + '（' + summaryData.kanji.length + '）') }>
                 ${ translationText.words.kanji.jp_kanji }（${ summaryData.kanji.length }）
             </span>
-            <span class="custom-summary-radical"${ getHoverTitle(translationText.words.radical.en_meaning) }>
+            <span class="custom-summary-radical"${ getHoverTitle(translationText.words.radical.en_meaning + '（' + summaryData.radical.length + '）') }>
                 ${ translationText.words.radical.jp_kanji }（${ summaryData.radical.length }）
             </span>
-            <span class="custom-summary-vocabulary"${ getHoverTitle(translationText.words.vocabulary.en_meaning) }>
+            <span class="custom-summary-vocabulary"${ getHoverTitle(translationText.words.vocabulary.en_meaning + '（' + summaryData.vocabulary.length + '）') }>
                 ${ translationText.words.vocabulary.jp_kanji }（${ summaryData.vocabulary.length }）
             </span>
             ${ buttonHTML }
