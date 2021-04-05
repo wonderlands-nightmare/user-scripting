@@ -181,6 +181,8 @@ function getLevelProgress(data) {
  *************************************************/
 function readyToLevelUp(levelData) {
     if (wkof.settings[scriptId].identify_level_up) {
+        wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Starting with this data:', levelData);
+
         let levelCircle = $('.level-progress-indicator .progress-ring');
         let kanjiLeftToPass = levelData.Kanji.KanjiToPass - levelData.Kanji.Passed.length;
         let kanjiInNextReview = 0;
