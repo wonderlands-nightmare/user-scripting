@@ -188,7 +188,7 @@ function readyToLevelUp(levelData) {
         let kanjiInNextReview = 0;
 
         $.each(levelData.Kanji.InProgress, function(index, inProgressItem) {
-            if (Object.values(wkofItemsData.NextRevewItems).includes(inProgressItem.data.id) && (inProgressItem.assignments.srs_stage == 4)) {
+            if (Object.values(wkofItemsData.NextRevewItems).includes(inProgressItem.id) && (inProgressItem.assignments.srs_stage == 4)) {
                 kanjiInNextReview++;
             }
         });
