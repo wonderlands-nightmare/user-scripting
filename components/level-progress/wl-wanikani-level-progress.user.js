@@ -184,7 +184,7 @@ function readyToLevelUp(levelData) {
         wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Starting with this data:', levelData);
 
         let levelCircle = $('.level-progress-indicator .progress-ring');
-        let kanjiLeftToPass = levelData.Kanji.KanjiToPass - levelData.Kanji.Passed.length;
+        let kanjiLeftToPass = levelData.KanjiToPass - levelData.Kanji.Passed.length;
         let kanjiInNextReview = 0;
 
         $.each(levelData.Kanji.InProgress, function(index, inProgressItem) {
