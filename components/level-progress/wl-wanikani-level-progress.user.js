@@ -193,7 +193,7 @@ function readyToLevelUp(levelData) {
             }
         });
 
-        if (kanjiLeftToPass == kanjiInNextReview) {
+        if (kanjiInNextReview >= kanjiLeftToPass) {
             $(levelCircle).addClass('level-up');
         }
         else {

@@ -6,6 +6,7 @@ let customThemeCss = {
     1: '',
     2: ''
 };
+
 let customCompatibilityThemeCss = {
     1: '',
     2: ''
