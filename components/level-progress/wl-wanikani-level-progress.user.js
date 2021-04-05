@@ -198,6 +198,6 @@ function readyToLevelUp(levelData) {
             $(levelCircle).removeClass('level-up');
         }
 
-        wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Got the level up data (kanjiLeftToPass, kanjiInNextReview):', kanjiLeftToPass, kanjiInNextReview);
+        wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Got the level up data:', { kanji_left_to_pass: kanjiLeftToPass, kanji_in_next_review: kanjiInNextReview });
     }
  };
