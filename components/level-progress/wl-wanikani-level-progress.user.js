@@ -183,21 +183,21 @@ function readyToLevelUp(levelData) {
     if (wkof.settings[scriptId].identify_level_up) {
         let levelCircle = $('.level-progress-indicator .progress-ring');
         let kanjiLeftToPass = levelData.Kanji.KanjiToPass - levelData.Kanji.Passed.length;
-        if (kanjiLeftToPass == 1) {
-            let kanjiInNextReview = 0;
+        let kanjiInNextReview = 0;
 
-            $.each(levelData.Kanji.InProgress, function(index, inProgressItem) {
-                if (Object.values(subjectIds).includes(inProgressItem.data.id) && (inProgressItem.assignments.srs_stage == 4)) {
-                    kanjiInNextReview++;
-                }
-            });
+        $.each(levelData.Kanji.InProgress, function(index, inProgressItem) {
+            if (Object.values(wkofItemsData.NextRevewItems).includes(inProgressItem.data.id) && (inProgressItem.assignments.srs_stage == 4)) {
+                kanjiInNextReview++;
+            }
+        });
 
-            if (kanjiInNextReview > 0) {
-                $(levelCircle).addClass('level-up');
-            }
-            else {
-                $(levelCircle).removeClass('level-up');
-            }
+        if (kanjiLeftToPass == kanjiInNextReview) {
+            $(levelCircle).addClass('level-up');
         }
+        else {
+            $(levelCircle).removeClass('level-up');
+        }
+
+        wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Got the level up data (kanjiLeftToPass, kanjiInNextReview):', kanjiLeftToPass, kanjiInNextReview);
     }
  };
