@@ -34,10 +34,14 @@ function setCustomDashboardCompatibilityTheme() {
         $('.custom-dashboard-compatibility-theme-css').remove();
     }
 
-    let style = document.createElement('style');
+    let compatabilityThemeCss = customCompatibilityThemeCss[wkof.settings[scriptId].selected_compatibility_theme];
 
-    style.innerHTML = customCompatibilityThemeCss[wkof.settings[scriptId].selected_compatibility_theme];
-    style.className = 'custom-dashboard-compatibility-theme-css';
+    if (compatabilityThemeCss != '') {
+        let style = document.createElement('style');
 
-    document.head.appendChild(style);
+        style.innerHTML = compatabilityThemeCss;
+        style.className = 'custom-dashboard-compatibility-theme-css';
+
+        document.head.appendChild(style);
+    }
 }
