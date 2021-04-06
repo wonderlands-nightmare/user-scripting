@@ -302,7 +302,7 @@ function getHoverTitle(translationItem, extraText = '', isPhrase = false, replac
         }
         else if (showHoverTranslation == 4) {
             hoverText = isPhrase
-                      ? `${ translationItem.jp_reading.replace('__', replacementItem.jp_reading) }, ${ translationItem.en_meaning.replace('__', replacementItem.en_meaning) }`
+                      ? `${ translationItem.jp_reading.replace('__', replacementItem.jp_reading) } - ${ translationItem.en_meaning.replace('__', replacementItem.en_meaning) }`
                       : `${ translationItem.jp_reading }, ${ translationItem.en_meaning }`;
         }
         
