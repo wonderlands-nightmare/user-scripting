@@ -91,7 +91,7 @@ function initialiseSrsSummaryComponent() {
         ${ generateSummaryHTML(enlightenedSummaryData
                              , 'custom-dashboard-progress-summary enlightened-summary'
                              , translationText.words.enlightened.jp_kanji + '（' + enlightenedSummaryTotalCount + '）'
-                             , [translationText.words.enlightened, '（' + enlightenedSummaryTotalCount.totalCount + '）']
+                             , [translationText.words.enlightened, '（' + enlightenedSummaryTotalCount + '）']
                              , true
                              , 'custom-progress-summary-button enlightened'
                              , translationText.words.look_at.jp_kanji
