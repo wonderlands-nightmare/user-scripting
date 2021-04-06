@@ -328,7 +328,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, divHeaderH
 
     let buttonHTML = hasButton
     ? `
-            <a class="custom-button ${ buttonClasses }"${ getHoverTitle(buttonHoverText) }>
+            <a class="custom-button ${ buttonClasses }"${ getHoverTitle.apply(this, buttonHoverText) }>
                 <span>${ buttonText }</span>
             </a>
     `
@@ -336,7 +336,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, divHeaderH
 
     let summaryHTML = `
         <div class="custom-summary ${ htmlClasses } check-text-colour">
-            <h2${ getHoverTitle(divHeaderHoverText) }>${ divHeaderText }</h2>
+            <h2${ getHoverTitle.apply(this, divHeaderHoverText) }>${ divHeaderText }</h2>
             <span class="custom-summary-kanji"${ getHoverTitle(translationText.words.kanji, '（' + summaryData.kanji.length + '）') }>
                 ${ translationText.words.kanji.jp_kanji }（${ summaryData.kanji.length }）
             </span>
