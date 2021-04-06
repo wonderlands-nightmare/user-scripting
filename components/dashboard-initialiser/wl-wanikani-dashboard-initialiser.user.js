@@ -298,7 +298,7 @@ function generateDashboardWrapperHTML() {
 /*************************************************
  *  ANCHOR Generate custom dashboard wrapper
  *************************************************/
-function getHoverTitle(translationItem, extraText = '', isPhrase = false, replacementItem = '', replaceOnly = false) {
+function getHoverTitle(translationItem, extraText = '', isPhrase = false, replacementItem = '', replaceOnly = false, replaceAsText = false) {
     let hoverTitle = '';
     
     // 1 - None
@@ -307,20 +307,22 @@ function getHoverTitle(translationItem, extraText = '', isPhrase = false, replac
         // 2 - English
         if (showHoverTranslation == 2) {
             hoverText = isPhrase
-                      ? translationItem.en_meaning.replace('__', replacementItem.en_meaning)
+                      ? translationItem.en_meaning.replace('__', (replaceAsText ? replacementItem : replacementItem.en_meaning))
                       : translationItem.en_meaning;
         }
         // 3 - Hiragana
         else if (showHoverTranslation == 3) {
             hoverText = isPhrase
-                      ? translationItem.jp_reading.replace('__', replacementItem.jp_reading)
+                      ? translationItem.jp_reading.replace('__', (replaceAsText ? replacementItem : replacementItem.jp_reading))
                       : translationItem.jp_reading;
         }
         // 4 - Both
         else if (showHoverTranslation == 4) {
             hoverText = isPhrase
-                      ? `${ translationItem.jp_reading.replace('__', replacementItem.jp_reading) } - ${ translationItem.en_meaning.replace('__', replacementItem.en_meaning) }`
-                      : `${ translationItem.jp_reading }, ${ translationItem.en_meaning }`;
+                      ? `${ translationItem.jp_reading.replace('__', (replaceAsText ? replacementItem : replacementItem.jp_reading)) } 
+                       - ${ translationItem.en_meaning.replace('__', (replaceAsText ? replacementItem : replacementItem.en_meaning)) }`
+                      : `${ translationItem.jp_reading } 
+                       - ${ translationItem.en_meaning }`;
         }
         
         hoverTitle = replaceOnly ? `${ hoverText }${ extraText }` : ` title="${ hoverText }${ extraText }"`;
