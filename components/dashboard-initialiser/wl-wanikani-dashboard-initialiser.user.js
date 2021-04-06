@@ -326,5 +326,6 @@ function getHoverTitle(translationItem, extraText = '', isPhrase = false, replac
         hoverTitle = replaceOnly ? `${ hoverText }${ extraText }` : ` title="${ hoverText }${ extraText }"`;
     }
 
+    wlWanikaniDebug('html', '==Dashboard Initialiser: getHoverTitle== Generated the following title HTML:', { translation_item: translationItem, hover_title: hoverTitle });
     return hoverTitle;
 };
