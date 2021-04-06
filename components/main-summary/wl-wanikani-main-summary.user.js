@@ -133,7 +133,7 @@ function getNextReviewTime(data) {
                         en_meaning: '',
                         jp_reading: ''
                     },
-                    count = 0,
+                    count = '',
                     subjectIds = new Array()
                 };
                 let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString([], { hour: '2-digit' });
