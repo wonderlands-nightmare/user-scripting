@@ -13,32 +13,51 @@ function initialiseLevelProgressComponent() {
     let levelProgressItemsHTML = `
         ${ levelProgressCircleHTML }
         <div class="progress-entries custom-div border-bottom kanji-in-progress ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">漢字進行中</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_in_progress, '', true, translationText.words.kanji) }>
+                ${ translationText.phrases.items_in_progress.jp_kanji.replace('__', translationText.words.kanji.jp_kanji) }
+            </h2>
             ${ levelProgressKanjiInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-in-progress ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">部首進行中</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_in_progress, '', true, translationText.words.radical) }>
+                ${ translationText.phrases.items_in_progress.jp_kanji.replace('__', translationText.words.radical.jp_kanji) }
+            </h2>
             ${ levelProgressRadicalsInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom kanji-passed ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">漢字合格</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_passed, '', true, translationText.words.kanji) }>
+                ${ translationText.phrases.items_passed.jp_kanji.replace('__', translationText.words.kanji.jp_kanji) }
+            </h2>
             ${ levelProgressKanjiPassedHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-passed ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">部首合格</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_passed, '', true, translationText.words.radical) }>
+                ${ translationText.phrases.items_passed.jp_kanji.replace('__', translationText.words.radical.jp_kanji) }
+            </h2>
             ${ levelProgressRadicalsPassedHTML }
         </div>
         <div class="progress-entries custom-div kanji-locked ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold">漢字ロック</h2>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.words.kanji_locked) }>
+                ${ translationText.words.kanji_locked.jp_kanji }
+            </h2>
             ${ levelProgressKanjiLockedHTML }
         </div>
     `;
-    let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData, 'custom-dashboard-progress-items', 'レベルすすむ', levelProgressItemsHTML);
+    let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData
+                                                                 , 'custom-dashboard-progress-items'
+                                                                 , translationText.words.level_progress.jp_kanji
+                                                                 , translationText.words.level_progress
+                                                                 , levelProgressItemsHTML
+                                                                 );
 
     wlWanikaniDebug('html', '==Level Progress: initialiseLevelProgressComponent== Generated the following Level Progress HTML', { main_html: levelProgressItemsTableHTML });
+    if ($('.custom-dashboard-progress-items').length > 0) {
+        $('.custom-dashboard-progress-items').remove();
+    }
     $(levelProgressItemsTableHTML).insertAfter($('.dashboard .custom-section.custom-lessons-and-reviews'));
 
     setLevelProgressCircle((levelProgressData.Kanji.Passed.length / levelProgressData.KanjiToPass) * 100);
+    readyToLevelUp(levelProgressData);
 }
 
 
@@ -155,3 +174,32 @@ function getLevelProgress(data) {
     wlWanikaniDebug('data', '==Level Progress: getLevelProgress== Got the level progress data:', progressData);
     return progressData;
 };
+
+
+/*************************************************
+ *  ANCHOR Set circle to pulse when ready to level up
+ *************************************************/
+function readyToLevelUp(levelData) {
+    if (wkof.settings[scriptId].identify_level_up) {
+        wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Starting with this data:', levelData);
+
+        let levelCircle = $('.level-progress-indicator .progress-ring');
+        let kanjiLeftToPass = levelData.KanjiToPass - levelData.Kanji.Passed.length;
+        let kanjiInNextReview = 0;
+
+        $.each(levelData.Kanji.InProgress, function(index, inProgressItem) {
+            if (Object.values(wkofItemsData.NextRevewItems).includes(inProgressItem.id) && (inProgressItem.assignments.srs_stage == 4)) {
+                kanjiInNextReview++;
+            }
+        });
+
+        if (kanjiInNextReview >= kanjiLeftToPass) {
+            $(levelCircle).addClass('level-up');
+        }
+        else {
+            $(levelCircle).removeClass('level-up');
+        }
+
+        wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Got the level up data:', { kanji_left_to_pass: kanjiLeftToPass, kanji_in_next_review: kanjiInNextReview });
+    }
+ };

@@ -63,9 +63,11 @@ function loadWkofSettings() {
         show_difficult_items: false,
         safe_level: 3,
         srs_stage: 4,
+        identify_upcoming_difficult_items: false,
+        identify_level_up: false,
+        hover_translation: 1,
         selected_theme: 1,
-        skip_session_summary: false,
-        identify_upcoming_difficult_items: false
+        skip_session_summary: false
     };
     
     wkof.Settings.load(scriptId, defaults);
@@ -179,15 +181,37 @@ function openSettings(items) {
                                     },
                                     debug_data: {
                                         type: 'checkbox',
-                                        label: 'Enable data debugging',
+                                        label: 'Enable data debugging (refreshes on enable)',
                                         hover_tip: 'Check if you want to enable debugging for the WKOF data used and generated.',
                                         default: false
                                     },
                                     debug_html: {
                                         type: 'checkbox',
-                                        label: 'Enable HTML debugging',
+                                        label: 'Enable HTML debugging (refreshes on enable)',
                                         hover_tip: 'Check if you want to enable debugging for the HTML used and generated.',
                                         default: false
+                                    },
+                                    other_dashboard_settings_header: {
+                                        type: 'section',
+                                        label: 'Other dashboard settings'
+                                    },
+                                    identify_level_up: {
+                                        type: 'checkbox',
+                                        label: 'Identify if you might level up',
+                                        hover_tip: 'Check if you want to identify if you might be able to level up in your current reviews or reviews in the immediate next review set.',
+                                        default: false
+                                    },
+                                    hover_translation: {
+                                        type: 'dropdown',
+                                        label: 'Show translations/readings on hover (refreshes on changed value)',
+                                        hover_tip: 'Check if you want the english translations or hiragana readings to show on mouse hover on the dashboard kanji headings.',
+                                        content: {
+                                            1: 'None',
+                                            2: 'English',
+                                            3: 'Hiragana',
+                                            4: 'Both'
+                                        },
+                                        default: 1
                                     }
                                 }
                             },
@@ -210,29 +234,13 @@ function openSettings(items) {
                         label: 'Translations',
                         hover_tip: 'Having trouble with all the Japanese? Here are the translations!',
                         content: {
-                            words_phrases_group: {
+                            words_group: {
                                 type: 'group',
                                 label: 'Words',
                                 content: {
                                     words_html: {
                                         type: 'html',
-                                        html: '<div class="wcd-dialog-item wcd-dialog-word">授業</br>じゅぎょう</br>Lesson</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">復習</br>ふくしゅう</br>Review</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">漢字</br>かんじ</br>Kanji</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">部首</br>ぶしゅ</br>Radical</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">単語</br>たんご</br>Vocabulary</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">見習</br>みならい</br>Apprentice</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">達人</br>たつじん</br>Guru</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">主人</br>しゅじん</br>Master</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">悟りを開いた</br>さとりをひらいた</br>Enlightened</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">焼け</br>やけ</br>Burned</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">見せて</br>みせて</br>Look at</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">音読み</br>おんよみ</br>Onyomi</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">訓読み</br>くんよみ</br>Kunyomi</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">名乗り</br>なのり</br>Nanori</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">苦労</br>くろう</br>Difficult</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">レベルすすむ</br>れべるすすむ</br>Level progress</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-word">漢字ロック</br>かんじろっく</br>Kanji locked</div>'
+                                        html: generateTranslationWords()
                                     }
                                 }
                             },
@@ -242,38 +250,7 @@ function openSettings(items) {
                                 content: {
                                     sentences_phrases_html: {
                                         type: 'html',
-                                        html: '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">漢字と部首と単語が合計'
-                                            + '</br>かんじとぶしゅとたんごがごうけい'
-                                            + '</br>Total number of kanji, radicals and vocabulary'
-                                            + '</br>Notes: A general statement sentence.</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">次の復習をなんでもない'
-                                            + '</br>つぎのふくしゅうをなんでもない'
-                                            + '</br>No next review'
-                                            + '</br>Notes: Highlights when there is no reviews available for the next 24 hours.</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">午前__時の次の復習　・　午後__時の次の復習'
-                                            + '</br>ごぜん__じのつぎのふくしゅ　・　ごご__じのつぎのふくしゅ'
-                                            + '</br>Next review at __ am/pm'
-                                            + '</br>Notes: These two statements are repeated with the hour that the review is due. 前（ぜん）is AM and 後（ご）is PM.</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__を開始'
-                                            + '</br>__をかいし'
-                                            + '</br>__ start'
-                                            + '</br>Notes: This phrase is repeated for both Lesson and Review section buttons.</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__進行中'
-                                            + '</br>__しんこうちゅう'
-                                            + '</br>__ in progress'
-                                            + '</br>Notes: This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">__合格'
-                                            + '</br>__ごうかく'
-                                            + '</br>__ passed'
-                                            + '</br>Notes: This phrase is repeated for Kanji and Radicals in the current Level Progress section.</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">君は__項目をあります!'
-                                            + '</br>きみは__こうもくをあります'
-                                            + '</br>You have __ items!'
-                                            + '</br>Notes: This sentence is repeated when there are items to be looked at in all main sections.</div>'
-                                            + '<div class="wcd-dialog-item wcd-dialog-sentence-phrase">ごめんなさい, 君は__項目をありません.'
-                                            + '</br>ごめんなさい、君は__こうもくをありません。'
-                                            + "</br>Sorry, you don't have any __ items."
-                                            + '</br>Notes: This sentence is repeated when there are no items to be looked at in any of the main sections.</div>'
+                                        html: generateTranslationPhrases()
                                     }
                                 }
                             }
@@ -287,11 +264,14 @@ function openSettings(items) {
                 generateDifficultItemsSection(wkofItemsData.AllData);
                 setCustomDashboardTheme();
                 setCustomDashboardCompatibilityTheme();
+                initialiseLevelProgressComponent();
+                // Must happen after everything else to force text colour check
                 setTextColour();
                 // Annoying if statement cause we don't need to reload if deselecting
                 if (
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
                  || (!htmlDebugMode && wkof.settings[scriptId].debug_html)
+                 || (showHoverTranslation != wkof.settings[scriptId].hover_translation)
                 ) {
                     window.location.reload();
                 }
@@ -333,4 +313,44 @@ function removeInlineCssFromSettingsDialog() {
     $.each(elementsToRemoveInlineStylesFrom, function (index) {
         $(elementsToRemoveInlineStylesFrom[index]).removeAttr('style');
     });
-}
+};
+
+
+/*************************************************
+ *  ANCHOR Settings html template generators
+ *************************************************/
+// NOTE Translation words
+function generateTranslationWords() {
+    let translationWordsHTML = '';
+
+    $.each(translationText.words, function(index, textItem) {
+        translationWordsHTML += `
+            <div class="wcd-dialog-item wcd-dialog-word">
+                ${ textItem.jp_kanji }
+                </br>${ textItem.jp_reading }
+                </br>${ textItem.en_meaning }
+            </div>
+        `;
+    });
+
+    return translationWordsHTML;
+};
+
+
+// NOTE Translation phrases
+function generateTranslationPhrases() {
+    let translationPhrasesHTML = '';
+
+    $.each(translationText.phrases, function(index, textItem) {
+        translationPhrasesHTML += `
+            <div class="wcd-dialog-item wcd-dialog-sentence-phrase">
+                ${ textItem.jp_kanji }
+                </br>${ textItem.jp_reading }
+                </br>${ textItem.en_meaning }
+                </br>Notes: ${ textItem.en_notes }
+            </div>
+        `;
+    });
+
+    return translationPhrasesHTML;
+};

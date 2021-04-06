@@ -11,9 +11,29 @@ function initialiseMainSummaryComponent() {
     let nextReviewsHTML = generateFutureReviewsHTML(wkofItemsData.AllData, nextReviewData);
 
     let mainSummaryHTML = `
-        ${ generateSummaryHTML(lessonSummaryData, 'custom-lessons-and-reviews-summary lessons-summary', '授業（' + lessonSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button lessons-button', '授業を開始') }
-        ${ generateSummaryHTML(reviewSummaryData, 'custom-lessons-and-reviews-summary reviews-summary', '復習（' + reviewSummaryData.totalCount + '）', true, 'custom-lessons-and-reviews-button reviews-button', '復習を開始') }
-        ${ generateSummaryHTML(totalSummaryData, 'custom-lessons-and-reviews-summary totals-summary', '漢字と部首と単語が合計') }
+        ${ generateSummaryHTML(lessonSummaryData
+                             , 'custom-lessons-and-reviews-summary lessons-summary'
+                             , translationText.words.lesson.jp_kanji + '（' + lessonSummaryData.totalCount + '）'
+                             , [translationText.words.lesson, '（' + lessonSummaryData.totalCount + '）']
+                             , true
+                             , 'custom-lessons-and-reviews-button lessons-button'
+                             , translationText.phrases.lesson_review_start.jp_kanji.replace('__', translationText.words.lesson.jp_kanji)
+                             , [translationText.phrases.lesson_review_start, '', true, translationText.words.lesson]
+        ) }
+        ${ generateSummaryHTML(reviewSummaryData
+                             , 'custom-lessons-and-reviews-summary reviews-summary'
+                             , translationText.words.review.jp_kanji + '（' + reviewSummaryData.totalCount + '）'
+                             , [translationText.words.review, '（' + reviewSummaryData.totalCount + '）']
+                             , true
+                             , 'custom-lessons-and-reviews-button reviews-button'
+                             , translationText.phrases.lesson_review_start.jp_kanji.replace('__', translationText.words.review.jp_kanji)
+                             , [translationText.phrases.lesson_review_start, '', true, translationText.words.review]
+        ) }
+        ${ generateSummaryHTML(totalSummaryData
+                             , 'custom-lessons-and-reviews-summary totals-summary'
+                             , translationText.phrases.totals_summary.jp_kanji
+                             , [translationText.phrases.totals_summary]
+        ) }
         ${ nextReviewsHTML.nextReviewHTML }
         ${ nextReviewsHTML.futureReviewsHTML }
     `;
@@ -45,10 +65,17 @@ function generateFutureReviewsHTML(data, nextReviewData) {
             let nextReviewSummaryData = getSubjectData(data, 'next-review', dataItem.subjectIds);
             let nextReviewCustomClass = index == 0 ? 'next-review-summary' : 'future-review-summary';
             let nextReviewTotalCount = nextReviewSummaryData.totalCount >= 10000 ? '~' + (nextReviewSummaryData.totalCount / 1000).toFixed() + '千' : nextReviewSummaryData.totalCount;
-            let nextReviewDataTitle = dataItem.text == ''
-                                    ? '次の復習をなんでもない'
-                                    : dataItem.text + 'の次の復習（' + nextReviewTotalCount + '）';
-            nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData, 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass, nextReviewDataTitle));
+            let nextReviewDataHeader = dataItem.text == ''
+                                     ? translationText.phrases.no_next_review.jp_kanji
+                                     : translationText.phrases.next_review.jp_kanji.replace('__', dataItem.text)  + '（' + nextReviewTotalCount + '）';
+            let nextReviewDataHeaderHoverText = dataItem.text == ''
+                                              ? [translationText.phrases.no_next_review]
+                                              : [translationText.phrases.next_review, '（' + nextReviewTotalCount + '）', true, dataItem.hoverText];
+            nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData
+                                                      , 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass
+                                                      , nextReviewDataHeader
+                                                      , nextReviewDataHeaderHoverText
+                                    ));
         });
 
         if (nextReviewData.length > 1) {
@@ -98,17 +125,33 @@ function getNextReviewTime(data) {
     $.each(summaryReviewsData, function(index, nextReviewItem) {
         if (index != 0) {
             if (nextReviewItem.subject_ids.length > 0) {
-                let nextReviewDataItem = {};
+                let nextReviewDataItem = {
+                    hoverText: {
+                        en_meaning: '',
+                        jp_reading: ''
+                    }
+                };
                 let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString([], { hour: '2-digit' });
                 refreshValue = refreshValue.toLocaleLowerCase();
 
                 // Double ternary to cater for browsers using 24 hour time
-                nextReviewDataItem.text = refreshValue.includes('am')
-                                        ? '午前' + refreshValue.replace(' am', '時')
-                                        : (refreshValue.includes('pm')
-                                          ? '午後' + refreshValue.replace(' pm', '時')
-                                          : refreshValue + '時'
-                                        );
+                nextReviewDataItem.timePrefix = refreshValue.includes('am')
+                                              ? translationText.words.am
+                                              : (refreshValue.includes('pm')
+                                                ? translationText.words.pm
+                                                : ''
+                                              );
+                nextReviewDataItem.timeValue = refreshValue.includes('am')
+                                             ? refreshValue.replace(' am', '')
+                                             : (refreshValue.includes('pm')
+                                               ? refreshValue.replace(' pm', '')
+                                               : refreshValue
+                                             );
+                nextReviewDataItem.text = nextReviewDataItem.timePrefix == ''
+                                        ? nextReviewDataItem.timeValue
+                                        : nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
+                nextReviewDataItem.hoverText.en_meaning = nextReviewDataItem.timePrefix.en_meaning.replace('__', nextReviewDataItem.timeValue);
+                nextReviewDataItem.hoverText.jp_reading = nextReviewDataItem.timePrefix.jp_reading.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
                 nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
 

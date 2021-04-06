@@ -33,6 +33,14 @@
     text-align: center;
 }
 
+.level-progress-indicator .progress-ring.level-up {
+    --start-pulse: var(--lesson-colour-darker);
+    --mid-pulse: var(--lesson-mid-pulse-colour);
+    --end-pulse: var(--lesson-colour-lighter);
+    animation: circlePulse 2s infinite;
+    border-radius: 50%;
+}
+
 .level-progress-indicator .progress-ring .progress-ring-circle {
     transition: 0.35s stroke-dashoffset;
     transform: rotate(-90deg);
@@ -63,4 +71,19 @@
  ********************************/
  .custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
     background: var(--kanji-locked);
+}
+
+/********************************
+ *  Animations
+ ********************************/
+@keyframes circlePulse { 
+    0% { 
+        box-shadow: 0 0 0 0 var(--start-pulse); 
+    } 
+    70% { 
+        box-shadow: 0 0 0 4px var(--mid-pulse); 
+    } 
+    100% { 
+        box-shadow: 0 0 0 0 var(--end-pulse); 
+    } 
 }

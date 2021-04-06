@@ -14,7 +14,12 @@
     background: none;
 }
 
+.custom-items section .progress-entries .progress-entry.kanji a.kanji-icon.locked {
+    background: var(--kanji-locked) !important;
+}
+
 .custom-items section .progress-entries .progress-entry a .progress-item-level,
-.custom-items section .progress-entries .progress-entry a .progress-item-srs-level {
+.custom-items section .progress-entries .progress-entry a .progress-item-srs-level,
+.custom-item-tooltip .custom-item-tooltip-text {
     color: var(--text-colour) !important;
 }

@@ -60,7 +60,13 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
         wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generating difficult items section and appending to:', insertAfterElement);
         let difficultItemsData = getDifficultItemsData(data);
         let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
-        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems, difficultItemsClass, '苦労', difficultItemsHTML, true);
+        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems
+                                                                 , difficultItemsClass
+                                                                 , translationText.words.difficult.jp_kanji
+                                                                 , translationText.words.difficult
+                                                                 , difficultItemsHTML
+                                                                 , true
+                                                                 );
 
         wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generated the following difficult items HTML:', { main_html: difficultItemsTableHTML });
         $(difficultItemsTableHTML).insertAfter(insertAfterElement);
