@@ -296,7 +296,7 @@ function generateDashboardWrapperHTML() {
 
 
 /*************************************************
- *  ANCHOR Generate custom dashboard wrapper
+ *  ANCHOR Generate a hover title attribute and value
  *************************************************/
 function getHoverTitle(translationItem, extraText = '', isPhrase = false, replacementItem = '') {
     let hoverTitle = '';
