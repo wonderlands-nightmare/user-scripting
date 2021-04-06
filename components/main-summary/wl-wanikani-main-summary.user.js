@@ -74,7 +74,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData
                                                       , 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass
                                                       , nextReviewDataHeader
-                                                      , [nextReviewDataHeaderHoverText]
+                                                      , nextReviewDataHeaderHoverText
                                     ));
         });
 

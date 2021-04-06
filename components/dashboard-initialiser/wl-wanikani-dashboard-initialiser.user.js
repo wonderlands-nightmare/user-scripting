@@ -319,10 +319,8 @@ function getHoverTitle(translationItem, extraText = '', isPhrase = false, replac
         // 4 - Both
         else if (showHoverTranslation == 4) {
             hoverText = isPhrase
-                      ? `${ translationItem.jp_reading.replace('__', (replaceAsText ? replacementItem : replacementItem.jp_reading)) } 
-                       - ${ translationItem.en_meaning.replace('__', (replaceAsText ? replacementItem : replacementItem.en_meaning)) }`
-                      : `${ translationItem.jp_reading } 
-                       - ${ translationItem.en_meaning }`;
+                      ? `${ translationItem.jp_reading.replace('__', (replaceAsText ? replacementItem : replacementItem.jp_reading)) } - ${ translationItem.en_meaning.replace('__', (replaceAsText ? replacementItem : replacementItem.en_meaning)) }`
+                      : `${ translationItem.jp_reading } - ${ translationItem.en_meaning }`;
         }
         
         hoverTitle = replaceOnly ? `${ hoverText }${ extraText }` : ` title="${ hoverText }${ extraText }"`;
