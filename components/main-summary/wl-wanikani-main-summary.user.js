@@ -70,7 +70,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
                                      : translationText.phrases.next_review.jp_kanji.replace('__', dataItem.text)  + '（' + nextReviewTotalCount + '）';
             let nextReviewDataHeaderHoverText = dataItem.text == ''
                                               ? [translationText.phrases.no_next_review]
-                                              : [translationText.phrases.next_review, '（' + nextReviewTotalCount + '）', true, dataItem.hoverText];
+                                              : [translationText.phrases.next_review, '（' + nextReviewTotalCount + '）', true, dataItem.hoverText, false, true];
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData
                                                       , 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass
                                                       , nextReviewDataHeader
