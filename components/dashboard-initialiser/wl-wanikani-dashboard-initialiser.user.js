@@ -219,17 +219,22 @@ function updateShortcutNavigation(item) {
     let navItem = $('.navigation-shortcut.navigation-shortcut--' + item + ' a');
     let navItemCount = $(navItem).find('span').text();
     let newItemText = item == 'lessons' ? translationText.words.lesson.jp_kanji : translationText.words.review.jp_kanji;
-    let newItemHoverText = item == 'lessons' ? translationText.words.lesson.en_meaning : translationText.words.review.en_meaning;
+    let newItemHoverText = item == 'lessons' ? translationText.words.lesson : translationText.words.review;
     let navHref = item == 'lessons' ? '/lesson/session' : '/review/start';
     let navHasClass = item == 'lessons' ? 'has-lessons' : 'has-reviews';
 
     navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
-    
-    if (showHoverTranslation) {
-        navItem.attr('title', newItemHoverText);
+    // 2 - English
+    if (showHoverTranslation == 2) {
+        navItem.attr('title', newItemHoverText.en_meaning);
     }
-    else {
-        navItem.removeAttr('title');
+    // 3 - Hiragana
+    else if (showHoverTranslation == 3) {
+        navItem.attr('title', newItemHoverText.jp_reading);
+    }
+    // 4 - Both
+    else if (showHoverTranslation == 4) {
+        navItem.attr('title', `${ newItemHoverText.jp_reading }, ${ newItemHoverText.en_meaning }`);
     }
 
     $('.navigation-shortcuts').addClass('hidden');
@@ -286,20 +291,22 @@ function generateDashboardWrapperHTML() {
 function getHoverTitle(translationItem, extraText = '', isPhrase = false, replacementItem = '') {
     let hoverTitle = '';
     
-    // showHoverTranslation: 1 - None, 2 - English, 3 - Hiragana, 4 - Both
+    // 1 - None
     if (showHoverTranslation != 1) {
         let hoverText = '';
-
+        // 2 - English
         if (showHoverTranslation == 2) {
             hoverText = isPhrase
                       ? translationItem.en_meaning.replace('__', replacementItem.en_meaning)
                       : translationItem.en_meaning;
         }
+        // 3 - Hiragana
         else if (showHoverTranslation == 3) {
             hoverText = isPhrase
                       ? translationItem.jp_reading.replace('__', replacementItem.jp_reading)
                       : translationItem.jp_reading;
         }
+        // 4 - Both
         else if (showHoverTranslation == 4) {
             hoverText = isPhrase
                       ? `${ translationItem.jp_reading.replace('__', replacementItem.jp_reading) } - ${ translationItem.en_meaning.replace('__', replacementItem.en_meaning) }`
