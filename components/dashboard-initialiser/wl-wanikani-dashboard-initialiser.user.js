@@ -34,6 +34,16 @@ const translationText = {
             jp_kanji: '復習',
             jp_reading: 'ふくしゅう'
         },
+        am: {
+            en_meaning: '__am',
+            jp_kanji: '前__',
+            jp_reading: 'ぜん__'
+        },
+        pm: {
+            en_meaning: '__pm',
+            jp_kanji: '後__',
+            jp_reading: 'ご__'
+        },
         kanji: {
             en_meaning: 'Kanji',
             jp_kanji: '漢字',
@@ -130,7 +140,7 @@ const translationText = {
         },
         next_review: {
             en_meaning: 'Next review at __',
-            en_notes: 'This shows the hour that the next review is due. Hour prefixes 前（ぜん）is for AM, and 後（ご）is for PM.',
+            en_notes: 'This shows the hour that the next review is due.',
             jp_kanji: '午__時の次の復習',
             jp_reading: 'ご__じのつぎのふくしゅ'
         },

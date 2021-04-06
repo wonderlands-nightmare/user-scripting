@@ -74,7 +74,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData
                                                       , 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass
                                                       , nextReviewDataHeader
-                                                      , nextReviewDataHeaderHoverText
+                                                      , [nextReviewDataHeaderHoverText]
                                     ));
         });
 
@@ -130,13 +130,22 @@ function getNextReviewTime(data) {
                 refreshValue = refreshValue.toLocaleLowerCase();
 
                 // Double ternary to cater for browsers using 24 hour time
-                nextReviewDataItem.text = refreshValue.includes('am')
-                                        ? '前' + refreshValue.replace(' am', '')
-                                        : (refreshValue.includes('pm')
-                                          ? '後' + refreshValue.replace(' pm', '')
-                                          : refreshValue + ''
-                                        );
-                nextReviewDataItem.hoverText = refreshValue;
+                nextReviewDataItem.timePrefix = refreshValue.includes('am')
+                                              ? translationText.words.am
+                                              : (refreshValue.includes('pm')
+                                                ? translationText.words.pm
+                                                : ''
+                                              );
+                nextReviewDataItem.timeValue = refreshValue.includes('am')
+                                             ? refreshValue.replace(' am', '')
+                                             : (refreshValue.includes('pm')
+                                               ? refreshValue.replace(' pm', '')
+                                               : refreshValue
+                                             );
+                nextReviewDataItem.text = nextReviewDataItem.timePrefix == ''
+                                        ? nextReviewDataItem.timeValue
+                                        : nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
+                nextReviewDataItem.hoverText = getHoverTitle(nextReviewDataItem.timePrefix, '', true, nextReviewDataItem.timeValue);
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
                 nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
 
