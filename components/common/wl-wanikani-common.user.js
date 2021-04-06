@@ -136,8 +136,8 @@ function generateCustomItemsTableHTML(customItemsData, customClass, headerMessag
                         ? translationText.phrases.have_no_items.jp_kanji.replace('__', headerMessageText)
                         : translationText.phrases.have_items.jp_kanji.replace('__', headerMessageText) + headerMessageCount;
     let headerHoverText = (customItemsData.length == 0)
-                        ? getHoverTitle(translationText.phrases.have_no_items.en_meaning.replace('__', headerTypeHoverText))
-                        : getHoverTitle(translationText.phrases.have_items.en_meaning.replace('__', headerTypeHoverText) + headerMessageCount);
+                        ? getHoverTitle(translationText.phrases.have_no_items, '', true, headerTypeHoverText)
+                        : getHoverTitle(translationText.phrases.have_items, headerMessageCount, true, headerTypeHoverText);
 
     let customTableHTML = `
         <div class="rounded ${ customClass } custom-items ${ customItemsHTML == '' ? 'all-done' : '' }">
@@ -268,7 +268,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 
             if (itemReadingOnyomiTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings onyomi"${ getHoverTitle(translationText.words.onyomi.en_meaning) }>
+                <div class="custom-item-tooltip-text-entries item-readings onyomi"${ getHoverTitle(translationText.words.onyomi) }>
                     ${ translationText.words.onyomi.jp_kanji }：${ itemReadingOnyomiTooltipItems }
                 </div>
                 `;
@@ -276,7 +276,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 
             if (itemReadingKunyomiTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings kunyomi"${ getHoverTitle(translationText.words.kunyomi.en_meaning) }>
+                <div class="custom-item-tooltip-text-entries item-readings kunyomi"${ getHoverTitle(translationText.words.kunyomi) }>
                     ${ translationText.words.kunyomi.jp_kanji }：${ itemReadingKunyomiTooltipItems }
                 </div>
                 `;
@@ -284,7 +284,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 
             if (itemReadingNanoriTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings nanori"${ getHoverTitle(translationText.words.nanori.en_meaning) }>
+                <div class="custom-item-tooltip-text-entries item-readings nanori"${ getHoverTitle(translationText.words.nanori) }>
                     ${ translationText.words.nanori.jp_kanji }：${ itemReadingNanoriTooltipItems }
                 </div>
                 `;
@@ -292,7 +292,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
 
             if (itemReadingOtherTooltipItems != '') {
                 returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-readings vocabulary"${ getHoverTitle(translationText.words.vocabulary.en_meaning) }>
+                <div class="custom-item-tooltip-text-entries item-readings vocabulary"${ getHoverTitle(translationText.words.vocabulary) }>
                     ${ translationText.words.vocabulary.jp_kanji }：${ itemReadingOtherTooltipItems }
                 </div>
                 `;
@@ -305,7 +305,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
             });
 
             returnTooltipTextHTML += `
-                <div class="custom-item-tooltip-text-entries item-meanings"${ getHoverTitle(translationText.words.meaning.en_meaning) }>
+                <div class="custom-item-tooltip-text-entries item-meanings"${ getHoverTitle(translationText.words.meaning) }>
                     ${ translationText.words.meaning.jp_kanji }：${ itemMeaningTooltipItems }
                 </div>
             `;
@@ -337,13 +337,13 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, divHeaderH
     let summaryHTML = `
         <div class="custom-summary ${ htmlClasses } check-text-colour">
             <h2${ getHoverTitle(divHeaderHoverText) }>${ divHeaderText }</h2>
-            <span class="custom-summary-kanji"${ getHoverTitle(translationText.words.kanji.en_meaning + '（' + summaryData.kanji.length + '）') }>
+            <span class="custom-summary-kanji"${ getHoverTitle(translationText.words.kanji, '（' + summaryData.kanji.length + '）') }>
                 ${ translationText.words.kanji.jp_kanji }（${ summaryData.kanji.length }）
             </span>
-            <span class="custom-summary-radical"${ getHoverTitle(translationText.words.radical.en_meaning + '（' + summaryData.radical.length + '）') }>
+            <span class="custom-summary-radical"${ getHoverTitle(translationText.words.radical, '（' + summaryData.radical.length + '）') }>
                 ${ translationText.words.radical.jp_kanji }（${ summaryData.radical.length }）
             </span>
-            <span class="custom-summary-vocabulary"${ getHoverTitle(translationText.words.vocabulary.en_meaning + '（' + summaryData.vocabulary.length + '）') }>
+            <span class="custom-summary-vocabulary"${ getHoverTitle(translationText.words.vocabulary, '（' + summaryData.vocabulary.length + '）') }>
                 ${ translationText.words.vocabulary.jp_kanji }（${ summaryData.vocabulary.length }）
             </span>
             ${ buttonHTML }

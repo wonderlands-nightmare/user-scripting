@@ -20,7 +20,7 @@ let wkofItemsData = {
     SafeLevel: {}
 };
 
-let showHoverTranslation = wkof.settings[scriptId].show_hover_translation;
+let showHoverTranslation = wkof.settings[scriptId].hover_translation;
 
 const translationText = {
     words: {
@@ -283,13 +283,31 @@ function generateDashboardWrapperHTML() {
 /*************************************************
  *  ANCHOR Generate custom dashboard wrapper
  *************************************************/
-function getHoverTitle(hoverText) {
-    if (showHoverTranslation) {
-        hoverText = ` title="${ hoverText }"`;
-    }
-    else {
-        hoverText = '';
+function getHoverTitle(translationItem, extraText = '', isPhrase = false, replacementItem = '') {
+    let hoverTitle = '';
+    
+    // showHoverTranslation: 1 - None, 2 - English, 3 - Hiragana, 4 - Both
+    if (showHoverTranslation != 1) {
+        let hoverText = '';
+
+        if (showHoverTranslation == 2) {
+            hoverText = isPhrase
+                      ? translationItem.en_meaning.replace('__', replacementItem.en_meaning)
+                      : translationItem.en_meaning;
+        }
+        else if (showHoverTranslation == 3) {
+            hoverText = isPhrase
+                      ? translationItem.jp_reading.replace('__', replacementItem.jp_reading)
+                      : translationItem.jp_reading;
+        }
+        else if (showHoverTranslation == 4) {
+            hoverText = isPhrase
+                      ? `${ translationItem.jp_reading.replace('__', replacementItem.jp_reading) }, ${ translationItem.en_meaning.replace('__', replacementItem.en_meaning) }`
+                      : `${ translationItem.jp_reading }, ${ translationItem.en_meaning }`;
+        }
+        
+        hoverTitle = ` title="${ hoverText }${ extraText }"`;
     }
 
-    return hoverText;
+    return hoverTitle;
 };

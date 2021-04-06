@@ -63,7 +63,7 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
         let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems
                                                                  , difficultItemsClass
                                                                  , translationText.words.difficult.jp_kanji
-                                                                 , translationText.words.difficult.en_meaning
+                                                                 , translationText.words.difficult
                                                                  , difficultItemsHTML
                                                                  , true
                                                                  );

@@ -13,31 +13,31 @@ function initialiseLevelProgressComponent() {
     let levelProgressItemsHTML = `
         ${ levelProgressCircleHTML }
         <div class="progress-entries custom-div border-bottom kanji-in-progress ${ levelProgressKanjiInProgressHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_in_progress.en_meaning.replace('__', translationText.words.kanji.en_meaning)) }>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_in_progress, '', true, translationText.words.kanji) }>
                 ${ translationText.phrases.items_in_progress.jp_kanji.replace('__', translationText.words.kanji.jp_kanji) }
             </h2>
             ${ levelProgressKanjiInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-in-progress ${ levelProgressRadicalsInProgressHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_in_progress.en_meaning.replace('__', translationText.words.radical.en_meaning)) }>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_in_progress, '', true, translationText.words.radical) }>
                 ${ translationText.phrases.items_in_progress.jp_kanji.replace('__', translationText.words.radical.jp_kanji) }
             </h2>
             ${ levelProgressRadicalsInProgressHTML }
         </div>
         <div class="progress-entries custom-div border-bottom kanji-passed ${ levelProgressKanjiPassedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_passed.en_meaning.replace('__', translationText.words.kanji.en_meaning)) }>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_passed, '', true, translationText.words.kanji) }>
                 ${ translationText.phrases.items_passed.jp_kanji.replace('__', translationText.words.kanji.jp_kanji) }
             </h2>
             ${ levelProgressKanjiPassedHTML }
         </div>
         <div class="progress-entries custom-div border-bottom radicals-passed ${ levelProgressRadicalsPassedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_passed.en_meaning.replace('__', translationText.words.radical.en_meaning)) }>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.phrases.items_passed, '', true, translationText.words.radical) }>
                 ${ translationText.phrases.items_passed.jp_kanji.replace('__', translationText.words.radical.jp_kanji) }
             </h2>
             ${ levelProgressRadicalsPassedHTML }
         </div>
         <div class="progress-entries custom-div kanji-locked ${ levelProgressKanjiLockedHTML == '' ? 'all-done' : '' }">
-            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.words.kanji_locked.en_meaning) }>
+            <h2 class="progress-entry-header text-sm text-left leading-none tracking-normal font-bold"${ getHoverTitle(translationText.words.kanji_locked) }>
                 ${ translationText.words.kanji_locked.jp_kanji }
             </h2>
             ${ levelProgressKanjiLockedHTML }
@@ -46,7 +46,7 @@ function initialiseLevelProgressComponent() {
     let levelProgressItemsTableHTML = generateCustomItemsTableHTML(levelProgressData
                                                                  , 'custom-dashboard-progress-items'
                                                                  , translationText.words.level_progress.jp_kanji
-                                                                 , translationText.words.level_progress.en_meaning
+                                                                 , translationText.words.level_progress
                                                                  , levelProgressItemsHTML
                                                                  );
 

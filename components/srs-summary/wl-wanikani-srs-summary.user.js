@@ -30,31 +30,31 @@ function initialiseSrsSummaryComponent() {
     let apprenticeSummaryItemsTableHTML = generateCustomItemsTableHTML(apprenticeSummaryData
                                                                      , 'custom-dashboard-summary-items apprentice'
                                                                      , translationText.words.apprentice.jp_kanji
-                                                                     , translationText.words.apprentice.en_meaning
+                                                                     , translationText.words.apprentice
                                                                      , apprenticeSummaryItemsHTML
                                                                      );
     let guruSummaryItemsTableHTML = generateCustomItemsTableHTML(guruSummaryData
                                                                , 'custom-dashboard-summary-items guru'
                                                                , translationText.words.guru.jp_kanji
-                                                               , translationText.words.guru.en_meaning
+                                                               , translationText.words.guru
                                                                , guruSummaryItemsHTML
                                                                );
     let masterSummaryItemsTableHTML = generateCustomItemsTableHTML(masterSummaryData
                                                                  , 'custom-dashboard-summary-items master'
                                                                  , translationText.words.master.jp_kanji
-                                                                 , translationText.words.master.en_meaning
+                                                                 , translationText.words.master
                                                                  , masterSummaryItemsHTML
                                                                  );
     let enlightenedSummaryItemsTableHTML = generateCustomItemsTableHTML(enlightenedSummaryData
                                                                       , 'custom-dashboard-summary-items enlightened'
                                                                       , translationText.words.enlightened.jp_kanji
-                                                                      , translationText.words.enlightened.en_meaning
+                                                                      , translationText.words.enlightened
                                                                       , enlightenedSummaryItemsHTML
                                                                       );
     let burnedSummaryItemsTableHTML = generateCustomItemsTableHTML(burnedSummaryData
                                                                  , 'custom-dashboard-summary-items burned'
                                                                  , translationText.words.burned.jp_kanji
-                                                                 , translationText.words.burned.en_meaning
+                                                                 , translationText.words.burned
                                                                  , burnedSummaryItemsHTML
                                                                  );
 
@@ -64,47 +64,47 @@ function initialiseSrsSummaryComponent() {
         ${ generateSummaryHTML(apprenticeSummaryData
                              , 'custom-dashboard-progress-summary apprentice-summary'
                              , translationText.words.apprentice.jp_kanji + '（' + apprenticeSummaryData.totalCount + '）'
-                             , translationText.words.apprentice.en_meaning + '（' + apprenticeSummaryData.totalCount + '）'
+                             , [translationText.words.apprentice, '（' + apprenticeSummaryData.totalCount + '）']
                              , true
                              , 'custom-progress-summary-button apprentice'
                              , translationText.words.look_at.jp_kanji
-                             , translationText.words.look_at.en_meaning
+                             , [translationText.words.look_at]
         ) }
         ${ generateSummaryHTML(guruSummaryData
                              , 'custom-dashboard-progress-summary guru-summary'
                              , translationText.words.guru.jp_kanji + '（' + guruSummaryData.totalCount + '）'
-                             , translationText.words.guru.en_meaning + '（' + guruSummaryData.totalCount + '）'
+                             , [translationText.words.guru, '（' + guruSummaryData.totalCount + '）']
                              , true
                              , 'custom-progress-summary-button guru'
                              , translationText.words.look_at.jp_kanji
-                             , translationText.words.look_at.en_meaning
+                             , [translationText.words.look_at]
         ) }
         ${ generateSummaryHTML(masterSummaryData
                              , 'custom-dashboard-progress-summary master-summary'
                              , translationText.words.master.jp_kanji + '（' + masterSummaryData.totalCount + '）'
-                             , translationText.words.master.en_meaning + '（' + masterSummaryData.totalCount + '）'
+                             , [translationText.words.master, '（' + masterSummaryData.totalCount + '）']
                              , true
                              , 'custom-progress-summary-button master'
                              , translationText.words.look_at.jp_kanji
-                             , translationText.words.look_at.en_meaning
+                             , [translationText.words.look_at]
         ) }
         ${ generateSummaryHTML(enlightenedSummaryData
                              , 'custom-dashboard-progress-summary enlightened-summary'
                              , translationText.words.enlightened.jp_kanji + '（' + enlightenedSummaryTotalCount + '）'
-                             , translationText.words.enlightened.en_meaning + '（' + enlightenedSummaryTotalCount.totalCount + '）'
+                             , [translationText.words.enlightened, '（' + enlightenedSummaryTotalCount.totalCount + '）']
                              , true
                              , 'custom-progress-summary-button enlightened'
                              , translationText.words.look_at.jp_kanji
-                             , translationText.words.look_at.en_meaning
+                             , [translationText.words.look_at]
         ) }
         ${ generateSummaryHTML(burnedSummaryData
                              , 'custom-dashboard-progress-summary burned-summary'
                              , translationText.words.burned.jp_kanji + '（' + burnedSummaryData.totalCount + '）'
-                             , translationText.words.burned.en_meaning + '（' + burnedSummaryData.totalCount + '）'
+                             , [translationText.words.burned, '（' + burnedSummaryData.totalCount + '）']
                              , true
                              , 'custom-progress-summary-button burned'
                              , translationText.words.look_at.jp_kanji
-                             , translationText.words.look_at.en_meaning
+                             , [translationText.words.look_at]
         ) }
     `;
     let customDashboardProgressAfterContent = `

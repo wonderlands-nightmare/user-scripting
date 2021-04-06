@@ -14,25 +14,25 @@ function initialiseMainSummaryComponent() {
         ${ generateSummaryHTML(lessonSummaryData
                              , 'custom-lessons-and-reviews-summary lessons-summary'
                              , translationText.words.lesson.jp_kanji + '（' + lessonSummaryData.totalCount + '）'
-                             , translationText.words.lesson.en_meaning + '（' + lessonSummaryData.totalCount + '）'
+                             , [translationText.words.lesson, '（' + lessonSummaryData.totalCount + '）']
                              , true
                              , 'custom-lessons-and-reviews-button lessons-button'
                              , translationText.phrases.lesson_review_start.jp_kanji.replace('__', translationText.words.lesson.jp_kanji)
-                             , translationText.phrases.lesson_review_start.en_meaning.replace('__', translationText.words.lesson.en_meaning)
+                             , [translationText.phrases.lesson_review_start, '', true, translationText.words.lesson]
         ) }
         ${ generateSummaryHTML(reviewSummaryData
                              , 'custom-lessons-and-reviews-summary reviews-summary'
                              , translationText.words.review.jp_kanji + '（' + reviewSummaryData.totalCount + '）'
-                             , translationText.words.review.en_meaning + '（' + reviewSummaryData.totalCount + '）'
+                             , [translationText.words.review, '（' + reviewSummaryData.totalCount + '）']
                              , true
                              , 'custom-lessons-and-reviews-button reviews-button'
                              , translationText.phrases.lesson_review_start.jp_kanji.replace('__', translationText.words.review.jp_kanji)
-                             , translationText.phrases.lesson_review_start.en_meaning.replace('__', translationText.words.review.en_meaning)
+                             , [translationText.phrases.lesson_review_start, '', true, translationText.words.review]
         ) }
         ${ generateSummaryHTML(totalSummaryData
                              , 'custom-lessons-and-reviews-summary totals-summary'
                              , translationText.phrases.totals_summary.jp_kanji
-                             , translationText.phrases.totals_summary.en_meaning
+                             , [translationText.phrases.totals_summary]
         ) }
         ${ nextReviewsHTML.nextReviewHTML }
         ${ nextReviewsHTML.futureReviewsHTML }
@@ -69,8 +69,8 @@ function generateFutureReviewsHTML(data, nextReviewData) {
                                      ? translationText.phrases.no_next_review.jp_kanji
                                      : translationText.phrases.next_review.jp_kanji.replace('__', dataItem.text)  + '（' + nextReviewTotalCount + '）';
             let nextReviewDataHeaderHoverText = dataItem.text == ''
-                                              ? translationText.phrases.no_next_review.en_meaning
-                                              : translationText.phrases.next_review.en_meaning.replace('__', dataItem.hoverText)  + '（' + nextReviewTotalCount + '）';
+                                              ? [translationText.phrases.no_next_review]
+                                              : [translationText.phrases.next_review, '（' + nextReviewTotalCount + '）', true, dataItem.hoverText];
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData
                                                       , 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass
                                                       , nextReviewDataHeader

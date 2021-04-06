@@ -65,7 +65,7 @@ function loadWkofSettings() {
         srs_stage: 4,
         identify_upcoming_difficult_items: false,
         identify_level_up: false,
-        show_hover_translation: false,
+        hover_translation: 1,
         selected_theme: 1,
         skip_session_summary: false
     };
@@ -201,11 +201,17 @@ function openSettings(items) {
                                         hover_tip: 'Check if you want to identify if you might be able to level up in your current reviews or reviews in the immediate next review set.',
                                         default: false
                                     },
-                                    show_hover_translation: {
-                                        type: 'checkbox',
-                                        label: 'Show translations on hover (refreshes on changed value)',
-                                        hover_tip: 'Check if you want the english translations to show on mouse hover on the dashboard kanji.',
-                                        default: false
+                                    hover_translation: {
+                                        type: 'dropdown',
+                                        label: 'Show translations/readings on hover (refreshes on changed value)',
+                                        hover_tip: 'Check if you want the english translations or hiragana readings to show on mouse hover on the dashboard kanji headings.',
+                                        content: {
+                                            1: 'None',
+                                            2: 'English',
+                                            3: 'Hiragana',
+                                            4: 'Both'
+                                        },
+                                        default: 1
                                     }
                                 }
                             },
@@ -265,8 +271,7 @@ function openSettings(items) {
                 if (
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
                  || (!htmlDebugMode && wkof.settings[scriptId].debug_html)
-                 || (!showHoverTranslation && wkof.settings[scriptId].show_hover_translation)
-                 || (showHoverTranslation && !wkof.settings[scriptId].show_hover_translation)
+                 || (showHoverTranslation != wkof.settings[scriptId].hover_translation)
                 ) {
                     window.location.reload();
                 }
