@@ -125,7 +125,17 @@ function getNextReviewTime(data) {
     $.each(summaryReviewsData, function(index, nextReviewItem) {
         if (index != 0) {
             if (nextReviewItem.subject_ids.length > 0) {
-                let nextReviewDataItem = {};
+                let nextReviewDataItem = {
+                    timePrefix: '',
+                    timeValue: '',
+                    text: '',
+                    hoverText: {
+                        en_meaning: '',
+                        jp_reading: ''
+                    },
+                    count = 0,
+                    subjectIds = new Array()
+                };
                 let refreshValue = new Date(nextReviewItem.available_at).toLocaleTimeString([], { hour: '2-digit' });
                 refreshValue = refreshValue.toLocaleLowerCase();
 
