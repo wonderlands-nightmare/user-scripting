@@ -70,7 +70,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
                                      : translationText.phrases.next_review.jp_kanji.replace('__', dataItem.text)  + '（' + nextReviewTotalCount + '）';
             let nextReviewDataHeaderHoverText = dataItem.text == ''
                                               ? [translationText.phrases.no_next_review]
-                                              : [translationText.phrases.next_review, '（' + nextReviewTotalCount + '）', true, dataItem.hoverText, false, true];
+                                              : [translationText.phrases.next_review, '（' + nextReviewTotalCount + '）', true, dataItem.hoverText];
             nextReviewHTMLData.push(generateSummaryHTML(nextReviewSummaryData
                                                       , 'custom-lessons-and-reviews-summary ' + nextReviewCustomClass
                                                       , nextReviewDataHeader
@@ -145,7 +145,8 @@ function getNextReviewTime(data) {
                 nextReviewDataItem.text = nextReviewDataItem.timePrefix == ''
                                         ? nextReviewDataItem.timeValue
                                         : nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
-                nextReviewDataItem.hoverText = getHoverTitle(nextReviewDataItem.timePrefix, '', true, nextReviewDataItem.timeValue, true, true);
+                nextReviewDataItem.hoverText.en_meaning = nextReviewDataItem.timePrefix.en_meaning.replace('__', nextReviewDataItem.timeValue);
+                nextReviewDataItem.hoverText.jp_reading = nextReviewDataItem.timePrefix.jp_reading.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
                 nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
 
