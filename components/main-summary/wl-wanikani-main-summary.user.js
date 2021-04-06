@@ -145,7 +145,7 @@ function getNextReviewTime(data) {
                 nextReviewDataItem.text = nextReviewDataItem.timePrefix == ''
                                         ? nextReviewDataItem.timeValue
                                         : nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
-                nextReviewDataItem.hoverText = getHoverTitle(nextReviewDataItem.timePrefix, '', true, nextReviewDataItem.timeValue);
+                nextReviewDataItem.hoverText = getHoverTitle(nextReviewDataItem.timePrefix, '', true, nextReviewDataItem.timeValue, true);
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
                 nextReviewDataItem.subjectIds = nextReviewItem.subject_ids;
 

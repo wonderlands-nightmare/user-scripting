@@ -298,7 +298,7 @@ function generateDashboardWrapperHTML() {
 /*************************************************
  *  ANCHOR Generate custom dashboard wrapper
  *************************************************/
-function getHoverTitle(translationItem, extraText = '', isPhrase = false, replacementItem = '') {
+function getHoverTitle(translationItem, extraText = '', isPhrase = false, replacementItem = '', replaceOnly = false) {
     let hoverTitle = '';
     
     // 1 - None
@@ -323,7 +323,7 @@ function getHoverTitle(translationItem, extraText = '', isPhrase = false, replac
                       : `${ translationItem.jp_reading }, ${ translationItem.en_meaning }`;
         }
         
-        hoverTitle = ` title="${ hoverText }${ extraText }"`;
+        hoverTitle = replaceOnly ? `${ hoverText }${ extraText }` : ` title="${ hoverText }${ extraText }"`;
     }
 
     return hoverTitle;
