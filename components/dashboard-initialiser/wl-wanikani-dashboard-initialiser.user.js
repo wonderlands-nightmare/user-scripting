@@ -244,7 +244,7 @@ function updateShortcutNavigation(item) {
     }
     // 4 - Both
     else if (showHoverTranslation == 4) {
-        navItem.attr('title', `${ newItemHoverText.jp_reading }, ${ newItemHoverText.en_meaning }`);
+        navItem.attr('title', `${ newItemHoverText.jp_reading } - ${ newItemHoverText.en_meaning }`);
     }
 
     $('.navigation-shortcuts').addClass('hidden');
