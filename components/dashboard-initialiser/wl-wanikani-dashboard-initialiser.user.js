@@ -130,7 +130,7 @@ const translationText = {
             en_meaning: 'Total number of kanji, radicals and vocabulary',
             en_notes: 'A general statement sentence.',
             jp_kanji: '漢字と部首と単語の合計',
-            jp_reading: 'かんじとぶしゅとたんごがごうけい'
+            jp_reading: 'かんじとぶしゅとたんごのごうけい'
         },
         no_next_review: {
             en_meaning: 'No next review',
