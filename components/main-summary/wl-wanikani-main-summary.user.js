@@ -139,7 +139,7 @@ function getNextReviewTime(data) {
                                               ? translationText.words.am
                                               : (refreshValue.includes('pm')
                                                 ? translationText.words.pm
-                                                : ''
+                                                : { en_meaning: '__', jp_kanji: '__', jp_reading: '__'}
                                               );
                 nextReviewDataItem.timeValue = refreshValue.includes('am')
                                              ? refreshValue.replace(' am', '')
@@ -147,9 +147,7 @@ function getNextReviewTime(data) {
                                                ? refreshValue.replace(' pm', '')
                                                : refreshValue
                                              );
-                nextReviewDataItem.text = nextReviewDataItem.timePrefix == ''
-                                        ? nextReviewDataItem.timeValue
-                                        : nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
+                nextReviewDataItem.text = nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.hoverText.en_meaning = nextReviewDataItem.timePrefix.en_meaning.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.hoverText.jp_reading = nextReviewDataItem.timePrefix.jp_reading.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;
