@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.7.2
+// @version      1.4.7.3
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -204,7 +204,7 @@
                 let script = document.createElement('script');
                 script.innerHTML = functionJs;
                 script.type = 'text/javascript';
-                script.className = 'custom-js';
+                script.className = 'custom-js ' + jsResource.replaceAll('_', '-').toLowerCase();
 
                 document.body.appendChild(script);
             }
