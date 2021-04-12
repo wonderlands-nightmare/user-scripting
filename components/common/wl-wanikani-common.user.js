@@ -324,7 +324,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
  *  ANCHOR Custom summary HTML generator
  *************************************************/
 function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, divHeaderHoverText, hasButton = false, buttonClasses = '', buttonText = '', buttonHoverText = '') {
-    wlWanikaniDebug('data', '==Common: generateSummaryHTML== Generating summary (' + htmlClasses + ') HTML:');
+    wlWanikaniDebug('data', '==Common: generateSummaryHTML== Generating summary (' + htmlClasses + ') with this data:', summaryData);
 
     let buttonHTML = hasButton
     ? `
