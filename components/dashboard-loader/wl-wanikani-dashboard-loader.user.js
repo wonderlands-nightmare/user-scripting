@@ -33,7 +33,7 @@ function dashboardLoader(loaded = false, failedToLoad = false) {
         $(loaderHTML).insertAfter('.footer-adjustment #search');
     }
     else if (failedToLoad) {
-        $(failMessage).insertAfter(loaderClass);
+        $(loaderClass).append(failMessage);
     }
 
     // Dashboard seems to sit under the WaniKani Header, so this is to force window to top
