@@ -17,7 +17,7 @@ function isDifficult(dataItems) {
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== Filter difficult items with the following data:', dataItems);
     
     let returnItems = []
-    $.each(dataItems, function (index, dataItem) {
+    $.each(dataItems, (index, dataItem) => {
         if ("assignments" in dataItem) {
             if ((dataItem.data.level <= wkofItemsData.SafeLevel) && (dataItem.assignments.srs_stage <= wkof.settings[scriptId].srs_stage)) {
                 if (wkof.settings[scriptId].identify_upcoming_difficult_items) {
@@ -37,7 +37,7 @@ function isDifficult(dataItems) {
     });
 
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of difficult items:', returnItems);
-    wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of upcoming difficult items:', returnItems.filter(function(item) { 
+    wlWanikaniDebug('data', '==Difficult Items: isDifficult== List of upcoming difficult items:', returnItems.filter((item) => {
         if ('upcoming' in item) {
             return item.upcoming == true;
         }

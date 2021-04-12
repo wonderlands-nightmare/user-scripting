@@ -2,7 +2,6 @@
  *  ANCHOR Component initialisation
  *************************************************/
 function initialiseDashboardInitialiserComponent() {
-    dashboardLoader();
     generateDashboardWrapperHTML();
     updateShortcutNavigation('lessons');
     updateShortcutNavigation('reviews');
@@ -189,36 +188,6 @@ function addReviewAndLessonButtonPulseEffect(buttonSelector, buttonCount, button
         $(buttonSelector).removeClass(buttonClass);
     }
 };
-
-
-/*************************************************
- *  ANCHOR Add a loading animation to the page while the dashboard HTML
- *  is generated
- *************************************************/
-function dashboardLoader(loaded = false) {
-    const loaderClass = 'custom-dashboard-loader';
-
-    if (loaded) {
-        if ($('.' + loaderClass).length > 0) {
-            $('.' + loaderClass).remove();
-        }
-        
-        $('.dashboard').show();
-    }
-    else {
-        // Yes this doubles up but is just in case a cache/reload issue happens and the loader exists on the page
-        if ($('.' + loaderClass).length > 0) {
-            $('.' + loaderClass).remove();
-        }
-
-        $('.dashboard').hide();
-
-        $('<div class="' + loaderClass + '"></div>').insertAfter('.footer-adjustment #search');
-    }
-
-    // Dashboard seems to sit under the WaniKani Header, so this is to force window to top
-    window.scrollTo(window.top);
-}
 
 
 /*************************************************

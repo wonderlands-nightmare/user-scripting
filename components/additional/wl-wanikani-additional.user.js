@@ -96,8 +96,8 @@ function skipAfterLessonSession(skip) {
 // NOTE Force URL redirect on button click once reviews are complete
 function skipAfterReviewSession(skip) {
     if (skip) {
-        $('#reviews #question #answer-form button').on('click.skipToHomepage', function() {
-            setTimeout(function() {
+        $('#reviews #question #answer-form button').on('click.skipToHomepage', () => {
+            setTimeout(() => {
                 if ($('#reviews #question #stats #available-count').text() == 0) {
                     window.location = 'https://www.wanikani.com';
                 }

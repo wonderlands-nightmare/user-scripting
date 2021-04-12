@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.7
+// @version      1.4.8
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
 // @include      /^https://(www|preview).wanikani.com/(lesson|review)/session$/
 // @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/wkof/wl-wanikani-wkof.user.js
 // @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/wkof/wl-wanikani-wkof.user.css
+// @resource     LOADER_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/dashboard-loader/wl-wanikani-dashboard-loader.user.js
+// @resource     LOADER_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/dashboard-loader/wl-wanikani-dashboard-loader.user.css
 // @resource     THEME_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/custom-themes/wl-wanikani-custom-themes.user.js
 // @resource     DEFAULT_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/custom-themes/wl-wanikani-custom-themes-default.user.css
 // @resource     DARK_THEME_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/custom-themes/wl-wanikani-custom-themes-dark.user.css
@@ -76,6 +78,10 @@
             js: 'INIT_JS',
             css: 'INIT_CSS'
         },
+        dashboardLoader: {
+            js: 'LOADER_JS',
+            css: 'LOADER_CSS'
+        },
         debug: {
             js: 'DEBUG_JS',
             css: ''
@@ -102,51 +108,83 @@
         }
     }
 
+    // WKOF settings check variables
+    let wkofSettingsLoadFailed = false;
+    let wkofIntervalCounter = 0;
+
 
     /*************************************************
      *  ANCHOR Actual script execution code
      *************************************************/
-    addResources(['wkof']);
+    // Setup WKOF resources
+    addResources(['wkof', 'dashboardLoader']);
     wkofInstallCheck();
 
+    // Start loader if on dashboard
+    if (window.location.href.match(dashboardUrlRegEx)) {
+        dashboardLoader();
+    }
+
+    // Setup WKOF settings
     wkof.include(wkofSettingsModules);
     wkof.ready(wkofSettingsModules)
         .then(loadWkofMenu)
         .then(loadWkofSettings);
-
-    setTimeout(function() {
+    
+    // Setup interval to check for when WKOF and WK Custom Dashboard settings are loaded
+    let wkofInterval = setInterval(() => {
+        wkofIntervalCounter++;
+        // First check for general WKOF settings
+        if (wkof.settings) {
+            console.log('WKOF settings have loaded.');
+            // Second check for WK Custom Dashboard settings
+            if (wkof.settings[scriptId]) {
+                console.log('WK Custom Dashboard settings have loaded.');
+                // Clear interval item and execute dashboard code
+                clearInterval(wkofInterval);
+                wkofExecution();
+            }
+        }
+        
+        // Fail test - if more than 10 seconds display failure and clear interval
+        if (wkofIntervalCounter == 20) {
+            wkofSettingsLoadFailed = true;
+            clearInterval(wkofInterval);
+            // Add error message to loader
+            dashboardLoader(false, true);
+        }
+    }, 500)
+    
+    function wkofExecution() {
         addResources(['dashboardInitialiser', 'debug', 'common']);
         initialiseDashboardInitialiserComponent();
-    }, 1500);
-    
-    if (window.location.href.match(dashboardUrlRegEx)) {
-        wkof.include(wkofDataModules);
-        wkof.ready(wkofDataModules)
-            .then(getWkofDataObject)
-            .then(function(data) {
-                addResources(['customTheme', 'customCompatibilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
-                wkofItemsData.AllData = data;
-                wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
-                setCustomDashboardTheme();
-                setCustomDashboardCompatibilityTheme();
-            })
-            .then(function() {
-                initialiseMainSummaryComponent();
-                initialiseLevelProgressComponent();
-                initialiseSrsSummaryComponent();
-                initialiseDifficultItemsComponent();
-                autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
-                setTextColour();
-                dashboardLoader(true);
-            });
-    }
+        
+        if (window.location.href.match(dashboardUrlRegEx)) {
+            wkof.include(wkofDataModules);
+            wkof.ready(wkofDataModules)
+                .then(getWkofDataObject)
+                .then((data) => {
+                    addResources(['customTheme', 'customCompatibilityTheme', 'mainSummary', 'levelProgress', 'srsSummary', 'difficultItems', 'autoRefresh']);
+                    wkofItemsData.AllData = data;
+                    wlWanikaniDebug('data', '==Main Executor== Data retrieved from WKOF:', wkofItemsData.AllData);
+                    setCustomDashboardTheme();
+                    setCustomDashboardCompatibilityTheme();
+                })
+                .then(() => {
+                    initialiseMainSummaryComponent();
+                    initialiseLevelProgressComponent();
+                    initialiseSrsSummaryComponent();
+                    initialiseDifficultItemsComponent();
+                    autoRefreshOnNextReviewHour(wkofItemsData.AllData.SummaryData);
+                    setTextColour();
+                    dashboardLoader(true);
+                });
+        }
 
-    if (window.location.href.match(sessionUrlRegEx)) {
-        // Timeout needed for now to wait for settings to be ready
-        setTimeout(function() {
+        if (window.location.href.match(sessionUrlRegEx)) {
             addResources(['additional']);
             skipReviewLessonSummary();
-        }, 1500);
+        }
     }
 
 
@@ -155,7 +193,7 @@
      *  Required to be in executor script due to GM functions
      *************************************************/
     function addResources(resourceNames) {
-        $.each(resourceNames, function(index, resourceName) {
+        $.each(resourceNames, (index, resourceName) => {
             const jsResource = dashboardResources[resourceName].js;
             let cssResource = '';
 
@@ -166,7 +204,7 @@
                 let script = document.createElement('script');
                 script.innerHTML = functionJs;
                 script.type = 'text/javascript';
-                script.className = 'custom-js';
+                script.className = 'custom-js ' + jsResource.replaceAll('_', '-').toLowerCase();
 
                 document.body.appendChild(script);
             }

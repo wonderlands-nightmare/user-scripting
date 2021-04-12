@@ -61,7 +61,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
     }
 
     if (nextReviewData.length > 0) {
-        $.each(nextReviewData, function(index, dataItem) {
+        $.each(nextReviewData, (index, dataItem) => {
             let nextReviewSummaryData = getSubjectData(data, 'next-review', dataItem.subjectIds);
             let nextReviewCustomClass = index == 0 ? 'next-review-summary' : 'future-review-summary';
             let nextReviewTotalCount = nextReviewSummaryData.totalCount >= 10000 ? '~' + (nextReviewSummaryData.totalCount / 1000).toFixed() + '千' : nextReviewSummaryData.totalCount;
@@ -81,7 +81,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
         if (nextReviewData.length > 1) {
             futureReviewsHTML += `<span class="custom-lessons-and-reviews-summary-tooltip future-reviews">`;
 
-            $.each(nextReviewHTMLData, function(index, htmlItem) {
+            $.each(nextReviewHTMLData, (index, htmlItem) => {
                 futureReviewsHTML += index > 0 ? htmlItem : '';
             });
 
@@ -103,10 +103,10 @@ function generateFutureReviewsHTML(data, nextReviewData) {
  *************************************************/
 function setFutureReviewsTooltip() {
     $('.dashboard .custom-lessons-and-reviews .custom-summary.custom-lessons-and-reviews-summary.next-review-summary').hover(
-        function(){
+        () => {
             $('.dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').show();
         },
-        function(){
+        () => {
             $('.dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').hide();
         }
     );
@@ -122,7 +122,7 @@ function getNextReviewTime(data) {
     let nextReviewData = [];
     let summaryReviewsData = data.SummaryData.data.reviews;
 
-    $.each(summaryReviewsData, function(index, nextReviewItem) {
+    $.each(summaryReviewsData, (index, nextReviewItem) => {
         if (index != 0) {
             if (nextReviewItem.subject_ids.length > 0) {
                 let nextReviewDataItem = {
@@ -139,7 +139,7 @@ function getNextReviewTime(data) {
                                               ? translationText.words.am
                                               : (refreshValue.includes('pm')
                                                 ? translationText.words.pm
-                                                : ''
+                                                : { en_meaning: '__', jp_kanji: '__', jp_reading: '__'}
                                               );
                 nextReviewDataItem.timeValue = refreshValue.includes('am')
                                              ? refreshValue.replace(' am', '')
@@ -147,9 +147,7 @@ function getNextReviewTime(data) {
                                                ? refreshValue.replace(' pm', '')
                                                : refreshValue
                                              );
-                nextReviewDataItem.text = nextReviewDataItem.timePrefix == ''
-                                        ? nextReviewDataItem.timeValue
-                                        : nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
+                nextReviewDataItem.text = nextReviewDataItem.timePrefix.jp_kanji.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.hoverText.en_meaning = nextReviewDataItem.timePrefix.en_meaning.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.hoverText.jp_reading = nextReviewDataItem.timePrefix.jp_reading.replace('__', nextReviewDataItem.timeValue);
                 nextReviewDataItem.count = nextReviewItem.subject_ids.length;

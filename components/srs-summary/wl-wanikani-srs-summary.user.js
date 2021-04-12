@@ -128,16 +128,16 @@ function initialiseSrsSummaryComponent() {
  *  buttons to show SRS Progress Summary information
  *************************************************/
 function setProgressSummaryButtonEffects() {
-    $('.dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each(function (index, item) {
-        let currentProgressType = $(this).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');
+    $('.dashboard .custom-section.custom-dashboard-progress').find('.custom-progress-summary-button').each((index, item) => {
+        let currentProgressType = $(item).attr('class').replace('custom-button custom-progress-summary-button ', '').replace(' selected', '');
         let progressSummarySection = $('.dashboard .custom-dashboard-summary-items.' + currentProgressType);
 
         progressSummarySection.slideToggle();
 
-        $(this).on('click', function() {
+        $(item).on('click', () => {
             wlWanikaniDebug('data', '==SRS Summary: setProgressSummaryButtonEffects== Clicked class type: ', currentProgressType);
 
-            $(this).toggleClass('selected');
+            $(item).toggleClass('selected');
             progressSummarySection.slideToggle();
         });
     });
