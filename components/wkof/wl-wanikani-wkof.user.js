@@ -310,7 +310,7 @@ function removeInlineCssFromSettingsDialog() {
         document.head.appendChild(style);
     }
 
-    $.each(elementsToRemoveInlineStylesFrom, function (index) {
+    $.each(elementsToRemoveInlineStylesFrom, (index) => {
         $(elementsToRemoveInlineStylesFrom[index]).removeAttr('style');
     });
 };
@@ -323,7 +323,7 @@ function removeInlineCssFromSettingsDialog() {
 function generateTranslationWords() {
     let translationWordsHTML = '';
 
-    $.each(translationText.words, function(index, textItem) {
+    $.each(translationText.words, (index, textItem) => {
         translationWordsHTML += `
             <div class="wcd-dialog-item wcd-dialog-word">
                 ${ textItem.jp_kanji }
@@ -341,7 +341,7 @@ function generateTranslationWords() {
 function generateTranslationPhrases() {
     let translationPhrasesHTML = '';
 
-    $.each(translationText.phrases, function(index, textItem) {
+    $.each(translationText.phrases, (index, textItem) => {
         translationPhrasesHTML += `
             <div class="wcd-dialog-item wcd-dialog-sentence-phrase">
                 ${ textItem.jp_kanji }

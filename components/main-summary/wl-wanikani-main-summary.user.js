@@ -61,7 +61,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
     }
 
     if (nextReviewData.length > 0) {
-        $.each(nextReviewData, function(index, dataItem) {
+        $.each(nextReviewData, (index, dataItem) => {
             let nextReviewSummaryData = getSubjectData(data, 'next-review', dataItem.subjectIds);
             let nextReviewCustomClass = index == 0 ? 'next-review-summary' : 'future-review-summary';
             let nextReviewTotalCount = nextReviewSummaryData.totalCount >= 10000 ? '~' + (nextReviewSummaryData.totalCount / 1000).toFixed() + '千' : nextReviewSummaryData.totalCount;
@@ -81,7 +81,7 @@ function generateFutureReviewsHTML(data, nextReviewData) {
         if (nextReviewData.length > 1) {
             futureReviewsHTML += `<span class="custom-lessons-and-reviews-summary-tooltip future-reviews">`;
 
-            $.each(nextReviewHTMLData, function(index, htmlItem) {
+            $.each(nextReviewHTMLData, (index, htmlItem) => {
                 futureReviewsHTML += index > 0 ? htmlItem : '';
             });
 
@@ -103,10 +103,10 @@ function generateFutureReviewsHTML(data, nextReviewData) {
  *************************************************/
 function setFutureReviewsTooltip() {
     $('.dashboard .custom-lessons-and-reviews .custom-summary.custom-lessons-and-reviews-summary.next-review-summary').hover(
-        function(){
+        () => {
             $('.dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').show();
         },
-        function(){
+        () => {
             $('.dashboard .custom-lessons-and-reviews-summary-tooltip.future-reviews').hide();
         }
     );
@@ -122,7 +122,7 @@ function getNextReviewTime(data) {
     let nextReviewData = [];
     let summaryReviewsData = data.SummaryData.data.reviews;
 
-    $.each(summaryReviewsData, function(index, nextReviewItem) {
+    $.each(summaryReviewsData, (index, nextReviewItem) => {
         if (index != 0) {
             if (nextReviewItem.subject_ids.length > 0) {
                 let nextReviewDataItem = {

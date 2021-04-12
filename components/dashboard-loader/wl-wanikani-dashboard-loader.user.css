@@ -1,5 +1,5 @@
 /* Dashboard loader */
-.custom-dashboard-loader {
+.custom-dashboard-loader .load-indicator {
     color: var(--loader-colour);
     overflow: hidden;
     width: 1em;
@@ -10,6 +10,10 @@
     transform: translateZ(0);
     animation: loaderDots 1.7s infinite ease, loaderSpin 1.7s infinite ease;
     font-size: 90px;
+}
+
+.custom-dashboard-loader .load-failure {
+    text-align: center;
 }
 
 

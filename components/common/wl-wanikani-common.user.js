@@ -26,7 +26,7 @@ const wanikaniSrsStages = {
  *************************************************/
 // NOTE Sorts items based on item level
 function itemLevelSort(itemsToSort) {
-    return itemsToSort.sort(function(a, b) {
+    return itemsToSort.sort((a, b) => {
         return (a.data.level == b.data.level)
              ? a.assignments.srs_stage - b.assignments.srs_stage
              : a.data.level - b.data.level;
@@ -91,7 +91,7 @@ function getSubjectData(data, type, subjectIds = []) {
         isLessonOrReview = true;
     }
 
-    $.each(data.ItemsData, function(index, dataItem) {
+    $.each(data.ItemsData, (index, dataItem) => {
         if (isLessonOrReview) {
             if (Object.values(subjectIds).includes(dataItem.id)) {
                 returnData[dataItem.object].push(dataItem);
@@ -164,7 +164,7 @@ function generateCustomItemsHTML(items, type) {
     let customItemsHTML = '';
 
     if (items.length > 0) {
-        $.each(items, function(index, item) {
+        $.each(items, (index, item) => {
             let itemSrsLevel = '';
             let itemType = item.object;
             let customItemTooltipHTML = generateItemTooltipHTML(item);
@@ -245,24 +245,24 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
         `;
 
         if (itemReadings.length > 0) {
-            let onyomiReadings = itemReadings.filter(function (item) { return item.type == 'onyomi'; });
-            let kunyomiReadings = itemReadings.filter(function (item) { return item.type == 'kunyomi'; });
-            let nanoriReadings = itemReadings.filter(function (item) { return item.type == 'nanori'; });
-            let otherReadings = itemReadings.filter(function (item) { return !('type' in item); });
+            let onyomiReadings = itemReadings.filter((item) => { return item.type == 'onyomi'; });
+            let kunyomiReadings = itemReadings.filter((item) => { return item.type == 'kunyomi'; });
+            let nanoriReadings = itemReadings.filter((item) => { return item.type == 'nanori'; });
+            let otherReadings = itemReadings.filter((item) => { return !('type' in item); });
 
-            $.each(onyomiReadings, function(index, reading) {
+            $.each(onyomiReadings, (index, reading) => {
                 itemReadingOnyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
             });
 
-            $.each(kunyomiReadings, function(index, reading) {
+            $.each(kunyomiReadings, (index, reading) => {
                 itemReadingKunyomiTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
             });
 
-            $.each(nanoriReadings, function(index, reading) {
+            $.each(nanoriReadings, (index, reading) => {
                 itemReadingNanoriTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
             });
 
-            $.each(otherReadings, function(index, reading) {
+            $.each(otherReadings, (index, reading) => {
                 itemReadingOtherTooltipItems += (index == 0 ? '' : ', ') + reading.reading;
             });
 
@@ -300,7 +300,7 @@ function generateTooltipMeaningReadingHTML(itemReadings, itemMeanings, customCla
         }
 
         if (itemMeanings.length > 0) {
-            $.each(itemMeanings, function(index, meaning) {
+            $.each(itemMeanings, (index, meaning) => {
                 itemMeaningTooltipItems += (index == 0 ? '' : ', ') + meaning.meaning;
             });
 
@@ -361,7 +361,7 @@ function generateSummaryHTML(summaryData, htmlClasses, divHeaderText, divHeaderH
 function setTextColour() {
     let setTextColourDebugData = new Array();
 
-    $.each($('.check-text-colour'), function(index, element) {
+    $.each($('.check-text-colour'), (index, element) => {
         setTextColourDebugData.push(element);
         
         let textColour = getContrastYIQ($(element).css('background-color'));
