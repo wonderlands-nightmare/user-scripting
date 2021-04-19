@@ -1,6 +1,10 @@
 /********************************
- *  SRS level indicator styles
+ *  Upcoming items styles
  ********************************/  
+.custom-items section h2 .upcoming-items-count {
+    color: var(--srs-upcoming-pulse-mid);
+}
+
 .custom-items section .progress-entries .progress-entry a.kanji-icon .progress-item-srs-level.is-upcoming {
     --start-pulse: var(--srs-upcoming-pulse-start);
     --mid-pulse: var(--srs-upcoming-pulse-mid);
