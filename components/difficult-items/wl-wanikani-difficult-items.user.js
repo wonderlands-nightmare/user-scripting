@@ -71,8 +71,11 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
         wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generated the following difficult items HTML:', { main_html: difficultItemsTableHTML });
         $(difficultItemsTableHTML).insertAfter(insertAfterElement);
         if (wkof.settings[scriptId].identify_upcoming_difficult_items) {
-            let upcomingDifficultItemsCountHTML = `<span class="upcoming-items-count">~${ wkofItemsData.DifficultItems.filter(item => item.upcoming).length }</span>`
-            $('.dashboard .' + difficultItemsClass + ' h2').append(upcomingDifficultItemsCountHTML)
+            let upcomingDifficultItemsCount = wkofItemsData.DifficultItems.filter(item => item.upcoming).length;
+            if (upcomingDifficultItemsCount > 0) {
+                let upcomingDifficultItemsCountHTML = `<span class="upcoming-items-count">~${ upcomingDifficultItemsCount }</span>`;
+                $('.dashboard .' + difficultItemsClass + ' h2').append(upcomingDifficultItemsCountHTML);
+            }
         }
     }
 };
