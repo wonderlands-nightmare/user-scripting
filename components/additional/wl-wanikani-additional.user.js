@@ -41,8 +41,8 @@ function skipAfterLessonSession(skip) {
         <i class="icon-arrow-left"></i>
         Need more time
     `;
-    let lessonReadyButton = $('#screen-lesson-ready .btn-set #lesson-ready-end');
-    let lessonReadyButtonOriginalContent = `
+    let lessonDoneForNowButton = $('#screen-lesson-ready .btn-set #lesson-ready-done');
+    let lessonDoneForNowButtonOriginalContent = `
         <i class="icon-arrow-left"></i>
         I'm done for now
     `;
@@ -69,13 +69,13 @@ function skipAfterLessonSession(skip) {
         }
     }
 
-    if (lessonReadyButton.length > 0) {
+    if (lessonDoneForNowButton.length > 0) {
         if (skip) {
-            lessonReadyButton.html(newButtonContent);
+            lessonDoneForNowButton.html(newButtonContent);
         }
         else {
-            if (lessonReadyButton.find('.lesson-skip-to-homepage').length > 0) {
-                lessonReadyButton.html(lessonReadyButtonOriginalContent);
+            if (lessonDoneForNowButton.find('.lesson-skip-to-homepage').length > 0) {
+                lessonDoneForNowButton.html(lessonDoneForNowButtonOriginalContent);
             }
         }
     }
