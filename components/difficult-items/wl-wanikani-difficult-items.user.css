@@ -5,6 +5,11 @@
     color: var(--srs-upcoming-pulse-mid);
 }
 
+.custom-items section h2 .upcoming-items-on-level-up-count {
+    margin-left: 10px;
+    color: var(--item-level-icon-background);
+}
+
 .custom-items section .progress-entries .progress-entry a.kanji-icon .progress-item-srs-level.is-upcoming {
     --start-pulse: var(--srs-upcoming-pulse-start);
     --mid-pulse: var(--srs-upcoming-pulse-mid);
