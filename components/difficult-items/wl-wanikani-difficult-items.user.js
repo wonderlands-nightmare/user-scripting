@@ -84,7 +84,7 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
         if (wkof.settings[scriptId].identify_upcoming_difficult_items && wkof.settings[scriptId].identify_level_up) {
             let upcomingDifficultItemsOnLevelUpCount = wkofItemsData.DifficultItems.filter(item => item.data.level == wkofItemsData.SafeLevel + 1).length;
             if (upcomingDifficultItemsOnLevelUpCount > 0) {
-                let upcomingDifficultItemsOnLevelUpCountHTML = `<span class="upcoming-items-on-level-up-count">~${ upcomingDifficultItemsOnLevelUpCount }</span>`;
+                let upcomingDifficultItemsOnLevelUpCountHTML = `<span class="upcoming-items-on-level-up-count">(+${ upcomingDifficultItemsOnLevelUpCount })</span>`;
                 $('.dashboard .' + difficultItemsClass + ' h2').append(upcomingDifficultItemsOnLevelUpCountHTML);
             }
         }
