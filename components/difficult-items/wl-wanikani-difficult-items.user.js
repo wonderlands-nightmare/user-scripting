@@ -60,9 +60,9 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
     if (wkof.settings[scriptId].show_difficult_items) {
         wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generating difficult items section and appending to:', insertAfterElement);
         let difficultItemsData = getDifficultItemsData(data);
-        let difficultItemsDisplayData = difficultItemsData.filter(item => item.data.level == wkofItemsData.SafeLevel);
-        let difficultItemsHTML = generateCustomItemsHTML(difficultItemsDisplayData.DifficultItems, 'difficult');
-        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsDisplayData.DifficultItems
+        let difficultItemsDisplayData = difficultItemsData.DifficultItems.filter(item => item.data.level == wkofItemsData.SafeLevel);
+        let difficultItemsHTML = generateCustomItemsHTML(difficultItemsDisplayData, 'difficult');
+        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsDisplayData
                                                                  , difficultItemsClass
                                                                  , translationText.words.difficult.jp_kanji
                                                                  , translationText.words.difficult
