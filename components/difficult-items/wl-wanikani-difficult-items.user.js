@@ -17,9 +17,10 @@ function isDifficult(dataItems) {
     wlWanikaniDebug('data', '==Difficult Items: isDifficult== Filter difficult items with the following data:', dataItems);
     
     let returnItems = []
+    let itemLevelLimit = wkof.settings[scriptId].identify_level_up ? wkofItemsData.SafeLevel + 1 : wkofItemsData.SafeLevel;
     $.each(dataItems, (index, dataItem) => {
         if ("assignments" in dataItem) {
-            if ((dataItem.data.level <= wkofItemsData.SafeLevel) && (dataItem.assignments.srs_stage <= wkof.settings[scriptId].srs_stage)) {
+            if ((dataItem.data.level <= itemLevelLimit) && (dataItem.assignments.srs_stage <= wkof.settings[scriptId].srs_stage)) {
                 if (wkof.settings[scriptId].identify_upcoming_difficult_items) {
                     dataItem.upcoming = (dataItem.assignments.srs_stage == wkof.settings[scriptId].srs_stage 
                                          && Object.values(wkofItemsData.NextRevewItems).includes(dataItem.id))
@@ -59,8 +60,9 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
     if (wkof.settings[scriptId].show_difficult_items) {
         wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generating difficult items section and appending to:', insertAfterElement);
         let difficultItemsData = getDifficultItemsData(data);
-        let difficultItemsHTML = generateCustomItemsHTML(difficultItemsData.DifficultItems, 'difficult');
-        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsData.DifficultItems
+        let difficultItemsDisplayData = difficultItemsData.DifficultItems.filter(item => item.data.level <= wkofItemsData.SafeLevel);
+        let difficultItemsHTML = generateCustomItemsHTML(difficultItemsDisplayData, 'difficult');
+        let difficultItemsTableHTML = generateCustomItemsTableHTML(difficultItemsDisplayData
                                                                  , difficultItemsClass
                                                                  , translationText.words.difficult.jp_kanji
                                                                  , translationText.words.difficult
@@ -70,6 +72,22 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
 
         wlWanikaniDebug('html', '==Difficult Items: generateDifficultItemsSection== Generated the following difficult items HTML:', { main_html: difficultItemsTableHTML });
         $(difficultItemsTableHTML).insertAfter(insertAfterElement);
+        
+        if (wkof.settings[scriptId].identify_upcoming_difficult_items) {
+            let upcomingDifficultItemsCount = wkofItemsData.DifficultItems.filter(item => item.upcoming).length;
+            if (upcomingDifficultItemsCount > 0) {
+                let upcomingDifficultItemsCountHTML = `<span class="upcoming-items-count">~${ upcomingDifficultItemsCount }</span>`;
+                $('.dashboard .' + difficultItemsClass + ' h2').append(upcomingDifficultItemsCountHTML);
+            }
+        }
+
+        if (wkof.settings[scriptId].identify_upcoming_difficult_items && wkof.settings[scriptId].identify_level_up && wkofItemsData.MightLevelUp) {
+            let upcomingDifficultItemsOnLevelUpCount = wkofItemsData.DifficultItems.filter(item => item.data.level == wkofItemsData.SafeLevel + 1).length;
+            if (upcomingDifficultItemsOnLevelUpCount > 0) {
+                let upcomingDifficultItemsOnLevelUpCountHTML = `<span class="upcoming-items-on-level-up-count">(+${ upcomingDifficultItemsOnLevelUpCount })</span>`;
+                $('.dashboard .' + difficultItemsClass + ' h2').append(upcomingDifficultItemsOnLevelUpCountHTML);
+            }
+        }
     }
 };
 

@@ -16,7 +16,8 @@ let wkofItemsData = {
     AllData: {},
     DifficultItems: {},
     NextRevewItems: new Array(),
-    SafeLevel: {}
+    SafeLevel: {},
+    MightLevelUp: false
 };
 
 let showHoverTranslation = wkof.settings[scriptId].hover_translation;

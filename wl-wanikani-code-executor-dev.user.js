@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WaniKani Custom Dashboard - DEV
 // @namespace    https://github.com/wonderlands-nightmare
-// @version      1.4.8
+// @version      1.5.0
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
@@ -109,7 +109,6 @@
     }
 
     // WKOF settings check variables
-    let wkofSettingsLoadFailed = false;
     let wkofIntervalCounter = 0;
 
 

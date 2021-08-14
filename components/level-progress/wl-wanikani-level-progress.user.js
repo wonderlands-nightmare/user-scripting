@@ -195,9 +195,11 @@ function readyToLevelUp(levelData) {
 
         if (kanjiInNextReview >= kanjiLeftToPass) {
             $(levelCircle).addClass('level-up');
+            wkofItemsData.MightLevelUp = true;
         }
         else {
             $(levelCircle).removeClass('level-up');
+            wkofItemsData.MightLevelUp = false;
         }
 
         wlWanikaniDebug('data', '==Level Progress: readyToLevelUp== Got the level up data:', { kanji_left_to_pass: kanjiLeftToPass, kanji_in_next_review: kanjiInNextReview });
