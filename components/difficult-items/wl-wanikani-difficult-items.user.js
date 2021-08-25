@@ -74,7 +74,7 @@ function generateDifficultItemsSection(data,  insertAfterElement = '.dashboard .
         $(difficultItemsTableHTML).insertAfter(insertAfterElement);
         
         if (wkof.settings[scriptId].identify_upcoming_difficult_items) {
-            let upcomingDifficultItemsCount = wkofItemsData.DifficultItems.filter(item => item.upcoming).length;
+            let upcomingDifficultItemsCount = difficultItemsDisplayData.filter(item => item.upcoming).length;
             if (upcomingDifficultItemsCount > 0) {
                 let upcomingDifficultItemsCountHTML = `<span class="upcoming-items-count">~${ upcomingDifficultItemsCount }</span>`;
                 $('.dashboard .' + difficultItemsClass + ' h2').append(upcomingDifficultItemsCountHTML);
