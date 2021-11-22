@@ -124,7 +124,7 @@ function initialiseSrsSummaryComponent() {
     const disableLessons = wkof.settings[scriptId].disable_lessons && (apprenticeSummaryData.totalCount >= wkof.settings[scriptId].disable_lessons_limit);
 
     if (disableLessons) {
-        $('.custom-button.custom-lessons-and-reviews-button.lessons-button').removeClass('has-lessons');
+        $('.custom-button.custom-lessons-and-reviews-button.lessons-button').removeClass('has-lessons').removeAttr('href');
         $('.navigation-shortcut.navigation-shortcut--lessons > a').removeClass('has-lessons');
     }
 }
