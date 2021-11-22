@@ -148,7 +148,7 @@ function openSettings(items) {
                                     identify_upcoming_difficult_items: {
                                         type: 'checkbox',
                                         label: 'Highlight items that may move out of difficult items list',
-                                        hover_tip: 'Check if you want to highlight the difficult items that are avaialble within the current or next review period (not future) that, if passed, will progress up above the currently set SRS Stage cap.',
+                                        hover_tip: 'Check if you want to highlight the difficult items that are available within the current or next review period (not future) that, if passed, will progress up above the currently set SRS Stage cap.',
                                         default: false
                                     },
                                     themes_header: {
@@ -212,6 +212,21 @@ function openSettings(items) {
                                             4: 'Both'
                                         },
                                         default: 1
+                                    },
+                                    disable_lessons: {
+                                        type: 'checkbox',
+                                        label: 'Disable Lessons at Apprentice count limit',
+                                        hover_tip: 'Check if you want to see prevent lessons from being done if you have more Apprentice items than the number you set.',
+                                        default: false
+                                    },
+                                    disable_lessons_limit: {
+                                        type: 'number',
+                                        label: 'Apprentice item limit',
+                                        hover_tip: 'This is the number of Apprentice items that if exceeded will disable Lessons. Defaults to 150.',
+                                        multi: false,
+                                        min: 0,
+                                        max: 2000,
+                                        default: 150
                                     }
                                 }
                             },
