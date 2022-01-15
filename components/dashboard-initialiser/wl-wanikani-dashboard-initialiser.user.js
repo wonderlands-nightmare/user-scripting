@@ -21,6 +21,7 @@ let wkofItemsData = {
 };
 
 let showHoverTranslation = wkof.settings[scriptId].hover_translation;
+let disableLessons = wkof.settings[scriptId].disable_lessons;
 
 const translationText = {
     words: {

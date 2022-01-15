@@ -287,6 +287,7 @@ function openSettings(items) {
                     (!dataDebugMode && wkof.settings[scriptId].debug_data)
                  || (!htmlDebugMode && wkof.settings[scriptId].debug_html)
                  || (showHoverTranslation != wkof.settings[scriptId].hover_translation)
+                 || (disableLessons != wkof.settings[scriptId].disable_lessons)
                 ) {
                     window.location.reload();
                 }
