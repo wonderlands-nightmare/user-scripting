@@ -72,8 +72,8 @@ const translationText = {
         },
         master: {
             en_meaning: 'Master',
-            jp_kanji: '主人',
-            jp_reading: 'しゅじん'
+            jp_kanji: '精通',
+            jp_reading: 'せいつう'
         },
         enlightened: {
             en_meaning: 'Enlightened',
@@ -82,13 +82,13 @@ const translationText = {
         },
         burned: {
             en_meaning: 'Burned',
-            jp_kanji: '焼け',
-            jp_reading: 'やけ'
+            jp_kanji: '焼き',
+            jp_reading: 'やき'
         },
         look_at: {
-            en_meaning: 'Look at',
-            jp_kanji: '見せて',
-            jp_reading: 'みせて'
+            en_meaning: 'See details',
+            jp_kanji: '詳細を見る',
+            jp_reading: 'しょうさいをみる'
         },
         onyomi: {
             en_meaning: 'Onyomi',
