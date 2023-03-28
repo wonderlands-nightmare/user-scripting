@@ -5,7 +5,7 @@
 // @description  A collection of custom scripts for editing the wanikani experience.
 // @author       Wonderland-Nightmares
 // @include      /^https://(www|preview).wanikani.com/(dashboard)?$/
-// @include      /^https://(www|preview).wanikani.com/(lesson|review)/session$/
+// @include      /^https://(www|preview).wanikani.com/subjects/(lesson|review)$/
 // @resource     WKOF_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/wkof/wl-wanikani-wkof.user.js
 // @resource     WKOF_CSS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/wkof/wl-wanikani-wkof.user.css
 // @resource     LOADER_JS https://raw.githubusercontent.com/wonderlands-nightmare/user-scripting/master/components/dashboard-loader/wl-wanikani-dashboard-loader.user.js
