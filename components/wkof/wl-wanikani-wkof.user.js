@@ -4,8 +4,8 @@
 const scriptName = 'Wanikani Custom Dashboard';
 const scriptId = 'wanikani_custom_dashboard';
 const dashboardUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(dashboard)?$/;
-const sessionUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/(lesson|review)\/session$/;
-const reviewSummaryUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/review$/;
+const sessionUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/subjects\/(lesson|review)$/;
+const reviewSummaryUrlRegEx = /^https:\/\/(www|preview).wanikani.com\/subjects\/review$/;
 
 // For dialog CSS since this file can't use GM
 let wcdDialogCss = '';
