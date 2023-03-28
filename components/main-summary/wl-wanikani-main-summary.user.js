@@ -41,8 +41,8 @@ function initialiseMainSummaryComponent() {
     wlWanikaniDebug('html', '==Main Summary: initialiseMainSummaryComponent== Generated the following Main Summary HTML:', { main_html: mainSummaryHTML });
     $('.dashboard .custom-section.custom-lessons-and-reviews').append(mainSummaryHTML);
 
-    addReviewAndLessonButtonPulseEffect('.dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/lesson/session', 'has-lessons');
-    addReviewAndLessonButtonPulseEffect('.dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/review/start', 'has-reviews');
+    addReviewAndLessonButtonPulseEffect('.dashboard .custom-lessons-and-reviews-button.lessons-button', lessonSummaryData.totalCount, '/subjects/lesson', 'has-lessons');
+    addReviewAndLessonButtonPulseEffect('.dashboard .custom-lessons-and-reviews-button.reviews-button', reviewSummaryData.totalCount, '/subjects/review', 'has-reviews');
     setFutureReviewsTooltip();
 };
 
