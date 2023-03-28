@@ -201,7 +201,7 @@ function updateShortcutNavigation(item) {
     let navItemCount = $(navItem).find('span').text();
     let newItemText = item == 'lessons' ? translationText.words.lesson.jp_kanji : translationText.words.review.jp_kanji;
     let newItemHoverText = item == 'lessons' ? translationText.words.lesson : translationText.words.review;
-    let navHref = item == 'lessons' ? '/lesson/session' : '/review/start';
+    let navHref = item == 'lessons' ? '/subjects/lesson' : '/subjects/review';
     let navHasClass = item == 'lessons' ? 'has-lessons' : 'has-reviews';
 
     navItem.text('').append('<span>' + navItemCount + '</span>' + newItemText);
